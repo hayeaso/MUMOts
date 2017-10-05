@@ -2,6 +2,8 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include.jsp"%>
 <c:set var="currentPage" value="${requestScope['javax.servlet.forward.request_uri']}" />
+<%-- 
+<c:set var="rooot" value="${pageContext.request.contextPath}" /> --%>
 
 <div class="hor-menu">
 	<ul class="nav navbar-nav">
