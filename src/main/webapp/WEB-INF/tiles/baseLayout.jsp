@@ -66,6 +66,9 @@
 				<!-- END RESPONSIVE MENU TOGGLER -->
 				<!-- BEGIN TOP NAVIGATION MENU -->
 				<div class="top-menu">
+				<c:if test="${pageContext.request.userPrincipal.name != null}">
+				<!-- CHECKS IF THE USER IS EMPTY -->
+				
 					<ul class="nav navbar-nav pull-right">
 						<!-- BEGIN USER LOGIN DROPDOWN -->
 						<li class="dropdown dropdown-user dropdown-dark"><a
@@ -91,6 +94,7 @@
 							</ul></li>
 						<!-- END USER LOGIN DROPDOWN -->
 					</ul>
+					</c:if>
 				</div>
 				<!-- END TOP NAVIGATION MENU -->
 			</div>

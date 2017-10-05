@@ -1,4 +1,5 @@
-/* custom template */
+/* /* custom template */
+/*
 html, body {
    height: 100%;
    font-family:verdana,arial,sans-serif;
@@ -54,17 +55,17 @@ hr {
 }
 
 .box {
-  	bottom: 0; /* increase for footer use */
+  	bottom: 0; increase for footer use
     left: 0;
     position: absolute;
     right: 0;
     top: 0;
     background-color:#444444;
-  /*
+  
     background-image:url('/assets/example/bg_suburb.jpg');
     background-size:cover;
     background-attachment:fixed;
-  */
+ 
 }
 
 .divider {
@@ -146,7 +147,7 @@ hr {
   margin-bottom:20px;
 }
 
-/* bootstrap overrides */
+bootstrap overrides
 
 h1,h2,h3 {
    font-weight:800;
@@ -236,7 +237,7 @@ small.text-muted {
   font-family:courier,courier-new,monospace;
 }
 
-/* adjust the contents on smaller devices */
+adjust the contents on smaller devices
 @media (max-width: 768px) {
 
   .column .padding {
@@ -257,10 +258,10 @@ small.text-muted {
 }
 
 
-/*
+
  * off canvas sidebar
  * --------------------------------------------------
- */
+
 @media screen and (max-width: 768px) {
   .row-offcanvas {
     position: relative;
@@ -290,8 +291,16 @@ small.text-muted {
     color: #3276b1;
     background-color: #fff;
 }
+
 a.activeLink{
 	color: antiquewhite; background: green;
-	/* style="color: antiquewhite; background: green;"
- */
+	style="color: antiquewhite; background: green;"
+
+ }*/
+
+
+ /* NEW CSS for NEW Look and FEEL */
+.page-header {
+ 	margin-top: 0px;
  }
+ 
