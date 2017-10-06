@@ -9,8 +9,6 @@
 	</definition>
 	<definition name="read-definition" template="/WEB-INF/tiles/readmelayout.jsp">
 	</definition>
-
-	
 	
 	<definition name="contactus" extends="base-definition">
 	<put-attribute name="menu" value="/WEB-INF/tiles/def-menu.jsp"></put-attribute>

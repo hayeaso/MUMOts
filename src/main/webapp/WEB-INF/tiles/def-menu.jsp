@@ -2,9 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include.jsp"%>
 
-<spring:url value="resources/css/styles.css" var="styleCss" />
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" integrity="sha384-+ENW/yibaokMnme+vBLnHMphUYxHs34h9lpdbSLuAwGkOKFRl4C34WkjazBtb7eT" crossorigin="anonymous">
-<link href="${styleCss	}" rel="stylesheet" />
 
  <nav class="navbar navbar-inverse">
   <div class="container-fluid"> 
@@ -25,7 +22,12 @@
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
+      <c:if test="${pageContext.request.userPrincipal.name == null}">
         <li><a href="<c:url value="/login" />">Login</a></li>
+        </c:if>
+        <c:if test="${pageContext.request.userPrincipal.name != null}">
+        <li><a href="<c:url value="/logout" />">Logout</a></li>
+        </c:if>
       </ul>
     </div>
   </div> 

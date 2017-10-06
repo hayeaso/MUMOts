@@ -10,9 +10,15 @@
   <div class="container-fluid"> 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
       <ul class="nav navbar-nav">
-      <li><a href="<c:url value="/admin/register" />"  ${('/onlinetest/admin/register' == currentPage) ? ' style="color: antiquewhite; background: green;"' : ''}>User Register</a></li>
-		<li><a href="<c:url value="/admin/users" />" ${('/onlinetest/admin/users' == currentPage) ? ' style="color: antiquewhite; background: green;"' : ''}>User List</a></li>
-		<li><a href="<c:url value="/admin/students" />" ${('/onlinetest/admin/students' == currentPage) ? ' style="color: antiquewhite; background: green;"' : ''}>Student List</a></li>
+      	 <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" ${('/onlinetest/admin/register' == currentPage || '/onlinetest/admin/users' == currentPage) ? ' style="color: antiquewhite; background: green;"' : ''}>Users <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+           		<li><a href="<c:url value="/admin/register" />" >Add User</a></li>
+				  <li role="separator" class="divider"></li>
+				<li><a href="<c:url value="/admin/users" />" >User List</a></li>
+		   </ul>
+        </li>
+      	<li><a href="<c:url value="/admin/students" />" ${('/onlinetest/admin/students' == currentPage) ? ' style="color: antiquewhite; background: green;"' : ''}>Student List</a></li>
 		<li><a href="<c:url value="/admin/categories" />" ${('/onlinetest/admin/categories' == currentPage) ? ' style="color: antiquewhite; background: green;"'  : ''}>Category</a></li>
 		<li><a href="<c:url value="/admin/subCategories" />" ${('/onlinetest/admin/subCategories' == currentPage) ? ' style="color: antiquewhite; background: green;"'  : ''}>Sub Category</a></li>
 		<li><a href="<c:url value="/admin/addquestion" />" ${('/onlinetest/admin/addquestion' == currentPage) ? ' style="color: antiquewhite; background: green;"' : ''}>Add Question</a></li>
