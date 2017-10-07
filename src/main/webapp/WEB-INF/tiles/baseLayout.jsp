@@ -51,12 +51,8 @@
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
 <body>
-	<!-- BEGIN HEADER -->
-	<div class="page-header">
-		<!-- BEGIN HEADER TOP -->
-		<div class="page-header-top">
-			<div class="container">
-			<div class="col-sm-10">
+		<div class="container">
+			<div class="row col-sm-10">
 				<div class="page-logo">
 					<a href="#"><img
 						src="<c:url value="/metronic/assets/logo.png" />" height="70px;"
@@ -105,8 +101,7 @@
 				</div>
 				<!-- END TOP NAVIGATION MENU -->
 			</div>
-			</div>
-		</div>
+			
 		<!-- END HEADER TOP -->
 		<!-- BEGIN HEADER MENU -->
 		<div class="page-header-menu">

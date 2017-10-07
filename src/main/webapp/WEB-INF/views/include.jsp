@@ -7,5 +7,5 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/flatly/bootstrap.min.css" rel="stylesheet" integrity="sha384-+ENW/yibaokMnme+vBLnHMphUYxHs34h9lpdbSLuAwGkOKFRl4C34WkjazBtb7eT" crossorigin="anonymous">
-<spring:url value="resources/css/styles.css" var="styleCss" />
+<spring:url value="/resources/css/styles.css" var="styleCss" />
 <link href="${styleCss}" rel="stylesheet" />

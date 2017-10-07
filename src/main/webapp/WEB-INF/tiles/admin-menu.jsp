@@ -5,7 +5,6 @@
 <%-- 
 <c:set var="rooot" value="${pageContext.request.contextPath}" /> --%>
 
-
  <nav class="navbar navbar-inverse">
   <div class="container-fluid"> 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">

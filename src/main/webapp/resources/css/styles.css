@@ -300,8 +300,9 @@ a.activeLink{
 
 
  /* NEW CSS for NEW Look and FEEL */
-.page-header {
- 	margin: 0px; !important;
+.container {
+ 	margin-top: 5px; !important;
+ 	margin-bottom: 5px; !important;
  }
 
  
