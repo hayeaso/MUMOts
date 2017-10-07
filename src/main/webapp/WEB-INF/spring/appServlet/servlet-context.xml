@@ -17,7 +17,7 @@
 
 	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
 		up static resources in the ${webappRoot}/resources directory -->
-	<mvc:resources location="/resources/" mapping="/resources/**" />
+	<mvc:resources location="/resources/" mapping="/resource/**" />
 	<mvc:resources location="/metronic/" mapping="/metronic/**" />
 
 	<bean id="tilesViewResolver"
