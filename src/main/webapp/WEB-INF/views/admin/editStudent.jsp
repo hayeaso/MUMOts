@@ -80,6 +80,10 @@
 				<button type="submit" id="register-submit-btn"
 					class="btn btn-success uppercase pull-right">Update</button>
 			</div>
+			<div class="form-actions">
+				<a href="<c:url value='/admin/students'/>">
+ 				<input style="margin-right:30px;" type="button" id="register-cancel-btn" class="btn btn-success uppercase pull-right" value="Cancel"/>
+ 			</div>	
 			<br/><br/>
 		</form:form>
 	</div>

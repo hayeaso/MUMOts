@@ -16,8 +16,8 @@
 		<!-- BEGIN REGISTRATION FORM -->
 		<form:form method="POST" class="register-form" action="register"
 			modelAttribute="loginUser">
-			<h3>Sign Up</h3>
-			<p class="hint">Enter your personal details below:</p>
+			<h3>Add New User</h3>
+			<p class="hint">Enter personal details below:</p>
 			<div class="form-group">
 				<form:label path="firstName"
 					class="control-label visible-ie8 visible-ie9">First Name</form:label>
@@ -73,6 +73,10 @@
 				<button type="submit" id="register-submit-btn"
 					class="btn btn-success uppercase pull-right">Submit</button>
 			</div>
+			<div class="form-actions">
+				<a href="<c:url value='/admin/users'/>">
+ 				<input style="margin-right:30px;" type="button" id="register-cancel-btn" class="btn btn-success uppercase pull-right" value="Cancel"/>
+ 			</div>	
 			<br/><br/>
 		</form:form>
 	</div>

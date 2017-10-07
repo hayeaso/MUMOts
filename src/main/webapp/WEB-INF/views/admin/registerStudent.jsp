@@ -66,10 +66,21 @@
 				<form:errors path="jobSearchStatus" cssClass="text-danger" />
 			</div>			
 			<form:hidden path="enabled" value="TRUE" />
+			
+<!-- 			<div class="form-actions"> -->
+<!-- 				<button type="submit" id="register-cancel-btn" -->
+<!-- 					class="btn btn-success uppercase pull-right">Cancel</button> -->
+<!-- 			</div>			 -->
+
 			<div class="form-actions">
 				<button type="submit" id="register-submit-btn"
 					class="btn btn-success uppercase pull-right">Submit</button>
 			</div>
+						
+			<div class="form-actions">
+				<a href="<c:url value='/admin/students'/>">
+ 				<input style="margin-right:30px;" type="button" id="register-cancel-btn" class="btn btn-success uppercase pull-right" value="Cancel"/>
+ 			</div>			
 			<br/><br/>
 		</form:form>
 	</div>

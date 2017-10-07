@@ -56,6 +56,10 @@ div.ui-datepicker-header select {
 	width: 60px;
 }
 
+.register-cancel-btn{
+	margin-right:55px;
+}
+
 /*button {
 				    font-family: Trebuchet MS,Tahoma,Verdana,Arial,sans-serif;
 				    font-size: 1em;
