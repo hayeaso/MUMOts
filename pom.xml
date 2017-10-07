@@ -163,6 +163,14 @@
 			<artifactId>spring-context-support</artifactId>
 			<version>3.2.8.RELEASE</version>
 		</dependency>
+		
+		<!-- SECURITY TAG LIBS -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>4.0.4.RELEASE</version>
+		</dependency>
+		
 	</dependencies>
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>

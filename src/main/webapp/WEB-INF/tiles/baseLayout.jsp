@@ -59,16 +59,22 @@
 		<!-- BEGIN HEADER TOP -->
 		<div class="page-header-top">
 			<div class="container">
+			<div class="col-sm-10">
 				<div class="page-logo">
 					<a href="#"><img
 						src="<c:url value="/metronic/assets/logo.png" />" height="70px;"
 						alt="logo" class="logo-default"></a>
 				</div>
+				</div>
 				<!-- BEGIN RESPONSIVE MENU TOGGLER -->
 				<a href="javascript:;" class="menu-toggler"></a>
 				<!-- END RESPONSIVE MENU TOGGLER -->
+				<div class="col-sm-2">
 				<!-- BEGIN TOP NAVIGATION MENU -->
 				<div class="top-menu">
+				<c:if test="${pageContext.request.userPrincipal.name != null}">
+				<!-- CHECKS IF THE USER IS EMPTY -->
+				
 					<ul class="nav navbar-nav pull-right">
 						<!-- BEGIN USER LOGIN DROPDOWN -->
 						<li class="dropdown dropdown-user dropdown-dark"><a
@@ -79,23 +85,29 @@
 									${sessionScope.username} ${sessionScope.role}!
 									</span>
 						</a>
+						</li>
+					</ul>
+						<%-- 
 							<ul class="dropdown-menu dropdown-menu-default">
-								<%-- <li><a href="<c:url value="/user/profile" />"> <i
+								<li><a href="<c:url value="/user/profile" />"> <i
 										class="icon-user"></i> My Profile
 								</a></li>
 								<li class="divider"></li>
 								<li><a href="<c:url value="/register" />"> <i
 										class="icon-key"></i> Register
-								</a></li> --%>
+								</a></li>
 								<li class="divider"></li>
 								<li><a href="<c:url value="/logout" />"> <i
 										class="icon-key"></i> Log Out
 								</a></li>
 							</ul></li>
 						<!-- END USER LOGIN DROPDOWN -->
-					</ul>
+					</ul> --%>
+					</c:if>
+				</div>
 				</div>
 				<!-- END TOP NAVIGATION MENU -->
+			</div>
 			</div>
 		</div>
 		<!-- END HEADER TOP -->
