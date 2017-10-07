@@ -16,7 +16,7 @@
 		<!-- BEGIN REGISTRATION FORM -->
 		<form:form method="POST" class="register-form"
 			action="registerStudent" modelAttribute="student">
-			<h3>Sign Up</h3>
+			<h3>Register New Student</h3>
 			<p class="hint">Enter student information below:</p>
 			<div class="form-group">
 				<form:label path="firstName"
@@ -46,13 +46,14 @@
 					type="text" placeholder="Student ID" name="studentId" />
 				<form:errors path="studentId" cssClass="text-danger" />
 			</div>
+			
 			<div class="form-group">
-				<form:label path="entry"
-					class="control-label visible-ie8 visible-ie9">Entry Year</form:label>
-				<form:input path="entry" class="form-control placeholder-no-fix"
-					type="text" placeholder="Entry year" name="entry" />
+				<form:label path="entry" class="control-label visible-ie8 visible-ie9">Entry Year</form:label>
+				<form:input path="entry" class="date-picker form-control placeholder-no-fix"
+					type="text" placeholder="Entry year" name="entry" id="datepick" />
 				<form:errors path="entry" cssClass="text-danger" />
 			</div>
+			
 			<div class="form-group">
 				<form:label class="control-label" path="jobSearchStatus">Job search status</form:label> 
 				<form:select
@@ -73,3 +74,34 @@
 		</form:form>
 	</div>
 </div>
+
+<script>
+	$(function() {
+		$('#datepick').datepicker(
+				{
+					changeMonth : true,
+					changeYear : true,
+					showButtonPanel : true,
+					showAnim : 'fadeIn',
+					dateFormat : 'MM yy',
+					monthNamesShort : [ "January", "February", "March",
+							"April", "May", "June", "July", "August",
+							"September", "October", "November", "December" ],
+					/* display selected date when btn 'done' is clicked */
+					onClose : function(dateText, inst) {
+						$(this).datepicker(
+								'setDate',
+								new Date(inst.selectedYear, inst.selectedMonth,
+										1));
+					}
+				});/* to prepopulate with the default date .datepicker("setDate", new Date())*/
+
+		/* display today's date when it's clicked */
+		$('button.ui-datepicker-current').live(
+				'click',
+				function() {
+					$.datepicker._curInst.input.datepicker('setDate',
+							new Date()).datepicker('hide');
+				});
+	});
+</script>
