@@ -11,7 +11,7 @@
 			<div class="row">
 				<div class="col-md-6">
 					<div class="btn-group">
-						<a href="createSubCategory" class="btn green"> Add New <i
+						<a href="createSubCategory" class="btn btn-primary"> Add New <i
 							class="fa fa-plus"></i>
 						</a>
 					</div>

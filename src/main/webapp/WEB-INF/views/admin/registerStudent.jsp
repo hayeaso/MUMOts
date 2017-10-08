@@ -16,7 +16,7 @@
 		<!-- BEGIN REGISTRATION FORM -->
 		<form:form method="POST" class="register-form"
 			action="registerStudent" modelAttribute="student">
-			<h3>Sign Up</h3>
+			<h3>Add Student</h3>
 			<p class="hint">Enter student information below:</p>
 			<div class="form-group">
 				<form:label path="firstName"
