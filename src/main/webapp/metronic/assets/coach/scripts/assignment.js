@@ -9,9 +9,13 @@ function generateAccessCode(){
 		return false;
 	}
 
+	//var str = document.getElementById("dateTime").value;
+	//alert("Date and time from generateAccessCode() " + str);
+	
 	$.ajax({
 		url:'../../../onlinetest/assignment/generateTest',
 		type:"GET",
+		data: $("#dateTime").serialize(),
 		success:function(data){
 			
 			$("#accessCode").val(data.accessCode);
@@ -49,7 +53,7 @@ function assignmentDone(userId){
 		   userId:userId,
 		   accessCode :$('#accessCode').val(),
 		   accessLink:$('#accessLink').val(),
-		   
+		   dateTime:$("#dateTime").val()
 	   },
 	   success: function(data){        
 		   
@@ -96,12 +100,13 @@ function sendEmail(userId){
 			 userId:userId,		
 			 accessLink:$('#accessLink').val(),
 			 accessCode:$('#accessCode').val(),
+			 dateTime: $("#dateTime").val(),
 			 email:$('#email').html(), 
 		},
 		type:"GET",
 		success:function(data){
 			if(data=="success"){
-				
+				alert("msg sent");
 			}
 			
 				 

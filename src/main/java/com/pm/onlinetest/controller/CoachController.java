@@ -2,6 +2,9 @@ package com.pm.onlinetest.controller;
 
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
+import java.time.temporal.ChronoField;
 import java.util.List;
 import java.util.Locale;
 
@@ -44,6 +47,12 @@ public class CoachController {
     @Autowired
     private MailSender mailSender;
 	
+	private static DateTimeFormatter DATE_FORMAT =  
+            new DateTimeFormatterBuilder().appendPattern("dd/MM/yyyy[ [HH][:mm][:ss][.SSS]]")
+            .parseDefaulting(ChronoField.HOUR_OF_DAY, 0)
+            .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
+            .parseDefaulting(ChronoField.SECOND_OF_MINUTE, 0)
+            .toFormatter(); 
 	
 	@RequestMapping(value = "/coach/home", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {		
@@ -63,7 +72,7 @@ public class CoachController {
 	
 
 	@RequestMapping(value = "/coach/studentAssignmentDetail/{userId}", method = RequestMethod.GET)
-	public String studentAssignmentDetail(@PathVariable("userId") String userId,Locale locale, Model model) {
+	public String studentAssignmentDetail(@PathVariable("userId") String userId, Locale locale, Model model) {
 		
 		System.out.println("Student id in detail1: "+userId);
 		
@@ -106,7 +115,7 @@ public class CoachController {
 	}
 	
 	@RequestMapping(value = "/coach/saveAssignment", method = RequestMethod.POST)
-	public @ResponseBody String saveAssignment(RedirectAttributes redirectAttr,@RequestParam("userId") String userId,@RequestParam("accessLink") String accessLink,@RequestParam("accessCode") String accessCode) {		
+	public @ResponseBody String saveAssignment(RedirectAttributes redirectAttr,@RequestParam("userId") String userId,@RequestParam("accessLink") String accessLink,@RequestParam("accessCode") String accessCode,@RequestParam("dateTime") String dateTime) {		
 		System.out.println("Student Id in save ASsignment is: "+userId);
 		System.out.println("accesscode in save ASsignment is: "+accessCode);
 		System.out.println("accessLink in save ASsignment is: "+accessLink);
@@ -117,7 +126,7 @@ public class CoachController {
 		System.out.println("coachModel.getUsername()t is: "+coachModel.getUsername());
 		
 		Student  student = studentService.findByStudentId(Integer.parseInt(userId));
-		System.out.println("student.getUsername() is: "+student.getUsername());
+		System.out.println("student.getUsername() is: "+student.getFirstName());
 		
 		assignment = assignmentService.findByAccesscode(accessCode);
 		if(assignment !=null ) {
@@ -129,6 +138,11 @@ public class CoachController {
 			assignment = new Assignment();
 			System.out.println("Assignment not exist create new one");
 		}
+		//DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm a");
+		//DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy'T'HH:mm", Locale.US);
+		//LocalDateTime dateTimeNew = LocalDateTime.parse(dateTime, formatter);
+		//System.out.println("DATE and TIME__________________" + dateTimeNew);
+		assignment.setSendEmailDateTime(dateTime);
 		assignment.setAccesscode(accessCode);
 		assignment.setCoachId(coachModel);
 		assignment.setStudentId(student);
@@ -147,21 +161,23 @@ public class CoachController {
 	
 	
 	@RequestMapping(value = "/coach/sendEmail", method = RequestMethod.GET)
-	public @ResponseBody String sendEmail(@RequestParam("userId") String userId,@RequestParam("accessLink") String accessLink,@RequestParam("accessCode") String accessCode, @RequestParam("email") String email,Locale locale, Model model) {
+	public @ResponseBody String sendEmail(@RequestParam("userId") String userId,@RequestParam("accessLink") String accessLink,@RequestParam("accessCode") String accessCode, @RequestParam("email") String email, @RequestParam("dateTime") String dateTime, Locale locale, Model model) {
+		System.out.println("__________________________________________________");
 		System.out.println("email sending");
+		System.out.println("datetime in send email " + dateTime);
 		SimpleMailMessage message = new SimpleMailMessage();
 	    message.setTo(email);
+	    System.out.println("EMAIL: ___" + email);
 	    message.setReplyTo("false");
 	 
 	    message.setFrom("mumtestlink@gmail.com");
 	    message.setSubject("Test Link");
 	    message.setText("The test you can take at this particular link. To access the test you need to enter the access code provided below. "
 	    		+ " Please find the link and the access code below: \n"+ "Access Link: "+"https://ots.cs.mum.edu/onlinetest/test" +"\n"+"Access Code: "+ accessCode +"\nAll the best!");
-    	mailSender.send(message);
-    	String result ="success";
+    	
+	    mailSender.send(message);
+	    String result ="success";
 	    return result;
-	    
-	    
       
 	}
 	
