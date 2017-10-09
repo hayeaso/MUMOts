@@ -14,7 +14,9 @@
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
 
-
+<!-- Date picker style  -->
+<link href="<c:url value="/metronic/assets/admin/pages/css/datepicker.css" />" rel="stylesheet" type="text/css"/>
+<!--<script src="<c:url value="/metronic/assets/admin/pages/scripts/datepicker.js" />" type="text/javascript"></script>-->
 
 	
 
@@ -37,6 +39,7 @@
 <link href="<c:url value="/metronic/assets/admin/layout3/css/custom.css" />" rel="stylesheet" type="text/css"/>
 <!-- END THEME STYLES -->
 <link rel="shortcut icon"/>
+
 
 
 <!-- Mehdi : I moved this in the top because i will need it to be loaded before I execute  some of my scripts  -->

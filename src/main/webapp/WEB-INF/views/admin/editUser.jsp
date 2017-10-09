@@ -16,8 +16,8 @@
 		<!-- BEGIN REGISTRATION FORM -->
 		<form:form method="POST" class="register-form" action="../editUser"
 			modelAttribute="loginUser">
-			<h3>Sign Up</h3>
-			<p class="hint">Enter your personal details below:</p>
+			<h3>Edit User</h3>
+			<p class="hint">Enter user details below:</p>
 			<form:hidden path="userId" name="userId" value="${user.userId}" />
 			<div class="form-group">
 				<form:label path="firstName"
@@ -42,7 +42,7 @@
 				<form:errors path="email" cssClass="text-danger" />
 			</div>
 
-			<p class="hint">Enter your account details below:</p>
+			<p class="hint">Edit user details below:</p>
 			<div class="form-group">
 				<form:label path="username"
 					class="control-label visible-ie8 visible-ie9">Username</form:label>
@@ -91,6 +91,10 @@
 				<button type="submit" id="register-submit-btn"
 					class="btn btn-success uppercase pull-right">Submit</button>
 			</div>
+			<div class="form-actions">
+				<a href="<c:url value='/admin/users'/>">
+ 				<input style="margin-right:30px;" type="button" id="register-cancel-btn" class="btn btn-success uppercase pull-right" value="Cancel"/>
+ 			</div>
 			<br/><br/>
 		</form:form>
 	</div>
