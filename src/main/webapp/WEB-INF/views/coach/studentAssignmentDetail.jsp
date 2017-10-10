@@ -2,13 +2,14 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include.jsp"%>
 <div class="content">
-	<div class="portlet box blue">
-		<div class="portlet-title">
-			<div class="caption">
-				<i class="fa fa-gift"></i>Student Assignment Detail
-			</div>
-		</div>
-		<div class="portlet-body form">
+<div class="panel panel-success">
+
+	<div class="panel-heading">
+		<h3 class="panel-title">
+			<i class="fa fa-gift"></i> Student Assignment Details
+		</h3>
+	</div>
+	<div class="panel-body form">
 		<div id="errorMessage" class="alert alert-warning" style="display:none;"></div>
 		<div id="successMessage" class="alert alert-success" style="display:none;"></div>
 		<input type="hidden" value="${assignment.accesscode}" id="sentEmail" />
@@ -71,15 +72,17 @@
 									<div class="col-md-offset-3 col-md-9">
 										<button type="button" id="generate-test-btn"
 											onclick="generateAccessCode()" name="generate-test-btn"
-											class="btn btn-circle blue">Generate Test</button>
+											class="btn btn-circle btn-primary">Generate Test</button>
 										<button type="button" id="send-test-btn"
 											onclick="sendEmail(${student.userId})" name="send-test-btn"
-											class="btn btn-circle blue">Send Email & Save</button>
+											class="btn btn-circle btn-success">Send Email & Save</button>
 										<button type="button" id="student-assignment-cancelbtn"
-											onclick="assignmentCancel()" class="btn btn-circle blue">Cancel</button>
+											onclick="assignmentCancel()" class="btn btn-circle btn-default">Cancel</button>
 									</div>
 								</div>
-							</div></form>
+							</div>
+							</div>
+							</form>
 	</div>
 	</div>
 </div>

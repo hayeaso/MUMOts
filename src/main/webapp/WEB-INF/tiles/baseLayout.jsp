@@ -57,7 +57,7 @@
 		<div class="container">
 			<div class="row col-sm-10">
 				<div class="page-logo">
-					<a href="#"><img
+					<a href="<c:url value="/" />"><img
 						src="<c:url value="/metronic/assets/logo2.png" />" height="70px;"
 						alt="logo" class="logo-default"></a>
 				</div>
@@ -73,14 +73,33 @@
 				
 					<ul class="nav navbar-nav pull-right">
 						<!-- BEGIN USER LOGIN DROPDOWN -->
-						<li class="dropdown dropdown-user dropdown-dark"><a
-							href="javascript:;" class="dropdown-toggle"
-							data-toggle="dropdown" data-hover="dropdown"
-							data-close-others="true"> <span
+						<li class="dropdown dropdown-user dropdown-dark">
+						<c:choose>
+    					<c:when test="${sessionScope.role.equals('admin')}">
+						<a
+							href="<c:url value="/admin/users" />"> <span
 								class="username username-hide-mobile">Welcome
-									${sessionScope.username} ${sessionScope.role}!
+									 ${sessionScope.role}!
 									</span>
 						</a>
+						</c:when>
+						<c:when test="${sessionScope.role.equals('coach')}">
+						<a
+							href="<c:url value="/coach/home" />"> <span
+								class="username username-hide-mobile">Welcome
+									 ${sessionScope.role}!
+									</span>
+						</a>
+						</c:when>
+						<c:when test="${sessionScope.role.equals('dba')}">
+						<a 
+							href="<c:url value="/dba/addquestion" />" > <span
+								class="username username-hide-mobile">Welcome
+									 ${sessionScope.role}!
+									</span>
+						</a>
+						</c:when>
+						</c:choose>
 						</li>
 					</ul>
 						<%-- 
