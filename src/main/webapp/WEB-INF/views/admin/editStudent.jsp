@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include.jsp"%>
+<c:set var="user_role" value="${sessionScope.role}"/>
 <div class="content">
 	<div class="portlet light">
 		<c:if test="${not empty success}">
@@ -55,8 +56,6 @@
 					type="text" placeholder="Entry year" name="entry" value="${student.entry}" id="datepick" />
 				<form:errors path="entry" cssClass="text-danger" />
 			</div>
-
-			
 			
 			<div class="form-group">
 				<form:label class="control-label" path="jobSearchStatus">Job search status</form:label> 
@@ -81,7 +80,12 @@
 					class="btn btn-success uppercase pull-right">Update</button>
 			</div>
 			<div class="form-actions">
-				<a href="<c:url value='/admin/students'/>">
+				<c:if test="${user_role == 'admin'}">
+					<a href="<c:url value='/admin/students'/>">
+ 				</c:if>
+ 				<c:if test="${user_role == 'coach'}">
+					<a href="<c:url value='/coach/students'/>">
+ 				</c:if>
  				<input style="margin-right:30px;" type="button" id="register-cancel-btn" class="btn btn-success uppercase pull-right" value="Cancel"/>
  			</div>	
 			<br/><br/>
