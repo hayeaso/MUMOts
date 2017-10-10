@@ -49,7 +49,7 @@
 		<property name="url" value="jdbc:mysql://localhost:3306/onlinetest?createDatabaseIfNotExist=true" />
 		
 		<property name="username" value="root" />
-		<property name="password" value="" />
+		<property name="password" value="root" />
 	</bean>
 
 
