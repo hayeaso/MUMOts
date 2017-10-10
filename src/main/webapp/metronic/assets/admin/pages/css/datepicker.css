@@ -60,7 +60,24 @@ div.ui-datepicker-header select {
 	margin-right:55px;
 }
 
-/*button {
-				    font-family: Trebuchet MS,Tahoma,Verdana,Arial,sans-serif;
-				    font-size: 1em;
-				}*/
+.bootstrap-datetimepicker-widget.dropdown-menu {
+  width: 250px;
+	border: 1px solid rgb(128, 128, 128);
+	margin: 5px 0 5px 0;
+	padding: 5px;
+	background: #e8eef4;
+	display: none;
+	font-family: Trebuchet MS, Tahoma, Verdana, Arial, sans-serif;
+	font-size: 1em;
+	cursor: pointer;
+}
+.bootstrap-datetimepicker-widget.dropdown-menu a span:hover,
+.bootstrap-datetimepicker-widget.dropdown-menu a span:focus {
+  background-color: #32aa62 !important;
+  color: #fff !important;
+}
+.bootstrap-datetimepicker-widget.dropdown-menu ul{
+	list-style: none;
+}
+
+
