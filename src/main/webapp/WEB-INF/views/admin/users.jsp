@@ -26,6 +26,7 @@
 					<th>Full Name</th>
 					<th>Email</th>
 					<th>Role</th>
+					<th>Status</th>
 					<th>Edit</th>
 					<th>Delete</th>
 				</tr>
@@ -38,6 +39,14 @@
 							<td>${user.firstName} ${user.lastName}</td>
 							<td>${user.email}</td>
 							<td class="center">${user.authorities[0].authority}</td>
+							<td class="center">
+								<c:if test="${user.status}">
+									Active
+								</c:if>
+								<c:if test="${user.status ne true}">
+									Inactive
+								</c:if>
+							</td>
 							<td><a href="editUser/${user.userId}"><i class="fa fa-edit"></i> Edit </a></td>
 							<td><button value="${user.userId}" type="button"
 									class="btnDelUser btn btn-xs btn-danger pull-right">Delete</button></td>
