@@ -85,11 +85,6 @@
 </div>
 <script src="<c:url value="/metronic/assets/coach/scripts/assignment.js" />" type="text/javascript"></script>
 <!-- JS for Date-Picker -->
-<!-- <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet"> -->
-<!-- <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" /> -->
-<!-- <script type="text/javascript" src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"> </script> -->
-<!-- <script type="text/javascript" src="http://tarruda.github.com/bootstrap-datetimepicker/assets/js/bootstrap-datetimepicker.min.js"></script> -->
-
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.4/jquery.datetimepicker.css"/ >
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.4/build/jquery.datetimepicker.full.min.js"></script>
 
@@ -103,13 +98,14 @@
 		//defaultTime: true,
 		todayButton: true,
 		defaultSelect: true,
-		controlType: 'select',
-		ampm: true,
-		format: 'm/d/y H:i A'
+		/*controlType: 'select',*/
+		/*ampm: true,*/
+		minDate: new Date(),
+		format: 'm/d/y H:i'
 	});
 
 /*
- * 
+ * format: 'm/d/y H:i A'
  format: 'Y/m/d A g:i',
  formatTime: 'A g:i',
  */
