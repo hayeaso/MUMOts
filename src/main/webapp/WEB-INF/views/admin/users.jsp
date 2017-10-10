@@ -38,7 +38,10 @@
 							<td>${user.firstName} ${user.lastName}</td>
 							<td>${user.email}</td>
 							<td class="center">${user.authorities[0].authority}</td>
+							
+							<!-- edit user profile button--->
 							<td><a href="editUser/${user.userId}"><i class="fa fa-edit"></i> Edit </a></td>
+							
 							<td><button value="${user.userId}" type="button"
 									class="btnDelUser btn btn-xs btn-danger pull-right">Delete</button></td>
 						</tr>
