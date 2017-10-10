@@ -17,6 +17,7 @@
 		<!-- BEGIN REGISTRATION FORM -->
 		<form:form method="POST" class="register-form"
 			action="registerStudent" modelAttribute="student">
+			
 			<h3>Register New Student</h3>
 			<p class="hint">Enter student information below:</p>
 			<div class="form-group">

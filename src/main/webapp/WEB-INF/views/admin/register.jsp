@@ -3,15 +3,29 @@
 <%@ include file="/WEB-INF/views/include.jsp"%>
 <div class="content">
 	<div class="portlet light">
-		<c:if test="${not empty success}">
-		<div class="alert alert-success" >
-			<strong>Success!</strong> Successfully added new user!
-		</div>
-		</c:if>
 		<c:if test="${not empty error}">
-		<div class="alert alert-warning" >
-			<strong>Warning!</strong> Username is duplicated!
-		</div>
+		<!-- Modal -->
+			<div id="myModal" class="modal fade" role="dialog">
+				<div class="modal-dialog">
+
+					<!-- Modal content-->
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">OOPS !!! Dupplicate Username</h4>
+						</div>
+						<div class="modal-body">
+							<p>Username cannot be duplicate.</p>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default"
+								data-dismiss="modal">Close</button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+<!-- END OF MODAL -->
 		</c:if>
 		<!-- BEGIN REGISTRATION FORM -->
 		<form:form method="POST" class="register-form" action="register"
@@ -81,3 +95,9 @@
 		</form:form>
 	</div>
 </div>
+
+<script type="text/javascript">
+    $(window).on('load',function(){
+        $('#myModal').modal('show');
+    });
+</script>

@@ -99,12 +99,14 @@ public class AdminController {
 
 		if(null != userService.findByUsername(user.getUsername())){
 			redirectAttr.addFlashAttribute("error", "Error");
+			return "redirect:/admin/register";
 		}else{
 			user.setEnabled(true);
 			userService.save(user);
-			redirectAttr.addFlashAttribute("success", "Success");			
+			redirectAttr.addFlashAttribute("success", "Success");	
+			return "redirect:/admin/users";
 		}
-		return "redirect:/admin/register";
+		
 	}
 
 	@RequestMapping(value = "/admin/editUser/{id}", method = RequestMethod.GET)

@@ -21,7 +21,7 @@
 <tiles:insertAttribute name="leftNav" />
 </div>
 
-<div	style="float: left; padding: 10px; width: 80%; border-left: 1px solid pink;">
+<div style="float: left; padding: 10px; width: 80%; border-left: 1px solid pink;">
 <tiles:insertAttribute name="content" />
 </div>
 

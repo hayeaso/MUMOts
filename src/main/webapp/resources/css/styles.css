@@ -300,8 +300,15 @@ a.activeLink{
 
 
  /* NEW CSS for NEW Look and FEEL */
-.page-header {
- 	margin: 0px; !important;
+.container {
+ 	margin-top: 5px; !important;
+ 	margin-bottom: 5px; !important;
  }
+ .portlet.box.blue{
+ border: 1 px solid #28bb9c;
+}
+.portlet-title{
+	background-color: #28bb9c; !important;
+}
 
  
