@@ -8,10 +8,6 @@ function generateAccessCode(){
 		$("#errorMessage").show();
 		return false;
 	}
-
-	//var str = document.getElementById("dateTime").value;
-	//alert("Date and time from generateAccessCode() " + str);
-	
 	$.ajax({
 		url:'../../../onlinetest/assignment/generateTest',
 		type:"GET",
@@ -19,11 +15,9 @@ function generateAccessCode(){
 		success:function(data){
 			
 			$("#accessCode").val(data.accessCode);
-			//$("#accessLink").val(data.accessLink);
-			
+			//$("#accessLink").val(data.accessLink);			
 		}
-	});
-	
+	});	
 }
 
 
@@ -31,21 +25,27 @@ function assignmentDone(userId){
 
 	if( !$('#accessCode').val() ) {
 		$("#errorMessage").empty();
-		var msg ="<strong>Warning!</strong> access Code is empty, you can not save "		
+		var msg ="<strong>Warning!</strong> Access Code is empty, you can not save "		
 		$("#errorMessage").append(msg);
 		$("#errorMessage").removeClass("hidden");
 		$("#errorMessage").show();
 		return false;
-	}
-	
-	if(!$("#sentEmail").val()){
+	}else if(!$("#sentEmail").val()){
 		$("#errorMessage").empty();
 		var msg ="<strong>Warning!</strong> You need to send test to student. Please send email "		
 		$("#errorMessage").append(msg);
 		$("#errorMessage").removeClass("hidden");
 		$("#errorMessage").show();
 		return false;
+	}else if( !$('#dateTime').val() ) {
+		$("#errorMessage").empty();
+		var msg ="<strong>Warning!</strong> Please select date and to schedule sending an email."		
+		$("#errorMessage").append(msg);
+		$("#errorMessage").removeClass("hidden");
+		$("#errorMessage").show();
+		return false;
 	}
+	
 	$.ajax({ 
 	   type: "POST",
 	   url: '../../../onlinetest/coach/saveAssignment',
@@ -58,30 +58,32 @@ function assignmentDone(userId){
 	   success: function(data){        
 		   
 		   if(data === "success"){
-			   window.location.href = "../../../onlinetest/coach/home";
-			   
-		   }
-		   
+			   window.location.href = "../../../onlinetest/coach/home";			   
+		   }		   
 	   }
 	});
-
 }
 
 
 function assignmentCancel(){
-
 	window.location.href = "../../../onlinetest/coach/home";
-
 }
 
 function sendEmail(userId){
 	var msg;
 	if( !$('#accessCode').val() ) {
 		$("#errorMessage").empty();
-		msg ="<strong>Warning!</strong> access Code is empty, you can not send email please generate code "
+		msg ="<strong>Warning!</strong> Access Code is empty, you can not send email please generate code "
 		$("#successMessage").hide();
 		$("#errorMessage").append(msg);
 //		$("#errorMessage").removeClass("hidden");
+		$("#errorMessage").show();
+		return false;
+	}else if( !$('#dateTime').val() ) {
+		$("#errorMessage").empty();
+		var msg ="<strong>Warning!</strong> Please select date and to schedule sending an email."		
+		$("#errorMessage").append(msg);
+		$("#errorMessage").removeClass("hidden");
 		$("#errorMessage").show();
 		return false;
 	}
@@ -106,10 +108,7 @@ function sendEmail(userId){
 		type:"GET",
 		success:function(data){
 			if(data=="success"){
-				alert("msg sent");
-			}
-			
-				 
+			}				 
 		}
 	});
 
@@ -123,16 +122,13 @@ $.ajax({
    data:{
 	   userId:userId,
 	   jobSearchStatus :$('input[name=jobSearchStatus]:checked').val(),
-	   
-	   
+  
    },
    success: function(data){        
 	   
 	   if(data === "success"){
-		   window.location.href = "../../../onlinetest/coach/home";
-		   
-	   }
-	   
+		   window.location.href = "../../../onlinetest/coach/home";		   
+	   }	   
    }
 });
 
