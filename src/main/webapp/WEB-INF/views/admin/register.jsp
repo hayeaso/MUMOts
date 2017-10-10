@@ -67,6 +67,15 @@
 				</form:select>
 				<form:errors path="authorities[0].authority" cssClass="text-danger" />
 			</div>
+			<div class="form-group">
+				<label class="control-label col-lg-2" for="status">Status</label>
+				<form:select path="status"
+					name="status" class="form-control">						
+					<form:option value="False">Inactive</form:option>
+					<form:option value="True" selected="selected">Active</form:option>												
+				</form:select>
+				<form:errors path="status" cssClass="text-danger" />
+			</div>
 			<form:hidden path="enabled" value="TRUE" />
 			<div class="form-actions">
 				<button type="submit" id="register-submit-btn"

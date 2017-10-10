@@ -76,8 +76,7 @@
 						<li class="dropdown dropdown-user dropdown-dark">
 						<c:choose>
     					<c:when test="${sessionScope.role.equals('admin')}">
-						<a
-							href="<c:url value="/admin/users" />"> <span
+						<a href="<c:url value ="/admin/users" />"> <span
 								class="username username-hide-mobile">Welcome
 									 ${sessionScope.role}!
 									</span>
@@ -102,22 +101,7 @@
 						</c:choose>
 						</li>
 					</ul>
-						<%-- 
-							<ul class="dropdown-menu dropdown-menu-default">
-								<li><a href="<c:url value="/user/profile" />"> <i
-										class="icon-user"></i> My Profile
-								</a></li>
-								<li class="divider"></li>
-								<li><a href="<c:url value="/register" />"> <i
-										class="icon-key"></i> Register
-								</a></li>
-								<li class="divider"></li>
-								<li><a href="<c:url value="/logout" />"> <i
-										class="icon-key"></i> Log Out
-								</a></li>
-							</ul></li>
-						<!-- END USER LOGIN DROPDOWN -->
-					</ul> --%>
+					
 					</c:if>
 				</div>
 				</div>

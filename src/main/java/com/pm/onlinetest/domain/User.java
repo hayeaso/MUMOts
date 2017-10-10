@@ -14,6 +14,7 @@ public class User {
 	private String lastName;
 	private String password;
 	private boolean enabled;
+	private boolean status;
 
 	private List<Authority> authorities;
 
@@ -96,6 +97,15 @@ public class User {
 	public void setEnabled(boolean enabled) {
 		this.enabled = enabled;
 	}
+	
+	@Column(name = "status", columnDefinition = "tinyint(1) default TRUE")
+	public boolean isStatus() {
+		return status;
+	}
+
+	public void setStatus(boolean status) {
+		this.status = status;
+	}
 
 	@OneToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL, mappedBy = "userId")
 	//@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
@@ -105,6 +115,5 @@ public class User {
 
 	public void setAuthorities(List<Authority> authorities) {
 		this.authorities = authorities;
-	}
-
+	}	
 }
