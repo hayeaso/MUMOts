@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include.jsp"%>
 <div class="content">
-	<div class="portlet light">
+	<div class="jumbotron">
 		<c:if test="${not empty success}">
 		<div class="alert alert-success" >
 			<strong>Success!</strong> Successfully added new Category!

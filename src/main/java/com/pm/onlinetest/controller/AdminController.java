@@ -99,6 +99,8 @@ public class AdminController {
 
 		if(null != userService.findByUsername(user.getUsername())){
 			redirectAttr.addFlashAttribute("error", "Error");
+			redirectAttr.addFlashAttribute("model", user);
+			
 			return "redirect:/admin/register";
 		}else{
 			user.setEnabled(true);

@@ -1,34 +1,25 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="/WEB-INF/views/include.jsp"%>
 
-<div id="assignment" class="portlet light ">
-	<div class="portlet-title">
-		<div class="caption">
-			<span class="caption-subject bold uppercase font-dark">Assignment
-				List </span>
-		</div>
-		<div class="actions">
-			<jsp:useBean id="now" class="java.util.Date" />
+<div class="panel panel-success">
+
+	<div class="panel-heading">
+		<h3 class="panel-title">
+			<i class="fa fa-edit"></i>Assignment list
+			<!-- <div class="actions"> -->
+			<p class="alignright"><jsp:useBean id="now" class="java.util.Date" />
 			Date Time :
 			<fmt:formatDate value="${now}" pattern="dd-MM-yyyy HH:mm:ss a z" />
-			<button id="export" class="btn btn-circlebtn-icon-only  btn-default">Export
-			</button>
-			<a class="btn btn-circle btn-icon-only btn-default fullscreen"
-				href="#" data-original-title="" title=""></a>
-		</div>
+			</p>
+		
+		</h3>
 	</div>
-	<div class="portlet-body">
-<!-- 		<div class="table-toolbar">
-			<div class="row">
-				<div class="col-md-6"></div>
-			</div>
-		</div>
-		<br> <br>
+	<div class="panel-body">
 
-		<div class="row">
-			<div class="col-md-8"></div>
-		</div>
-		<br> <br> -->
+	<div class="portlet-body">
+		
+		<button id="export" class="btn btn-circle btn-primary alignright">Export
+			</button>
 		<div id="table_wrapper">
 			<table class="table table-striped table-hover table-bordered"
 				id="sample_editable_1">
@@ -101,6 +92,8 @@
 		</div>
 	</div>
 </div>
+</div>
+</
 <script src="<c:url value="/metronic/assets/global/plugins/jquery.min.js" />" type="text/javascript"></script>
 <script src="<c:url value="/metronic/assets/global/plugins/jquery-migrate.min.js" />" type="text/javascript"></script>
 <%-- <script src="<c:url value="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"/>"></script> --%>

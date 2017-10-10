@@ -8,7 +8,16 @@
   </div>
   <div class="panel-body">
   <div class="portlet-body">
-
+<div class="table-toolbar">
+			<div class="row">
+				<div class="col-md-6">
+					<div class="btn-group">
+						<a href="register" class="btn btn-primary"><i class="fa fa-plus"></i> Add New
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
 		<table class="table table-striped table-hover table-bordered"
 			id="sample_editable_1">
 			<thead>

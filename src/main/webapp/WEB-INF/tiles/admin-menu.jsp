@@ -9,14 +9,9 @@
   <div class="container-fluid"> 
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
       <ul class="nav navbar-nav">
-      	 <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" ${('/onlinetest/admin/register' == currentPage || '/onlinetest/admin/users' == currentPage) ? ' style="color: #fdfdfd; background: #28bb9c;"' : ''}>Users <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-           		<li><a href="<c:url value="/admin/register" />" >Add User</a></li>
-				  <li role="separator" class="divider"></li>
-				<li><a href="<c:url value="/admin/users" />" >User List</a></li>
-		   </ul>
-        </li>
+      	 
+        <li><a href="<c:url value="/admin/users" />" ${('/onlinetest/admin/users' == currentPage) ? ' style="color: #fdfdfd; background: #28bb9c;"' : ''}>User List</a></li>
+		
       	<li><a href="<c:url value="/admin/students" />" ${('/onlinetest/admin/students' == currentPage) ? ' style="color: #fdfdfd; background: #28bb9c;"' : ''}>Student List</a></li>
 		<li><a href="<c:url value="/admin/categories" />" ${('/onlinetest/admin/categories' == currentPage) ? ' style="color: #fdfdfd; background: #28bb9c;"'  : ''}>Category</a></li>
 		<li><a href="<c:url value="/admin/subCategories" />" ${('/onlinetest/admin/subCategories' == currentPage) ? ' style="color: #fdfdfd; background: #28bb9c;"'  : ''}>Sub Category</a></li>

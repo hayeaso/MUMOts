@@ -4,28 +4,21 @@
 <%@ page session="false"%>
 
 
+<div class="panel panel-success">
 
-<div id="report" class="portlet light ">
-	<div class="portlet-title">
-		<div class="caption">
-			<span class="caption-subject bold uppercase font-dark">Student
-				Test Score </span>
-
-		</div>
-		<div class="actions">
-			<jsp:useBean id="now" class="java.util.Date" />
-			<button id="exportResult"
-				class="btn btn-circlebtn-icon-only  btn-default">Export</button>
-			<a class="btn btn-circle btn-icon-only btn-default fullscreen"
-				href="#" data-original-title="" title=""> </a>
-		</div>
+	<div class="panel-heading">
+		<h3 class="panel-title">
+			<i class="fa fa-edit"></i>Student Test Score
+		
+		</h3>
 	</div>
+	<div class="panel-body">
+
 	<div class="portlet-body">
 
 
-
-
-
+	<button id="exportResult"
+				class="btn btn-circle btn-primary alignright">Export</button>
 		<table class="table table-sm" id="sample_editable_1">
 			<thead>
 				<tr>
@@ -74,6 +67,7 @@
 
 	</div>
 
+</div>
 </div>
 <script src="<c:url value="/metronic/assets/global/plugins/jquery.min.js" />" type="text/javascript"></script>
 <script src="<c:url value="/metronic/assets/global/plugins/jquery-migrate.min.js" />" type="text/javascript"></script>
