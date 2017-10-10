@@ -5,12 +5,29 @@
 	<ul class="nav navbar-nav">
 		<li><a href="<c:url value="/coach/home" />">Home</a></li>
 		<li><a href="<c:url value="/coach/assignments" />">Assignments</a></li>
-		<li><a href="<c:url value="/coach/resultlist" />">Test Results</a></li>
+		<li><a href="<c:url value="/coach/resultlist" />">Test
+				Results</a></li>
 		<li><a href="<c:url value="/coach/students" />">Student List</a></li>
-		<li><a href="<c:url value="/coach/addquestion" />">Add Question</a></li>
-		<li><a href="<c:url value="/coach/viewquestions" />">Question List</a></li>
+		<li><a href="<c:url value="/coach/addquestion" />">Add
+				Question</a></li>
+		<li><a href="<c:url value="/coach/viewquestions" />">Question
+				List</a></li>
 		<li><a href="<c:url value="/coach/importData" />">Import Data</a></li>
 		<li><a href="<c:url value="/help" />">Help</a></li>
+
 		<%-- <li><a href="<c:url value="/coach/grading" />">Grading</a></li> --%>
+
+
+	</ul>
+	<button type="button" class="btn btn-default dropdown-toggle"
+		data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+	</button>
+	<ul class="dropdown-menu">
+
+		<td><a href="editUser/${user.userId}"><i class="fa fa-edit"></i>
+				Edit Profile </a></td>
+		<li><a href="<c:url value="/logout" />">Logout</a></li>
+
 	</ul>
 </div>

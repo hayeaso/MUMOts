@@ -46,12 +46,11 @@
 				<span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
 			</button>
 			<ul class="dropdown-menu">
-				<li><a href="#">Profile</a></li>
+
+				<td><a href="editUser/${user.userId}"><i class="fa fa-edit"></i> Edit Profile </a></td>
 				<li><a href="<c:url value="/logout" />">Logout</a></li>
 
 			</ul>
-
-
 		</div>
 	</div>
 </nav>
