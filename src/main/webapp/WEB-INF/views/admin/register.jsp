@@ -45,7 +45,7 @@
 				<form:label path="username"
 					class="control-label visible-ie8 visible-ie9">Username</form:label>
 				<form:input path="username" class="form-control placeholder-no-fix"
-					type="text" autocomplete="off" placeholder="User Name" value="${model.getFirstName() }"
+					type="text" autocomplete="off" placeholder="User Name" value="${model.getUsername() }"
 					name="username" />
 				<form:errors path="username" cssClass="text-danger" />
 			</div>
