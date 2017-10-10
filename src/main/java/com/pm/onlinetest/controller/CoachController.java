@@ -176,6 +176,7 @@ public class CoachController {
 	    		+ " Please find the link and the access code below: \n"+ "Access Link: "+"https://ots.cs.mum.edu/onlinetest/test" +"\n"+"Access Code: "+ accessCode +"\nAll the best!");
     	
 	    mailSender.send(message);
+	    
 	    String result ="success";
 	    return result;
       
