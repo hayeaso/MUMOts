@@ -52,7 +52,7 @@
 			aria-haspopup="true" aria-expanded="false"> <span
 				class="glyphicon glyphicon-cog" aria-hidden="true"></span></a>
 			<ul class="dropdown-menu">
-				<li><a href="editUser/${user.userId}"><i class="fa fa-edit"></i>
+				<li><a href="editProfile"><i class="fa fa-edit"></i>
 						Edit Profile </a></li>
 				<li><a href="<c:url value="/logout" />">Logout</a></li>
 			</ul>
