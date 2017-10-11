@@ -464,7 +464,7 @@ public class AdminController {
 	}
 
 	// bind to profile edit button in setting in tiles/admin-menu.jsp
-	@RequestMapping(value = "/admin/editProfile", method = RequestMethod.GET)
+	@RequestMapping(value = {"/admin/editProfile","/admin/*/editProfile"}, method = RequestMethod.GET)
 	public String editProfile(@ModelAttribute("loginUser") User user, Model model){
 		System.out.println("GET: enter into EditProfile	");
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
