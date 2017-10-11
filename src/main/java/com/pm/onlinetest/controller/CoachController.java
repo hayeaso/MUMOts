@@ -7,6 +7,8 @@ import java.time.temporal.ChronoField;
 import java.util.List;
 import java.util.Locale;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
@@ -14,6 +16,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -208,7 +211,7 @@ public class CoachController {
 	}
 
 	// bind to profile edit button in setting in tiles/coach-menu.jsp
-	@RequestMapping(value = { "/coach/editProfile", "/coach/**/editProfile" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/coach/editProfile", "/coach/**/editProfile"}, method = RequestMethod.GET)
 	public String editProfile(@ModelAttribute("loginUser") User user, Model model) {
 		System.out.println("GET: enter into EditProfile	");
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
@@ -220,9 +223,25 @@ public class CoachController {
 
 	@RequestMapping(value = "/coach/editProfile/{id}", method = RequestMethod.GET)
 	public String editUser(@ModelAttribute("loginUser") User user, Model model, @PathVariable("id") int id) {
-		System.out.println("GET: enter into Edit User	");
-		System.out.println("userid=" + id);
 		model.addAttribute("user", userService.findByUserId(id));// assign user										
 		return "editUser";
+	}
+	
+	@RequestMapping(value = "/coach/editUser", method = RequestMethod.POST)
+	public String editUser(@Valid @ModelAttribute("loginUser") User user, BindingResult result,
+			RedirectAttributes redirectAttr) {
+		System.out.println("POST: enter into Edit User");
+		if (result.hasErrors()) {
+			return "editUser";
+		}
+
+		if (null != userService.findByUsernameExceptThis(user.getUsername(), user.getUserId())) {
+			redirectAttr.addFlashAttribute("error", "Error");
+		} else {
+			user.setEnabled(true);
+			userService.save(user);
+			redirectAttr.addFlashAttribute("success", "Success");
+		}
+		return "redirect:/coach/editProfile/" + user.getUserId();
 	}
 }
