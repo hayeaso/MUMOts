@@ -1,10 +1,5 @@
 package com.pm.onlinetest.controller;
 
-<<<<<<< HEAD
-
-import java.sql.Timestamp;
-=======
->>>>>>> af690ec9c60b41e907db700b3d7dd61049af7dcd
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -80,12 +75,7 @@ public class CoachController {
 	public String home1(Locale locale, Model model) {
 		List<Student> students = coachService.findStudentByAcitveJobStatus();
 		model.addAttribute("students", students);
-<<<<<<< HEAD
 		return "coach";	
-=======
-		return "coach";
-
->>>>>>> af690ec9c60b41e907db700b3d7dd61049af7dcd
 	}
 
 	@RequestMapping(value = "/coach/studentAssignmentDetail/{userId}", method = RequestMethod.GET)
@@ -96,7 +86,6 @@ public class CoachController {
 		Integer studentId = Integer.parseInt(userId);
 		Student student = coachService.findStudentById(studentId);
 		Assignment assignment = assignmentService.findByStudentIdByFinish(student);
-<<<<<<< HEAD
 		if(assignment !=null)
 		System.out.println("assignment of finish false is: "+assignment.isFinished());
 		
@@ -115,50 +104,19 @@ public class CoachController {
 		//System.out.println("assignment details accessCode:"+ assignment);
 		return "studentAssignmentDetail";	
 	}	
-	
-=======
-		if (assignment != null)
-			System.out.println("assignment of finish false is: " + assignment.isFinished());
-
-		model.addAttribute("student", student);
-
-		if (assignment != null && assignment.getAccesscode() != null) {
-			System.out.println("assignment details accessCode: " + assignment.getAccesscode());
-
-			model.addAttribute("assignment", assignment);
-
-			System.out.println("assignment is not null");
-		} else {
-			assignment = null;
-			model.addAttribute("assignment", assignment);
-			System.out.println("making assignment null");
-		}
-
-		System.out.println("assignment details accessCode:" + assignment);
-		return "studentAssignmentDetail";
-
-	}
-
->>>>>>> af690ec9c60b41e907db700b3d7dd61049af7dcd
 	@RequestMapping(value = "/coach/studentAssignmentHistory/{userId}", method = RequestMethod.GET)
 	public String studentAssignmentHistory(@PathVariable("userId") String userId, Locale locale, Model model) {
 		Student student = studentService.findByStudentId(Integer.parseInt(userId));
 		List<Assignment> assignments = assignmentService.findByStudent(student);
-<<<<<<< HEAD
 		model.addAttribute("assignments",assignments);
 		model.addAttribute("student",student);
 		return "studentAssignmentHistory";	
-=======
-		model.addAttribute("assignments", assignments);
-		model.addAttribute("student", student);
-		return "studentAssignmentHistory";
-
->>>>>>> af690ec9c60b41e907db700b3d7dd61049af7dcd
 	}
 
 	@RequestMapping(value = "/coach/saveAssignment", method = RequestMethod.POST)
-<<<<<<< HEAD
-	public @ResponseBody String saveAssignment(RedirectAttributes redirectAttr,@RequestParam("userId") String userId,@RequestParam("accessLink") String accessLink,@RequestParam("accessCode") String accessCode,@RequestParam("dateTime") String dateTime) {		
+	public @ResponseBody String saveAssignment(RedirectAttributes redirectAttr,@RequestParam("userId") String userId,
+			@RequestParam("accessLink") String accessLink,@RequestParam("accessCode") String accessCode,
+			@RequestParam("dateTime") String dateTime) {		
 		System.out.println("Student Id in save ASsignment is: "+userId);
 		System.out.println("accesscode in save ASsignment is: "+accessCode);
 		System.out.println("accessLink in save ASsignment is: "+accessLink);
@@ -176,56 +134,20 @@ public class CoachController {
 		if(assignment !=null ) {
 			System.out.println("Assignment Already exist");			
 		}else {
-=======
-	public @ResponseBody String saveAssignment(RedirectAttributes redirectAttr, @RequestParam("userId") String userId,
-			@RequestParam("accessLink") String accessLink, @RequestParam("accessCode") String accessCode,
-			@RequestParam("dateTime") String dateTime) {
-		System.out.println("Student Id in save ASsignment is: " + userId);
-		System.out.println("accesscode in save ASsignment is: " + accessCode);
-		System.out.println("accessLink in save ASsignment is: " + accessLink);
-
-		Assignment assignment;
-		String coachName = SecurityContextHolder.getContext().getAuthentication().getName();
-		User coachModel = userService.findByUsername(coachName);
-		System.out.println("coachModel.getUsername()t is: " + coachModel.getUsername());
-
-		Student student = studentService.findByStudentId(Integer.parseInt(userId));
-		System.out.println("student.getUsername() is: " + student.getFirstName());
-
-		assignment = assignmentService.findByAccesscode(accessCode);
-		if (assignment != null) {
-			System.out.println("Assignment Already exist");
-
-		}
-
-		else {
->>>>>>> af690ec9c60b41e907db700b3d7dd61049af7dcd
 			assignment = new Assignment();
 			emailScheduler = new EmailScheduler();
 			System.out.println("Assignment not exist create new one");
 		}
-<<<<<<< HEAD
-
 		/*saving a new assignment and data into the emailscheduler table that associated with this assignment*/
 		emailScheduler.setAssignmentId(assignment);
 		emailScheduler.setSend(false);
 		emailScheduler.setSendEmailDateTime(dateTime);
 		emailScheduleService.saveEmailScheduler(emailScheduler);
 		//System.out.println("-------------------------------Date from user-------" + dateTime);
-=======
-		// DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy
-		// HH:mm a");
-		// DateTimeFormatter formatter =
-		// DateTimeFormatter.ofPattern("MM/dd/yyyy'T'HH:mm", Locale.US);
-		// LocalDateTime dateTimeNew = LocalDateTime.parse(dateTime, formatter);
-		// System.out.println("DATE and TIME__________________" + dateTimeNew);
-		assignment.setSendEmailDateTime(dateTime);
->>>>>>> af690ec9c60b41e907db700b3d7dd61049af7dcd
 		assignment.setAccesscode(accessCode);
 		assignment.setCoachId(coachModel);
 		assignment.setStudentId(student);
 		assignment.setCount(0);
-<<<<<<< HEAD
 		assignment.setFinished(false);	
 		//System.out.println(" Assignment get access codeis: "+assignment.getAccesscode());		
 		assignmentService.saveAssignment(assignment);
@@ -234,20 +156,7 @@ public class CoachController {
 	 */
 		return "success";
 	}
-	
-=======
-		assignment.setFinished(false);
 
-		System.out.println(" Assignment get access codeis: " + assignment.getAccesscode());
-
-		assignmentService.saveAssignment(assignment);
-		/*
-		 * redirectAttr.addFlashAttribute("success",
-		 * "Test Generated Successfully!"); return "redirect:/coach/home";
-		 */
-		return "success";
-	}
->>>>>>> af690ec9c60b41e907db700b3d7dd61049af7dcd
 
 	@RequestMapping(value = "/coach/sendEmail", method = RequestMethod.GET)
 	public @ResponseBody String sendEmail(@RequestParam("userId") String userId,
@@ -258,8 +167,7 @@ public class CoachController {
 		System.out.println("email sending");
 		//System.out.println("datetime in send email " + dateTime);
 		SimpleMailMessage message = new SimpleMailMessage();
-<<<<<<< HEAD
-	    message.setTo(email);
+		message.setTo(email);
 	    //System.out.println("EMAIL: ___" + email);
 	    message.setReplyTo("false");
 	 
@@ -272,26 +180,6 @@ public class CoachController {
 	    
 	    String result ="success";
 	    return result;
-      
-=======
-		message.setTo(email);
-		System.out.println("EMAIL: ___" + email);
-		message.setReplyTo("false");
-
-		message.setFrom("mumtestlink@gmail.com");
-		message.setSubject("Test Link");
-		message.setText(
-				"The test you can take at this particular link. To access the test you need to enter the access code provided below. "
-						+ " Please find the link and the access code below: \n" + "Access Link: "
-						+ "https://ots.cs.mum.edu/onlinetest/test" + "\n" + "Access Code: " + accessCode
-						+ "\nAll the best!");
-
-		mailSender.send(message);
-
-		String result = "success";
-		return result;
-
->>>>>>> af690ec9c60b41e907db700b3d7dd61049af7dcd
 	}
 
 	@RequestMapping(value = "/coach/changeStudentJobSearchStatus", method = RequestMethod.POST)
