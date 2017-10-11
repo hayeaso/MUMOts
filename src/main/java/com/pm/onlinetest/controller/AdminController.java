@@ -474,4 +474,5 @@ public class AdminController {
 		return "redirect:/admin/editUser/" + currentUser.getUserId();
 	}
 
+	
 }
