@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include.jsp"%>
 <div class="content">
+<<<<<<< HEAD
 	<div class="portlet box blue">
 		<div class="portlet-title">
 			<div class="caption">
@@ -21,6 +22,45 @@
 						<div class="col-md-3">
 							<p class="form-control-static">${student.studentId}</p>
 						</div>
+=======
+<div class="panel panel-success">
+
+	<div class="panel-heading">
+		<h3 class="panel-title">
+			<i class="fa fa-gift"></i> Student Assignment Details
+		</h3>
+	</div>
+	<div class="panel-body form">
+		<div id="errorMessage" class="alert alert-warning" style="display:none;"></div>
+		<div id="successMessage" class="alert alert-success" style="display:none;"></div>
+		<input type="hidden" value="${assignment.accesscode}" id="sentEmail" />
+		<form action="#" class="form-horizontal">
+		<div class="form-body">
+			<div class="form-group">
+				<label class="col-md-3 control-label">Student</label>
+				<div class="col-md-3">
+					<p class="form-control-static">${student.studentId}</p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-3 control-label">Student Name:</label>
+				<div class="col-md-3">
+					<p class="form-control-static">${student.firstName} ${student.lastName}</p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-3 control-label">Student Email:</label>
+				<div class="col-md-4">
+					<p class="form-control-static" id="email" name="email">${student.email}</p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-md-3 control-label">Access Link</label>
+				<div class="col-md-4">
+					<div class="input-icon">
+						<input type="text" class="form-control" id="accessLink" name="accessLink" readonly="readonly" 
+						value="http://localhost:8080/onlinetest/test">
+>>>>>>> af690ec9c60b41e907db700b3d7dd61049af7dcd
 					</div>
 					<div class="form-group">
 						<label class="col-md-3 control-label">Student Name:</label>
@@ -66,6 +106,7 @@
 							</div>
 						</div>
 					</div>
+<<<<<<< HEAD
 
 					<div class="form-actions">
 						<div class="row">
@@ -83,6 +124,26 @@
 					</div>
 			</form>
 		</div>
+=======
+				
+							<div class="form-actions">
+								<div class="row">
+									<div class="col-md-offset-3 col-md-9">
+										<button type="button" id="generate-test-btn"
+											onclick="generateAccessCode()" name="generate-test-btn"
+											class="btn btn-circle btn-primary">Generate Test</button>
+										<button type="button" id="send-test-btn"
+											onclick="sendEmail(${student.userId})" name="send-test-btn"
+											class="btn btn-circle btn-success">Send Email & Save</button>
+										<button type="button" id="student-assignment-cancelbtn"
+											onclick="assignmentCancel()" class="btn btn-circle btn-default">Cancel</button>
+									</div>
+								</div>
+							</div>
+							</div>
+							</form>
+	</div>
+>>>>>>> af690ec9c60b41e907db700b3d7dd61049af7dcd
 	</div>
 </div>
 <script

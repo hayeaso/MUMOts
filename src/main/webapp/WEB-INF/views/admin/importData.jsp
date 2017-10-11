@@ -1,13 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include.jsp"%>
-<div class="content">
-	<div class="portlet box green">	
-		<div class="portlet-title">
-			<div class="caption">
-				<i class="fa fa-edit"></i>Import Data
-			</div>
-		</div>
+<div class="panel panel-success">
+
+	<div class="panel-heading">
+		<h3 class="panel-title">
+			<i class="fa fa-edit"></i>Import Data 
+		</h3>
+	</div>
+	<div class="panel-body">
 		<div class="portlet-body form">
 			<c:if test="${not empty error}">
 				<div class="alert alert-warning">
@@ -40,7 +41,7 @@
 				<div class="form-actions">
 					<div class="row">
 						<div class="col-md-offset-3 col-md-9">
-							<button type="submit" class="btn btn-circle blue">Import</button>
+							<button type="submit" class="btn btn-circle btn-primary">Import</button>
 						</div>
 					</div>
 				</div>

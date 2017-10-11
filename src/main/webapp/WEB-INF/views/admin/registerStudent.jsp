@@ -3,7 +3,7 @@
 <%@ include file="/WEB-INF/views/include.jsp"%>
 <c:set var="user_role" value="${sessionScope.role}"/>
 <div class="content">
-	<div class="portlet light">
+	<div class="jumbotron">
 		<c:if test="${not empty success}">
 		<div class="alert alert-success" >
 			<strong>Success!</strong> Successfully added new Student!

@@ -2,33 +2,35 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include.jsp"%>
 <div class="content">
-	<!-- <div class="portlet light"> -->
-	<div class="jumbotron">
-		<c:if test="${not empty error}">
-			<div class="alert alert-dismissible alert-danger">
-				<button type="button" class="close" data-dismiss="alert">&times;</button>
-				<strong>Oh snap!</strong> <a href="#" class="alert-link">Username
-					already exists. </a> Choose different username.
-			</div>
+	<div class="portlet light">
+		<c:if test="${not empty success}">
+		<div class="alert alert-success" >
+			<strong>Success!</strong> User updated!
+		</div>
 		</c:if>
-		
+		<c:if test="${not empty error}">
+		<div class="alert alert-warning" >
+			<strong>Warning!</strong> Username is duplicated!
+		</div>
+		</c:if>
 		<!-- BEGIN REGISTRATION FORM -->
-		<form:form method="POST" class="register-form" action="register"
+		<form:form method="POST" class="register-form" action="../editProfile"
 			modelAttribute="loginUser">
-			<h3>Add New User</h3>
-			<p class="hint">Enter personal details below:</p>
+			<h3>Edit Profile</h3>
+			<p class="hint">Enter user details below:</p>
+			<form:hidden path="userId" name="userId" value="${user.userId}" />
 			<div class="form-group">
 				<form:label path="firstName"
 					class="control-label visible-ie8 visible-ie9">First Name</form:label>
 				<form:input path="firstName" class="form-control placeholder-no-fix"
-					type="text" placeholder="First Name" name="firstName" value="${model.getFirstName() }"/>
+					type="text" placeholder="First Name" name="firstName" value="${user.firstName}"/>
 				<form:errors path="firstName" cssClass="text-danger" />
 			</div>
 			<div class="form-group">
 				<form:label path="lastName"
 					class="control-label visible-ie8 visible-ie9">Last Name</form:label>
 				<form:input path="lastName" class="form-control placeholder-no-fix"
-					type="text" placeholder="Last Name" name="lastName" value="${model.getLastName() }" />
+					type="text" placeholder="Last Name" name="lastName" value="${user.lastName}"/>
 				<form:errors path="lastName" cssClass="text-danger" />
 			</div>
 
@@ -36,16 +38,16 @@
 				<form:label path="email"
 					class="control-label visible-ie8 visible-ie9">Email</form:label>
 				<form:input path="email" class="form-control placeholder-no-fix"
-					type="text" placeholder="Email" name="email" value="${model.getEmail() }"/>
+					type="text" placeholder="Email" name="email" value="${user.email}"/>
 				<form:errors path="email" cssClass="text-danger" />
 			</div>
 
-			<p class="hint">Enter your account details below:</p>
+			<p class="hint">Edit user details below:</p>
 			<div class="form-group">
 				<form:label path="username"
 					class="control-label visible-ie8 visible-ie9">Username</form:label>
 				<form:input path="username" class="form-control placeholder-no-fix"
-					type="text" autocomplete="off" placeholder="User Name" value="${model.getUsername() }"
+					type="text" autocomplete="off" placeholder="User Name" value="${user.username}"
 					name="username" />
 				<form:errors path="username" cssClass="text-danger" />
 			</div>
@@ -54,25 +56,23 @@
 					class="control-label visible-ie8 visible-ie9">Password</form:label>
 				<form:input path="password" class="form-control placeholder-no-fix"
 					id="register_password" type="password" autocomplete="off"
-					placeholder="Password" name="password" value="${model.getPassword() }"/>
+					placeholder="Password" name="password" />
 				<form:errors path="password" cssClass="text-danger" />
-			</div>
-			<div class="form-group">
-				<label class="control-label col-lg-2" for="authority">Role</label>
-				<form:select path="authorities[0].authority"
-					name="authorities[0].authority" class="form-control">
-					<form:option value="ROLE_ADMIN">ROLE_ADMIN</form:option>
-					<form:option value="ROLE_COACH">ROLE_COACH</form:option>
-					<form:option value="ROLE_DBA">ROLE_DBA</form:option>
-				</form:select>
-				<form:errors path="authorities[0].authority" cssClass="text-danger" />
-			</div>
+			</div>	
 			<div class="form-group">
 				<label class="control-label col-lg-2" for="status">Status</label>
 				<form:select path="status"
-					name="status" class="form-control">						
-					<form:option value="False">Inactive</form:option>
-					<form:option value="True" selected="selected">Active</form:option>												
+					name="status" class="form-control">
+					<c:choose>
+						<c:when test="${user.status}">						
+							<form:option value="False">Inactive</form:option>
+							<form:option value="True" selected="selected">Active</form:option>
+						</c:when>
+						<c:otherwise>							
+							<form:option value="False" selected="selected">Inactive</form:option>
+							<form:option value="True">Active</form:option>
+						</c:otherwise>
+					</c:choose>
 				</form:select>
 				<form:errors path="status" cssClass="text-danger" />
 			</div>
@@ -82,18 +82,10 @@
 					class="btn btn-success uppercase pull-right">Submit</button>
 			</div>
 			<div class="form-actions">
-				<a href="<c:url value='/admin/users'/>"> <input
-					style="margin-right: 30px;" type="button" id="register-cancel-btn"
-					class="btn btn-success uppercase pull-right" value="Cancel" />
-			</div>
-			<br />
-			<br />
+				<a href="<c:url value='/coach/users'/>">
+ 				<input style="margin-right:30px;" type="button" id="register-cancel-btn" class="btn btn-success uppercase pull-right" value="Cancel"/>
+ 			</div>
+			<br/><br/>
 		</form:form>
 	</div>
 </div>
-
-<script type="text/javascript">
-	$(window).on('load', function() {
-		$('#myModal').modal('show');
-	});
-</script>
