@@ -2,17 +2,16 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include.jsp"%>
 <div class="content">
-	<div class="portlet light">
-		<c:if test="${not empty success}">
-		<div class="alert alert-success" >
-			<strong>Success!</strong> Successfully added new user!
-		</div>
-		</c:if>
+	<!-- <div class="portlet light"> -->
+	<div class="jumbotron">
 		<c:if test="${not empty error}">
-		<div class="alert alert-warning" >
-			<strong>Warning!</strong> Username is duplicated!
-		</div>
+			<div class="alert alert-dismissible alert-danger">
+				<button type="button" class="close" data-dismiss="alert">&times;</button>
+				<strong>Oh snap!</strong> <a href="#" class="alert-link">Username
+					already exists. </a> Choose different username.
+			</div>
 		</c:if>
+		
 		<!-- BEGIN REGISTRATION FORM -->
 		<form:form method="POST" class="register-form" action="register"
 			modelAttribute="loginUser">
@@ -22,14 +21,14 @@
 				<form:label path="firstName"
 					class="control-label visible-ie8 visible-ie9">First Name</form:label>
 				<form:input path="firstName" class="form-control placeholder-no-fix"
-					type="text" placeholder="First Name" name="firstName" />
+					type="text" placeholder="First Name" name="firstName" value="${model.getFirstName() }"/>
 				<form:errors path="firstName" cssClass="text-danger" />
 			</div>
 			<div class="form-group">
 				<form:label path="lastName"
 					class="control-label visible-ie8 visible-ie9">Last Name</form:label>
 				<form:input path="lastName" class="form-control placeholder-no-fix"
-					type="text" placeholder="Last Name" name="lastName" />
+					type="text" placeholder="Last Name" name="lastName" value="${model.getLastName() }" />
 				<form:errors path="lastName" cssClass="text-danger" />
 			</div>
 
@@ -37,7 +36,7 @@
 				<form:label path="email"
 					class="control-label visible-ie8 visible-ie9">Email</form:label>
 				<form:input path="email" class="form-control placeholder-no-fix"
-					type="text" placeholder="Email" name="email" />
+					type="text" placeholder="Email" name="email" value="${model.getEmail() }"/>
 				<form:errors path="email" cssClass="text-danger" />
 			</div>
 
@@ -46,7 +45,7 @@
 				<form:label path="username"
 					class="control-label visible-ie8 visible-ie9">Username</form:label>
 				<form:input path="username" class="form-control placeholder-no-fix"
-					type="text" autocomplete="off" placeholder="User Name"
+					type="text" autocomplete="off" placeholder="User Name" value="${model.getUsername() }"
 					name="username" />
 				<form:errors path="username" cssClass="text-danger" />
 			</div>
@@ -55,7 +54,7 @@
 					class="control-label visible-ie8 visible-ie9">Password</form:label>
 				<form:input path="password" class="form-control placeholder-no-fix"
 					id="register_password" type="password" autocomplete="off"
-					placeholder="Password" name="password" />
+					placeholder="Password" name="password" value="${model.getPassword() }"/>
 				<form:errors path="password" cssClass="text-danger" />
 			</div>
 			<div class="form-group">
@@ -68,16 +67,33 @@
 				</form:select>
 				<form:errors path="authorities[0].authority" cssClass="text-danger" />
 			</div>
+			<div class="form-group">
+				<label class="control-label col-lg-2" for="status">Status</label>
+				<form:select path="status"
+					name="status" class="form-control">						
+					<form:option value="False">Inactive</form:option>
+					<form:option value="True" selected="selected">Active</form:option>												
+				</form:select>
+				<form:errors path="status" cssClass="text-danger" />
+			</div>
 			<form:hidden path="enabled" value="TRUE" />
 			<div class="form-actions">
 				<button type="submit" id="register-submit-btn"
 					class="btn btn-success uppercase pull-right">Submit</button>
 			</div>
 			<div class="form-actions">
-				<a href="<c:url value='/admin/users'/>">
- 				<input style="margin-right:30px;" type="button" id="register-cancel-btn" class="btn btn-success uppercase pull-right" value="Cancel"/>
- 			</div>	
-			<br/><br/>
+				<a href="<c:url value='/admin/users'/>"> <input
+					style="margin-right: 30px;" type="button" id="register-cancel-btn"
+					class="btn btn-success uppercase pull-right" value="Cancel" />
+			</div>
+			<br />
+			<br />
 		</form:form>
 	</div>
 </div>
+
+<script type="text/javascript">
+	$(window).on('load', function() {
+		$('#myModal').modal('show');
+	});
+</script>

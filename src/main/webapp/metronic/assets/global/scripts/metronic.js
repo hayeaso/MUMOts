@@ -129,6 +129,27 @@ var Metronic = function() {
                 portlet.children('.portlet-body').css('height', height);
             }
         });
+        // handle portlet NEW* fullscreen
+        $('body').on('click', '.panel > .panel-body .fullscreen', function(e) {
+            e.preventDefault();
+            var portlet = $(this).closest(".panel");
+            if (portlet.hasClass('panel-fullscreen')) {
+                $(this).removeClass('on');
+                portlet.removeClass('panel-fullscreen');
+                $('body').removeClass('panel-fullscreen');
+                portlet.children('.panel-body').css('height', 'auto');
+            } else {
+                var height = Metronic.getViewPort().height -
+                    portlet.children('.panel-title').outerHeight() -
+                    parseInt(portlet.children('.panel-body').css('padding-top')) -
+                    parseInt(portlet.children('.panel-body').css('padding-bottom'));
+
+                $(this).addClass('on');
+                portlet.addClass('panel-fullscreen');
+                $('body').addClass('page-panel-fullscreen');
+                portlet.children('.panel-body').css('height', height);
+            }
+        });
 
         $('body').on('click', '.portlet > .portlet-title > .tools > a.reload', function(e) {
             e.preventDefault();

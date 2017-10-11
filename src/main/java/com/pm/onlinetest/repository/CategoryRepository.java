@@ -24,4 +24,9 @@ public interface CategoryRepository extends CrudRepository<Category, Integer> {
 	
 	@Query("SELECT c FROM Category c WHERE c.name=:name AND c.enabled = true")
 	public List<Category> findCategoryByName(@Param("name") String name);
+	
+	@Query("SELECT c.name FROM Category c WHERE c.enabled = true")
+	public List<String> findAllEnableCategoryNames();
+
+	public Category findFirstByName(String name);
 }

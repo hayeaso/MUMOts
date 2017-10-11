@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include.jsp"%>
+<c:set var="user_role" value="${sessionScope.role}"/>
 <div class="content">
-	<div class="portlet light">
+	<div class="jumbotron">
 		<c:if test="${not empty success}">
 		<div class="alert alert-success" >
 			<strong>Success!</strong> Successfully added new Student!
@@ -67,11 +68,6 @@
 				<form:errors path="jobSearchStatus" cssClass="text-danger" />
 			</div>			
 			<form:hidden path="enabled" value="TRUE" />
-			
-<!-- 			<div class="form-actions"> -->
-<!-- 				<button type="submit" id="register-cancel-btn" -->
-<!-- 					class="btn btn-success uppercase pull-right">Cancel</button> -->
-<!-- 			</div>			 -->
 
 			<div class="form-actions">
 				<button type="submit" id="register-submit-btn"
@@ -79,7 +75,12 @@
 			</div>
 						
 			<div class="form-actions">
-				<a href="<c:url value='/admin/students'/>">
+				<c:if test="${user_role == 'admin'}">
+					<a href="<c:url value='/admin/students'/>">
+ 				</c:if>
+ 				<c:if test="${user_role == 'coach'}">
+					<a href="<c:url value='/coach/students'/>">
+ 				</c:if>
  				<input style="margin-right:30px;" type="button" id="register-cancel-btn" class="btn btn-success uppercase pull-right" value="Cancel"/>
  			</div>			
 			<br/><br/>

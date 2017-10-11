@@ -1,19 +1,17 @@
 package com.pm.onlinetest.domain;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Set;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Entity
 public class Assignment {
@@ -22,7 +20,10 @@ public class Assignment {
     @GeneratedValue
     private Integer id;
  	
- 	private LocalDateTime start_date;
+ 	//@DateTimeFormat(pattern="MM/dd/yyyy HH:mm a")
+ 	private String sendEmailDateTime;
+
+	private LocalDateTime start_date;
  
  	private LocalDateTime end_date;
  	private Integer count;
@@ -30,6 +31,15 @@ public class Assignment {
  	private boolean finished;
  	private String accesscode;
  	
+
+ 	public String getSendEmailDateTime() {
+		return sendEmailDateTime;
+	}
+
+	public void setSendEmailDateTime(String sendEmailDateTime) {
+		this.sendEmailDateTime = sendEmailDateTime;
+	}
+	
  	@OneToOne(fetch=FetchType.EAGER)	
  	private Student studentId;
  	
