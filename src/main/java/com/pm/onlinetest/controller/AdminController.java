@@ -33,6 +33,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.pm.onlinetest.domain.User;
+import com.pm.onlinetest.exception.DuplicateCategoryNameException;
 import com.pm.onlinetest.domain.Authority;
 import com.pm.onlinetest.domain.Category;
 import com.pm.onlinetest.domain.Choice;
@@ -239,13 +240,19 @@ public class AdminController {
 	
 	@RequestMapping(value = "/admin/createCategory", method = RequestMethod.POST)
 	public String createCategoryPost(@ModelAttribute("Category") Category category, BindingResult result,
-			RedirectAttributes redirectAttr) {
+			RedirectAttributes redirectAttr) { //throws DuplicateCategoryNameException {
 		if (result.hasErrors()) {
 			return "createCategory";
 		}
 		
-		categoryService.save(category);
-		redirectAttr.addFlashAttribute("success", "Successfully added new category!");
+		try {
+			categoryService.save(category);
+			redirectAttr.addFlashAttribute("success", "Successfully added new category!");
+		} catch (DuplicateCategoryNameException ex) {
+			redirectAttr.addFlashAttribute("alertErrorMsg", "["+ category.getName() +"]: " + ex.getMessage());
+			redirectAttr.addFlashAttribute("category", category);
+		}		
+		
 		return "redirect:/admin/createCategory";
 	}
 	
@@ -407,6 +414,13 @@ public class AdminController {
 		obj.put("subcat", str);
 		return obj;
 	}
+	
+	@RequestMapping(value = "/admin/list/category", method = RequestMethod.GET)
+	public @ResponseBody List<String> getCategories() {
+		// may need get all the categories
+		return categoryService.findAllEnableCategoryNames();		
+	}
+	
 //	@ResponseBody
 //	@RequestMapping(value = "/assign", method = RequestMethod.POST)
 //	public String getAssignCoach(Locale locale, Model model, HttpServletRequest request,

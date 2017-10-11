@@ -6,8 +6,13 @@
 		<c:if test="${not empty success}">
 		<div class="alert alert-success" >
 			<strong>Success!</strong> Successfully added new Category!
-		</div>
+		</div>		
 		</c:if>
+		<%-- <c:if test ="${not empty alertErrorMsg}">
+			<div class="alert alert-error" >
+				{alertErrorMsg} 
+			</div>
+		</c:if>	 --%>
 		<!-- BEGIN REGISTRATION FORM -->
 		<form:form method="POST" class="register-form"
 			action="createCategory" modelAttribute="Category">
