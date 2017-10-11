@@ -1,10 +1,9 @@
 package com.pm.onlinetest.controller;
 
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
-import java.time.temporal.ChronoField;
 import java.util.List;
 import java.util.Locale;
 
@@ -22,10 +21,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.pm.onlinetest.domain.Assignment;
+import com.pm.onlinetest.domain.EmailScheduler;
 import com.pm.onlinetest.domain.Student;
 import com.pm.onlinetest.domain.User;
 import com.pm.onlinetest.service.AssignmentService;
 import com.pm.onlinetest.service.CoachService;
+import com.pm.onlinetest.service.EmailSchedulerService;
 import com.pm.onlinetest.service.StudentService;
 import com.pm.onlinetest.service.UserService;
 
@@ -43,6 +44,9 @@ public class CoachController {
 	
 	@Autowired
 	StudentService studentService;
+	
+	@Autowired
+	EmailSchedulerService emailScheduleService; 
 
     @Autowired
     private MailSender mailSender;
@@ -66,8 +70,7 @@ public class CoachController {
 	public String home1(Locale locale, Model model) {		
 		List<Student> students = coachService.findStudentByAcitveJobStatus();
 		model.addAttribute("students", students);
-		return "coach";
-	
+		return "coach";	
 	}
 	
 
@@ -85,24 +88,18 @@ public class CoachController {
 		model.addAttribute("student",student);
 		
 		if(assignment !=null && assignment.getAccesscode()!=null){
-		System.out.println("assignment details accessCode: "+ assignment.getAccesscode());
-			
-			model.addAttribute("assignment",assignment);
-			
+			//System.out.println("assignment details accessCode: "+ assignment.getAccesscode());			
+			model.addAttribute("assignment",assignment);			
 			System.out.println("assignment is not null");
 		}
 		else{
 			assignment=null;
 			model.addAttribute("assignment",assignment);
-			System.out.println("making assignment null");
-		}
-		
-		System.out.println("assignment details accessCode:"+ assignment);
-		return "studentAssignmentDetail";
-	
-	}
-	
-	
+			//System.out.println("making assignment null");
+		}		
+		//System.out.println("assignment details accessCode:"+ assignment);
+		return "studentAssignmentDetail";	
+	}	
 	
 	@RequestMapping(value = "/coach/studentAssignmentHistory/{userId}", method = RequestMethod.GET)
 	public String studentAssignmentHistory(@PathVariable("userId") String userId,Locale locale, Model model) {
@@ -110,8 +107,7 @@ public class CoachController {
 		List<Assignment> assignments = assignmentService.findByStudent(student);
 		model.addAttribute("assignments",assignments);
 		model.addAttribute("student",student);
-		return "studentAssignmentHistory";
-	
+		return "studentAssignmentHistory";	
 	}
 	
 	@RequestMapping(value = "/coach/saveAssignment", method = RequestMethod.POST)
@@ -121,53 +117,51 @@ public class CoachController {
 		System.out.println("accessLink in save ASsignment is: "+accessLink);
 		
 		Assignment assignment ;
+		EmailScheduler emailScheduler = null; 
 		String coachName =  SecurityContextHolder.getContext().getAuthentication().getName();
 		User coachModel = userService.findByUsername(coachName);
-		System.out.println("coachModel.getUsername()t is: "+coachModel.getUsername());
+		//System.out.println("coachModel.getUsername()t is: "+coachModel.getUsername());
 		
-		Student  student = studentService.findByStudentId(Integer.parseInt(userId));
-		System.out.println("student.getUsername() is: "+student.getFirstName());
+		Student student = studentService.findByStudentId(Integer.parseInt(userId));
+		//System.out.println("student.getUsername() is: "+student.getFirstName());
 		
 		assignment = assignmentService.findByAccesscode(accessCode);
 		if(assignment !=null ) {
-			System.out.println("Assignment Already exist");
-			
-		}
-		
-		else {
+			System.out.println("Assignment Already exist");			
+		}else {
 			assignment = new Assignment();
+			emailScheduler = new EmailScheduler();
 			System.out.println("Assignment not exist create new one");
 		}
-		//DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm a");
-		//DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy'T'HH:mm", Locale.US);
-		//LocalDateTime dateTimeNew = LocalDateTime.parse(dateTime, formatter);
-		//System.out.println("DATE and TIME__________________" + dateTimeNew);
-		assignment.setSendEmailDateTime(dateTime);
+
+		/*saving a new assignment and data into the emailscheduler table that associated with this assignment*/
+		emailScheduler.setAssignmentId(assignment);
+		emailScheduler.setSend(false);
+		emailScheduler.setSendEmailDateTime(dateTime);
+		emailScheduleService.saveEmailScheduler(emailScheduler);
+		//System.out.println("-------------------------------Date from user-------" + dateTime);
 		assignment.setAccesscode(accessCode);
 		assignment.setCoachId(coachModel);
 		assignment.setStudentId(student);
 		assignment.setCount(0);
-		assignment.setFinished(false);
-		
-		System.out.println(" Assignment get access codeis: "+assignment.getAccesscode());
-		
+		assignment.setFinished(false);	
+		//System.out.println(" Assignment get access codeis: "+assignment.getAccesscode());		
 		assignmentService.saveAssignment(assignment);
 	/*	redirectAttr.addFlashAttribute("success", "Test Generated Successfully!");
 	   	return "redirect:/coach/home";
-*/
+	 */
 		return "success";
 	}
 	
-	
-	
+
 	@RequestMapping(value = "/coach/sendEmail", method = RequestMethod.GET)
 	public @ResponseBody String sendEmail(@RequestParam("userId") String userId,@RequestParam("accessLink") String accessLink,@RequestParam("accessCode") String accessCode, @RequestParam("email") String email, @RequestParam("dateTime") String dateTime, Locale locale, Model model) {
 		System.out.println("__________________________________________________");
 		System.out.println("email sending");
-		System.out.println("datetime in send email " + dateTime);
+		//System.out.println("datetime in send email " + dateTime);
 		SimpleMailMessage message = new SimpleMailMessage();
 	    message.setTo(email);
-	    System.out.println("EMAIL: ___" + email);
+	    //System.out.println("EMAIL: ___" + email);
 	    message.setReplyTo("false");
 	 
 	    message.setFrom("mumtestlink@gmail.com");
