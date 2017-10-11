@@ -10,6 +10,9 @@
 	<definition name="read-definition" template="/WEB-INF/tiles/readmelayout.jsp">
 	</definition>
 	
+	<definition name="passwordReset-definition" template="/WEB-INF/views/resetpassword.jsp">
+	</definition>
+	
 	<definition name="contactus" extends="base-definition">
 	<put-attribute name="menu" value="/WEB-INF/tiles/def-menu.jsp"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/views/contactus.jsp" />
