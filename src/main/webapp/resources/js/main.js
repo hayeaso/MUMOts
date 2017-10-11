@@ -13,9 +13,17 @@ $(function() {
 					if (ui.content.length === 0) {
 						alert("The category can be added!");
 					}
+					closeAlertError();
 				}
 			})
 		});
+	}
+	
+	function closeAlertError() {
+		var $closeAlert = $("div.alertContainer > a");
+		if ($closeAlert.length > 0) {
+			$closeAlert.click();
+		}
 	}
 
 });

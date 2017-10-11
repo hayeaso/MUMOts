@@ -153,7 +153,7 @@
 						</div> -->
 						<!-- END BEGIN PROFILE SIDEBAR -->
 						<c:if test="${not empty alertErrorMsg}">
-							<div class="alert alert-danger"
+							<div class="alert alert-danger alertContainer"
 								style="height: 36px; padding-top: 8px;">
 								<a class="btn-danger" data-dismiss="alert" style="float:right;"
 									aria-hidden="true">close</a>
