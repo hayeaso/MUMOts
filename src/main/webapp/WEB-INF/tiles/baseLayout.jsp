@@ -78,8 +78,7 @@
     					<c:when test="${sessionScope.role.equals('admin')}">
 						<a href="<c:url value ="/admin/users" />"> <span
 								class="username username-hide-mobile">Welcome
-									 ${sessionScope.role}!
-									</span>
+											${sessionScope.role}! </span>
 						</a>
 						</c:when>
 						<c:when test="${sessionScope.role.equals('coach')}">
