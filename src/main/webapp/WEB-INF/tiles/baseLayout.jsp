@@ -152,6 +152,16 @@
 							END PORTLET MAIN
 						</div> -->
 						<!-- END BEGIN PROFILE SIDEBAR -->
+						<c:if test="${not empty alertErrorMsg}">
+							<div class="alert alert-danger alertContainer"
+								style="height: 36px; padding-top: 8px;">
+								<a class="btn-danger" data-dismiss="alert" style="float:right;"
+									aria-hidden="true">close</a>
+							
+								<span class="center glyphicon glyphicon-exclamation-sign"></span>
+								<c:out value="${alertErrorMsg}" />
+							</div>
+						</c:if>
 						<!-- BEGIN PROFILE CONTENT -->
 						<div class="profile-content">
 							<div class="row">
@@ -215,7 +225,7 @@
 <script src="<c:url value="/metronic/assets/admin/pages/scripts/table-editable.js" />"></script>
 <script src="<c:url value="/metronic/assets/admin/pages/scripts/login.js" />" type="text/javascript"></script>
 <script src="<c:url value="/metronic/assets/admin/pages/scripts/form-samples.js" />" type="text/javascript"></script>
-
+<script src="<c:url value="/resources/js/main.js" />" type="text/javascript"></script>
 
 <!-- END PAGE LEVEL SCRIPTS -->
 	<script>

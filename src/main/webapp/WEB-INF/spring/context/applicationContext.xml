@@ -4,18 +4,25 @@
 	xmlns:context="http://www.springframework.org/schema/context"
    xmlns:tx="http://www.springframework.org/schema/tx"
    xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+   xmlns:task="http://www.springframework.org/schema/task"
     xsi:schemaLocation="
       http://www.springframework.org/schema/beans 
       http://www.springframework.org/schema/beans/spring-beans.xsd
  	  http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
-      http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd">
+      http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+		http://www.springframework.org/schema/task
+		http://www.springframework.org/schema/task/spring-task-3.0.xsd">
+<!-- above adding schema location details for the task-annotation driven tag -->
 
    <!-- Scan for  transaction-based resources -->
    <context:component-scan base-package="com.pm.onlinetest" />
      
    <tx:annotation-driven transaction-manager="transactionManager"/>
    
+   	<!-- tasks are driven by annotations -->
+   	<task:annotation-driven/>
+    
     <!-- The jpa:repositories scans for all interfaces that extend  Repository and 
       creates implementations for use at runtime.  -->
   <jpa:repositories base-package="com.pm.onlinetest.repository"/>
@@ -48,8 +55,8 @@
 		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
 		<property name="url" value="jdbc:mysql://localhost:3306/onlinetest?createDatabaseIfNotExist=true" />
 		
-		<property name="username" value="cs544" />
-		<property name="password" value="201511" />
+		<property name="username" value="root" />
+		<property name="password" value="" />
 	</bean>
 
 

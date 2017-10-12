@@ -4,16 +4,20 @@
     width: 100%;
 } */
 @media only screen and (min-width: 768px) {
- /*    For desktop:  */
+	/*    For desktop:  */
 	.container {
 		margin-top: 5px; ! important;
-		margin-bottom: 5px; !important;
+		margin-bottom: 5px;
+		!
+		important;
 	}
 	.portlet.box.blue {
 		border: 1 px solid #28bb9c;
 	}
 	.portlet-title {
 		background-color: #28bb9c;
+		!
+		important;
 	}
 	.alignleft {
 		float: left;
@@ -22,5 +26,9 @@
 		float: right;
 	}
 
-
+	/*Status dropdown*/
+	.lblStatus {
+		margin-right: 12px;
+		width: 94px;
+	}
 }

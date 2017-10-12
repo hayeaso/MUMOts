@@ -34,7 +34,7 @@
 						<th>Full Name</th>
 						<th>Email</th>
 						<th>Role</th>
-						<th>Status</th>
+						<th class="tblStatusCol">Status</th>
 						<th>Edit</th>
 						<th>Delete</th>
 					</tr>
