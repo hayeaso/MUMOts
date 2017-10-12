@@ -85,6 +85,15 @@ public class AdminController {
 		model.addAttribute("users", users);
 		return "users";
 	}
+	
+	@RequestMapping(value = { "/admin/students", "/coach/students" }, method = RequestMethod.GET)
+	public String getStudents(Model model, HttpServletRequest request) {
+		List<Student> students = studentService.findAllEnabled();
+		model.addAttribute("students", students);
+		String mapping = request.getServletPath();
+		System.out.println(mapping);
+		return mapping;
+	}
 
 	@RequestMapping(value = "/admin/register", method = RequestMethod.GET)
 	public String register(@ModelAttribute("loginUser") User user) {
@@ -186,13 +195,7 @@ public class AdminController {
 		userService.softDelete(Integer.parseInt(id));
 	}
 
-	@RequestMapping(value = { "/admin/students", "/coach/students" }, method = RequestMethod.GET)
-	public String getStudents(Model model, HttpServletRequest request) {
-		List<Student> students = studentService.findAllEnabled();
-		model.addAttribute("students", students);
-		String mapping = request.getServletPath();
-		return mapping;
-	}
+
 
 	// @RequestMapping(value = "/admin/assign", method = RequestMethod.GET)
 	// public String assignCoach(Model model) {

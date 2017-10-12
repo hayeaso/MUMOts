@@ -1,9 +1,8 @@
 package com.pm.onlinetest.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,34 +20,21 @@ import com.pm.onlinetest.service.UserService;
 
 @Controller
 public class UserController {
-	private static final Logger logger = LoggerFactory.getLogger(AdminController.class);
-
 	@Autowired
 	UserService userService;
-	
-	@RequestMapping(value = {"/*/editProfile"}, method = RequestMethod.GET)
-	public String editProfile(@ModelAttribute("loginUser") User user, Model model){
-		System.out.println("GET: enter into EditProfile	");
+
+	@RequestMapping(value = { "/*/editProfile" }, method = RequestMethod.GET)
+	public String editProfile(@ModelAttribute("loginUser") User user, Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String name = auth.getName();
 		User currentUser = userService.findByUsername(name);
-		model.addAttribute("currentUser", currentUser);
-		return "redirect:/editProfile/" + currentUser.getUserId();
-	}
-	
-	@RequestMapping(value = "/editProfile/{id}", method = RequestMethod.GET)
-	public String editUser(@ModelAttribute("loginUser") User user, Model model, @PathVariable("id") int id) {
-		System.out.println("GET: enter into Edit User	");
-		System.out.println("userid=" + id);
-		model.addAttribute("user", userService.findByUserId(id));// assign user										
+		model.addAttribute("user", currentUser);
 		return "editProfile";
 	}
 
-	
 	@RequestMapping(value = "/editProfile", method = RequestMethod.POST)
 	public String editUser(@Valid @ModelAttribute("loginUser") User user, BindingResult result,
 			RedirectAttributes redirectAttr) {
-		System.out.println("POST: enter into Edit User");
 		if (result.hasErrors()) {
 			return "editProfile";
 		}
@@ -60,10 +46,7 @@ public class UserController {
 			userService.saveProfile(user);
 			redirectAttr.addFlashAttribute("success", "Success");
 		}
-		return "redirect:/editProfile/" + user.getUserId();
+		 return "editProfile";
 	}
-
-	
-
 
 }
