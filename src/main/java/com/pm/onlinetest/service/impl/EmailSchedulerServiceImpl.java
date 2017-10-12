@@ -36,35 +36,36 @@ public class EmailSchedulerServiceImpl implements EmailSchedulerService{
 	 * 1.Seconds; 2.Minutes; 3.Hours; 4.Day-of-Month; 5.Month; 6.Day-of-Week; 7.Year (optional field)
 	 * @Scheduled(cron = "* * * * * *")
 	 */
-	//@Scheduled(fixedDelay = 1000)
+	//@Scheduled(fixedDelay = 5000)
 	@Override
 	public void generateEmailsToBeSend() {		
 
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yy HH:00");
 		LocalDateTime dateTime = LocalDateTime.now();
-		String curDate = dateTime.format(formatter); 
+		String curDate = dateTime.format(formatter);
+		LocalDateTime newDateNow = LocalDateTime.parse(curDate, formatter);
+		 
+		System.out.println("***************Current date******* " + newDateNow);
 		
 		List<EmailScheduler> dateList = new ArrayList<>();
-		dateList = findDate(curDate);
+		dateList = findDate(newDateNow);
 		
 		if ( dateList.isEmpty() ){
 			System.out.println("****************No dates found************");
 			return;
 		}else{
 			for (EmailScheduler date : dateList ){
-				
-				if (date.getSendEmailDateTime().equals(curDate)){
-					System.out.println("***************  DB date********** " + date.getSendEmailDateTime());
-					System.out.println("***************Current date******* " + curDate);
+				if (date.getSendEmailDateTime().equals(newDateNow)){
+					//System.out.println("***************  DB date in if loop ********** " + date.getSendEmailDateTime());
+					//System.out.println("***************Current date in if loop ******* " + newDateNow);
 				}
 			}
-		}
-	
+		}	
 	}
 
 	@Override
-	public List<EmailScheduler> findDate(String dateTime) {
-		return emailSchedulerRepository.findDate(dateTime);
+	public List<EmailScheduler> findDate(LocalDateTime newDateNow) {
+		return emailSchedulerRepository.findDate(newDateNow);
 	}
 
 	@Override

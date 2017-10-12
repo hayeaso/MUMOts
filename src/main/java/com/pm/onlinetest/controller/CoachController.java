@@ -138,12 +138,15 @@ public class CoachController {
 			emailScheduler = new EmailScheduler();
 			System.out.println("Assignment not exist create new one");
 		}
+		/*Format string from user input to LocalDateTime*/
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yy HH:00");
+		LocalDateTime dateTimeNew = LocalDateTime.parse(dateTime, formatter);
+		System.out.println("-------------------------------Date from user-------" + dateTimeNew);
 		/*saving a new assignment and data into the emailscheduler table that associated with this assignment*/
 		emailScheduler.setAssignmentId(assignment);
 		emailScheduler.setSend(false);
-		emailScheduler.setSendEmailDateTime(dateTime);
+		emailScheduler.setSendEmailDateTime(dateTimeNew);
 		emailScheduleService.saveEmailScheduler(emailScheduler);
-		//System.out.println("-------------------------------Date from user-------" + dateTime);
 		assignment.setAccesscode(accessCode);
 		assignment.setCoachId(coachModel);
 		assignment.setStudentId(student);
