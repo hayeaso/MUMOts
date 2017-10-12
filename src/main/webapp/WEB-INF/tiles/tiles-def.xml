@@ -100,7 +100,7 @@
 	<definition name="editProfile" extends="base-definition">
 		<put-attribute name="menu" value="/WEB-INF/tiles/coach-menu.jsp"></put-attribute>
 		<put-attribute name="content"
-			value="/WEB-INF/views/coach/editProfile.jsp" />
+			value="/WEB-INF/views/editProfile.jsp" />
 	</definition>
 
 	<definition name="users" extends="base-definition">

@@ -201,39 +201,4 @@ public class CoachController {
 		studentService.save(student);
 		return "success";
 	}
-
-	// bind to profile edit button in setting in tiles/coach-menu.jsp
-	@RequestMapping(value = { "/coach/editProfile", "/coach/**/editProfile"}, method = RequestMethod.GET)
-	public String editProfile(@ModelAttribute("loginUser") User user, Model model) {
-		System.out.println("GET: enter into EditProfile	");
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String name = auth.getName();
-		User currentUser = userService.findByUsername(name);
-		model.addAttribute("currentUser", currentUser);
-		return "redirect:/coach/editProfile/" + currentUser.getUserId();
-	}
-
-	@RequestMapping(value = "/coach/editProfile/{id}", method = RequestMethod.GET)
-	public String editUser(@ModelAttribute("loginUser") User user, Model model, @PathVariable("id") int id) {
-		model.addAttribute("user", userService.findByUserId(id));// assign user										
-		return "editUser";
-	}
-	
-	@RequestMapping(value = "/coach/editUser", method = RequestMethod.POST)
-	public String editUser(@Valid @ModelAttribute("loginUser") User user, BindingResult result,
-			RedirectAttributes redirectAttr) {
-		System.out.println("POST: enter into Edit User");
-		if (result.hasErrors()) {
-			return "editUser";
-		}
-
-		if (null != userService.findByUsernameExceptThis(user.getUsername(), user.getUserId())) {
-			redirectAttr.addFlashAttribute("error", "Error");
-		} else {
-			user.setEnabled(true);
-			userService.save(user);
-			redirectAttr.addFlashAttribute("success", "Success");
-		}
-		return "redirect:/coach/editProfile/" + user.getUserId();
-	}
 }
