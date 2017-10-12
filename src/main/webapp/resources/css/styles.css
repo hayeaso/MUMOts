@@ -18,4 +18,9 @@
 .bimal{
 	color: red;
 }
- 
+
+/*Status dropdown*/
+.lblStatus {
+	margin-right: 12px;
+	width: 94px;
+}
