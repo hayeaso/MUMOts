@@ -1,7 +1,7 @@
 <%@ include file="/WEB-INF/views/include.jsp"%>
 <%@ page session="true"%>
 <div class="content">
-	<div class="portlet light">
+	<div class="jumbotron">
 		<h1>${description}</h1>
 		<c:if test="${not empty success}">
 

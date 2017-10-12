@@ -159,7 +159,7 @@ public class TestController {
 
 	@RequestMapping(value = "/showcategories", method = RequestMethod.GET)
 	public String selectCategoriesView(Model model, HttpServletRequest request, RedirectAttributes attr) {
-
+		System.out.println("----Inside TEST---");
 //		Assignment obj = (Assignment) request.getAttribute("assignment");
 //
 //		if (obj == null) {
@@ -187,6 +187,8 @@ public class TestController {
 
 		dto.setCategories(categories);
 		//dto.setCategories(categoryService.findAllEnabled());
+		
+		System.out.println("-----"+dto.getCategories().get(0));
 		model.addAttribute("categoryDto", dto);
 		return "categoryselect";
 	}

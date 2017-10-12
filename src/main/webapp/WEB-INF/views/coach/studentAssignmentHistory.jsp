@@ -1,12 +1,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page session="false"%>
-<div class="portlet box blue">
-	<div class="portlet-title">
-		<div class="caption">
-			<i class="fa "></i>Student Test History
-		</div>
+<div class="panel panel-success">
+
+	<div class="panel-heading">
+		<h3 class="panel-title">
+			<i class="fa fa-edit"></i>Category List
+		</h3>
 	</div>
-	<div class="portlet-body">
+	<div class="panel-body">
 	<div class=" portlet-title caption ">
 			Student ID: ${student.studentId} 
 		</div>

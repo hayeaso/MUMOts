@@ -2,12 +2,14 @@
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page session="false"%>
-<div class="portlet box blue">
-	<div class="portlet-title">
-		<div class="caption">
-			<i class="fa fa-edit"></i>Question Bank
-		</div>
+<div class="panel panel-success">
+
+	<div class="panel-heading">
+		<h3 class="panel-title">
+			<i class="fa fa-edit"></i>Sub Category List
+		</h3>
 	</div>
+	<div class="panel-body">
 	<div class="portlet-body">
 
 		<table class="table table-striped table-hover table-bordered"
@@ -59,5 +61,5 @@
 		</table>
 	</div>
 </div>
-
+</div>
 

@@ -9,25 +9,25 @@
 	</definition>
 	<definition name="read-definition" template="/WEB-INF/tiles/readmelayout.jsp">
 	</definition>
-	
+
 	<definition name="contactus" extends="base-definition">
-	<put-attribute name="menu" value="/WEB-INF/tiles/def-menu.jsp"></put-attribute>
+		<put-attribute name="menu" value="/WEB-INF/tiles/def-menu.jsp"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/views/contactus.jsp" />
 	</definition>
 	<definition name="preacess" extends="login-definition">
-	<put-attribute name="menu" value="/WEB-INF/tiles/def-menu.jsp"></put-attribute>
+		<put-attribute name="menu" value="/WEB-INF/tiles/def-menu.jsp"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/views/preacess.jsp" />
 	</definition>
 	<definition name="read" extends="read-definition">
-	<put-attribute name="menu" value="/WEB-INF/tiles/def-menu.jsp"></put-attribute>
+		<put-attribute name="menu" value="/WEB-INF/tiles/def-menu.jsp"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/views/read.jsp" />
 	</definition>
-	
+
 	<definition name="help" extends="base-definition">
-	<put-attribute name="menu" value="/WEB-INF/tiles/def-menu.jsp"></put-attribute>
+		<put-attribute name="menu" value="/WEB-INF/tiles/def-menu.jsp"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/views/help.jsp" />
 	</definition>
-	
+
 	<definition name="login" extends="login-definition">
 		<put-attribute name="content" value="/WEB-INF/views/login.jsp" />
 	</definition>
@@ -39,43 +39,49 @@
 
 	<definition name="/coach/result" extends="base-definition">
 		<put-attribute name="menu" value="/WEB-INF/tiles/coach-menu.jsp"></put-attribute>
-		<put-attribute name="content"   value="/WEB-INF/views/coach/result.jsp"/> 
+		<put-attribute name="content" value="/WEB-INF/views/coach/result.jsp" />
 	</definition>
 	<definition name="/admin/result" extends="base-definition">
 		<put-attribute name="menu" value="/WEB-INF/tiles/admin-menu.jsp"></put-attribute>
-		<put-attribute name="content"   value="/WEB-INF/views/coach/result.jsp"/> 
+		<put-attribute name="content" value="/WEB-INF/views/coach/result.jsp" />
 	</definition>
 	<definition name="/coach/resultDetail" extends="base-definition">
 		<put-attribute name="menu" value="/WEB-INF/tiles/coach-menu.jsp"></put-attribute>
-		<put-attribute name="content"   value="/WEB-INF/views/coach/resultdetail.jsp"/> 
+		<put-attribute name="content"
+			value="/WEB-INF/views/coach/resultdetail.jsp" />
 	</definition>
 	<definition name="/admin/resultDetail" extends="base-definition">
 		<put-attribute name="menu" value="/WEB-INF/tiles/admin-menu.jsp"></put-attribute>
-		<put-attribute name="content"   value="/WEB-INF/views/coach/resultdetail.jsp"/> 
+		<put-attribute name="content"
+			value="/WEB-INF/views/coach/resultdetail.jsp" />
 	</definition>
 	<definition name="/coach/resultlist" extends="base-definition">
 		<put-attribute name="menu" value="/WEB-INF/tiles/coach-menu.jsp"></put-attribute>
-		<put-attribute name="content"   value="/WEB-INF/views/coach/resultlist.jsp"/> 
+		<put-attribute name="content"
+			value="/WEB-INF/views/coach/resultlist.jsp" />
 	</definition>
 	<definition name="/admin/resultlist" extends="base-definition">
 		<put-attribute name="menu" value="/WEB-INF/tiles/admin-menu.jsp"></put-attribute>
-		<put-attribute name="content"   value="/WEB-INF/views/coach/resultlist.jsp"/> 
+		<put-attribute name="content"
+			value="/WEB-INF/views/coach/resultlist.jsp" />
 	</definition>
-	
+
 	<definition name="feedback" extends="base-definition">
 		<put-attribute name="menu" value="/WEB-INF/tiles/coach-menu.jsp"></put-attribute>
-		<put-attribute name="content"   value="/WEB-INF/views/test/feedback.jsp"/> 
+		<put-attribute name="content" value="/WEB-INF/views/test/feedback.jsp" />
 	</definition>
-	
+
 	<definition name="/coach/assignments" extends="base-definition">
 		<put-attribute name="menu" value="/WEB-INF/tiles/coach-menu.jsp"></put-attribute>
-		<put-attribute name="content"   value="/WEB-INF/views/coach/assignments.jsp"/> 
+		<put-attribute name="content"
+			value="/WEB-INF/views/coach/assignments.jsp" />
 	</definition>
 	<definition name="/admin/assignments" extends="base-definition">
 		<put-attribute name="menu" value="/WEB-INF/tiles/admin-menu.jsp"></put-attribute>
-		<put-attribute name="content"   value="/WEB-INF/views/coach/assignments.jsp"/> 
+		<put-attribute name="content"
+			value="/WEB-INF/views/coach/assignments.jsp" />
 	</definition>
-	
+
 	<definition name="admin-home" extends="base-definition">
 		<put-attribute name="menu" value="/WEB-INF/tiles/admin-menu.jsp"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/views/admin/home.jsp" />
@@ -90,12 +96,18 @@
 		<put-attribute name="menu" value="/WEB-INF/tiles/admin-menu.jsp"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/views/admin/editUser.jsp" />
 	</definition>
-	
+
+	<definition name="editProfile" extends="base-definition">
+		<put-attribute name="menu" value="/WEB-INF/tiles/coach-menu.jsp"></put-attribute>
+		<put-attribute name="content"
+			value="/WEB-INF/views/editProfile.jsp" />
+	</definition>
+
 	<definition name="users" extends="base-definition">
 		<put-attribute name="menu" value="/WEB-INF/tiles/admin-menu.jsp"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/views/admin/users.jsp" />
 	</definition>
-	
+
 	<definition name="/admin/students" extends="base-definition">
 		<put-attribute name="menu" value="/WEB-INF/tiles/admin-menu.jsp"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/views/admin/students.jsp" />
@@ -107,35 +119,42 @@
 
 	<definition name="/admin/registerStudent" extends="base-definition">
 		<put-attribute name="menu" value="/WEB-INF/tiles/admin-menu.jsp"></put-attribute>
-		<put-attribute name="content" value="/WEB-INF/views/admin/registerStudent.jsp" />
+		<put-attribute name="content"
+			value="/WEB-INF/views/admin/registerStudent.jsp" />
 	</definition>
 	<definition name="/coach/registerStudent" extends="base-definition">
 		<put-attribute name="menu" value="/WEB-INF/tiles/coach-menu.jsp"></put-attribute>
-		<put-attribute name="content" value="/WEB-INF/views/admin/registerStudent.jsp" />
+		<put-attribute name="content"
+			value="/WEB-INF/views/admin/registerStudent.jsp" />
 	</definition>
 
 	<definition name="/admin/editStudent" extends="base-definition">
 		<put-attribute name="menu" value="/WEB-INF/tiles/admin-menu.jsp"></put-attribute>
-		<put-attribute name="content" value="/WEB-INF/views/admin/editStudent.jsp" />
+		<put-attribute name="content"
+			value="/WEB-INF/views/admin/editStudent.jsp" />
 	</definition>
 	<definition name="/coach/editStudent" extends="base-definition">
 		<put-attribute name="menu" value="/WEB-INF/tiles/coach-menu.jsp"></put-attribute>
-		<put-attribute name="content" value="/WEB-INF/views/admin/editStudent.jsp" />
+		<put-attribute name="content"
+			value="/WEB-INF/views/admin/editStudent.jsp" />
 	</definition>
-	
+
 	<definition name="/admin/importData" extends="base-definition">
 		<put-attribute name="menu" value="/WEB-INF/tiles/admin-menu.jsp"></put-attribute>
-		<put-attribute name="content" value="/WEB-INF/views/admin/importData.jsp" />
+		<put-attribute name="content"
+			value="/WEB-INF/views/admin/importData.jsp" />
 	</definition>
 	<definition name="/coach/importData" extends="base-definition">
 		<put-attribute name="menu" value="/WEB-INF/tiles/coach-menu.jsp"></put-attribute>
-		<put-attribute name="content" value="/WEB-INF/views/admin/importData.jsp" />
+		<put-attribute name="content"
+			value="/WEB-INF/views/admin/importData.jsp" />
 	</definition>
 	<definition name="/dba/importData" extends="base-definition">
 		<put-attribute name="menu" value="/WEB-INF/tiles/dba-menu.jsp"></put-attribute>
-		<put-attribute name="content" value="/WEB-INF/views/admin/importData.jsp" />
+		<put-attribute name="content"
+			value="/WEB-INF/views/admin/importData.jsp" />
 	</definition>
-	
+
 	<definition name="categories" extends="base-definition">
 		<put-attribute name="menu" value="/WEB-INF/tiles/admin-menu.jsp"></put-attribute>
 		<put-attribute name="content"
@@ -168,12 +187,13 @@
 		<put-attribute name="content" value="/WEB-INF/views/test/test.jsp" />
 	</definition>
 	<definition name="categoryselect" extends="base-definition">
-		<put-attribute name="content" value="/WEB-INF/views/test/categoryselect.jsp" />
+		<put-attribute name="content"
+			value="/WEB-INF/views/test/categoryselect.jsp" />
 	</definition>
 	<definition name="completed" extends="base-definition">
 		<put-attribute name="content" value="/WEB-INF/views/test/completed.jsp" />
 	</definition>
-	
+
 	<definition name="/dba/addquestion" extends="base-definition">
 		<put-attribute name="menu" value="/WEB-INF/tiles/dba-menu.jsp"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/views/dba/addquestion.jsp" />
@@ -189,20 +209,24 @@
 
 	<definition name="editquestion" extends="base-definition">
 		<put-attribute name="menu" value="/WEB-INF/tiles/dba-menu.jsp"></put-attribute>
-		<put-attribute name="content" value="/WEB-INF/views/dba/editquestion.jsp" />
+		<put-attribute name="content"
+			value="/WEB-INF/views/dba/editquestion.jsp" />
 	</definition>
 
 	<definition name="/dba/viewquestions" extends="base-definition">
 		<put-attribute name="menu" value="/WEB-INF/tiles/dba-menu.jsp"></put-attribute>
-		<put-attribute name="content" value="/WEB-INF/views/dba/viewquestions.jsp" />
+		<put-attribute name="content"
+			value="/WEB-INF/views/dba/viewquestions.jsp" />
 	</definition>
 	<definition name="/admin/viewquestions" extends="base-definition">
 		<put-attribute name="menu" value="/WEB-INF/tiles/admin-menu.jsp"></put-attribute>
-		<put-attribute name="content" value="/WEB-INF/views/dba/viewquestions.jsp" />
+		<put-attribute name="content"
+			value="/WEB-INF/views/dba/viewquestions.jsp" />
 	</definition>
 	<definition name="/coach/viewquestions" extends="base-definition">
 		<put-attribute name="menu" value="/WEB-INF/tiles/coach-menu.jsp"></put-attribute>
-		<put-attribute name="content" value="/WEB-INF/views/dba/viewquestions.jsp" />
+		<put-attribute name="content"
+			value="/WEB-INF/views/dba/viewquestions.jsp" />
 	</definition>
 
 	<definition name="access" extends="login-definition">
@@ -232,22 +256,24 @@
 
 	<definition name="inventory" extends="base-definition">
 		<put-attribute name="menu" value="/WEB-INF/tiles/admin-menu.jsp"></put-attribute>
-		<put-attribute name="content"   value="/WEB-INF/views/inventory/inventory.jsp"/> 
+		<put-attribute name="content"
+			value="/WEB-INF/views/inventory/inventory.jsp" />
 	</definition>
-	
+
 	<definition name="addInventory" extends="base-definition">
 		<put-attribute name="menu" value="/WEB-INF/tiles/admin-menu.jsp"></put-attribute>
-		<put-attribute name="content"   value="/WEB-INF/views/inventory/add.jsp"/> 
+		<put-attribute name="content" value="/WEB-INF/views/inventory/add.jsp" />
 	</definition>
-	
+
 	<definition name="updateInventory" extends="base-definition">
 		<put-attribute name="menu" value="/WEB-INF/tiles/admin-menu.jsp"></put-attribute>
-		<put-attribute name="content"   value="/WEB-INF/views/inventory/update.jsp"/> 
+		<put-attribute name="content"
+			value="/WEB-INF/views/inventory/update.jsp" />
 	</definition>
 
 	<definition name="grading" extends="base-definition">
 		<put-attribute name="menu" value="/WEB-INF/tiles/admin-menu.jsp"></put-attribute>
-		<put-attribute name="content"   value="/WEB-INF/views/grading/index.jsp"/> 
+		<put-attribute name="content" value="/WEB-INF/views/grading/index.jsp" />
 	</definition>
 
 	<!-- Mehdi Endi -->

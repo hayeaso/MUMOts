@@ -57,7 +57,7 @@
 		<div class="container">
 			<div class="row col-sm-10">
 				<div class="page-logo">
-					<a href="#"><img
+					<a href="<c:url value="/" />"><img
 						src="<c:url value="/metronic/assets/logo2.png" />" height="70px;"
 						alt="logo" class="logo-default"></a>
 				</div>
@@ -73,32 +73,34 @@
 				
 					<ul class="nav navbar-nav pull-right">
 						<!-- BEGIN USER LOGIN DROPDOWN -->
-						<li class="dropdown dropdown-user dropdown-dark"><a
-							href="javascript:;" class="dropdown-toggle"
-							data-toggle="dropdown" data-hover="dropdown"
-							data-close-others="true"> <span
+						<li class="dropdown dropdown-user dropdown-dark">
+						<c:choose>
+    					<c:when test="${sessionScope.role.equals('admin')}">
+						<a href="<c:url value ="/admin/users" />"> <span
 								class="username username-hide-mobile">Welcome
-									${sessionScope.username} ${sessionScope.role}!
+											${sessionScope.role}! </span>
+						</a>
+						</c:when>
+						<c:when test="${sessionScope.role.equals('coach')}">
+						<a
+							href="<c:url value="/coach/home" />"> <span
+								class="username username-hide-mobile">Welcome
+									 ${sessionScope.role}!
 									</span>
 						</a>
+						</c:when>
+						<c:when test="${sessionScope.role.equals('dba')}">
+						<a 
+							href="<c:url value="/dba/addquestion" />" > <span
+								class="username username-hide-mobile">Welcome
+									 ${sessionScope.role}!
+									</span>
+						</a>
+						</c:when>
+						</c:choose>
 						</li>
 					</ul>
-						<%-- 
-							<ul class="dropdown-menu dropdown-menu-default">
-								<li><a href="<c:url value="/user/profile" />"> <i
-										class="icon-user"></i> My Profile
-								</a></li>
-								<li class="divider"></li>
-								<li><a href="<c:url value="/register" />"> <i
-										class="icon-key"></i> Register
-								</a></li>
-								<li class="divider"></li>
-								<li><a href="<c:url value="/logout" />"> <i
-										class="icon-key"></i> Log Out
-								</a></li>
-							</ul></li>
-						<!-- END USER LOGIN DROPDOWN -->
-					</ul> --%>
+					
 					</c:if>
 				</div>
 				</div>
@@ -117,7 +119,7 @@
 			</div>
 		</div>
 		<!-- END HEADER MENU -->
-	</div>
+	<!-- </div> -->
 	<!-- END HEADER -->
 
 	<!-- BEGIN PAGE CONTAINER -->
@@ -149,6 +151,16 @@
 							END PORTLET MAIN
 						</div> -->
 						<!-- END BEGIN PROFILE SIDEBAR -->
+						<c:if test="${not empty alertErrorMsg}">
+							<div class="alert alert-danger alertContainer"
+								style="height: 36px; padding-top: 8px;">
+								<a class="btn-danger" data-dismiss="alert" style="float:right;"
+									aria-hidden="true">close</a>
+							
+								<span class="center glyphicon glyphicon-exclamation-sign"></span>
+								<c:out value="${alertErrorMsg}" />
+							</div>
+						</c:if>
 						<!-- BEGIN PROFILE CONTENT -->
 						<div class="profile-content">
 							<div class="row">
@@ -212,7 +224,7 @@
 <script src="<c:url value="/metronic/assets/admin/pages/scripts/table-editable.js" />"></script>
 <script src="<c:url value="/metronic/assets/admin/pages/scripts/login.js" />" type="text/javascript"></script>
 <script src="<c:url value="/metronic/assets/admin/pages/scripts/form-samples.js" />" type="text/javascript"></script>
-
+<script src="<c:url value="/resources/js/main.js" />" type="text/javascript"></script>
 
 <!-- END PAGE LEVEL SCRIPTS -->
 	<script>

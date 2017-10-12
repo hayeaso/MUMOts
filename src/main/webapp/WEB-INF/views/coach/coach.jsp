@@ -1,12 +1,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="/WEB-INF/views/include.jsp"%>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<div class="portlet box blue">
-	<div class="portlet-title">
-		<div class="caption">
-			<i class="fa"></i>Student List
-		</div>
+<div class="panel panel-success">
+
+	<div class="panel-heading">
+		<h3 class="panel-title">
+			<i class="fa fa-edit"></i>Student List
+		</h3>
 	</div>
+	<div class="panel-body">
 	<div class="portlet-body">
 	
 		<table class="table table-striped table-hover table-bordered"
@@ -75,6 +77,7 @@
 			</tbody>
 		</table>
 	</div>
+</div>
 </div>
 <script src="<c:url value="/metronic/assets/coach/scripts/assignment.js" />" type="text/javascript"></script>
 
