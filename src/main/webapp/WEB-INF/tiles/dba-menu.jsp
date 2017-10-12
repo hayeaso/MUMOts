@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include.jsp"%>
-<<<<<<< HEAD
 <c:set var="currentPage"
 	value="${requestScope['javax.servlet.forward.request_uri']}" />
 <%-- 
@@ -16,9 +15,8 @@
 				data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"
 				aria-expanded="false">
 				<span class="sr-only">Toggle navigation</span> <span
-					class="icon-bar"></span> 
-					<span class="icon-bar"></span> 
-					<span class="icon-bar"></span>
+					class="icon-bar"></span> <span class="icon-bar"></span> <span
+					class="icon-bar"></span>
 			</button>
 		</div>
 
@@ -27,33 +25,32 @@
 			<ul class="nav navbar-nav">
 
 				<li><a href="<c:url value="/dba/addquestion" />"
-					${('/onlinetest/dba/addquestion' == currentPage) ? ' style="color: #fdfdfd; background: #28bb9c;"' : ''}>Add Question
-				</a></li>
+					${('/onlinetest/dba/addquestion' == currentPage) ? ' style="color: #fdfdfd; background: #28bb9c;"' : ''}>Add
+						Question </a></li>
 
 				<li><a href="<c:url value="/dba/viewquestions" />"
-					${('/onlinetest/dba/viewquestions' == currentPage) ? ' style="color: #fdfdfd; background: #28bb9c;"' : ''}>Question List
-				</a></li>
+					${('/onlinetest/dba/viewquestions' == currentPage) ? ' style="color: #fdfdfd; background: #28bb9c;"' : ''}>Question
+						List </a></li>
 				<li><a href="<c:url value="/dba/importData" />"
-					${('/onlinetest/dba/importData' == currentPage) ? ' style="color: #fdfdfd; background: #28bb9c;"' : ''}>Import Data
-				</a></li>
+					${('/onlinetest/dba/importData' == currentPage) ? ' style="color: #fdfdfd; background: #28bb9c;"' : ''}>Import
+						Data </a></li>
 				<li><a href="<c:url value="/help" />"
 					${('/onlinetest/help' == currentPage) ? ' style="color: #fdfdfd; background: #28bb9c;"' : ''}>Help
 				</a></li>
-				
-				
 			</ul>
-			
+
+			<!-- NAVBAR ITEMS ON THE RIGHT -->
 			<ul class="nav navbar-nav navbar-right">
-				<li class="dropdown btn btn-default dropdown-toggle"><a href="#"
-			class="dropdown-toggle" data-toggle="dropdown" role="button"
-			aria-haspopup="true" aria-expanded="false"> <span
-				class="glyphicon glyphicon-cog" aria-hidden="true"></span></a>
-			<ul class="dropdown-menu">
-				<li><a href="editProfile"><i class="fa fa-edit"></i>
-						Edit Profile </a></li>
-				<li><a href="<c:url value="/logout" />">Logout</a></li>
-			</ul>
-		</li>
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown" role="button" aria-haspopup="true"
+					aria-expanded="false"> <span class="glyphicon glyphicon-cog"
+						aria-hidden="true"></span> <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="editProfile"><i class="fa fa-edit"></i> Edit
+								Profile </a></li>
+						<li role="separator" class="divider"></li>
+						<li><a href="<c:url value="/logout" />">Logout</a></li>
+					</ul></li>
 			</ul>
 		</div>
 	</div>
