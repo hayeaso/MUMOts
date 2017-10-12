@@ -462,17 +462,4 @@ public class AdminController {
 		}
 		return "redirect:/admin/editUser/" + user.getUserId();
 	}
-
-	// bind to profile edit button in setting in tiles/admin-menu.jsp
-	@RequestMapping(value = {"/admin/editProfile","/admin/*/editProfile"}, method = RequestMethod.GET)
-	public String editProfile(@ModelAttribute("loginUser") User user, Model model){
-		System.out.println("GET: enter into EditProfile	");
-		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		String name = auth.getName();
-		User currentUser = userService.findByUsername(name);
-		model.addAttribute("currentUser", currentUser);
-		return "redirect:/admin/editUser/" + currentUser.getUserId();
-	}
-
-	
 }
