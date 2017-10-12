@@ -6,8 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.poi.util.SystemOutLogger;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -167,13 +169,22 @@ public class TestController {
 
 		CategorySelectDto dto = new CategorySelectDto();
 		List<Category> categories = new ArrayList<>();
-		for(Category cat : categoryService.findAllEnabled()){
-			for(Subcategory subCat : cat.getSubcategories()){
-				if(subCat.isEnabled() && questionService.findBySubcategory(subCat).size() >= 20){
-					categories.add(cat);
+		for(Category cat : categoryService.findAllEnabled()) {
+
+			for (Subcategory subCat : cat.getSubcategories()) {
+
+				if (subCat.isEnabled() && questionService.findBySubcategory(subCat).size() >= 1) {
+					if(!categories.contains(cat)) {
+						categories.add(cat);
+					}
 				}
+				System.out.println(subCat.getName());
 			}
+
+
+			System.out.println(cat.getName());
 		}
+
 		dto.setCategories(categories);
 		//dto.setCategories(categoryService.findAllEnabled());
 		model.addAttribute("categoryDto", dto);
@@ -184,7 +195,9 @@ public class TestController {
 	public String setCategories(@ModelAttribute("categoryDto") CategorySelectDto dto, BindingResult resultDto,
 			HttpServletRequest request) {
 
+		System.out.println("inside method");
 		Integer assignmentId = Integer.parseInt(request.getSession().getAttribute("assignmentId").toString());
+		System.out.println("----------"+assignmentId);
 		Assignment assignment = assignmentService.findById(assignmentId);
 
 		List<Test> existingTest = testService.findByAssignment(assignment);
