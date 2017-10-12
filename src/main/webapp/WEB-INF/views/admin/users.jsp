@@ -1,5 +1,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page session="false"%>
+<%@ include file="/WEB-INF/views/deleteConfirm.jsp"%>
+<!-- SHOW MODAL -->
+
+<c:if test="${not empty success}">
+<%@ include file="/WEB-INF/views/popUp.jsp"%>
+</c:if>
 
 <div class="panel panel-success">
 
@@ -51,8 +57,8 @@
 								<td><a href="editUser/${user.userId}"><i
 										class="fa fa-edit"></i> Edit </a></td>
 
-								<td><button value="${user.userId}" type="button"
-										class="btnDelUser btn btn-xs btn-danger pull-right">Delete</button></td>
+								<td><button data-value="${user.userId}" type="button" data-toggle="modal" data-target="#delModal"
+										class="deleteButton btn btn-xs btn-danger pull-right">Delete</button></td>
 							</tr>
 						</c:if>
 					</c:forEach>
@@ -62,36 +68,6 @@
 	</div>
 </div>
 
-<!-- SHOW MODAL -->
 
-<c:if test="${not empty success}">
 
-	<!-- Modal -->
-	<div id="myModal" class="modal fade" role="dialog">
-		<div class="modal-dialog">
-
-			<!-- Modal content-->
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-					<h4 class="modal-title">Data Saved To Database</h4>
-				</div>
-				<div class="modal-body">
-					<p>Successfully data saved to database.</p>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!-- END OF MODAL -->
-</c:if>
-
-<script type="text/javascript">
-	$(window).on('load', function() {
-		$('#myModal').modal('show');
-	});
-</script>
 

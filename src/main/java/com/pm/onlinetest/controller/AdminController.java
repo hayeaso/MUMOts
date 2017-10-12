@@ -106,6 +106,8 @@ public class AdminController {
 			user.setEnabled(true);
 			userService.save(user);
 			redirectAttr.addFlashAttribute("success", "Success");	
+			redirectAttr.addFlashAttribute("titleMessage", "User Added");	
+			redirectAttr.addFlashAttribute("bodyMessage", "User "+user.getUsername()+" SuccessFully Added to the database");	
 			return "redirect:/admin/users";
 		}
 		
@@ -149,12 +151,22 @@ public class AdminController {
 		}
 		if(null != studentService.findByStudentId(student.getStudentId())){
 			redirectAttr.addFlashAttribute("error", "Error");
+			redirectAttr.addFlashAttribute("model", student);	
+			return "redirect:"+mapping;
 		}else{
 			studentService.save(student);
-			redirectAttr.addFlashAttribute("success", "Success");		
+			redirectAttr.addFlashAttribute("success", "Success");	
+			redirectAttr.addFlashAttribute("titleMessage", "Student Added");	
+			redirectAttr.addFlashAttribute("bodyMessage", "Student "+student.getFirstName()+" "+student.getLastName()+" SuccessFully Added to the database");	
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		    String role = auth.getAuthorities().toString();
+		    if(role.equals("[ROLE_ADMIN]"))
+		    	return "redirect:/admin/students";
+		    else
+		    	return "redirect:/coach/students";
 		}
 		
-		return "redirect:"+mapping;
+		
 	}
 
 	@RequestMapping(value = {"/admin/editStudent/{id}", "/coach/editStudent/{id}"}, method = RequestMethod.GET)
@@ -178,7 +190,8 @@ public class AdminController {
 			redirectAttr.addFlashAttribute("error", "Error");
 		}else{
 			studentService.save(student);
-			redirectAttr.addFlashAttribute("success", "Success");		
+			redirectAttr.addFlashAttribute("success", "Success");	
+			
 		}		
 
 		return "redirect:"+mapping+"/"+student.getUserId();

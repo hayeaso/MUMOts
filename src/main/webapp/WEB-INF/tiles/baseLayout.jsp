@@ -120,7 +120,7 @@
 			</div>
 		</div>
 		<!-- END HEADER MENU -->
-	</div>
+	<!-- </div> -->
 	<!-- END HEADER -->
 
 	<!-- BEGIN PAGE CONTAINER -->
