@@ -21,6 +21,13 @@
 	<put-attribute name="menu" value="/WEB-INF/tiles/def-menu.jsp"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/views/preacess.jsp" />
 	</definition>
+	
+	<definition name="resetPassword" extends="login-definition">
+		<put-attribute name="content" value="/WEB-INF/views/resetpassword.jsp" />
+	</definition>
+	
+	
+	
 	<definition name="read" extends="read-definition">
 	<put-attribute name="menu" value="/WEB-INF/tiles/def-menu.jsp"></put-attribute>
 		<put-attribute name="content" value="/WEB-INF/views/read.jsp" />

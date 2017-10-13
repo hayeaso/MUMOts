@@ -14,17 +14,16 @@
 						<spring:message code="AbstractUserDetailsAuthenticationProvider.badCredentials"/><br />
 					</div>
 				</c:if>
-			    	<form action="<spring:url value="/postResetPassword"></spring:url>" method="post">
+			    	<form action="<spring:url value="/resetPassword"></spring:url>" method="post">
                     <fieldset>
-			    	  	<div class="form-group">
-			    		    <input class="form:input-large" placeholder="Email" name='email' type="text">
-			    		</div>
-			    		
-			    		<input class="btn btn-lg btn-success btn-mini" type="submit" onclick="sendEmail(${users.userId})" value="Reset">
-			    		
-						<input class="btn btn-lg btn-success btn-mini" type="submit" onclick="ResetPasswordCancel()" value="Cancel">
-		
-			    		
+			    	  		<div class="form-group">
+								<input class=" form:input-large" placeholder="Password"
+									name='password' type="password" value="">
+							</div>
+			    			<div class="form-actions">
+								<button type="submit" id="register-submit-btn"
+									class="btn btn-success">Reset Password</button>
+							</div>
 			    	</fieldset>
 			      	</form>
 			    </div>
