@@ -1,5 +1,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page session="false"%>
+<%@ include file="/WEB-INF/views/deleteConfirm.jsp"%>
+
+<c:if test="${not empty success}">
+<%@ include file="/WEB-INF/views/popUp.jsp"%>
+</c:if>
 
 <div class="panel panel-success">
   <div class="panel-heading">
@@ -25,7 +30,7 @@
 					<th>Full Name</th>
 					<th>Email</th>
 					<th>Year</th>
-					<th>Job Search Status</th>
+					<th class="tblStatusCol">Job Search Status</th>
 					<th>Edit</th>
 					<th>Delete</th>
 				</tr>
@@ -46,8 +51,8 @@
 							</c:if>
 						</td>
 						<td><a href="editStudent/${student.userId}"><i class="fa fa-edit"></i> Edit </a></td>
-						<td><button value="${student.userId}" type="button"
-								class="btnDelUser btn btn-xs btn-danger pull-right">Delete</button></td>
+						<td><button data-value="${student.userId}" type="button" data-toggle="modal" data-target="#delModal"
+								class="deleteButton btn btn-xs btn-danger pull-right">Delete</button></td>
 					</tr>
 				</c:forEach>
 			</tbody>

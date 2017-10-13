@@ -43,7 +43,7 @@
 						<th>Date Assigned</th>
 						<th>Date Finished</th>
 						<th>Try</th>
-						<th>Status</th>
+						<th class="tblStatusCol2">Status</th>
 						<th class="noExl">Report</th>
 
 					</tr>

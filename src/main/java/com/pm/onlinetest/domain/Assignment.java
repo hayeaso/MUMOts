@@ -10,18 +10,12 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.format.annotation.DateTimeFormat.ISO;
-
 @Entity
 public class Assignment {
 
  	@Id
     @GeneratedValue
     private Integer id;
- 	
- 	//@DateTimeFormat(pattern="MM/dd/yyyy HH:mm a")
- 	private String sendEmailDateTime;
 
 	private LocalDateTime start_date;
  
@@ -30,15 +24,6 @@ public class Assignment {
  	private boolean started;
  	private boolean finished;
  	private String accesscode;
- 	
-
- 	public String getSendEmailDateTime() {
-		return sendEmailDateTime;
-	}
-
-	public void setSendEmailDateTime(String sendEmailDateTime) {
-		this.sendEmailDateTime = sendEmailDateTime;
-	}
 	
  	@OneToOne(fetch=FetchType.EAGER)	
  	private Student studentId;
