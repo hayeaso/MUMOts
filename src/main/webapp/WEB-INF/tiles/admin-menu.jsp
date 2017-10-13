@@ -10,7 +10,7 @@
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -22,30 +22,30 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 				<li><a href="<c:url value="/admin/users" />"
-					${('/onlinetest/admin/users' == currentPage) ? ' style="color: #fdfdfd; background: #28bb9c;"' : ''}>User
+					${('/onlinetest/admin/users' == currentPage || '/onlinetest/admin/register' == currentPage) ? ' class="activeNavItem"' : ''}>User
 						List</a></li>
 
 				<li><a href="<c:url value="/admin/students" />"
-					${('/onlinetest/admin/students' == currentPage) ? ' style="color: #fdfdfd; background: #28bb9c;"' : ''}>Student
+					${('/onlinetest/admin/students' == currentPage || '/onlinetest/admin/registerStudent' == currentPage) ? ' class="activeNavItem"' : ''}>Student
 						List</a></li>
 				<li><a href="<c:url value="/admin/categories" />"
-					${('/onlinetest/admin/categories' == currentPage) ? ' style="color: #fdfdfd; background: #28bb9c;"'  : ''}>Category</a></li>
+					${('/onlinetest/admin/categories' == currentPage || '/onlinetest/admin/createCategory' == currentPage) ? ' class="activeNavItem"'  : ''}>Category</a></li>
 				<li><a href="<c:url value="/admin/subCategories" />"
-					${('/onlinetest/admin/subCategories' == currentPage) ? ' style="color: #fdfdfd; background: #28bb9c;"'  : ''}>Sub
+					${('/onlinetest/admin/subCategories' == currentPage || '/onlinetest/admin/createSubCategory' == currentPage) ? ' class="activeNavItem"'  : ''}>Sub
 						Category</a></li>
 				<li><a href="<c:url value="/admin/addquestion" />"
-					${('/onlinetest/admin/addquestion' == currentPage) ? ' style="color: #fdfdfd; background: #28bb9c;"' : ''}>Add
+					${('/onlinetest/admin/addquestion' == currentPage ) ? ' class="activeNavItem"' : ''}>Add
 						Question</a></li>
 				<li><a href="<c:url value="/admin/viewquestions" />"
-					${('/onlinetest/admin/viewquestions' == currentPage) ? ' style="color: #fdfdfd; background: #28bb9c;"'  : ''}>Question
+					${('/onlinetest/admin/viewquestions' == currentPage) ? ' class="activeNavItem"'  : ''}>Question
 						List</a></li>
 				<li><a href="<c:url value="/admin/importData" />"
-					${('/onlinetest/admin/importData' == currentPage) ? ' style="color: #fdfdfd; background: #28bb9c;"'  : ''}>Import
+					${('/onlinetest/admin/importData' == currentPage) ? ' class="activeNavItem"'  : ''}>Import
 						Data</a></li>
 				<li><a href="<c:url value="/admin/assignments" />"
-					${('/onlinetest/admin/assignments' == currentPage) ? ' style="color: #fdfdfd; background: #28bb9c;"'  : ''}>Assignments</a></li>
+					${('/onlinetest/admin/assignments' == currentPage) ? ' class="activeNavItem"'  : ''}>Assignments</a></li>
 				<li><a href="<c:url value="/admin/resultlist" />"
-					${('/onlinetest/admin/resultlist' == currentPage) ? ' style="color: #fdfdfd; background: #28bb9c;"'  : ''}>Test
+					${('/onlinetest/admin/resultlist' == currentPage) ? ' class="activeNavItem"'  : ''}>Test
 						Results</a></li>
 
 			</ul>
