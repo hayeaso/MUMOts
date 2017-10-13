@@ -8,6 +8,7 @@ import com.pm.onlinetest.domain.User;
 public interface UserService {
 
 	public void save(User user);
+	public void saveProfile(User user);
 	public void delete(User user);
 	public void softDelete(Integer userId);
 	public List<User> findAllEnabled();

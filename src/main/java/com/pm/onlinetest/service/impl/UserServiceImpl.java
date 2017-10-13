@@ -40,6 +40,16 @@ public class UserServiceImpl implements UserService {
 		
 	}
 
+	
+	public void saveProfile(User user) {
+
+		PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String encodedPassword = passwordEncoder.encode(user.getPassword());
+		user.setPassword(encodedPassword);
+		user.setEnabled(true);
+		userRepository.save(user);
+	}
+	
 	@Override
 	public List<User> findAllEnabled() {
 		return (List<User>) userRepository.findAllEnabled();

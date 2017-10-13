@@ -92,7 +92,7 @@ function sendEmail(userId){
 	$("#successMessage").empty();
 	msg ="<strong>Success!</strong> Email has been sent successfully! "
 	$("#successMessage").append(msg);
-	$("#successMessage").show();
+	//$("#successMessage").show();
 	$("#sentEmail").val(true);
 	assignmentDone(userId);
 	
@@ -108,6 +108,8 @@ function sendEmail(userId){
 		type:"GET",
 		success:function(data){
 			if(data=="success"){
+				$("#successMessage").show();
+				console.log("email sent")
 			}				 
 		}
 	});

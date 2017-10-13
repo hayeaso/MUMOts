@@ -1,7 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page session="false"%>
-<div class="panel panel-success">
+<%@ include file="/WEB-INF/views/deleteConfirm2.jsp"%>
 
+<div class="panel panel-success">
 	<div class="panel-heading">
 		<h3 class="panel-title">
 			<i class="fa fa-edit"></i>Sub Category List
@@ -35,8 +36,8 @@
 							<td>${subCategory.name}</td>
 							<td>${subCategory.category.name}</td>
 							<td>
-								<button value="${subCategory.id}" type="button"
-									class="btnDelSubCat btn btn-xs btn-default pull-right">Delete</button>
+								<button data-value="${subCategory.id}" type="button" data-toggle="modal" data-target="#delModal2"
+									class="deleteButton2 btn btn-xs btn-danger pull-right">Delete</button>
 							</td>
 						</tr>
 					</c:forEach>

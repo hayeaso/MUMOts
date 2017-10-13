@@ -73,9 +73,86 @@ var TableEditable = function () {
             }],
             "order": [
                 [0, "asc"]
-            ] // set first column as a default sort by asc
+            ], // set first column as a default sort by asc
+            initComplete: function () {
+            	// student status dropdown filter
+            	var mtable = this;
+            	//check if table have column status
+            	var statusCol = $("th.tblStatusCol");
+         	
+            	if (statusCol.length > 0) {
+	            	
+	            	var $labelStatus = $("<label>");
+	            	var $selectStatus = $("<select>");
+	            	$selectStatus.attr({
+	            		"id": "statusDropdown",
+	            		"class": "form-control"
+	            	});
+	            	
+	            	$selectStatus.append(new Option('All', ""));
+	            	$selectStatus.append(new Option('Active', "Active"));
+	            	$selectStatus.append(new Option('Inactive', "Inactive"));
+	            	
+	            	/*$selectStatus.append(new Option('ALL', ""));
+	            	$selectStatus.append(new Option('Started', "S"));
+	            	$selectStatus.append(new Option('Finished', "F"));
+	            	$selectStatus.append(new Option('Not Started', "A"));*/
+	            	
+	            	$labelStatus.append($selectStatus);
+	            	$labelStatus.append(new Text("status"));
+	            	$labelStatus.addClass("lblStatus");
+	            	
+	            	var $divRecord  = $("div#sample_editable_1_length");
+	                if ($divRecord.length > 0) {	                	
+	                	$divRecord.prepend($labelStatus);
+	                	$selectStatus.on('change',function(){
+		            	   var selectedValue = $(this).val();	            	   
+		            	   //("^"+selectedValue+"$", 0, true); //searchValue, column, reg
+		            	   mtable.api().columns('.tblStatusCol')
+		                    .search( selectedValue ? '^'+selectedValue+'$' : '', true, false )
+		                	.draw();
+		            	});
+		            }
+            	}
+     	
+            	//var mtable2 = this;
+            	//check if table have column status
+            	var statusCol2 = $("th.tblStatusCol2");
+            	if (statusCol2.length > 0) {
+	            	
+	            	var $labelStatus2 = $("<label>");
+	            	var $selectStatus2 = $("<select>");
+	            	$selectStatus2.attr({
+	            		"id": "statusDropdown",
+	            		"class": "form-control"
+	            	});
+	            	
+	            	$selectStatus2.append(new Option('ALL', ""));
+	            	$selectStatus2.append(new Option('Started', "S"));
+	            	$selectStatus2.append(new Option('Finished', "F"));
+	            	$selectStatus2.append(new Option('Not Started', "A"));
+	            	
+	            	$labelStatus2.append($selectStatus2);
+	            	$labelStatus2.append(new Text("status"));
+	            	$labelStatus2.addClass("lblStatus");
+	            	
+	            	var $divRecord2  = $("div#sample_editable_1_length");
+	                if ($divRecord2.length > 0) {	                	
+	                	$divRecord2.prepend($labelStatus2);
+	                	$selectStatus2.on('change',function(){
+		            	   var selectedValue2 = $(this).val();	            	   
+		            	   //("^"+selectedValue+"$", 0, true); //searchValue, column, reg
+		            	   mtable.api().columns('.tblStatusCol2')
+		                    .search( selectedValue ? '^'+selectedValue+'$' : '', true, false )
+		                	.draw();
+		            	});
+		            }
+            	}
+      	
+            }
         });
 
+        
         var tableWrapper = $("#sample_editable_1_wrapper");
 
         tableWrapper.find(".dataTables_length select").select2({
@@ -111,9 +188,8 @@ var TableEditable = function () {
             nNew = true;
         });
 
-        table.on('click', '.delete', function (e) {
-            e.preventDefault();
-
+        table.on('click', '.delete', function (e) {        	
+            e.preventDefault();            
             if (confirm("Are you sure to delete this row ?") == false) {
                 return;
             }

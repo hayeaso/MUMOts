@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include.jsp"%>
+
 <div class="content">
 	<!-- <div class="portlet light"> -->
 	<div class="jumbotron">
 		<c:if test="${not empty error}">
-			<div class="alert alert-dismissible alert-danger">
+			<div class="alert alert-dismissible alert-warning">
 				<button type="button" class="close" data-dismiss="alert">&times;</button>
 				<strong>Oh snap!</strong> <a href="#" class="alert-link">Username
 					already exists. </a> Choose different username.
@@ -84,7 +85,7 @@
 			<div class="form-actions">
 				<a href="<c:url value='/admin/users'/>"> <input
 					style="margin-right: 30px;" type="button" id="register-cancel-btn"
-					class="btn btn-success uppercase pull-right" value="Cancel" />
+					class="btn btn-success uppercase pull-right" value="Cancel" /></a>
 			</div>
 			<br />
 			<br />
@@ -92,8 +93,3 @@
 	</div>
 </div>
 
-<script type="text/javascript">
-	$(window).on('load', function() {
-		$('#myModal').modal('show');
-	});
-</script>
