@@ -4,8 +4,10 @@ import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.poi.util.SystemOutLogger;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -165,6 +167,7 @@ public class TestController {
 
 		CategorySelectDto dto = new CategorySelectDto();
 		List<Category> categories = new ArrayList<>();
+
 		Set<Category> mycategories = new HashSet<>();
 		for(Category cat : categoryService.findAllEnabled()){
 			for(Subcategory subCat : cat.getSubcategories()){
@@ -174,8 +177,13 @@ public class TestController {
 
 					}
 				}
+				System.out.println(subCat.getName());
 			}
+
+
+			System.out.println(cat.getName());
 		}
+
 		dto.setCategories(categories);
 		//dto.setCategories(categoryService.findAllEnabled());
 		
@@ -187,6 +195,7 @@ public class TestController {
 	@RequestMapping(value = "/setcategories", method = RequestMethod.POST)
 	public String setCategories(@ModelAttribute("categoryDto") CategorySelectDto dto, BindingResult resultDto,
 			HttpServletRequest request) {
+
 
 		//System.out.println("I am here");
 		System.out.println((request.getSession().getAttribute("assignmentId")));
