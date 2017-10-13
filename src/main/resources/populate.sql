@@ -5,13 +5,13 @@ INSERT INTO `User` (`userId`, `email`, `enabled`, `firstName`, `lastName`, `pass
 INSERT INTO `Authority` (`id`, `authority`, `userId`) VALUES (2, 'ROLE_COACH', 2);
 
 --Student users
-INSERT INTO `User` (`userId`, `email`, `enabled`, `firstName`, `lastName`, `password`, `username`) VALUES (8, 'test1@mum.edu', b'1', 'Stu01', 'Clark', null, null);
-INSERT INTO `User` (`userId`, `email`, `enabled`, `firstName`, `lastName`, `password`, `username`) VALUES (9, 'test2@mum.edu', b'1', 'Stu02', 'Stark', null, null);
-INSERT INTO `User` (`userId`, `email`, `enabled`, `firstName`, `lastName`, `password`, `username`) VALUES (10, 'test3@mum.edu', b'1', 'Stu03', 'Oven', null, null);
-INSERT INTO `User` (`userId`, `email`, `enabled`, `firstName`, `lastName`, `password`, `username`) VALUES (11, 'test4@mum.edu', b'1', 'Stu04', 'Olive', null, null);
-INSERT INTO `User` (`userId`, `email`, `enabled`, `firstName`, `lastName`, `password`, `username`) VALUES (12, 'test5@mum.edu', b'1', 'Stu05', 'Washinton', null, null);
-INSERT INTO `User` (`userId`, `email`, `enabled`, `firstName`, `lastName`, `password`, `username`) VALUES (13, 'test6@mum.edu', b'1', 'Stu06', 'Trouble', null, null);
-INSERT INTO `User` (`userId`, `email`, `enabled`, `firstName`, `lastName`, `password`, `username`) VALUES (14, 'test7@mum.edu', b'1', 'Stu07', 'Awesome', null, null);
+INSERT INTO `User` (`userId`, `email`, `enabled`, `firstName`, `lastName`, `password`, `username`) VALUES (3, 'test1@mum.edu', b'1', 'Stu01', 'Clark', null, null);
+INSERT INTO `User` (`userId`, `email`, `enabled`, `firstName`, `lastName`, `password`, `username`) VALUES (4, 'test2@mum.edu', b'1', 'Stu02', 'Stark', null, null);
+INSERT INTO `User` (`userId`, `email`, `enabled`, `firstName`, `lastName`, `password`, `username`) VALUES (5, 'test3@mum.edu', b'1', 'Stu03', 'Oven', null, null);
+INSERT INTO `User` (`userId`, `email`, `enabled`, `firstName`, `lastName`, `password`, `username`) VALUES (6, 'test4@mum.edu', b'1', 'Stu04', 'Olive', null, null);
+INSERT INTO `User` (`userId`, `email`, `enabled`, `firstName`, `lastName`, `password`, `username`) VALUES (7, 'test5@mum.edu', b'1', 'Stu05', 'Washinton', null, null);
+INSERT INTO `User` (`userId`, `email`, `enabled`, `firstName`, `lastName`, `password`, `username`) VALUES (8, 'test6@mum.edu', b'1', 'Stu06', 'Trouble', null, null);
+INSERT INTO `User` (`userId`, `email`, `enabled`, `firstName`, `lastName`, `password`, `username`) VALUES (9, 'test7@mum.edu', b'1', 'Stu07', 'Awesome', null, null);
 
 
 INSERT INTO `Grade` (`name`, `rangeFrom`, `rangeTo`) VALUES ('A', 95, 98);
