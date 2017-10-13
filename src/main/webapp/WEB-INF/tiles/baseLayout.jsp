@@ -331,6 +331,7 @@
 				$(".questionNumber").empty();
 								
 				if(parseInt(arg2) == 1){
+				    console.log("I am here");
 					qNewNum = parseInt(qNum)+1;
 					var num = qNewNum+1;
 					$(".questionNumber").append("Questions "+num+"/"+testCount);
