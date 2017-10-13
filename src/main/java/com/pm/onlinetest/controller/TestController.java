@@ -2,9 +2,7 @@ package com.pm.onlinetest.controller;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -159,7 +157,7 @@ public class TestController {
 
 	@RequestMapping(value = "/showcategories", method = RequestMethod.GET)
 	public String selectCategoriesView(Model model, HttpServletRequest request, RedirectAttributes attr) {
-		System.out.println("----Inside TEST---");
+
 //		Assignment obj = (Assignment) request.getAttribute("assignment");
 //
 //		if (obj == null) {
@@ -169,13 +167,14 @@ public class TestController {
 
 		CategorySelectDto dto = new CategorySelectDto();
 		List<Category> categories = new ArrayList<>();
-		for(Category cat : categoryService.findAllEnabled()) {
 
-			for (Subcategory subCat : cat.getSubcategories()) {
-
-				if (subCat.isEnabled() && questionService.findBySubcategory(subCat).size() >= 1) {
-					if(!categories.contains(cat)) {
+		Set<Category> mycategories = new HashSet<>();
+		for(Category cat : categoryService.findAllEnabled()){
+			for(Subcategory subCat : cat.getSubcategories()){
+				if(subCat.isEnabled() && questionService.findBySubcategory(subCat).size() >= 1){
+					if (!categories.contains(cat)){
 						categories.add(cat);
+
 					}
 				}
 				System.out.println(subCat.getName());
@@ -188,7 +187,7 @@ public class TestController {
 		dto.setCategories(categories);
 		//dto.setCategories(categoryService.findAllEnabled());
 		
-		System.out.println("-----"+dto.getCategories().get(0));
+
 		model.addAttribute("categoryDto", dto);
 		return "categoryselect";
 	}
@@ -197,14 +196,20 @@ public class TestController {
 	public String setCategories(@ModelAttribute("categoryDto") CategorySelectDto dto, BindingResult resultDto,
 			HttpServletRequest request) {
 
-		System.out.println("inside method");
-		Integer assignmentId = Integer.parseInt(request.getSession().getAttribute("assignmentId").toString());
-		System.out.println("----------"+assignmentId);
-		Assignment assignment = assignmentService.findById(assignmentId);
 
+		//System.out.println("I am here");
+		System.out.println((request.getSession().getAttribute("assignmentId")));
+		//Integer assignmentId = Integer.parseInt(request.getSession().getAttribute("assignmentId").toString());
+		Integer assignmentId = 1;
+
+
+		Assignment assignment = assignmentService.findById(assignmentId);
+		//System.out.println("I am here");
 		List<Test> existingTest = testService.findByAssignment(assignment);
 		System.out.println("ExistingTest: " + existingTest.size());
+		System.out.println("size is " + existingTest.size());
 		if (existingTest.size() == 0) {
+			System.out.println("I am inside if");
 			List<Integer> subcategories = dto.getSelectedSubCategories();
 
 			Subcategory subcategory = null;
@@ -215,7 +220,7 @@ public class TestController {
 
 				List<Question> subcategoryQuestions = questionService.findBySubcategory(subcategory);
 				//for (int i = 0; i < totalQuestions / subcategories.size(); i++) {
-				for (int i = 0; i < 20; i++) {
+				for (int i = 0; i < 2; i++) {
 
 					int index = 0;
 					if (subcategoryQuestions.size() > 0) {
@@ -236,7 +241,8 @@ public class TestController {
 
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public String test(Model model, HttpServletRequest request) {
-		Integer assignmentId = Integer.parseInt(request.getSession().getAttribute("assignmentId").toString());
+		//Integer assignmentId = Integer.parseInt(request.getSession().getAttribute("assignmentId").toString());
+		Integer assignmentId = 1;
 		Assignment assignment = assignmentService.findById(assignmentId);
 		assignment.setStart_date(LocalDateTime.now());
 		assignment.setStarted(true);
@@ -245,12 +251,14 @@ public class TestController {
 
 		tests = testService.findByAssignment(assignment);
 		request.getSession().setAttribute("tests", tests);
+		System.out.println("Test is "+tests);
 		model.addAttribute("test", tests.get(0));
 		model.addAttribute("indexCount", tests.get(0).getId());
 		model.addAttribute("assignment", assignment);
 		model.addAttribute("totalTestCount", tests.size());
 		request.getSession().setAttribute("min", 120);
 		request.getSession().setAttribute("sec", 00);
+		System.out.println("size of test is"+tests.size());
 		return "test";
 	}
 
@@ -267,6 +275,7 @@ public class TestController {
 			test.setAnswer(Integer.parseInt(currentQuestion.getAnswer()));
 		}
 		testService.save(test);
+		System.out.println("index problem is " + tests.get(currentQuestion.getNewQuestionNum()).getId());
 		Test nextTest = testService.findOne(tests.get(currentQuestion.getNewQuestionNum()).getId());
 
 		JSONObject obj = new JSONObject();
@@ -278,6 +287,7 @@ public class TestController {
 			i++;
 		}
 		obj.put("answer", nextTest.getAnswer());
+		System.out.println("Description is"+nextTest.getQuestion().getDescription());
 		return obj;
 	}
 
@@ -303,7 +313,8 @@ public class TestController {
 	}
 
 	@RequestMapping(value = "/completed", method = RequestMethod.GET)
-	public String completede() {
+	public String completed() {
+		System.out.println("I am inside completed");
 		return "completed";
 	}
 

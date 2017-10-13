@@ -476,6 +476,10 @@ public class AdminController {
 			user.setEnabled(true);
 			userService.save(user);
 			redirectAttr.addFlashAttribute("success", "Success");
+			redirectAttr.addFlashAttribute("titleMessage", "User EDITED");	
+			redirectAttr.addFlashAttribute("bodyMessage", "User "+user.getUsername()+" SuccessFully EDITED to the database");	
+
+			return "redirect:/admin/users";
 		}
 		return "redirect:/admin/editUser/" + user.getUserId();
 	}

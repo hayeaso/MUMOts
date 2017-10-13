@@ -30,7 +30,7 @@
 					<th>Full Name</th>
 					<th>Email</th>
 					<th>Year</th>
-					<th>Job Search Status</th>
+					<th class="tblStatusCol">Job Search Status</th>
 					<th>Edit</th>
 					<th>Delete</th>
 				</tr>
