@@ -42,7 +42,7 @@
 		create-drop: drop the schema at the end of the session. These options intended 
 		to be developers tools and not to facilitate any production level databases 
 		<prop key="hibernate.hbm2ddl.auto">create-drop</prop> -->
-			<prop key="hibernate.hbm2ddl.auto">update</prop>
+			<prop key="hibernate.hbm2ddl.auto">create-update</prop>
             <!--  <prop key="hibernate.show_sql">true</prop>  -->
             <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
             <prop key="hibernate.hbm2ddl.import_files">populate.sql</prop>
@@ -56,7 +56,7 @@
 		<property name="url" value="jdbc:mysql://localhost:3306/onlinetest?createDatabaseIfNotExist=true" />
 		
 		<property name="username" value="root" />
-		<property name="password" value="" />
+		<property name="password" value="root" />
 	</bean>
 
 

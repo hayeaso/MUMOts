@@ -85,6 +85,15 @@ public class AdminController {
 		model.addAttribute("users", users);
 		return "users";
 	}
+	
+	@RequestMapping(value = { "/admin/students", "/coach/students" }, method = RequestMethod.GET)
+	public String getStudents(Model model, HttpServletRequest request) {
+		List<Student> students = studentService.findAllEnabled();
+		model.addAttribute("students", students);
+		String mapping = request.getServletPath();
+		System.out.println(mapping);
+		return mapping;
+	}
 
 	@RequestMapping(value = "/admin/register", method = RequestMethod.GET)
 	public String register(@ModelAttribute("loginUser") User user) {
@@ -106,7 +115,11 @@ public class AdminController {
 		} else {
 			user.setEnabled(true);
 			userService.save(user);
-			redirectAttr.addFlashAttribute("success", "Success");
+
+			redirectAttr.addFlashAttribute("success", "Success");	
+			redirectAttr.addFlashAttribute("titleMessage", "User Added");	
+			redirectAttr.addFlashAttribute("bodyMessage", "User "+user.getUsername()+" SuccessFully Added to the database");	
+
 			return "redirect:/admin/users";
 		}
 
@@ -127,13 +140,22 @@ public class AdminController {
 		}
 		if (null != studentService.findByStudentId(student.getStudentId())) {
 			redirectAttr.addFlashAttribute("error", "Error");
-		} else {
+			redirectAttr.addFlashAttribute("model", student);	
+			return "redirect:"+mapping;
+		}else{
 			studentService.save(student);
-			redirectAttr.addFlashAttribute("success", "Success");
+			redirectAttr.addFlashAttribute("success", "Success");	
+			redirectAttr.addFlashAttribute("titleMessage", "Student Added");	
+			redirectAttr.addFlashAttribute("bodyMessage", "Student "+student.getFirstName()+" "+student.getLastName()+" SuccessFully Added to the database");	
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		    String role = auth.getAuthorities().toString();
+		    if(role.equals("[ROLE_ADMIN]"))
+		    	return "redirect:/admin/students";
+		    else
+		    	return "redirect:/coach/students";
 		}
-
-		return "redirect:" + mapping;
 	}
+
 
 	@RequestMapping(value = { "/admin/editStudent/{id}", "/coach/editStudent/{id}" }, method = RequestMethod.GET)
 	public String editStudent(@ModelAttribute("student") Student student, HttpServletRequest request, Model model,
@@ -156,6 +178,7 @@ public class AdminController {
 			redirectAttr.addFlashAttribute("error", "Error");
 		} else {
 			studentService.save(student);
+
 			redirectAttr.addFlashAttribute("success", "Success");
 		}
 
@@ -186,13 +209,7 @@ public class AdminController {
 		userService.softDelete(Integer.parseInt(id));
 	}
 
-	@RequestMapping(value = { "/admin/students", "/coach/students" }, method = RequestMethod.GET)
-	public String getStudents(Model model, HttpServletRequest request) {
-		List<Student> students = studentService.findAllEnabled();
-		model.addAttribute("students", students);
-		String mapping = request.getServletPath();
-		return mapping;
-	}
+
 
 	// @RequestMapping(value = "/admin/assign", method = RequestMethod.GET)
 	// public String assignCoach(Model model) {

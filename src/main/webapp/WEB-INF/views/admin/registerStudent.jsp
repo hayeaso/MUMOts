@@ -24,35 +24,35 @@
 				<form:label path="firstName"
 					class="control-label visible-ie8 visible-ie9">First Name</form:label>
 				<form:input path="firstName" class="form-control placeholder-no-fix"
-					type="text" placeholder="First Name" name="firstName" />
+					type="text" placeholder="First Name" name="firstName"  value="${model.getFirstName() }"/>
 				<form:errors path="firstName" cssClass="text-danger" />
 			</div>
 			<div class="form-group">
 				<form:label path="lastName"
 					class="control-label visible-ie8 visible-ie9">Last Name</form:label>
 				<form:input path="lastName" class="form-control placeholder-no-fix"
-					type="text" placeholder="Last Name" name="lastName" />
+					type="text" placeholder="Last Name" name="lastName" value="${model.getLastName() }"/>
 				<form:errors path="lastName" cssClass="text-danger" />
 			</div>
 			<div class="form-group">
 				<form:label path="email"
 					class="control-label visible-ie8 visible-ie9">Email</form:label>
 				<form:input path="email" class="form-control placeholder-no-fix"
-					type="text" placeholder="Email" name="email" />
+					type="text" placeholder="Email" name="email" value="${model.getEmail() }"/>
 				<form:errors path="email" cssClass="text-danger" />
 			</div>
 			<div class="form-group">
 				<form:label path="studentId"
 					class="control-label visible-ie8 visible-ie9">Student ID</form:label>
 				<form:input path="studentId" class="form-control placeholder-no-fix"
-					type="text" placeholder="Student ID" name="studentId" />
+					type="text" placeholder="Student ID" name="studentId" value="${model.getStudentId() }"/>
 				<form:errors path="studentId" cssClass="text-danger" />
 			</div>
 			
 			<div class="form-group">
 				<form:label path="entry" class="control-label visible-ie8 visible-ie9">Entry Year</form:label>
 				<form:input path="entry" class="date-picker form-control placeholder-no-fix"
-					type="text" placeholder="Entry year" name="entry" id="datepick" />
+					type="text" placeholder="Entry year" name="entry" id="datepick" value="${model.getEntry() }"/>
 				<form:errors path="entry" cssClass="text-danger" />
 			</div>
 			
