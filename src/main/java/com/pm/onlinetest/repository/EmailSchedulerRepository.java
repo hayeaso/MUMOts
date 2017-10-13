@@ -13,6 +13,6 @@ import com.pm.onlinetest.domain.EmailScheduler;
 @Repository
 public interface EmailSchedulerRepository extends CrudRepository<EmailScheduler, Integer>{
 
-	@Query ("SELECT d from EmailScheduler d WHERE d.sendEmailDateTime =:dateTime")
+	@Query ("SELECT d from EmailScheduler d WHERE d.sendEmailDateTime <= :dateTime and d.isSend = false")
 	List<EmailScheduler> findDate(@Param("dateTime") LocalDateTime newDateNow);
 }

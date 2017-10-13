@@ -1,10 +1,12 @@
 package com.pm.onlinetest.service.impl;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;
@@ -12,15 +14,15 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.pm.onlinetest.domain.EmailScheduler;
 import com.pm.onlinetest.repository.EmailSchedulerRepository;
 import com.pm.onlinetest.service.EmailSchedulerService;
+
+/*
+ * Method that 
+ * 
+ */
 
 @Service
 @Transactional
@@ -34,9 +36,25 @@ public class EmailSchedulerServiceImpl implements EmailSchedulerService{
     
 	/* Tasks scheduler method
 	 * 1.Seconds; 2.Minutes; 3.Hours; 4.Day-of-Month; 5.Month; 6.Day-of-Week; 7.Year (optional field)
-	 * @Scheduled(cron = "* * * * * *")
+	 * set the timezone if needed zone="America/Chicago"
+	 * @Scheduled(cron = "* /10 * * * * *", zone="America/Chicago")
+	 * 
+	* +------------------ second (0 - 59)
+	|  +----------------- minute (0 - 59)
+	|  |  +-------------- hour (0 - 23)
+	|  |  |  +----------- day of month (1 - 31)
+	|  |  |  |  +-------- month (1 - 12)
+	|  |  |  |  |  +----- day of week (0 - 6) (Sunday=0 or 7)
+	|  |  |  |  |  |  +-- year [optional]
+	|  |  |  |  |  |  |
+	*  *  *  *  *  *  * 
+	 * https://www.freeformatter.com/cron-expression-generator-quartz.html
+	 * 0 1 * ? * * At second :00 of minute :01 of every hour
+	 * 10 0 * ? * * At second :10 of minute :00 of every hour
+	 * 0/10 0 * ? * * => Every 10 seconds starting at second 00, at minute :00, of every hour
 	 */
-	//@Scheduled(fixedDelay = 5000)
+	@Scheduled(fixedDelay = 180000)
+    //@Scheduled(cron = "10 0 * ? * *", zone="America/Chicago") // every 1 hour
 	@Override
 	public void generateEmailsToBeSend() {		
 
@@ -44,9 +62,12 @@ public class EmailSchedulerServiceImpl implements EmailSchedulerService{
 		LocalDateTime dateTime = LocalDateTime.now();
 		String curDate = dateTime.format(formatter);
 		LocalDateTime newDateNow = LocalDateTime.parse(curDate, formatter);
-		 
-		System.out.println("***************Current date******* " + newDateNow);
 		
+		DateFormat dateFormat = new SimpleDateFormat("MM/dd/yy HH:mm:ss");
+		Date date2 = new Date();
+		System.out.println("****************Time now************" + dateFormat.format(date2)); //2016/11/16 12:08:43
+		
+		//System.out.println("****************Time now************" + newDateNow.toString());
 		List<EmailScheduler> dateList = new ArrayList<>();
 		dateList = findDate(newDateNow);
 		
@@ -55,10 +76,22 @@ public class EmailSchedulerServiceImpl implements EmailSchedulerService{
 			return;
 		}else{
 			for (EmailScheduler date : dateList ){
-				if (date.getSendEmailDateTime().equals(newDateNow)){
-					//System.out.println("***************  DB date in if loop ********** " + date.getSendEmailDateTime());
-					//System.out.println("***************Current date in if loop ******* " + newDateNow);
-				}
+				String accessCode = date.getAssignmentId().getAccesscode();
+				String email = date.getAssignmentId().getStudentId().getEmail();
+				String studentId = date.getAssignmentId().getStudentId().getStudentId();
+				String accessLink = date.getAccessLink();
+				System.out.println("***************sending email: emailSchedulerID***************" + date.getId());
+				System.out.println("***************sending email: accesscode***************" + accessCode);
+				System.out.println("***************sending email: email***************" + email);
+				System.out.println("***************sending email: studentId***************" + studentId);
+				System.out.println("***************sending email: accessLink***************" + accessLink);
+				System.out.println("***************sending email: date***************" + date);
+				
+				sendEmail(studentId,accessLink, accessCode, email);
+				date.setSend(true);
+				
+				System.out.println("***************isSend after sending emaile***************" + date.isSend());
+				System.out.println("-------------------------------------------------------" + date);
 			}
 		}	
 	}
@@ -73,7 +106,7 @@ public class EmailSchedulerServiceImpl implements EmailSchedulerService{
 		emailSchedulerRepository.save(emailScheduler);	
 	}	
 	
-	/*public @ResponseBody String sendEmail(String userId, String accessLink, String accessCode, String email, String dateTime) {
+	public String sendEmail(String userId, String accessLink, String accessCode, String email) {
 		System.out.println("_____________________email sending form Email Service Impl_____________________________");
 		SimpleMailMessage message = new SimpleMailMessage();
 	    message.setTo(email);
@@ -86,6 +119,6 @@ public class EmailSchedulerServiceImpl implements EmailSchedulerService{
 	    mailSender.send(message);	    
 	    String result ="success";
 	    return result;     
-	}*/
+	}
 	
 }

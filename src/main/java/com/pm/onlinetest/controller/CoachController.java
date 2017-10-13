@@ -146,6 +146,7 @@ public class CoachController {
 		emailScheduler.setAssignmentId(assignment);
 		emailScheduler.setSend(false);
 		emailScheduler.setSendEmailDateTime(dateTimeNew);
+		emailScheduler.setAccessLink(accessLink);
 		emailScheduleService.saveEmailScheduler(emailScheduler);
 		assignment.setAccesscode(accessCode);
 		assignment.setCoachId(coachModel);
@@ -161,7 +162,7 @@ public class CoachController {
 	}
 
 
-	@RequestMapping(value = "/coach/sendEmail", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/coach/sendEmail", method = RequestMethod.GET)
 	public @ResponseBody String sendEmail(@RequestParam("userId") String userId,
 			@RequestParam("accessLink") String accessLink, @RequestParam("accessCode") String accessCode,
 			@RequestParam("email") String email, @RequestParam("dateTime") String dateTime, Locale locale,
@@ -183,7 +184,7 @@ public class CoachController {
 	    
 	    String result ="success";
 	    return result;
-	}
+	}*/
 
 	@RequestMapping(value = "/coach/changeStudentJobSearchStatus", method = RequestMethod.POST)
 	public @ResponseBody String changeStudentJobStatus(@RequestParam("userId") String studentId,

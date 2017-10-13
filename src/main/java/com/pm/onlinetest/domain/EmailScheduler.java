@@ -25,6 +25,8 @@ public class EmailScheduler {
   	@OneToOne(cascade = {CascadeType.ALL})
   	private Assignment assignmentId;
   	
+  	private String accessLink;
+  	
   	private boolean isSend;
 
 	public Integer getId() {
@@ -50,6 +52,14 @@ public class EmailScheduler {
 	public void setAssignmentId(Assignment assignmentId) {
 		this.assignmentId = assignmentId;
 	}
+	
+	public String getAccessLink() {
+		return accessLink;
+	}
+
+	public void setAccessLink(String accessLink) {
+		this.accessLink = accessLink;
+	}
 
 	public boolean isSend() {
 		return isSend;
@@ -57,7 +67,8 @@ public class EmailScheduler {
 
 	public void setSend(boolean isSend) {
 		this.isSend = isSend;
-	} 
+	}
+
 	
 	
 }
