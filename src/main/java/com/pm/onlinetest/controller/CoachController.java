@@ -138,12 +138,16 @@ public class CoachController {
 			emailScheduler = new EmailScheduler();
 			System.out.println("Assignment not exist create new one");
 		}
+		/*Format string from user input to LocalDateTime*/
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yy HH:00");
+		LocalDateTime dateTimeNew = LocalDateTime.parse(dateTime, formatter);
+		System.out.println("-------------------------------Date from user-------" + dateTimeNew);
 		/*saving a new assignment and data into the emailscheduler table that associated with this assignment*/
 		emailScheduler.setAssignmentId(assignment);
 		emailScheduler.setSend(false);
-		emailScheduler.setSendEmailDateTime(dateTime);
+		emailScheduler.setSendEmailDateTime(dateTimeNew);
+		emailScheduler.setAccessLink(accessLink);
 		emailScheduleService.saveEmailScheduler(emailScheduler);
-		//System.out.println("-------------------------------Date from user-------" + dateTime);
 		assignment.setAccesscode(accessCode);
 		assignment.setCoachId(coachModel);
 		assignment.setStudentId(student);
@@ -158,7 +162,7 @@ public class CoachController {
 	}
 
 
-	@RequestMapping(value = "/coach/sendEmail", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/coach/sendEmail", method = RequestMethod.GET)
 	public @ResponseBody String sendEmail(@RequestParam("userId") String userId,
 			@RequestParam("accessLink") String accessLink, @RequestParam("accessCode") String accessCode,
 			@RequestParam("email") String email, @RequestParam("dateTime") String dateTime, Locale locale,
@@ -180,7 +184,7 @@ public class CoachController {
 	    
 	    String result ="success";
 	    return result;
-	}
+	}*/
 
 	@RequestMapping(value = "/coach/changeStudentJobSearchStatus", method = RequestMethod.POST)
 	public @ResponseBody String changeStudentJobStatus(@RequestParam("userId") String studentId,

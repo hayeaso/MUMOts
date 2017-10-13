@@ -48,18 +48,18 @@
 
 				<%-- <li><a href="<c:url value="/coach/grading" />">Grading</a></li> --%>
 			</ul>
+			<!-- NAVBAR ITEMS ON THE RIGHT -->
 			<ul class="nav navbar-nav navbar-right">
-				<li class="dropdown btn btn-default dropdown-toggle"><a href="#"
-			class="dropdown-toggle" data-toggle="dropdown" role="button"
-			aria-haspopup="true" aria-expanded="false"> <span
-				class="glyphicon glyphicon-cog" aria-hidden="true"></span></a>
-			<ul class="dropdown-menu">
-				<li><a href="editProfile"><i class="fa fa-edit"></i>
-						Edit Profile </a></li>
-				<li><a href="<c:url value="/logout" />">Logout</a></li>
-			</ul>
-		</li>
-
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown" role="button" aria-haspopup="true"
+					aria-expanded="false"> <span class="glyphicon glyphicon-cog"
+						aria-hidden="true"></span> <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li><a href="editProfile"><i class="fa fa-edit"></i> Edit
+								Profile </a></li>
+						<li role="separator" class="divider"></li>
+						<li><a href="<c:url value="/logout" />">Logout</a></li>
+					</ul></li>
 			</ul>
 		</div>
 	</div>

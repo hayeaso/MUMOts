@@ -97,11 +97,23 @@
 		<put-attribute name="content" value="/WEB-INF/views/admin/editUser.jsp" />
 	</definition>
 
-	<definition name="editProfile" extends="base-definition">
-		<put-attribute name="menu" value="/WEB-INF/tiles/coach-menu.jsp"></put-attribute>
-		<put-attribute name="content"
-			value="/WEB-INF/views/editProfile.jsp" />
+	<definition name="editProfileFromAdmin" extends="base-definition">
+		<put-attribute name="menu" value="/WEB-INF/tiles/admin-menu.jsp"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/views/editProfile.jsp" />
 	</definition>
+
+	<definition name="editProfileFromCoach" extends="base-definition">
+		<put-attribute name="menu" value="/WEB-INF/tiles/coach-menu.jsp"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/views/editProfile.jsp" />
+	</definition>
+
+
+	<definition name="editProfileFromDba" extends="base-definition">
+		<put-attribute name="menu" value="/WEB-INF/tiles/dba-menu.jsp"></put-attribute>
+		<put-attribute name="content" value="/WEB-INF/views/editProfile.jsp" />
+	</definition>
+
+
 
 	<definition name="users" extends="base-definition">
 		<put-attribute name="menu" value="/WEB-INF/tiles/admin-menu.jsp"></put-attribute>

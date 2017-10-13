@@ -4,11 +4,11 @@
 <c:set var="user_role" value="${sessionScope.role}"/>
 <div class="content">
 	<div class="jumbotron">
-		<c:if test="${not empty success}">
+		<!-- <c:if test="${not empty success}">
 		<div class="alert alert-success" >
 			<strong>Success!</strong> Successfully added new Student!
 		</div>
-		</c:if>
+		</c:if>-->
 		<c:if test="${not empty error}">
 		<div class="alert alert-warning" >
 			<strong>Warning!</strong> Student ID is duplicated!
@@ -88,13 +88,40 @@
 	</div>
 </div>
 
+<!-- SHOW MODAL -->
+
+<c:if test="${not empty success}">
+
+	<!-- Modal -->
+	<div id="myModal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">New User</h4>
+				</div>
+				<div class="modal-body">
+					<p>New user added successfully</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal" OnClick="closeModal()">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- END OF MODAL -->
+</c:if>
+
 <script>
 	$(function() {
-		$('#datepick').datepicker(
-				{
+		$('#datepick').datepicker({
 					changeMonth : true,
 					changeYear : true,
 					showButtonPanel : true,
+					//autoclose: true,
 					showAnim : 'fadeIn',
 					dateFormat : 'MM yy',
 					monthNamesShort : [ "January", "February", "March",
@@ -117,4 +144,13 @@
 							new Date()).datepicker('hide');
 				});
 	});
+	
+	$(window).on('load', function() {
+		$('#myModal').modal('show');
+	});
+	
+	 function closeModal(){
+		window.location.href = "../../../onlinetest/coach/students";	
+        self.close();
+     }
 </script>

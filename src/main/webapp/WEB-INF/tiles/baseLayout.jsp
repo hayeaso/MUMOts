@@ -78,8 +78,7 @@
     					<c:when test="${sessionScope.role.equals('admin')}">
 						<a href="<c:url value ="/admin/users" />"> <span
 								class="username username-hide-mobile">Welcome
-									 ${sessionScope.role}!
-									</span>
+											${sessionScope.role}! </span>
 						</a>
 						</c:when>
 						<c:when test="${sessionScope.role.equals('coach')}">
@@ -331,6 +330,7 @@
 				$(".questionNumber").empty();
 								
 				if(parseInt(arg2) == 1){
+				    console.log("I am here");
 					qNewNum = parseInt(qNum)+1;
 					var num = qNewNum+1;
 					$(".questionNumber").append("Questions "+num+"/"+testCount);
