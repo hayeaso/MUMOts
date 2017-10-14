@@ -4,7 +4,7 @@
 
 <%
 	response.setHeader("Cache-Control","no-cache,no-store,must-revalidate");
-	response.setHeader(refererUrl, "no-cache");
+	//response.setHeader(refererUrl, "no-cache");
 	response.setHeader("Cache-Control", "no-cache");
 	response.setDateHeader("Expires", 0);
 %>
