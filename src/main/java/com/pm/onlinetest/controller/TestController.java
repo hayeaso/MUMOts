@@ -167,11 +167,11 @@ public class TestController {
 		List<Category> categories = new ArrayList<>();
 		Set<Category> mycategories = new HashSet<>();
 		for(Category cat : categoryService.findAllEnabled()){
+//			System.out.println("++++"+cat.getName().toString());// Java JS .Net
 			for(Subcategory subCat : cat.getSubcategories()){
 				if(subCat.isEnabled() && questionService.findBySubcategory(subCat).size() >= 1){
 					if (!categories.contains(cat)){
 						categories.add(cat);
-
 					}
 				}
 			}
@@ -179,7 +179,6 @@ public class TestController {
 		dto.setCategories(categories);
 		//dto.setCategories(categoryService.findAllEnabled());
 		
-
 		model.addAttribute("categoryDto", dto);
 		return "categoryselect";
 	}
@@ -191,7 +190,7 @@ public class TestController {
 		//System.out.println("I am here");
 		System.out.println((request.getSession().getAttribute("assignmentId")));
 		//Integer assignmentId = Integer.parseInt(request.getSession().getAttribute("assignmentId").toString());
-		Integer assignmentId = 1;
+		int assignmentId = 1;
 
 
 		Assignment assignment = assignmentService.findById(assignmentId);
@@ -211,7 +210,7 @@ public class TestController {
 
 				List<Question> subcategoryQuestions = questionService.findBySubcategory(subcategory);
 				//for (int i = 0; i < totalQuestions / subcategories.size(); i++) {
-				for (int i = 0; i < 2; i++) {
+				for (int i = 0; i < 1; i++) {
 
 					int index = 0;
 					if (subcategoryQuestions.size() > 0) {
@@ -219,7 +218,9 @@ public class TestController {
 					}
 
 					Test test = new Test();
-					test.setQuestion(subcategoryQuestions.remove(index));
+				
+					System.out.println("-----------TESTING -------");
+					test.setQuestion(subcategoryQuestions.remove(i));
 					test.setAssignment(assignment);
 					testService.save(test);
 				}

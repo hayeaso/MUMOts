@@ -246,12 +246,14 @@ public class AdminController {
 		try {
 			categoryService.save(category);
 			redirectAttr.addFlashAttribute("success", "Successfully added new category!");
+			redirectAttr.addFlashAttribute("titleMessage", "CATEGORY ADDED!");
+			redirectAttr.addFlashAttribute("bodyMessage", "Successfully added new category "+ category.getName() );
 		} catch (DuplicateCategoryNameException ex) {
 			redirectAttr.addFlashAttribute("alertErrorMsg", "[" + category.getName() + "]: " + ex.getMessage());
 			redirectAttr.addFlashAttribute("category", category);
 		}
 
-		return "redirect:/admin/createCategory";
+		return "redirect:/admin/categories";
 	}
 
 	@RequestMapping(value = "/admin/subCategories", method = RequestMethod.GET)
@@ -284,7 +286,9 @@ public class AdminController {
 		subcategory.setCategory(categoryService.findOne(subcategory.getCategoryId()));
 		subCategoryService.save(subcategory);
 		redirectAttr.addFlashAttribute("success", "Successfully added new Subcategory!");
-		return "redirect:/admin/createSubCategory";
+		redirectAttr.addFlashAttribute("titleMessage", "SUB CATEGORY ADDED!");
+		redirectAttr.addFlashAttribute("bodyMessage", "Successfully added new Subcategory "+ subcategory.getName());
+		return "redirect:/admin/subCategories";
 	}
 
 	@RequestMapping(value = { "/admin/deleteSubCategory" }, method = RequestMethod.POST)
