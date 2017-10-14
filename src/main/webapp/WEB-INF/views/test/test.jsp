@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
 <%@ include file="/WEB-INF/views/include.jsp"%>
 <body onload="examTimer()">
+ <!-- onunload="javascript:history.go(1)" -->
 <div class="content" >
 	<div class="portlet light">
 		<div id="showtime" style="position:absolute;left:800px;top:20px"></div>
@@ -62,6 +64,12 @@
 <input type="hidden" name="second"/>
 </body>
 <script>
+$(document).ready(function(){
+	window.history.pushState(null, "", window.location.href);        
+    window.onpopstate = function() {
+        window.history.pushState(null, "", window.location.href);
+    };
+});
 
 var tim;       
 var min = '${sessionScope.min}';
