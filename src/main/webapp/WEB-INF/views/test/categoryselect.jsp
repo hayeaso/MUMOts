@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ include file="/WEB-INF/views/include.jsp"%>
+
+<%
+	response.setHeader("Cache-Control","no-cache,no-store,must-revalidate");
+	//response.setHeader(refererUrl, "no-cache");
+	response.setHeader("Cache-Control", "no-cache");
+	response.setDateHeader("Expires", 0);
+%>
 <div class="content">
 	<div class="portlet light">
 	<h2 class="margin-bottom-20"> Please select 3 to 4 sub categories </h2>

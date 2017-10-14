@@ -62,8 +62,4 @@ public class Test {
 		this.question = question;
 	}
 
-	
-
-	
-	
 }

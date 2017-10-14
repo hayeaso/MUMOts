@@ -16,4 +16,7 @@ public interface UserService {
 	public User findByUsernameExceptThis(String username, Integer userId);
 	public User findByUserId(Integer userId);
 	public List<User> findByAuthority(String authority);
+	public boolean emailExists(String email);
+	public int findByUseremail(String email);
+//	public int updatepassword(Integer userId);
  }

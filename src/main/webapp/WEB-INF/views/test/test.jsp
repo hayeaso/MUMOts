@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	
 <%@ include file="/WEB-INF/views/include.jsp"%>
 <body onload="examTimer()">
+ <!-- onunload="javascript:history.go(1)" -->
 <div class="content" >
 	<div class="portlet light">
 		<div id="showtime" style="position:absolute;left:800px;top:20px"></div>
@@ -10,6 +12,7 @@
 		<%-- <h3 class="">Student Id:
 			${assignment.studentId.userId}</h3> --%>
 		<h3 class="questionNumber">Questions 1/${totalTestCount}</h3>
+
 		<input type="hidden" id="testCount" value="${totalTestCount}">
 		<hr>
 		<div class="portlet-body form">
@@ -29,7 +32,7 @@
 						<br /> <input class="btn btn-lg btn-success btn-mini btnPrev"
 							type="button" id="0" style="display: none;" value="Previous">
 						<input class="btn btn-lg btn-success btn-mini btnNext"
-							type="button" id="0" value="Next">
+							type="button" id="1" value="Next">
 						<a href="#myModal3" role="button" style="display: none;" class="btn btn-lg btn-success btnTestSubmit" data-toggle="modal">
 							Submit for grading </a>
 				</div>
@@ -61,6 +64,12 @@
 <input type="hidden" name="second"/>
 </body>
 <script>
+$(document).ready(function(){
+	window.history.pushState(null, "", window.location.href);        
+    window.onpopstate = function() {
+        window.history.pushState(null, "", window.location.href);
+    };
+});
 
 var tim;       
 var min = '${sessionScope.min}';
@@ -81,6 +90,7 @@ function examTimer() {
 		     /* document.questionForm.minute.value=0;
 		     document.questionForm.second.value=0; */
 		     var qNum = parseInt($(".btnPrev").attr("id"));
+		     console.log(qNum);
 				$(".btnPrev").hide();
 				$(".btnNext").hide();
 				$(".btnTestSubmit").hide();

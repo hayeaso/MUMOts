@@ -90,4 +90,26 @@ public class UserServiceImpl implements UserService {
 		return userRepository.findByUsernameExceptThis(username, userId);
 	}
 
+	@Override
+	public boolean emailExists(String email) {
+		// TODO Auto-generated method stub
+		if(userRepository.isEmailExists(email)!=null) {
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public int findByUseremail(String email) {
+		// TODO Auto-generated method stub
+		return userRepository.findByUseremailid(email);
+		
+		}
+		
+//	@Override
+//	public int updatepassword(Integer userId) {
+//		// TODO Auto-generated method stub
+//		return userRepository.passwordUpdate(userId);
+//		
+//		}
 }
