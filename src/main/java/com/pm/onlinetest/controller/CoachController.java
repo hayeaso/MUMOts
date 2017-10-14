@@ -49,10 +49,10 @@ public class CoachController {
 	StudentService studentService;
 	
 	@Autowired
-	EmailSchedulerService emailScheduleService; 
+	EmailSchedulerService emailScheduleService; //added by diana yamaletdinova
 
-	@Autowired
-	private MailSender mailSender;
+	/*@Autowired
+	private MailSender mailSender;*/
 
 	//
 	// private static DateTimeFormatter DATE_FORMAT =
@@ -86,19 +86,27 @@ public class CoachController {
 		Integer studentId = Integer.parseInt(userId);
 		Student student = coachService.findStudentById(studentId);
 		Assignment assignment = assignmentService.findByStudentIdByFinish(student);
+		EmailScheduler emailScheduler = emailScheduleService.findByAssignmentId(assignment);//added by Diana Yamaletdinova
 		if(assignment !=null)
 		System.out.println("assignment of finish false is: "+assignment.isFinished());
-		
-		model.addAttribute("student",student);
-		
+		//added by Diana Yamaletdinova//remove later
+		if (emailScheduler != null){
+			System.out.println("emailScheduler already exists for this assignment");			
+		}			
+		model.addAttribute("student",student);		
 		if(assignment !=null && assignment.getAccesscode()!=null){
+			System.out.println("emailScheduler date " + emailScheduler.getSendEmailDateTime());	
 			//System.out.println("assignment details accessCode: "+ assignment.getAccesscode());			
-			model.addAttribute("assignment",assignment);			
-			System.out.println("assignment is not null");
+			model.addAttribute("assignment",assignment);	
+			model.addAttribute("emailScheduler", emailScheduler);//added by Diana Yamaletdinova
+			System.out.println("assignment and emailScheduler are not null");
+			//return "coach/coach";
 		}
 		else{
 			assignment=null;
+			emailScheduler = null;
 			model.addAttribute("assignment",assignment);
+			model.addAttribute("emailScheduler", emailScheduler);//added by Diana Yamaletdinova
 			//System.out.println("making assignment null");
 		}		
 		//System.out.println("assignment details accessCode:"+ assignment);
@@ -132,13 +140,15 @@ public class CoachController {
 		
 		assignment = assignmentService.findByAccesscode(accessCode);
 		if(assignment !=null ) {
-			System.out.println("Assignment Already exist");			
+			System.out.println("Assignment Already exist");				
+			return "exist"; //added by Diana Yamaletdinova
 		}else {
 			assignment = new Assignment();
 			emailScheduler = new EmailScheduler();
 			System.out.println("Assignment not exist create new one");
 		}
-		/*Format string from user input to LocalDateTime*/
+		/* Added by Diana Yamaletdinova
+		 * Format string from user input to LocalDateTime*/
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yy HH:00");
 		LocalDateTime dateTimeNew = LocalDateTime.parse(dateTime, formatter);
 		System.out.println("-------------------------------Date from user-------" + dateTimeNew);
@@ -148,6 +158,8 @@ public class CoachController {
 		emailScheduler.setSendEmailDateTime(dateTimeNew);
 		emailScheduler.setAccessLink(accessLink);
 		emailScheduleService.saveEmailScheduler(emailScheduler);
+		/* End added by Diana Yamaletdinova*/
+		
 		assignment.setAccesscode(accessCode);
 		assignment.setCoachId(coachModel);
 		assignment.setStudentId(student);
@@ -161,27 +173,22 @@ public class CoachController {
 		return "success";
 	}
 
+	//this method is commented out because the email scheduler is implemented in a service class
+	//now when the user selects a day, email will be sent on this specific date. 
 
 	/*@RequestMapping(value = "/coach/sendEmail", method = RequestMethod.GET)
 	public @ResponseBody String sendEmail(@RequestParam("userId") String userId,
 			@RequestParam("accessLink") String accessLink, @RequestParam("accessCode") String accessCode,
 			@RequestParam("email") String email, @RequestParam("dateTime") String dateTime, Locale locale,
 			Model model) {
-		System.out.println("__________________________________________________");
-		System.out.println("email sending");
-		//System.out.println("datetime in send email " + dateTime);
 		SimpleMailMessage message = new SimpleMailMessage();
 		message.setTo(email);
-	    //System.out.println("EMAIL: ___" + email);
 	    message.setReplyTo("false");
-	 
 	    message.setFrom("mumtestlink@gmail.com");
 	    message.setSubject("Test Link");
 	    message.setText("The test you can take at this particular link. To access the test you need to enter the access code provided below. "
-	    		+ " Please find the link and the access code below: \n"+ "Access Link: "+"https://ots.cs.mum.edu/onlinetest/test" +"\n"+"Access Code: "+ accessCode +"\nAll the best!");
-    	
-	    mailSender.send(message);
-	    
+	    		+ " Please find the link and the access code below: \n"+ "Access Link: "+"https://ots.cs.mum.edu/onlinetest/test" +"\n"+"Access Code: "+ accessCode +"\nAll the best!");  	
+	    mailSender.send(message);	    
 	    String result ="success";
 	    return result;
 	}*/

@@ -16,7 +16,7 @@
 				<p>Are you Sure, You want to delete ??</p>
 			</div>
 			<div class="modal-footer">
-				<button value="" type="button" class="btnDelUser btn btn-primary"
+				<button value="" type="button" class="btn btn-primary"
 					id="userId">Yes</button>
 				<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 			</div>
@@ -47,12 +47,24 @@
 <script>
 	$(document).on("click", ".deleteButton", function() {
 		var myId = $(this).data('value'); // from data-value
-		console.log("delete button is clicked--- data balue is" + myId);
+		console.log("delete button is clicked--- data balue is " + myId);
 		$(".modal-footer #userId").val(myId);
-		// As pointed out in comments, 
-		// it is superfluous to have to manually call the modal.
-		// $('#addBookDialog').modal('show');
+		$(".modal-footer #userId").addClass("btnDelUser");
 	});
+	
+	$(document).on("click", ".deleteButtonSubCat", function() {
+		var myId = $(this).data('value'); // from data-value
+		console.log("delete button is clicked--- data balue is " + myId);
+		$(".modal-footer #userId").val(myId);
+		$(".modal-footer #userId").addClass("btnDelSubCat");
+	});
+	$(document).on("click", ".deleteButtonCat", function() {
+		var myId = $(this).data('value'); // from data-value
+		console.log("delete button is clicked--- data balue is " + myId);
+		$(".modal-footer #userId").val(myId);
+		$(".modal-footer #userId").addClass("btnDelCat");
+	});
+	
 	$("#userId").click(function() {
 		$('#delModal').modal('hide');
 		$('#deleteSuccess').modal('show');

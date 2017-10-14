@@ -55,14 +55,14 @@
 							</div>
 						</div>
 					</div>
-
+					
 					<!-- Select day / time -->
 					<div class="form-group">
 						<label class="col-md-3 control-label">Date & Time</label>
 						<div class="col-md-4">
 							<div class="input-icon">
 								<input type="text" class="form-control" id="dateTime"
-									name="dateTime" required />
+									name="dateTime" value="${emailScheduler.sendEmailDateTime}" required />
 							</div>
 						</div>
 					</div>
@@ -75,7 +75,7 @@
 									onclick="generateAccessCode()" name="generate-test-btn"
 									class="btn btn-circle btn-primary">Generate Test</button>
 								<button type="button" id="send-test-btn"
-									onclick="sendEmail(${student.userId})" name="send-test-btn"
+									onclick="assignmentDone(${student.userId})" name="send-test-btn"
 									class="btn btn-circle btn-success">Send Email & Save</button>
 								<button type="button" id="student-assignment-cancelbtn"
 									onclick="assignmentCancel()" class="btn btn-circle btn-default">Cancel</button>
@@ -95,12 +95,12 @@
 	jQuery('#dateTime').datetimepicker({
 		timepicker: true,
 		closeOnDateSelect: true,
-		startDate: new Date(),
+		//startDate: new Date(),
 		defaultDate: new Date(),
 		scrollMonth : false,
 		todayButton: true,
 		defaultSelect: true,
-		minDate: new Date(),
+		//minDate: new Date(),
 		format: 'm/d/y H:00'
 		//format: 'm/d/Y h:m A' /* M d y will give a different format that will be displayed in the form*/
 	});

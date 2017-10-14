@@ -1,7 +1,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page session="false"%>
-<%@ include file="/WEB-INF/views/deleteConfirm2.jsp"%>
+<%@ include file="/WEB-INF/views/deleteConfirm.jsp"%>
 
+<c:if test="${not empty success}">
+	<%@ include file="/WEB-INF/views/popUp.jsp"%>
+</c:if>
 <div class="panel panel-success">
 	<div class="panel-heading">
 		<h3 class="panel-title">
@@ -36,8 +39,8 @@
 							<td>${subCategory.name}</td>
 							<td>${subCategory.category.name}</td>
 							<td>
-								<button data-value="${subCategory.id}" type="button" data-toggle="modal" data-target="#delModal2"
-									class="deleteButton2 btn btn-xs btn-danger pull-right">Delete</button>
+								<button data-value="${subCategory.id}" type="button" data-toggle="modal" data-target="#delModal"
+									class="deleteButtonSubCat btn btn-xs btn-danger pull-right">Delete</button>
 							</td>
 						</tr>
 					</c:forEach>
