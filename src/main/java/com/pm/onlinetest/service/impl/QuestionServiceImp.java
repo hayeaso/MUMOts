@@ -39,6 +39,7 @@ public class QuestionServiceImp implements QuestionService {
 
 	@Override
 	public List<Question> findBySubcategory(Subcategory subcategory) {
+		
 		List<Question> questions = questionRepository.findBySubcategory(subcategory);
 		return questions;
 	}
