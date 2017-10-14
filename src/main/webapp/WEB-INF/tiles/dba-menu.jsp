@@ -19,23 +19,25 @@
 					class="icon-bar"></span>
 			</button>
 		</div>
-
+		
+		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse"
-			id="bs-example-navbar-collapse-2">
+			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 
 				<li><a href="<c:url value="/dba/addquestion" />"
-					${('/onlinetest/dba/addquestion' == currentPage) ? ' style="color: #fdfdfd; background: #28bb9c;"' : ''}>Add
+					${('/onlinetest/dba/addquestion' == currentPage) ? ' class="activeNavItem"' : ''}>Add
 						Question </a></li>
 
 				<li><a href="<c:url value="/dba/viewquestions" />"
-					${('/onlinetest/dba/viewquestions' == currentPage) ? ' style="color: #fdfdfd; background: #28bb9c;"' : ''}>Question
+					${('/onlinetest/dba/viewquestions' == currentPage) ? ' class="activeNavItem"' : ''}>Question
 						List </a></li>
 				<li><a href="<c:url value="/dba/importData" />"
-					${('/onlinetest/dba/importData' == currentPage) ? ' style="color: #fdfdfd; background: #28bb9c;"' : ''}>Import
+					${('/onlinetest/dba/importData' == currentPage) ? ' class="activeNavItem"' : ''}>Import
 						Data </a></li>
+
 				<li><a href="<c:url value="/help" />"
-					${('/onlinetest/help' == currentPage) ? ' style="color: #fdfdfd; background: #28bb9c;"' : ''}>Help
+					${('/onlinetest/help' == currentPage) ? ' class="activeNavItem"' : ''}>Help
 				</a></li>
 			</ul>
 

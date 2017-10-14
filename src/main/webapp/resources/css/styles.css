@@ -3,32 +3,37 @@
 /*  [class*="col-"] {
     width: 100%;
 } */
-@media only screen and (min-width: 768px) {
-	/*    For desktop:  */
-	.container {
-		margin-top: 5px; ! important;
-		margin-bottom: 5px;
-		!
-		important;
-	}
-	.portlet.box.blue {
-		border: 1 px solid #28bb9c;
-	}
-	.portlet-title {
-		background-color: #28bb9c;
-		!
-		important;
-	}
-	.alignleft {
-		float: left;
-	}
-	.alignright {
-		float: right;
-	}
+/* Custom, iPhone Retina */ 
 
-	/*Status dropdown*/
-	.lblStatus {
-		margin-right: 12px;
-		width: 94px;
-	}
+.activeNavItem {
+	color: #fdfdfd;
+	background: #28bb9c; ! important;
+}
+
+.container {
+	margin-top: 5px; ! important;
+	margin-bottom: 5px; ! important;
+
+}
+
+.portlet.box.blue {
+	border: 1 px solid #28bb9c;
+}
+
+.portlet-title {
+	background-color: #28bb9c; ! important;
+}
+
+.alignleft {
+	float: left;
+}
+
+.alignright {
+	float: right;
+}
+
+/*Status dropdown*/
+.lblStatus {
+	margin-right: 12px;
+	width: 94px;
 }
