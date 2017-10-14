@@ -2,7 +2,7 @@ function generateAccessCode(){
 	
 	if( $('#accessCode').val() ) {
 		$("#errorMessage").empty();
-		var msg ="<strong>Warning! </strong>Student has already been assigned the test "		
+		var msg ="<strong>Warning! </strong>Student has already been assigned the test. Please try in the next 24 hours. "		
 		$("#errorMessage").append(msg);
 		$("#errorMessage").removeClass("hidden");
 		$("#errorMessage").show();
@@ -12,8 +12,7 @@ function generateAccessCode(){
 		url:'../../../onlinetest/assignment/generateTest',
 		type:"GET",
 		data: $("#dateTime").serialize(),
-		success:function(data){
-			
+		success:function(data){			
 			$("#accessCode").val(data.accessCode);
 			//$("#accessLink").val(data.accessLink);			
 		}
@@ -25,21 +24,23 @@ function assignmentDone(userId){
 
 	if( !$('#accessCode').val() ) {
 		$("#errorMessage").empty();
-		var msg ="<strong>Warning!</strong> Access Code is empty, you can not save "		
+		var msg ="<strong>Warning!</strong> Access Code is empty, you can not save. Please Generate the code first."		
 		$("#errorMessage").append(msg);
 		$("#errorMessage").removeClass("hidden");
 		$("#errorMessage").show();
 		return false;
-	}else if(!$("#sentEmail").val()){
+	}
+	
+	/*else if(!$("#sentEmail").val()){
 		$("#errorMessage").empty();
 		var msg ="<strong>Warning!</strong> You need to send test to student. Please send email "		
 		$("#errorMessage").append(msg);
 		$("#errorMessage").removeClass("hidden");
 		$("#errorMessage").show();
 		return false;
-	}else if( !$('#dateTime').val() ) {
+	}*/else if( !$('#dateTime').val() ) {
 		$("#errorMessage").empty();
-		var msg ="<strong>Warning!</strong> Please select date and to schedule sending an email."		
+		var msg ="<strong>Warning!</strong> Please select date to schedule sending an email."		
 		$("#errorMessage").append(msg);
 		$("#errorMessage").removeClass("hidden");
 		$("#errorMessage").show();
@@ -59,7 +60,15 @@ function assignmentDone(userId){
 		   
 		   if(data === "success"){
 			   window.location.href = "../../../onlinetest/coach/home";			   
-		   }		   
+		   }
+		   else{
+			   $("#errorMessage").empty();
+				var msg ="<strong>Warning!</strong> Sending email was already scheduled when the test was created" 		
+				$("#errorMessage").append(msg);
+				$("#errorMessage").removeClass("hidden");
+				$("#errorMessage").show();
+				return false;
+		   }
 	   }
 	});
 }
@@ -69,11 +78,12 @@ function assignmentCancel(){
 	window.location.href = "../../../onlinetest/coach/home";
 }
 
+/*
 function sendEmail(userId){
 	var msg;
 	if( !$('#accessCode').val() ) {
 		$("#errorMessage").empty();
-		msg ="<strong>Warning!</strong> Access Code is empty, you can not send email please generate code "
+		msg ="<strong>Warning!</strong> Access Code is empty, you can not send email, please generate code first"
 		$("#successMessage").hide();
 		$("#errorMessage").append(msg);
 //		$("#errorMessage").removeClass("hidden");
@@ -114,7 +124,7 @@ function sendEmail(userId){
 		}
 	});
 
-}
+}*/
 
 function saveJobSearchStatusChange(userId){
 
@@ -123,11 +133,9 @@ $.ajax({
    url: '../../../onlinetest/coach/changeStudentJobSearchStatus',
    data:{
 	   userId:userId,
-	   jobSearchStatus :$('input[name=jobSearchStatus]:checked').val(),
-  
+	   jobSearchStatus :$('input[name=jobSearchStatus]:checked').val(),  
    },
-   success: function(data){        
-	   
+   success: function(data){        	   
 	   if(data === "success"){
 		   window.location.href = "../../../onlinetest/coach/home";		   
 	   }	   

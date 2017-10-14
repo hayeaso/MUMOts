@@ -11,7 +11,11 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 import org.hibernate.annotations.Type;
-
+/**
+ * @author Diana Yamaletdinova
+ *
+ * Oct 9, 2017
+ */
 @Entity
 public class EmailScheduler {
 
