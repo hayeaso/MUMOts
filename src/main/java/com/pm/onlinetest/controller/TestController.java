@@ -3,6 +3,7 @@ package com.pm.onlinetest.controller;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -165,17 +166,18 @@ public class TestController {
 
 		CategorySelectDto dto = new CategorySelectDto();
 		List<Category> categories = new ArrayList<>();
-		Set<Category> mycategories = new HashSet<>();
+		List<Category> tempCategories = new ArrayList<>();
 		for(Category cat : categoryService.findAllEnabled()){
 			for(Subcategory subCat : cat.getSubcategories()){
-				if(subCat.isEnabled() && questionService.findBySubcategory(subCat).size() >= 1){
+				if(subCat.isEnabled() && questionService.findBySubcategory(subCat).size() >= 0){
 					if (!categories.contains(cat)){
 						categories.add(cat);
-
 					}
 				}
 			}
 		}
+
+		System.out.println("Size of the categories " + categories.size());
 		dto.setCategories(categories);
 		//dto.setCategories(categoryService.findAllEnabled());
 		

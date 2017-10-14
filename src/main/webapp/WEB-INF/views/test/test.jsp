@@ -30,7 +30,7 @@
 						<br /> <input class="btn btn-lg btn-success btn-mini btnPrev"
 							type="button" id="0" style="display: none;" value="Previous">
 						<input class="btn btn-lg btn-success btn-mini btnNext"
-							type="button" id="0" value="Next">
+							type="button" id="1" value="Next">
 						<a href="#myModal3" role="button" style="display: none;" class="btn btn-lg btn-success btnTestSubmit" data-toggle="modal">
 							Submit for grading </a>
 				</div>
@@ -82,6 +82,7 @@ function examTimer() {
 		     /* document.questionForm.minute.value=0;
 		     document.questionForm.second.value=0; */
 		     var qNum = parseInt($(".btnPrev").attr("id"));
+		     console.log(qNum);
 				$(".btnPrev").hide();
 				$(".btnNext").hide();
 				$(".btnTestSubmit").hide();
