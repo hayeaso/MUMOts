@@ -23,6 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.pm.onlinetest.domain.Student;
 import com.pm.onlinetest.domain.User;
+import com.pm.onlinetest.service.AssignmentService;
 import com.pm.onlinetest.service.UserService;
 
 @Controller
@@ -33,6 +34,9 @@ public class LoginController {
 	
 	 @Autowired
 	    private MailSender mailSender;
+	 
+	 @Autowired
+		AssignmentService assignmentService;
 
 	
 	@RequestMapping(value = "/exam", method = RequestMethod.GET)
@@ -54,51 +58,71 @@ public class LoginController {
 
 	}
 	
-//	ADD Anita
+//	ADD by Anita
 	@RequestMapping(value = "/postResetPassword", method = RequestMethod.POST)
-	public String forgetPass(@ModelAttribute("loginUser") User user, Model model) {
+	public String forgetPass(@ModelAttribute("loginUser") User user, Model model, RedirectAttributes redirectAttributes) {
 	
 		String email =user.getEmail();
 
 		if(userService.emailExists(user.getEmail())){
-			int id= userService.findByUseremail(email);
-			System.out.println(id);
+			
+			String accessCode = assignmentService.generateAccesscode();
+			userService.setAccessCodeInPasswordField(email,accessCode);
 			
 			SimpleMailMessage message = new SimpleMailMessage();
 			  message.setTo(email);
-//			  System.out.println("EMAIL: " + email);
+
 			   message.setReplyTo("false");
 			   message.setFrom("mumtestlink@gmail.com");
 			    message.setSubject("Test Link");
-			    message.setText("You have requested to reset your password for your account. To get started, please click this link." + "Access Link: "+"http://localhost:8080/onlinetest/resetPassword/"+id);
+			    message.setText("You have requested to reset your password for your account. To get started, please click this link." + "Access Link: "+"http://localhost:8080/onlinetest/resetPassword/"+accessCode);
 			   
 			    mailSender.send(message);
 			    String result ="success";
 			    
-//			    System.out.println("result");
 			
-		}else {
-			
-		System.out.println("Not Found");
-	}
+		}else { 
+			System.out.println("NOT FOUND");
+			redirectAttributes.addFlashAttribute("notFoundEmail", email);	
+			return "redirect:/login";
+		}
+	
 		return "login";
 	}
 	
-	@RequestMapping(value = "/resetPassword/{id}", method = RequestMethod.GET)
-	public String resetPassword(HttpServletRequest request, HttpServletResponse response, @PathVariable("id") String id) {
+	@RequestMapping(value = "/resetPassword/{accessCode}", method = RequestMethod.GET)
+	public String resetPassword(Locale locale,Model model, HttpServletRequest request, HttpServletResponse response , @PathVariable("accessCode") String accessCode) {
 		
-		System.out.println("ID:"+ id);
+		System.out.println("GET ACCESS IN RESET:"+ accessCode);
+		model.addAttribute("accessCode", accessCode);
 		
 		return "resetPassword";
 	}
 	
-//	@RequestMapping(value = "/resetPassword/{id}", method = RequestMethod.POST)
-//	public int updatePassword(HttpServletRequest request) {
-//		
-//		String id = request.getParameter("userid").toString();
-//		return userService.updatepassword(Integer.parseInt(id));
-//			
-//	}
+	@RequestMapping(value = "/resetPassword", method = RequestMethod.POST)
+	public String updatePassword(Model model, HttpServletRequest request,RedirectAttributes redirectAttr) {
+		
+		String userAccessCode = request.getParameter("userAccessCode").toString();
+		String newPassword = request.getParameter("newpassword");
+		
+		User user = userService.findUserByAccessCode(userAccessCode);
+		
+		if(user != null) {
+		user.setPassword(newPassword);
+		userService.saveProfile(user);
+		
+		redirectAttr.addFlashAttribute("success", "Success");	
+		redirectAttr.addFlashAttribute("titleMessage", "Password Changed");	
+		redirectAttr.addFlashAttribute("bodyMessage", "User "+user.getUsername()+", Password Changed SuccessFully.");
+		
+		return "redirect:/resetPassword/"+userAccessCode+"";
+		}else {
+			
+			System.out.println("HERE GOES CODE FOR THE ACCES CODE VALIDITY OFF.");
+			
+			return "redirect:/login";
+		}
+	}
 	
 
 	@RequestMapping(value = "/logout", method = RequestMethod.GET)

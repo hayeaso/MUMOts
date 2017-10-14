@@ -1,7 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include.jsp"%>
+
+<c:if test="${not empty notFoundEmail}">
+<%@ include file="/WEB-INF/views/popUp.jsp"%>
+</c:if>
+
 <div class="container">
+
 	<div class="row">
 		<div class="col-md-4 col-md-offset-4">
 			<div class="panel panel-default">
@@ -28,7 +34,7 @@
 									name='password' type="password" value="">
 							</div>
 							<div class="form-group login-group-checkbox">
-								<input id="lg_remember" name="lg_remember" type="checkbox">
+								<input name="keepMe" type="checkbox">
 								<label for="lg_remember">Remember Me</label>
 							</div>
 							<input class="btn btn-success btn-mini" type="submit"
@@ -65,9 +71,9 @@
 					</fieldset>
 				</div>
 				<div class="modal-footer">
-				<button type="submit" class="btn btn-primary">Reset</button>
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					
+					<button type="submit" class="btn btn-primary">Reset</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
 				</div>
 			</form>
 		</div>

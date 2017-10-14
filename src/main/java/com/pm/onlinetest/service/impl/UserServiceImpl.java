@@ -42,6 +42,8 @@ public class UserServiceImpl implements UserService {
 
 	
 	public void saveProfile(User user) {
+		
+		System.out.println(user.getPassword());
 
 		PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String encodedPassword = passwordEncoder.encode(user.getPassword());
@@ -106,10 +108,18 @@ public class UserServiceImpl implements UserService {
 		
 		}
 		
-//	@Override
-//	public int updatepassword(Integer userId) {
-//		// TODO Auto-generated method stub
-//		return userRepository.passwordUpdate(userId);
-//		
-//		}
+	@Override
+	public void setAccessCodeInPasswordField(String email, String accessCode) {
+		// TODO Auto-generated method stub
+		userRepository.passwordUpdate(email, accessCode);
+		
+		}
+	
+	@Override
+	public User findUserByAccessCode(String accessCode) {
+		// TODO Auto-generated method stub
+		return userRepository.findUserByAccessCode(accessCode);
+		
+		}
+	
 }
