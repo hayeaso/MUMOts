@@ -28,3 +28,4 @@ hs_err_pid*
 # https://stackoverflow.com/questions/18955149/ignore-classpath-and-project-from-git
 *.classpath
 *.project
+applicationContext.xml
