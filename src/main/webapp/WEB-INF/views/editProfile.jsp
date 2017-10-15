@@ -14,7 +14,7 @@
 			</div>
 		</c:if>
 		<!-- BEGIN REGISTRATION FORM -->
-		<form:form method="POST" class="register-form" action="../editProfile"
+		<form:form method="POST" class="register-form" action="editProfile"
 			modelAttribute="loginUser">
 			<h3>Edit Profile</h3>
 			<p class="hint">Enter user details below:</p>

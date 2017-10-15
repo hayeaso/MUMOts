@@ -30,7 +30,7 @@ public class ProfileController {
 		return "editProfileFromAdmin";
 	}
 
-	@RequestMapping(value = "/admin/editProfileFromAdmin", method = RequestMethod.POST)
+	@RequestMapping(value = "/admin/editProfile", method = RequestMethod.POST)
 	public String editProfileFromAdmin(@Valid @ModelAttribute("loginUser") User user, BindingResult result,
 			RedirectAttributes redirectAttr) {
 		if (result.hasErrors()) {
@@ -44,7 +44,7 @@ public class ProfileController {
 			userService.saveProfile(user);
 			redirectAttr.addFlashAttribute("success", "Success");
 		}
-		 return "editProfileFromAdmin";
+		return "editProfileFromAdmin";
 	}
 	
 	@RequestMapping(value = { "/coach/editProfile" }, method = RequestMethod.GET)
@@ -56,7 +56,7 @@ public class ProfileController {
 		return "editProfileFromCoach";
 	}
 
-	@RequestMapping(value = "/admin/editProfileFromCoach", method = RequestMethod.POST)
+	@RequestMapping(value = "/coach/editProfile", method = RequestMethod.POST)
 	public String editProfileFromCoach(@Valid @ModelAttribute("loginUser") User user, BindingResult result,
 			RedirectAttributes redirectAttr) {
 		if (result.hasErrors()) {
@@ -73,7 +73,7 @@ public class ProfileController {
 		 return "editProfileFromCoach";
 	}
 	
-	@RequestMapping(value = { "/admin/editProfileFromDba" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/dba/editProfile" }, method = RequestMethod.GET)
 	public String editProfileFromDba(@ModelAttribute("loginUser") User user, Model model) {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		String name = auth.getName();
@@ -82,7 +82,7 @@ public class ProfileController {
 		return "editProfileFromDba";
 	}
 
-	@RequestMapping(value = "/admin/editProfileFromDba", method = RequestMethod.POST)
+	@RequestMapping(value = "/dba/editProfile", method = RequestMethod.POST)
 	public String editProfileFromDba(@Valid @ModelAttribute("loginUser") User user, BindingResult result,
 			RedirectAttributes redirectAttr) {
 		if (result.hasErrors()) {
