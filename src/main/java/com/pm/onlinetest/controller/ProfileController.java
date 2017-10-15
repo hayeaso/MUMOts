@@ -30,7 +30,8 @@ public class ProfileController {
 		return "editProfileFromAdmin";
 	}
 
-	@RequestMapping(value = "/admin/editProfile", method = RequestMethod.POST)
+
+	@RequestMapping(value = "/admin/editProfile/submit", method = RequestMethod.POST)
 	public String editProfileFromAdmin(@Valid @ModelAttribute("loginUser") User user, BindingResult result,
 			RedirectAttributes redirectAttr) {
 		if (result.hasErrors()) {
@@ -56,7 +57,7 @@ public class ProfileController {
 		return "editProfileFromCoach";
 	}
 
-	@RequestMapping(value = "/coach/editProfile", method = RequestMethod.POST)
+	@RequestMapping(value = "/coach/editProfile/submit", method = RequestMethod.POST)
 	public String editProfileFromCoach(@Valid @ModelAttribute("loginUser") User user, BindingResult result,
 			RedirectAttributes redirectAttr) {
 		if (result.hasErrors()) {
@@ -82,7 +83,7 @@ public class ProfileController {
 		return "editProfileFromDba";
 	}
 
-	@RequestMapping(value = "/dba/editProfile", method = RequestMethod.POST)
+	@RequestMapping(value = "/dba/editProfile/submit", method = RequestMethod.POST)
 	public String editProfileFromDba(@Valid @ModelAttribute("loginUser") User user, BindingResult result,
 			RedirectAttributes redirectAttr) {
 		if (result.hasErrors()) {
