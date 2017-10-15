@@ -111,10 +111,3 @@ INSERT INTO `Choice` (`id`, `answer`, `description`, `question_id`) VALUES (47, 
 INSERT INTO `Choice` (`id`, `answer`, `description`, `question_id`) VALUES (48, b'0', 'C', 10);
 INSERT INTO `Choice` (`id`, `answer`, `description`, `question_id`) VALUES (49, b'1', 'Y', 10);
 INSERT INTO `Choice` (`id`, `answer`, `description`, `question_id`) VALUES (50, b'0', 'D', 10);
-
-CREATE TABLE persistent_logins (     
-	username varchar(64) not null,
-	series varchar(64) not null,
-	token varchar(64) not null,
-	last_used timestamp not null,
-	PRIMARY KEY (series) );

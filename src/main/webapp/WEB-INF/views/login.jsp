@@ -2,9 +2,6 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include.jsp"%>
 
-<c:if test="${not empty notFoundEmail}">
-<%@ include file="/WEB-INF/views/popUp.jsp"%>
-</c:if>
 
 <div class="container">
 
@@ -15,6 +12,21 @@
 					<h3 class="panel-title">Please sign in</h3>
 				</div>
 				<div class="panel-body">
+				<c:if test="${not empty foundEmail}">
+						<div class="alert alert-warning">
+							<h4> Link Sent to your email id  - ${ FoundEmail }.</h4>
+						</div>
+					</c:if>
+				<c:if test="${not empty changeSuccess}">
+						<div class="alert alert-warning">
+							<h4>Password Successfully Changed.</h4>
+						</div>
+					</c:if>
+					<c:if test="${not empty notFoundEmail}">
+						<div class="alert alert-warning">
+							<h4>Email - ${ notFoundEmail } - is not found in the database.</h4>
+						</div>
+					</c:if>
 					<c:if test="${not empty error}">
 						<div class="alert alert-danger">
 							<spring:message

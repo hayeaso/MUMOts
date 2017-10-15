@@ -79,15 +79,17 @@ public class LoginController {
 			   
 			    mailSender.send(message);
 			    String result ="success";
-			    
+			    redirectAttributes.addFlashAttribute("foundEmail", email);
+			    System.out.println("IT HAS TO BE RE_DIRECTED");
+			    return "redirect:/login";
 			
 		}else { 
-			System.out.println("NOT FOUND");
+			//System.out.println("NOT FOUND");
 			redirectAttributes.addFlashAttribute("notFoundEmail", email);	
 			return "redirect:/login";
 		}
 	
-		return "login";
+
 	}
 	
 	@RequestMapping(value = "/resetPassword/{accessCode}", method = RequestMethod.GET)
@@ -111,11 +113,11 @@ public class LoginController {
 		user.setPassword(newPassword);
 		userService.saveProfile(user);
 		
-		redirectAttr.addFlashAttribute("success", "Success");	
+		redirectAttr.addFlashAttribute("changeSuccess", "ChangeSuccess");	
 		redirectAttr.addFlashAttribute("titleMessage", "Password Changed");	
-		redirectAttr.addFlashAttribute("bodyMessage", "User "+user.getUsername()+", Password Changed SuccessFully.");
+		redirectAttr.addFlashAttribute("bodyMessage", "New Password Updated SuccessFully.");
 		
-		return "redirect:/resetPassword/"+userAccessCode+"";
+		return "redirect:/login";
 		}else {
 			
 			System.out.println("HERE GOES CODE FOR THE ACCES CODE VALIDITY OFF.");
