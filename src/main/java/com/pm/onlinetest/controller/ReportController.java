@@ -27,6 +27,8 @@ import com.pm.onlinetest.service.ChoiceService;
 import com.pm.onlinetest.service.GradeService;
 import com.pm.onlinetest.service.SearchService;
 
+import helpers.AssignmentSelectDto;
+
 @Controller
 public class ReportController {
 
@@ -138,7 +140,7 @@ public class ReportController {
 	}
 
 	@RequestMapping(value = {"/coach/assignments", "/admin/assignments"}, method = RequestMethod.GET)
-	public String assignmentDetail(Model model, HttpServletRequest request) {
+	public String assignmentDetail(AssignmentSelectDto AssignmentSelectDto, Model model, HttpServletRequest request) {
 
 		List<Assignment> assignments = assignmentService.findAll();
 		model.addAttribute("assignments", assignments);
@@ -195,5 +197,11 @@ public class ReportController {
 		return "feedback";
 
 	}
+	
+	@RequestMapping(value = {"/coach/assignments/export", "/admin/assignments/export"}, method = RequestMethod.POST)
+	public void exportAsExcel(AssignmentSelectDto AssignmentSelectDto) {
+		
+	}
+
 
 }
