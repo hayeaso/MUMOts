@@ -459,8 +459,8 @@ public class AdminController {
 	// bind to edit button in users.jsp
 	@RequestMapping(value = "/admin/editUser/{id}", method = RequestMethod.GET)
 	public String editUser(@ModelAttribute("loginUser") User user, Model model, @PathVariable("id") int id) {
-		System.out.println("GET: enter into Edit User	");
-		System.out.println("userid=" + id);
+		//System.out.println("GET: enter into Edit User	");
+		//System.out.println("userid=" + id);
 		model.addAttribute("user", userService.findByUserId(id));// assign user										
 		return "editUser";
 	}

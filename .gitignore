@@ -24,3 +24,8 @@ src/main/webapp/WEB-INF/spring/context/applicationContext.xml
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 .idea/
+
+# see https://stackoverflow.com/questions/18955149/ignore-classpath-and-project-from-git
+*.classpath
+*.project
+applicationContext.xml

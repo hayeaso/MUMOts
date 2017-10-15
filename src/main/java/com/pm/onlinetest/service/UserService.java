@@ -18,5 +18,6 @@ public interface UserService {
 	public List<User> findByAuthority(String authority);
 	public boolean emailExists(String email);
 	public int findByUseremail(String email);
-//	public int updatepassword(Integer userId);
+	public void setAccessCodeInPasswordField(String email, String accessCode);
+	public User findUserByAccessCode(String accessCode);
  }

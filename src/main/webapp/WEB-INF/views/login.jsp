@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include.jsp"%>
+
+
 <div class="container">
+
 	<div class="row">
 		<div class="col-md-4 col-md-offset-4">
 			<div class="panel panel-default">
@@ -9,6 +12,21 @@
 					<h3 class="panel-title">Please sign in</h3>
 				</div>
 				<div class="panel-body">
+				<c:if test="${not empty foundEmail}">
+						<div class="alert alert-warning">
+							<h4> Link Sent to your email id  - ${ FoundEmail }.</h4>
+						</div>
+					</c:if>
+				<c:if test="${not empty changeSuccess}">
+						<div class="alert alert-warning">
+							<h4>Password Successfully Changed.</h4>
+						</div>
+					</c:if>
+					<c:if test="${not empty notFoundEmail}">
+						<div class="alert alert-warning">
+							<h4>Email - ${ notFoundEmail } - is not found in the database.</h4>
+						</div>
+					</c:if>
 					<c:if test="${not empty error}">
 						<div class="alert alert-danger">
 							<spring:message
@@ -28,7 +46,7 @@
 									name='password' type="password" value="">
 							</div>
 							<div class="form-group login-group-checkbox">
-								<input id="lg_remember" name="lg_remember" type="checkbox">
+								<input name="keepMe" type="checkbox">
 								<label for="lg_remember">Remember Me</label>
 							</div>
 							<input class="btn btn-success btn-mini" type="submit"
@@ -65,9 +83,9 @@
 					</fieldset>
 				</div>
 				<div class="modal-footer">
-				<button type="submit" class="btn btn-primary">Reset</button>
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					
+					<button type="submit" class="btn btn-primary">Reset</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
 				</div>
 			</form>
 		</div>

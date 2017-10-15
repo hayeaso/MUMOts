@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.pm.onlinetest.domain.Student;
-import com.pm.onlinetest.domain.User;
 import com.pm.onlinetest.repository.CoachRepository;
 import com.pm.onlinetest.service.CoachService;
 

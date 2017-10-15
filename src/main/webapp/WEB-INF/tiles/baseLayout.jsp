@@ -19,7 +19,6 @@
 <!--<script src="<c:url value="/metronic/assets/admin/pages/scripts/datepicker.js" />" type="text/javascript"></script>-->
 
 	
-
 <link rel="stylesheet" type="text/css" href="<c:url value="/metronic/assets/global/plugins/font-awesome/css/font-awesome.min.css" />" />
 <link href="<c:url value="/metronic/assets/global/plugins/font-awesome/css/font-awesome.min.css" />" rel="stylesheet" type="text/css"/>
 <link href="<c:url value="/metronic/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" />" rel="stylesheet" type="text/css"/>
