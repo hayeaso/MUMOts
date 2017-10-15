@@ -93,11 +93,6 @@ var TableEditable = function () {
 	            	$selectStatus.append(new Option('Active', "Active"));
 	            	$selectStatus.append(new Option('Inactive', "Inactive"));
 	            	
-	            	/*$selectStatus.append(new Option('ALL', ""));
-	            	$selectStatus.append(new Option('Started', "S"));
-	            	$selectStatus.append(new Option('Finished', "F"));
-	            	$selectStatus.append(new Option('Not Started', "A"));*/
-	            	
 	            	$labelStatus.append($selectStatus);
 	            	$labelStatus.append(new Text("status"));
 	            	$labelStatus.addClass("lblStatus");
@@ -143,7 +138,7 @@ var TableEditable = function () {
 		            	   var selectedValue2 = $(this).val();	            	   
 		            	   //("^"+selectedValue+"$", 0, true); //searchValue, column, reg
 		            	   mtable.api().columns('.tblStatusCol2')
-		                    .search( selectedValue ? '^'+selectedValue+'$' : '', true, false )
+		                    .search( selectedValue2 ? '^'+selectedValue2+'$' : '', true, false )
 		                	.draw();
 		            	});
 		            }

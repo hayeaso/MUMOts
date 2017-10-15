@@ -8,6 +8,7 @@ import java.util.Locale;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.core.Authentication;
@@ -54,15 +55,6 @@ public class CoachController {
 	/*@Autowired
 	private MailSender mailSender;*/
 
-	//
-	// private static DateTimeFormatter DATE_FORMAT =
-	// new DateTimeFormatterBuilder().appendPattern("dd/MM/yyyy[
-	// [HH][:mm][:ss][.SSS]]")
-	// .parseDefaulting(ChronoField.HOUR_OF_DAY, 0)
-	// .parseDefaulting(ChronoField.MINUTE_OF_HOUR, 0)
-	// .parseDefaulting(ChronoField.SECOND_OF_MINUTE, 0)
-	// .toFormatter();
-	//
 	@RequestMapping(value = "/coach/home", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		List<Student> students = coachService.findStudentByAcitveJobStatus();

@@ -59,6 +59,7 @@ function assignmentDone(userId){
 	   success: function(data){        
 		   
 		   if(data === "success"){
+			   alert("successsss");
 			   window.location.href = "../../../onlinetest/coach/home";			   
 		   }
 		   else{
@@ -78,7 +79,7 @@ function assignmentCancel(){
 	window.location.href = "../../../onlinetest/coach/home";
 }
 
-/*
+/* by Diana * not needed anymore, since the date is swcheduled and will run automatically
 function sendEmail(userId){
 	var msg;
 	if( !$('#accessCode').val() ) {
