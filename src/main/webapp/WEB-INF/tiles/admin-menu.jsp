@@ -69,7 +69,7 @@
 						<li><a href="editProfile"><i class="fa fa-edit"></i> Edit
 								Profile </a></li>
 						<li role="separator" class="divider"></li>
-						<li><a href="<c:url value="/logout" />">Logout</a></li>
+						<li><a href="<c:url value="/logout" />"><i class="glyphicon glyphicon-log-out"></i>Logout</a></li>
 					</ul></li>
 			</ul>
 
