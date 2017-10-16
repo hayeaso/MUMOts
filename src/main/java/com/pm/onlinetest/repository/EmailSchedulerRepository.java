@@ -43,7 +43,7 @@ public interface EmailSchedulerRepository extends CrudRepository<EmailScheduler,
 	*/
 	@Modifying(clearAutomatically = true)
 	@Transactional
-	@Query("UPDATE Assignment a SET a.finished=true WHERE a.id=:id")
+	@Query("UPDATE Assignment a SET a.regenerateTest=true WHERE a.id=:id")
 	void set24pastAssignmentToNull (@Param("id") Integer id);
 	
 	

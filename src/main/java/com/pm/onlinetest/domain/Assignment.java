@@ -24,6 +24,8 @@ public class Assignment {
  	private boolean started;
  	private boolean finished;
  	private String accesscode;
+ 	
+ 	private boolean regenerateTest;
 	
  	@OneToOne(fetch=FetchType.EAGER)	
  	private Student studentId;
@@ -114,7 +116,14 @@ public class Assignment {
 	public void setAccesscode(String accesscode) {
 		this.accesscode = accesscode;
 	}
-	
+
+	public boolean isRegenerateTest() {
+		return regenerateTest;
+	}
+
+	public void setRegenerateTest(boolean regenerateTest) {
+		this.regenerateTest = regenerateTest;
+	}
 	
 	
 }
