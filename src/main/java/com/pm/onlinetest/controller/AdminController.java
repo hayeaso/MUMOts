@@ -481,7 +481,7 @@ public class AdminController {
 			userService.save(user);
 			redirectAttr.addFlashAttribute("success", "Success");
 			redirectAttr.addFlashAttribute("titleMessage", "User EDITED");	
-			redirectAttr.addFlashAttribute("bodyMessage", "User "+user.getUsername()+" SuccessFully EDITED to the database");	
+			redirectAttr.addFlashAttribute("bodyMessage", "User "+user.getUsername()+" successfully edited!");	
 
 			return "redirect:/admin/users";
 		}

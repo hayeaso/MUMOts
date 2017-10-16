@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include.jsp"%>
+
 	<div class="panel panel-success">
 
 		<div class="panel-heading">
@@ -76,7 +77,7 @@
 									class="btn btn-circle btn-primary">Generate Test</button>
 								<button type="button" id="send-test-btn"
 									onclick="assignmentDone(${student.userId})" name="send-test-btn"
-									class="btn btn-circle btn-success">Send Email & Save</button>
+									class="btn btn-circle btn-success" data-toggle="modal" data-target="#myModal">Send Email & Save</button>
 								<button type="button" id="student-assignment-cancelbtn"
 									onclick="assignmentCancel()" class="btn btn-circle btn-default">Cancel</button>
 							</div>
@@ -85,6 +86,31 @@
 				</div>
 			</form>
 		</div>
+		
+<!-- SHOW MODAL -->
+
+	<!-- Modal -->
+	<div id="myModal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Success!</h4>
+				</div>
+				<div class="modal-body">
+					<p>Test is generated and data will be send to the student as scheduled!</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal" OnClick="closeModalCoachAssignment()">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- END OF MODAL -->
+
 <script src="<c:url value="/metronic/assets/coach/scripts/assignment.js" />" type="text/javascript"></script>
 <!-- JS for Date-Picker -->
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.4/jquery.datetimepicker.css"/ >
@@ -110,4 +136,5 @@
  format: 'Y/m/d A g:i',
  formatTime: 'A g:i',
  */
+
 </script>
