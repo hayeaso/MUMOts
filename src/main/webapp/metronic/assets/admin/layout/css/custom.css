@@ -3,7 +3,7 @@
 /***
 Rounded Portlets
 ***/
-/*
+
 .portlet {
 	border-radius: 4px !important;
 }
@@ -16,13 +16,13 @@ Rounded Portlets
 .portlet .portlet-body .form-actions  {
 	border-radius: 0px 0px 4px 4px !important;
 }
-*/
+
 
 /*
 Change Quick Sidebar Width
 */
 
-/*
+
 .page-quick-sidebar-wrapper {
   right: -370px;
   width: 370px;
@@ -57,4 +57,3 @@ Change Quick Sidebar Width
 .page-quick-sidebar-wrapper .page-quick-sidebar .page-quick-sidebar-content-item-shown .page-quick-sidebar-list {
   margin-left: -370px;
 }
-*/
