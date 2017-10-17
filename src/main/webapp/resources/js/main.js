@@ -74,7 +74,20 @@ $(function() {
 				//return " code: " + xhr.status +" Unexpected error: "+errorThrown+" textStatus: "+textStatus;
 				console.log (" code: " + xhr+" Unexpected error: "+errorThrown+" textStatus: "+textStatus);
 			}
-		}
+			
+		};
+		
+		// check if Bootstrap modal is open for Bootstrap <= 3
+		$("#delModal").on('shown.bs.modal', function(){			
+			// This function to update the content popup when button is undelete
+			var uid = $("button#userId").prop('value');			
+			var $btnClick = $("button.deleteButton[data-value='"+uid+"']");	
+
+			$(this).find('.modal-title').text($btnClick.text()+ " Confirmation"); // change title
+			if ($btnClick.text() == "Undelete") { // if undelete button
+				$(this).find('.modal-body p').text("Are you sure, you want to undelete?");								
+			}					
+		});
 		
 		window.MUMOTS = MUMOTS;
 		$(document).ready(function(){
