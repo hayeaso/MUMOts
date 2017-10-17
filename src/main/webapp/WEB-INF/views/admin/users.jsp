@@ -48,9 +48,9 @@
 								<td>${user.email}</td>
 								<td class="center">${user.authorities[0].authority}</td>
 
-								<td class="center"><c:if test="${user.status}">
+								<td class="center"><c:if test="${user.enabled}">
 									Active
-								</c:if> <c:if test="${user.status ne true}">
+								</c:if> <c:if test="${user.enabled ne true}">
 									Inactive
 								</c:if></td>
 								<!-- edit user profile button-->
@@ -58,7 +58,7 @@
 										class="fa fa-edit"></i> Edit </a></td>
 
 								<td><button data-value="${user.userId}" type="button" data-toggle="modal" data-target="#delModal"
-										class="deleteButton btn btn-xs btn-danger pull-right">Delete</button></td>
+										class="deleteButton btn btn-xs btn-danger pull-right"><c:out value="${user.enabled? 'Delete' : 'Undelete'}" /></button></td>
 							</tr>
 						</c:if>
 					</c:forEach>

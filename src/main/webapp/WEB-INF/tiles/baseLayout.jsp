@@ -16,7 +16,7 @@
 
 <!-- Date picker style  -->
 <link href="<c:url value="/metronic/assets/admin/pages/css/datepicker.css" />" rel="stylesheet" type="text/css"/>
-<!--<script src="<c:url value="/metronic/assets/admin/pages/scripts/datepicker.js" />" type="text/javascript"></script>-->
+<script src="<c:url value="/metronic/assets/admin/pages/scripts/datepicker.js" />" type="text/javascript"></script>
 
 	
 <link rel="stylesheet" type="text/css" href="<c:url value="/metronic/assets/global/plugins/font-awesome/css/font-awesome.min.css" />" />
@@ -52,60 +52,30 @@
 </head>
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
-<body>
-		<div class="container">
-			<div class="row col-sm-10">
+<body><!-- BEGIN HEADER -->
+	<div class="page-header">
+		<!-- BEGIN HEADER TOP -->
+		<div class="page-header-top">
+			<div class="container">
 				<div class="page-logo">
 					<a href="<c:url value="/" />"><img
 						src="<c:url value="/metronic/assets/logo2.png" />" height="70px;"
 						alt="logo" class="logo-default"></a>
 				</div>
-				</div>
 				<!-- BEGIN RESPONSIVE MENU TOGGLER -->
-				<!-- <a href="javascript:;" class="menu-toggler"></a> -->
+				<a href="javascript:;" class="menu-toggler"></a>
 				<!-- END RESPONSIVE MENU TOGGLER -->
-				<div class="col-sm-2">
 				<!-- BEGIN TOP NAVIGATION MENU -->
 				<div class="top-menu">
-				<c:if test="${pageContext.request.userPrincipal.name != null}">
-				<!-- CHECKS IF THE USER IS EMPTY -->
-				
 					<ul class="nav navbar-nav pull-right">
 						<!-- BEGIN USER LOGIN DROPDOWN -->
-						<li class="dropdown dropdown-user dropdown-dark">
-						<c:choose>
-    					<c:when test="${sessionScope.role.equals('admin')}">
-						<a href="<c:url value ="/admin/users" />"> <span
-								class="username username-hide-mobile">Welcome
-											${sessionScope.role}! </span>
-						</a>
-						</c:when>
-						<c:when test="${sessionScope.role.equals('coach')}">
-						<a
-							href="<c:url value="/coach/home" />"> <span
-								class="username username-hide-mobile">Welcome
-									 ${sessionScope.role}!
-									</span>
-						</a>
-						</c:when>
-						<c:when test="${sessionScope.role.equals('dba')}">
-						<a 
-							href="<c:url value="/dba/addquestion" />" > <span
-								class="username username-hide-mobile">Welcome
-									 ${sessionScope.role}!
-									</span>
-						</a>
-						</c:when>
-						</c:choose>
-						</li>
+						
+						<!-- END USER LOGIN DROPDOWN -->
 					</ul>
-					
-					</c:if>
-				</div>
 				</div>
 				<!-- END TOP NAVIGATION MENU -->
 			</div>
-			
+		</div>
 		<!-- END HEADER TOP -->
 		<!-- BEGIN HEADER MENU -->
 		<div class="page-header-menu">
@@ -118,7 +88,7 @@
 			</div>
 		</div>
 		<!-- END HEADER MENU -->
-	<!-- </div> -->
+	</div>
 	<!-- END HEADER -->
 
 	<!-- BEGIN PAGE CONTAINER -->
@@ -128,39 +98,6 @@
 			<div class="container">
 				<div class="row margin-top-10">
 					<div class="col-md-12">
-						<!-- BEGIN PROFILE SIDEBAR -->
-<!-- 						<div class="profile-sidebar" style="width: 250px;"> -->
-<!-- 							PORTLET MAIN -->
-<!-- 							<div class="portlet light profile-sidebar-portlet"> -->
-<!-- 								<div class="panel-heading"> -->
-<!-- 									<h4>Left Sidebar</h4> -->
-<!-- 								</div> -->
-<!-- 								<div class="panel-body"></div> -->
-<!-- 							</div> -->
-<!-- 							END PORTLET MAIN -->
-<!-- 						</div> -->
-<!-- 						<div class="profile-sidebar" style="width: 250px;">
-							PORTLET MAIN
-							<div class="portlet light profile-sidebar-portlet">
-								<div class="panel-heading">
-									<h4>Left Sidebar</h4>
-								</div>
-								<div class="panel-body"></div>
-							</div>
-							END PORTLET MAIN
-						</div> -->
-						<!-- END BEGIN PROFILE SIDEBAR -->
-						<c:if test="${not empty alertErrorMsg}">
-							<div class="alert alert-danger alertContainer"
-								style="height: 36px; padding-top: 8px;">
-								<a class="btn-danger" data-dismiss="alert" style="float:right;"
-									aria-hidden="true">close</a>
-							
-								<span class="center glyphicon glyphicon-exclamation-sign"></span>
-								<c:out value="${alertErrorMsg}" />
-							</div>
-						</c:if>
-						<!-- BEGIN PROFILE CONTENT -->
 						<div class="profile-content">
 							<div class="row">
 								<div class="col-md-12">
@@ -188,7 +125,6 @@
 	<div class="scroll-to-top">
 		<i class="icon-arrow-up"></i>
 	</div>
-	<!-- END FOOTER -->
 
 	<!-- BEGIN JAVASCRIPTS(Load javascripts at bottom, this will reduce page load time) -->
 	<!-- BEGIN CORE PLUGINS -->
@@ -241,9 +177,10 @@
 				$.ajax({
 					url: '/onlinetest/${sessionScope.role}/deleteUser?userid=' + id,
 					method: 'POST'
-					}).done(function(data) {					
-				});
-				$("#user"+id).remove();
+					}).done(function(data) {						
+						location.reload();
+				}).fail(MUMOTS.ajaxErrorMsg());
+				//$("#user"+id).remove();
 			});
 			
 			$(".btnAssignCoach").live("click",function(){

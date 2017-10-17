@@ -12,8 +12,6 @@
 
 .container {
 	margin-top: 5px; ! important;
-	margin-bottom: 5px; ! important;
-
 }
 
 .portlet.box.blue {
@@ -36,4 +34,9 @@
 .lblStatus {
 	margin-right: 12px;
 	width: 94px;
+}
+.page-header{
+	padding-bottom: 0px;
+    margin: 0px 0 0px;
+    border-bottom: 1px solid transparent;
 }
