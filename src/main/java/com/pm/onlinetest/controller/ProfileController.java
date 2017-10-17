@@ -31,9 +31,8 @@ public class ProfileController {
 	}
 	
 	
-	@RequestMapping(value = { "/admin/editUser/editProfile", }, method = RequestMethod.GET)
-	public String  redirect(@ModelAttribute("loginUser") User user, Model model) {
-	    System.out.println("in redirect method");
+	@RequestMapping(value = { "/admin/editUser/editProfile","/admin/editStudent/editProfile" }, method = RequestMethod.GET)
+	public String  redirectFromAdmin(@ModelAttribute("loginUser") User user, Model model) {
 		return "redirect:/admin/editProfile";
 	}
 
@@ -51,8 +50,10 @@ public class ProfileController {
 			user.setEnabled(true);
 			userService.saveProfile(user);
 			redirectAttr.addFlashAttribute("success", "Success");
+			redirectAttr.addFlashAttribute("titleMessage", "User EDITED");	
+			redirectAttr.addFlashAttribute("bodyMessage", "User "+user.getUsername()+" successfully edited!");	
 		}
-		return "editProfileFromAdmin";
+		return "redirect:/admin/editProfile";
 	}
 	
 	@RequestMapping(value = { "/coach/editProfile" }, method = RequestMethod.GET)
@@ -63,6 +64,13 @@ public class ProfileController {
 		model.addAttribute("user", currentUser);
 		return "editProfileFromCoach";
 	}
+	
+	@RequestMapping(value = { "/coach/studentAssignmentDetail/editProfile" }, method = RequestMethod.GET)
+	public String  redirectForCoach(@ModelAttribute("loginUser") User user, Model model) {
+		return "redirect:/coach/editProfile";
+	}
+
+
 
 	@RequestMapping(value = "/coach/editProfile", method = RequestMethod.POST)
 	public String editProfileFromCoach(@Valid @ModelAttribute("loginUser") User user, BindingResult result,
@@ -77,8 +85,10 @@ public class ProfileController {
 			user.setEnabled(true);
 			userService.saveProfile(user);
 			redirectAttr.addFlashAttribute("success", "Success");
+			redirectAttr.addFlashAttribute("titleMessage", "User EDITED");	
+			redirectAttr.addFlashAttribute("bodyMessage", "User "+user.getUsername()+" successfully edited!");	
 		}
-		 return "editProfileFromCoach";
+		return "redirect:/coach/editProfile";
 	}
 	
 	@RequestMapping(value = { "/dba/editProfile" }, method = RequestMethod.GET)
@@ -103,8 +113,10 @@ public class ProfileController {
 			user.setEnabled(true);
 			userService.saveProfile(user);
 			redirectAttr.addFlashAttribute("success", "Success");
+			redirectAttr.addFlashAttribute("titleMessage", "User EDITED");	
+			redirectAttr.addFlashAttribute("bodyMessage", "User "+user.getUsername()+" successfully edited!");	
 		}
-		 return "editProfileFromDba";
+		return "redirect:/dba/editProfile";
 	}
 
 }

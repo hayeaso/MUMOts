@@ -20,4 +20,6 @@ public interface UserService {
 	public int findByUseremail(String email);
 	public void setAccessCodeInPasswordField(String email, String accessCode);
 	public User findUserByAccessCode(String accessCode);
+	public List<User> findAll();
+	public void updateStatus(Integer userId, boolean enabled);
  }

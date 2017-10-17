@@ -1,6 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include.jsp"%>
+
+
+<c:if test="${not empty success}">
+<%@ include file="/WEB-INF/views/popUp.jsp"%>
+</c:if>
+
+
 <div class="content">
 	<div class="portlet light">
 		<c:if test="${not empty success}">
@@ -16,7 +23,7 @@
 		<!-- BEGIN REGISTRATION FORM -->
 		<form:form method="POST" class="register-form" action="editProfile"
 			modelAttribute="loginUser">
-			<h3>Edit User</h3>
+			<h3>Edit Profile</h3>
 			<p class="hint">Enter user details below:</p>
 			<form:hidden path="userId" name="userId" value="${user.userId}" />
 			<div class="form-group">
@@ -59,32 +66,39 @@
 					placeholder="Password" name="password" />
 				<form:errors path="password" cssClass="text-danger" />
 			</div>		
-			<div class="form-group">
-				<label class="control-label col-lg-2" for="status">Status</label>
-				<form:select path="status"
-					name="status" class="form-control">
-					<c:choose>
-						<c:when test="${user.status}">						
-							<form:option value="False">Inactive</form:option>
-							<form:option value="True" selected="selected">Active</form:option>
-						</c:when>
-						<c:otherwise>							
-							<form:option value="False" selected="selected">Inactive</form:option>
-							<form:option value="True">Active</form:option>
-						</c:otherwise>
-					</c:choose>
-				</form:select>
-				<form:errors path="status" cssClass="text-danger" />
-			</div>
+				
+			</div>			
+
 			<form:hidden path="enabled" value="TRUE" />
 			<div class="form-actions">
 				<button type="submit" id="register-submit-btn"
 					class="btn btn-success uppercase pull-right">Submit</button>
 			</div>
-			<div class="form-actions">
-				<a href="<c:url value='/admin/users'/>">
- 				<input style="margin-right:30px;" type="button" id="register-cancel-btn" class="btn btn-success uppercase pull-right" value="Cancel"/>
- 			</div>
+			<div>
+				<c:choose>
+					<c:when test="${sessionScope.role.equals('admin')}">
+						<a href="<c:url value ="/admin/users" />"> <input
+							style="margin-right: 30px;" type="button"
+							id="register-cancel-btn"
+							class="btn btn-success uppercase pull-right" value="Cancel" />
+						</a>
+					</c:when>
+					<c:when test="${sessionScope.role.equals('coach')}">
+						<a href="<c:url value="/coach/home" />"> <input
+							style="margin-right: 30px;" type="button"
+							id="register-cancel-btn"
+							class="btn btn-success uppercase pull-right" value="Cancel" />
+						</a>
+					</c:when>
+					<c:when test="${sessionScope.role.equals('dba')}">
+						<a href="<c:url value="/dba/addquestion" />"> <input
+							style="margin-right: 30px;" type="button"
+							id="register-cancel-btn"
+							class="btn btn-success uppercase pull-right" value="Cancel" />
+						</a>
+					</c:when>
+				</c:choose>
+			</div>
 			<br/><br/>
 		</form:form>
 	</div>
