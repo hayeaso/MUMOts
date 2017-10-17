@@ -66,6 +66,9 @@
 					placeholder="Password" name="password" />
 				<form:errors path="password" cssClass="text-danger" />
 			</div>		
+			
+		
+ 
 			<div class="form-group">
 				<label class="control-label col-lg-2" for="status">Status</label>
 				<form:select path="status"
