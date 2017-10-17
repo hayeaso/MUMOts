@@ -51,6 +51,8 @@ public class ProfileController {
 			user.setEnabled(true);
 			userService.saveProfile(user);
 			redirectAttr.addFlashAttribute("success", "Success");
+			redirectAttr.addFlashAttribute("titleMessage", "User EDITED");	
+			redirectAttr.addFlashAttribute("bodyMessage", "User "+user.getUsername()+" successfully edited!");	
 		}
 		return "editProfileFromAdmin";
 	}
@@ -77,6 +79,8 @@ public class ProfileController {
 			user.setEnabled(true);
 			userService.saveProfile(user);
 			redirectAttr.addFlashAttribute("success", "Success");
+			redirectAttr.addFlashAttribute("titleMessage", "User EDITED");	
+			redirectAttr.addFlashAttribute("bodyMessage", "User "+user.getUsername()+" successfully edited!");	
 		}
 		 return "editProfileFromCoach";
 	}
@@ -103,6 +107,8 @@ public class ProfileController {
 			user.setEnabled(true);
 			userService.saveProfile(user);
 			redirectAttr.addFlashAttribute("success", "Success");
+			redirectAttr.addFlashAttribute("titleMessage", "User EDITED");	
+			redirectAttr.addFlashAttribute("bodyMessage", "User "+user.getUsername()+" successfully edited!");	
 		}
 		 return "editProfileFromDba";
 	}
