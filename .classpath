@@ -123,7 +123,7 @@
 	<classpathentry kind="var" path="M2_REPO/org/springframework/spring-context-support/3.2.8.RELEASE/spring-context-support-3.2.8.RELEASE.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/springframework/security/spring-security-taglibs/4.0.4.RELEASE/spring-security-taglibs-4.0.4.RELEASE.jar"/>
 	<classpathentry kind="var" path="M2_REPO/org/springframework/security/spring-security-acl/4.0.4.RELEASE/spring-security-acl-4.0.4.RELEASE.jar"/>
-	<classpathentry kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
+	<classpathentry exported="true" kind="con" path="org.eclipse.m2e.MAVEN2_CLASSPATH_CONTAINER">
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
