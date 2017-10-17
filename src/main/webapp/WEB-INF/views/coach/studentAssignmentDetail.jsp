@@ -77,7 +77,7 @@
 									class="btn btn-circle btn-primary">Generate Test</button>
 								<button type="button" id="send-test-btn"
 									onclick="assignmentDone(${student.userId})" name="send-test-btn"
-									class="btn btn-circle btn-success" data-toggle="modal" data-target="#myModal">Send Email & Save</button>
+									class="btn btn-circle btn-success" >Send Email & Save</button>
 								<button type="button" id="student-assignment-cancelbtn"
 									onclick="assignmentCancel()" class="btn btn-circle btn-default">Cancel</button>
 							</div>

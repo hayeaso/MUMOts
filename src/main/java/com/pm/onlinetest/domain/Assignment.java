@@ -25,7 +25,7 @@ public class Assignment {
  	private boolean finished;
  	private String accesscode;
  	
- 	private boolean regenerateTest;
+ 	private boolean regenerateTest;//added by Diana Yamaletdinova
 	
  	@OneToOne(fetch=FetchType.EAGER)	
  	private Student studentId;
