@@ -144,6 +144,18 @@ public class CoachController {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yy HH:00");
 		LocalDateTime dateTimeNew = LocalDateTime.parse(dateTime, formatter);
 		System.out.println("-------------------------------Date from user-------" + dateTimeNew);
+		
+		
+		//DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yy HH:00");
+		LocalDateTime dateTime2 = LocalDateTime.now();
+		String curDate = dateTime2.format(formatter);
+		LocalDateTime newDateNow = LocalDateTime.parse(curDate, formatter);
+		
+		System.out.println("-------------------------------Date NOW-------" + newDateNow);
+		
+		if (newDateNow.equals(dateTimeNew)){
+			System.out.println("-------------------------------dates are the same");
+		}
 		/*saving a new assignment and data into the emailscheduler table that associated with this assignment*/
 		emailScheduler.setAssignmentId(assignment);
 		emailScheduler.setSend(false);
