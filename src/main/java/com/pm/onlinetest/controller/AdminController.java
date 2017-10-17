@@ -34,6 +34,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.pm.onlinetest.domain.User;
 import com.pm.onlinetest.exception.DuplicateCategoryNameException;
+import com.pm.onlinetest.exception.UserNotFoundException;
 import com.pm.onlinetest.domain.Authority;
 import com.pm.onlinetest.domain.Category;
 import com.pm.onlinetest.domain.Choice;
@@ -81,14 +82,14 @@ public class AdminController {
 
 	@RequestMapping(value = "/admin/users", method = RequestMethod.GET)
 	public String getUsers(Locale locale, Model model) {
-		List<User> users = userService.findAllEnabled();
+		List<User> users = userService.findAll();
 		model.addAttribute("users", users);
 		return "users";
 	}
 	
 	@RequestMapping(value = { "/admin/students", "/coach/students" }, method = RequestMethod.GET)
 	public String getStudents(Model model, HttpServletRequest request) {
-		List<Student> students = studentService.findAllEnabled();
+		List<Student> students = studentService.findAll();
 		model.addAttribute("students", students);
 		String mapping = request.getServletPath();
 		System.out.println(mapping);
@@ -204,12 +205,17 @@ public class AdminController {
 	// }
 
 	@RequestMapping(value = { "/admin/deleteUser", "/coach/deleteUser" }, method = RequestMethod.POST)
-	public void DeleteUser(HttpServletRequest request) {
-		String id = request.getParameter("userid").toString();
-		userService.softDelete(Integer.parseInt(id));
+	public String DeleteUser(HttpServletRequest request, @RequestParam("userid") Integer userId) throws UserNotFoundException {
+		System.out.println("call delete ..........");
+		User user = userService.findByUserId(userId);
+		if (user == null) {
+			System.out.println("call delete");
+			throw new UserNotFoundException("User id is not valid");
+		}
+		userService.updateStatus(userId, !user.isEnabled());
+		System.out.println("success delete ..........");
+		return "admin/users";
 	}
-
-
 
 	// @RequestMapping(value = "/admin/assign", method = RequestMethod.GET)
 	// public String assignCoach(Model model) {
@@ -236,9 +242,8 @@ public class AdminController {
 
 	@RequestMapping(value = "/admin/createCategory", method = RequestMethod.POST)
 	public String createCategoryPost(@ModelAttribute("Category") Category category, BindingResult result,
-			RedirectAttributes redirectAttr) { // throws
-												// DuplicateCategoryNameException
-												// {
+			RedirectAttributes redirectAttr) {
+		
 		if (result.hasErrors()) {
 			return "createCategory";
 		}

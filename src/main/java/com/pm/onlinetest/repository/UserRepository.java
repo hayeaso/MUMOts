@@ -50,4 +50,9 @@ public interface UserRepository extends CrudRepository<User, Integer> {
 	
 	@Query("SELECT u FROM User u WHERE u.password =:userAccessCode")
 	User findUserByAccessCode(@Param("userAccessCode") String userAccessCode);
+	
+	@Modifying(clearAutomatically = true)
+	@Transactional
+	@Query("UPDATE User u SET u.enabled = :enabled WHERE u.userId =:userId")
+	void updateStatus(@Param("userId") Integer userId, @Param("enabled") boolean enabled);
 }
