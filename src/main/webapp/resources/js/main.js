@@ -11,7 +11,7 @@ $(function() {
 				response : function(event, ui) {
 					// ui.content is the array that's about to be sent to the response callback.
 					if (ui.content.length === 0) {
-						alert("The category can be added!");
+						//alert("The category can be added!");
 					}
 					closeAlertError();
 				}
@@ -25,5 +25,5 @@ $(function() {
 			$closeAlert.click();
 		}
 	}
-
+	
 });
