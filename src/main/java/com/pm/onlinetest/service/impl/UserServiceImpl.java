@@ -121,5 +121,16 @@ public class UserServiceImpl implements UserService {
 		return userRepository.findUserByAccessCode(accessCode);
 		
 		}
+
+	@Override
+	public List<User> findAll() {
+		return (List<User>) userRepository.findAll();
+	}
+
+
+	@Override
+	public void updateStatus(Integer userId, boolean enabled) {
+		userRepository.updateStatus(userId, enabled);		
+	}
 	
 }

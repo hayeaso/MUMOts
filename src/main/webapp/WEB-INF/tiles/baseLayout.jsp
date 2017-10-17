@@ -177,9 +177,10 @@
 				$.ajax({
 					url: '/onlinetest/${sessionScope.role}/deleteUser?userid=' + id,
 					method: 'POST'
-					}).done(function(data) {					
-				});
-				$("#user"+id).remove();
+					}).done(function(data) {						
+						location.reload();
+				}).fail(MUMOTS.ajaxErrorMsg());
+				//$("#user"+id).remove();
 			});
 			
 			$(".btnAssignCoach").live("click",function(){
