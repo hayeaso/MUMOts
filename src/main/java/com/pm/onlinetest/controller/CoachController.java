@@ -80,6 +80,7 @@ public class CoachController {
 		Student student = coachService.findStudentById(studentId);
 		Assignment assignment = assignmentService.findByStudentIdByFinish(student);
 		EmailScheduler emailScheduler = emailScheduleService.findByAssignmentId(assignment);//added by Diana Yamaletdinova
+ 
 		if(assignment !=null)
 		System.out.println("assignment of finish false is: "+assignment.isFinished());
 		//added by Diana Yamaletdinova//remove later
@@ -151,7 +152,7 @@ public class CoachController {
 		emailScheduler.setSend(false);
 		emailScheduler.setSendEmailDateTime(dateTimeUserInput);
 		emailScheduler.setAccessLink(accessLink);
-		emailScheduleService.saveEmailScheduler(emailScheduler);
+		
 		
 		/* End added by Diana Yamaletdinova*/
 		
@@ -160,7 +161,9 @@ public class CoachController {
 		assignment.setStudentId(student);
 		assignment.setCount(0);
 		assignment.setFinished(false);	
+		//assignment.setRegenerateTest(false);
 		//System.out.println(" Assignment get access codeis: "+assignment.getAccesscode());		
+		emailScheduleService.saveEmailScheduler(emailScheduler);
 		assignmentService.saveAssignment(assignment);
 
 		/* Added by Diana Yamaletdinova*/

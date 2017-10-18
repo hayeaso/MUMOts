@@ -73,7 +73,7 @@ public class EmailSchedulerServiceImpl implements EmailSchedulerService {
 			for(EmailScheduler assignment : past24hMap){
 				long hours = calculate24hours(assignment.getSendEmailDateTime(), newDateNow);
 				
-				if (hours >= 24){
+				if (hours > 24){
 					System.out.println(" -------------------------wasnt started within 24 h: assignment id--------------------------" + assignment.getId());
 					System.out.println(" -------------------------wasnt started within 24 h: hours passed--------------------------" + hours);
 					System.out.println(" -------------------------wasnt started within 24 h: email sent date--------------------------" + assignment.getSendEmailDateTime());
