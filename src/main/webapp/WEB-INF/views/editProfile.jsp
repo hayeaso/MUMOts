@@ -69,6 +69,10 @@
 				<form:errors path="password" cssClass="text-danger" />
 			</div>
 
+			<div class="form-group">
+				<input class=" form-control " placeholder="Confirm Password"
+					name='confirmpassword' id="password_confirmation" type="password" value="${user.password}">
+			</div>
 
 			<div id="divCheckPasswordMatch"></div>
 
