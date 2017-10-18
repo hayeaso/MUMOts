@@ -128,6 +128,7 @@ public class EmailSchedulerServiceImpl implements EmailSchedulerService {
 	/*
 	 * Sends email to the student
 	 */
+	@Override
 	public String sendEmail(String userId, String accessLink, String accessCode, String email) {
 		SimpleMailMessage message = new SimpleMailMessage();
 		message.setTo(email);
@@ -176,10 +177,13 @@ public class EmailSchedulerServiceImpl implements EmailSchedulerService {
 	public EmailScheduler findByAssignmentId(Assignment assignmentId) {
 		return emailSchedulerRepository.findByAssignmentId(assignmentId);
 	}
+
+	@Override
+	public void updateOnEmailSend(Assignment assignmentId) {
+		emailSchedulerRepository.updateOnEmailSend(assignmentId);
+	}
 	
-	
-	
-	
+
 //	private List<Assignment> findAllAssignentsNotStarted(Assignment assignmentId) {
 //		return emailSchedulerRepository.findAllAssignentsNotStarted(assignmentId);
 //	}
