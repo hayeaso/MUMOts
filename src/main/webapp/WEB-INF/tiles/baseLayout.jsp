@@ -25,6 +25,11 @@
 <%-- <link href="<c:url value="/metronic/assets/global/plugins/bootstrap/css/bootstrap.min.css" />" rel="stylesheet" type="text/css"/>
  --%><link href="<c:url value="/metronic/assets/global/plugins/uniform/css/uniform.default.css" />" rel="stylesheet" type="text/css"/>
 <!-- END GLOBAL MANDATORY STYLES -->
+
+<!-- ANIMATE CSS LINK -->
+<link href="<c:url value="/resources/css/animate.css" />" rel="stylesheet" type="text/css"/>
+
+
 <!-- BEGIN PAGE LEVEL STYLES -->
 <link href="<c:url value="/metronic/assets/admin/pages/css/profile.css" />" rel="stylesheet" type="text/css"/>
 <link rel="stylesheet" type="text/css" href="<c:url value="/metronic/assets/global/plugins/select2/select2.css" />" />
