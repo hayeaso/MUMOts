@@ -28,6 +28,7 @@ import com.pm.onlinetest.domain.Assignment;
 import com.pm.onlinetest.domain.EmailScheduler;
 import com.pm.onlinetest.domain.Student;
 import com.pm.onlinetest.domain.User;
+import com.pm.onlinetest.repository.EmailSchedulerRepository;
 import com.pm.onlinetest.service.AssignmentService;
 import com.pm.onlinetest.service.CoachService;
 import com.pm.onlinetest.service.EmailSchedulerService;
@@ -142,14 +143,16 @@ public class CoachController {
 		/* Added by Diana Yamaletdinova
 		 * Format string from user input to LocalDateTime*/
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yy HH:00");
-		LocalDateTime dateTimeNew = LocalDateTime.parse(dateTime, formatter);
-		System.out.println("-------------------------------Date from user-------" + dateTimeNew);
+		LocalDateTime dateTimeUserInput = LocalDateTime.parse(dateTime, formatter);
+		System.out.println("-------------------------------Date from user-------" + dateTimeUserInput);
+		
 		/*saving a new assignment and data into the emailscheduler table that associated with this assignment*/
 		emailScheduler.setAssignmentId(assignment);
 		emailScheduler.setSend(false);
-		emailScheduler.setSendEmailDateTime(dateTimeNew);
+		emailScheduler.setSendEmailDateTime(dateTimeUserInput);
 		emailScheduler.setAccessLink(accessLink);
 		emailScheduleService.saveEmailScheduler(emailScheduler);
+		
 		/* End added by Diana Yamaletdinova*/
 		
 		assignment.setAccesscode(accessCode);
@@ -159,7 +162,24 @@ public class CoachController {
 		assignment.setFinished(false);	
 		//System.out.println(" Assignment get access codeis: "+assignment.getAccesscode());		
 		assignmentService.saveAssignment(assignment);
-	/*	redirectAttr.addFlashAttribute("success", "Test Generated Successfully!");
+
+		/* Added by Diana Yamaletdinova*/
+		/*send the emal if user selected the current time*/
+		LocalDateTime now = LocalDateTime.now();
+		String curDate = now.format(formatter);
+		LocalDateTime curDateTime = LocalDateTime.parse(curDate, formatter);
+		
+		System.out.println("-------------------------------Date NOW-------" + curDateTime);
+		
+		if (curDateTime.equals(dateTimeUserInput)){
+			System.out.println("-------------------------------dates are the same student.getEmail()" + student.getEmail());
+			emailScheduleService.sendEmail(userId, accessLink, accessCode, student.getEmail());
+			emailScheduleService.updateOnEmailSend(assignment);
+			emailScheduler.setSend(true);
+		}
+		/* End added by Diana Yamaletdinova*/
+	
+		/*	redirectAttr.addFlashAttribute("success", "Test Generated Successfully!");
 	   	return "redirect:/coach/home";
 	 */
 		return "success";

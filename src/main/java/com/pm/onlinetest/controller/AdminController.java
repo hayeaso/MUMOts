@@ -205,15 +205,13 @@ public class AdminController {
 	// }
 
 	@RequestMapping(value = { "/admin/deleteUser", "/coach/deleteUser" }, method = RequestMethod.POST)
-	public String DeleteUser(HttpServletRequest request, @RequestParam("userid") Integer userId) throws UserNotFoundException {
-		System.out.println("call delete ..........");
+	public String DeleteUser(HttpServletRequest request, @RequestParam("userid") Integer userId) throws UserNotFoundException {		
 		User user = userService.findByUserId(userId);
 		if (user == null) {
-			System.out.println("call delete");
+			logger.debug("user id is invalid");
 			throw new UserNotFoundException("User id is not valid");
 		}
-		userService.updateStatus(userId, !user.isEnabled());
-		System.out.println("success delete ..........");
+		userService.updateStatus(userId, !user.isEnabled());		
 		return "admin/users";
 	}
 

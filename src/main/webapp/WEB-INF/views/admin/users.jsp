@@ -58,7 +58,7 @@
 										class="fa fa-edit"></i> Edit </a></td>
 
 								<td><button data-value="${user.userId}" type="button" data-toggle="modal" data-target="#delModal"
-										class="deleteButton btn btn-xs btn-danger pull-right"><c:out value="${user.enabled? 'Delete' : 'Undelete'}" /></button></td>
+										class="deleteButton btn btn-xs <c:out value="${user.enabled? 'btn-danger' : 'btn-primary'}"/> pull-right"><c:out value="${user.enabled? 'Delete' : 'Undelete'}" /></button></td>
 							</tr>
 						</c:if>
 					</c:forEach>

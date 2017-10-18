@@ -59,9 +59,9 @@ function assignmentDone(userId){
 	   success: function(data){        
 		   
 		   if(data === "success"){
-			   //alert("successsss");
-			   $('#myModal').modal('show');
-			   //window.location.href = "../../../onlinetest/coach/home";			   
+			   alert("successsss");
+			  // $('#myModal').modal('show');
+			   window.location.href = "../../../onlinetest/coach/home";			   
 		   }
 		   else{
 			   $("#errorMessage").empty();
@@ -75,10 +75,10 @@ function assignmentDone(userId){
 	});
 }
 
-function closeModalCoachAssignment(){
+/*function closeModalCoachAssignment(){
 	window.location.href = "../../../onlinetest/coach/home";	
- self.close();
-}
+	self.close();
+}*/
 
 function assignmentCancel(){
 	window.location.href = "../../../onlinetest/coach/home";
