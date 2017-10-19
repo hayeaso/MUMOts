@@ -3,7 +3,7 @@
 /***
 Rounded Portlets
 ***/
-/*
+
 .portlet {
 	border-radius: 4px !important;
 }
@@ -16,4 +16,3 @@ Rounded Portlets
 .portlet .portlet-body .form-actions  {
 	border-radius: 0px 0px 4px 4px !important;
 }
-*/

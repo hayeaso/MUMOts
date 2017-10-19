@@ -21,7 +21,7 @@
 		</div>
 		
 		<!-- Collect the nav links, forms, and other content for toggling -->
-		<div class="collapse navbar-collapse"
+		<div class="navbar-collapse collapse in"
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 
@@ -45,8 +45,7 @@
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown" role="button" aria-haspopup="true"
-					aria-expanded="false"> <span class="glyphicon glyphicon-cog"
-						aria-hidden="true"></span> <span class="caret"></span></a>
+					aria-expanded="false"> <span class="bold ">${sessionScope.role}</span><span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="editProfile"><i class="fa fa-edit"></i> Edit
 								Profile </a></li>

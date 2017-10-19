@@ -1,4 +1,4 @@
-/* @media print {
+ @media print {
   body {
     background-color: #fff !important;
   }
@@ -250,12 +250,12 @@ Page Header
 .page-header .page-header-top .top-menu .navbar-nav > li.dropdown-notification.dropdown-dark .dropdown-menu .dropdown-menu-list > li > a:hover .time {
   background: #181b1e;
 }
-.page-header .page-header-menu {
+/* .page-header .page-header-menu {
   background: #444d58;
   Default Mega Menu
   Light Mega Menu
   Header seaech box
-}
+} */
 .page-header .page-header-menu.fixed {
   box-shadow: 0px 1px 10px 0px rgba(68, 77, 88, 0.2);
 }
@@ -1862,4 +1862,4 @@ Page Loading
   display: none;
   transition: all 2s;
 }
- */
+ 

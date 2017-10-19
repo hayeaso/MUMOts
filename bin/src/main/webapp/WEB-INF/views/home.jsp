@@ -16,18 +16,18 @@
       <li data-target="#myCarousel" data-slide-to="2"></li>
     </ol>
 
-    <!-- Wrapper for slides -->
+   <!-- Wrapper for slides -->
     <div class="carousel-inner">
       <div class="item active">
-        <img src="<c:url value="/resources/images/collage1.jpg" />" alt="IT" style="width:100%; height: 480px">
+        <img src="<c:url value="/resources/images/collage1.jpg" />" alt="IT" style="width:100%; height: 520px">
       </div>
 
       <div class="item">
-        <img src="<c:url value="/resources/images/collage2.jpg" />" alt="IT" style="width:100%; height: 480px">
+        <img src="<c:url value="/resources/images/collage2.jpg" />" alt="IT" style="width:100%; height: 520px">
       </div>
     
       <div class="item">
-        <img src="<c:url value="/resources/images/collage3.jpg" />" alt="IT" style="width:100%; height: 480px">
+        <img src="<c:url value="/resources/images/collage3.jpg" />" alt="IT" style="width:100%; height: 520px">
       </div>
     </div>
 

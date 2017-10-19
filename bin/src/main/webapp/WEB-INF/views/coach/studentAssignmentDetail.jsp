@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include.jsp"%>
+
 	<div class="panel panel-success">
 
 		<div class="panel-heading">
@@ -66,6 +67,8 @@
 							</div>
 						</div>
 					</div>
+					
+<img src="<c:url value="/resources/images/ajax-loader.gif" />" alt="Loading..." id="loading-indicator" style="display:none" />
 
 
 					<div class="form-actions">
@@ -76,7 +79,7 @@
 									class="btn btn-circle btn-primary">Generate Test</button>
 								<button type="button" id="send-test-btn"
 									onclick="assignmentDone(${student.userId})" name="send-test-btn"
-									class="btn btn-circle btn-success">Send Email & Save</button>
+									class="btn btn-circle btn-success" >Send Email & Save</button>
 								<button type="button" id="student-assignment-cancelbtn"
 									onclick="assignmentCancel()" class="btn btn-circle btn-default">Cancel</button>
 							</div>
@@ -85,29 +88,62 @@
 				</div>
 			</form>
 		</div>
+		
+<!-- SHOW MODAL -->
+
+	<!-- Modal -->
+	<div id="myModal" class="modal fade" role="dialog">
+		<div class="modal-dialog">
+
+			<!-- Modal content-->
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Success!</h4>
+				</div>
+				<div class="modal-body">
+					<p>Test is generated and data will be send to the student as scheduled!</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal" OnClick="closeModalCoachAssignment()">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- END OF MODAL -->
+
 <script src="<c:url value="/metronic/assets/coach/scripts/assignment.js" />" type="text/javascript"></script>
 <!-- JS for Date-Picker -->
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.4/jquery.datetimepicker.css"/ >
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.4/build/jquery.datetimepicker.full.min.js"></script>
 
+<style>
+	#loading-indicator {
+	  position: absolute;
+	  left: 10px;
+	  top: 10px;
+	}
+</style>
 <script type="text/javascript">
 
 	jQuery('#dateTime').datetimepicker({
 		timepicker: true,
 		closeOnDateSelect: true,
-		//startDate: new Date(),
+		startDate: new Date(),
 		defaultDate: new Date(),
 		scrollMonth : false,
 		todayButton: true,
 		defaultSelect: true,
-		//minDate: new Date(),
+		minDate: new Date(),
 		format: 'm/d/y H:00'
 		//format: 'm/d/Y h:m A' /* M d y will give a different format that will be displayed in the form*/
 	});
-
+   
 /* this will display am/pm format
  * format: 'm/d/y H:i A'
  format: 'Y/m/d A g:i',
  formatTime: 'A g:i',
  */
+
 </script>
