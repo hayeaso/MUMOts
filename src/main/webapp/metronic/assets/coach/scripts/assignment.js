@@ -57,10 +57,16 @@ function assignmentDone(userId){
 		   accessLink:$('#accessLink').val(),
 		   dateTime:$("#dateTime").val()
 	   },
+	   ajaxSend: function() {
+		    /* show loader */
+			//$('#loading-indicator').show();
+		   //waitingDialog.show('Custom message');
+			
+		},
 	   success: function(data){        
-		   
+		  // $('#loading-indicator').show();
 		   if(data === "success"){
-			  // alert("successsss");
+
 			   $('#myModal').modal('show');
 //			   window.location.href = "../../../onlinetest/coach/home";			   
 		   }
@@ -73,7 +79,7 @@ function assignmentDone(userId){
 				return false;
 		   }
 	   }
-	});
+	})
 }
 
 function closeModalCoachAssignment(){

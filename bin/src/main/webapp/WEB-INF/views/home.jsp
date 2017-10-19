@@ -19,15 +19,15 @@
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
       <div class="item active">
-        <img src="<c:url value="/resources/images/boat_02-cropped.jpg" />" alt="Boat 2" style="width:100%; height: 480px">
+        <img src="<c:url value="/resources/images/collage1.jpg" />" alt="IT" style="width:100%; height: 480px">
       </div>
 
       <div class="item">
-        <img src="<c:url value="/resources/images/boat_04-cropped.jpg" />" alt="Boat 4" style="width:100%; height: 480px">
+        <img src="<c:url value="/resources/images/collage2.jpg" />" alt="IT" style="width:100%; height: 480px">
       </div>
     
       <div class="item">
-        <img src="<c:url value="/resources/images/camping_01-cropped.jpg" />" alt="Camping 1" style="width:100%; height: 480px">
+        <img src="<c:url value="/resources/images/collage3.jpg" />" alt="IT" style="width:100%; height: 480px">
       </div>
     </div>
 

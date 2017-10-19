@@ -116,6 +116,9 @@ public class CoachController {
 	public @ResponseBody String saveAssignment(RedirectAttributes redirectAttr,@RequestParam("userId") String userId,
 			@RequestParam("accessLink") String accessLink,@RequestParam("accessCode") String accessCode,
 			@RequestParam("dateTime") String dateTime) {		
+		try {
+			
+		
 		System.out.println("Student Id in save ASsignment is: "+userId);
 		System.out.println("accesscode in save ASsignment is: "+accessCode);
 		System.out.println("accessLink in save ASsignment is: "+accessLink);
@@ -176,6 +179,11 @@ public class CoachController {
 	   	return "redirect:/coach/home";
 	 */
 		return "success";
+		} catch (Exception e) {
+			System.out.println("failed"+ e);
+			return "failure";
+			// TODO: handle exception
+		}
 	}
 
 	//this method is commented out because the email scheduler is implemented in a service class

@@ -37,7 +37,7 @@ public class EmailSchedulerServiceImpl implements EmailSchedulerService {
 
 	@Autowired
 	private MailSender mailSender;
-	
+
 	private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yy HH:00");
 	private LocalDateTime dateTime = LocalDateTime.now();
 	private String curDate = dateTime.format(formatter);
@@ -54,17 +54,16 @@ public class EmailSchedulerServiceImpl implements EmailSchedulerService {
 	 * :10 of minute :00 of every hour 0/10 0 * ? * * => Every 10 seconds
 	 * starting at second 00, at minute :00, of every hour
 	 */
-	@Scheduled(fixedDelay = 180000)//3min
+	@Scheduled(fixedDelay = 180000) // 3min
 	// @Scheduled(fixedDelay = 50000)
 	// @Scheduled(cron = "10 0 * ? * *", zone="America/Chicago") // every 1 hour
 	@Override
 	public void generateEmailsToBeSend() {
 
-		
-		//resetting assignments that passed 24h period and were not started
+		// resetting assignments that passed 24h period and were not started
 		notStartedIn24Hours();
-		
-		//start sending the email cron job
+
+		// start sending the email cron job
 		List<EmailScheduler> dateList = new ArrayList<>();
 		dateList = findDateToSend(newDateNow);
 
@@ -72,37 +71,42 @@ public class EmailSchedulerServiceImpl implements EmailSchedulerService {
 			System.out.println("****************No dates found************");
 			return;
 		} else {
-			for (EmailScheduler date : dateList) {				
+			for (EmailScheduler date : dateList) {
 				String accessCode = date.getAssignmentId().getAccesscode();
-				if (accessCode != null) {										
+				if (accessCode != null) {
 					String email = date.getAssignmentId().getStudentId().getEmail();
 					String studentId = date.getAssignmentId().getStudentId().getStudentId();
 					String accessLink = date.getAccessLink();
 					sendEmail(studentId, accessLink, accessCode, email);
-					date.setSend(true);// as email sent, set isSend to true, so it wont be picked up by the DB next time the job runs
+					date.setSend(true);// as email sent, set isSend to true, so
+										// it wont be picked up by the DB next
+										// time the job runs
 				}
 			}
 		}
 	}
 
 	/*
-	 * Implements the functionality to allow the coach to regenerate the assignment if the test was not started 
+	 * Implements the functionality to allow the coach to regenerate the
+	 * assignment if the test was not started
 	 */
 	private void notStartedIn24Hours() {
-		//start reset assignments passed 24 h cron job
+		// start reset assignments passed 24 h cron job
 		List<EmailScheduler> past24hMap = new ArrayList<EmailScheduler>();
 		past24hMap = findAllNotStartedWithin24h(newDateNow);
-		
-		if (!past24hMap.isEmpty()){
-	
-			for(EmailScheduler assignment : past24hMap){
+
+		if (!past24hMap.isEmpty()) {
+
+			for (EmailScheduler assignment : past24hMap) {
 				long hours = calculate24hours(assignment.getSendEmailDateTime(), newDateNow);
-				
-				if (hours >= 24){
-					System.out.println(" -------------------------wasn't started within 24 h: Allow to reassign/regenerate a new test for assignment id --------------------------" + assignment.getId());
+
+				if (hours >= 24) {
+					System.out.println(
+							" -------------------------wasn't started within 24 h: Allow to reassign/regenerate a new test for assignment id --------------------------"
+									+ assignment.getId());
 					set24pastAssignmentEmailSchedulerToNull(assignment.getAssignmentId().getId());
-				}				
-			}			
+				}
+			}
 		}
 	}
 
@@ -111,22 +115,24 @@ public class EmailSchedulerServiceImpl implements EmailSchedulerService {
 	 */
 	@Override
 	public String sendEmail(String userId, String accessLink, String accessCode, String email) {
-		SimpleMailMessage message = new SimpleMailMessage();
-		message.setTo(email);
-		message.setReplyTo("false");
-		message.setFrom("mumtestlink@gmail.com");
-		message.setSubject("Test Link");
-		message.setText(
-				"The test you can take at this particular link. To access the test you need to enter the access code provided below. "
-						+ " Please find the link and the access code below: \n" + "Access Link: "
-						+ "https://ots.cs.mum.edu/onlinetest/test" + "\n" + "Access Code: " + accessCode
-						+ "\nAll the best!");
+		try {
+			SimpleMailMessage message = new SimpleMailMessage();
+			message.setTo(email);
+			message.setReplyTo("false");
+			message.setFrom("mumtestlink@gmail.com");
+			message.setSubject("Test Link");
+			message.setText(
+					"The test you can take at this particular link. To access the test you need to enter the access code provided below. "
+							+ " Please find the link and the access code below: \n" + "Access Link: "
+							+ "https://ots.cs.mum.edu/onlinetest/test" + "\n" + "Access Code: " + accessCode
+							+ "\nAll the best!");
 
-		mailSender.send(message);
-		String result = "success";
-		return result;
+			mailSender.send(message);
+			return "success";
+		} catch (Exception e) {
+			return "failure";
+		}
 	}
-
 
 	/*
 	 * Calculates how many hours passed from the date the test was sent
@@ -141,14 +147,14 @@ public class EmailSchedulerServiceImpl implements EmailSchedulerService {
 	public List<EmailScheduler> findAllNotStartedWithin24h(LocalDateTime newDateNow) {
 		return emailSchedulerRepository.findAllNotStartedWithin24h(newDateNow);
 	}
-	
-	//@Transactional(isolation=Isolation.READ_COMMITTED)
+
+	// @Transactional(isolation=Isolation.READ_COMMITTED)
 	@Override
-	public void set24pastAssignmentEmailSchedulerToNull(Integer id){
+	public void set24pastAssignmentEmailSchedulerToNull(Integer id) {
 		emailSchedulerRepository.set24pastAssignmentToNull(id);
 	}
-	
-	/* 
+
+	/*
 	 * Find the EmailScheduler obj by assignment Id
 	 */
 	@Override
@@ -165,7 +171,6 @@ public class EmailSchedulerServiceImpl implements EmailSchedulerService {
 	public List<EmailScheduler> findDateToSend(LocalDateTime newDateNow) {
 		return emailSchedulerRepository.findDateToSend(newDateNow);
 	}
-
 
 	@Override
 	public void saveEmailScheduler(EmailScheduler emailScheduler) {
