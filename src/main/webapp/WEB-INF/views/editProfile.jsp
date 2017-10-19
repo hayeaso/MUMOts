@@ -71,7 +71,8 @@
 
 			<div class="form-group">
 				<input class=" form-control " placeholder="Confirm Password"
-					name='confirmpassword' id="password_confirmation" type="password" value="${user.password}">
+					name='confirmpassword' id="password_confirmation" type="password"
+					value="${user.password}">
 			</div>
 
 			<div id="divCheckPasswordMatch"></div>
@@ -121,12 +122,14 @@
 		$("#register_password, #password_confirmation").keyup(function() {
 			var password = $("#register_password").val();
 			var confirmPassword = $("#password_confirmation").val();
-
-			if (password != confirmPassword)
+			if (password != confirmPassword) {
 				$("#divCheckPasswordMatch").html("Passwords do not match!");
-			else
+				$('#register-submit-btn').attr('disabled','disabled');
+			}
+			else {
 				$("#divCheckPasswordMatch").html("Passwords match.");
+				$('#register-submit-btn').removeAttr('disabled');
+			}
 		});
-
 	});
 </script>

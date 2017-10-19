@@ -50,7 +50,7 @@
 						List</a></li>
 				<li><a href="<c:url value="/admin/importData" />"
 					${('/onlinetest/admin/importData' == currentPage) ? ' class="activeNavItem"'  : ''}>Import
-						Data</a></li>
+						Question</a></li>
 				<li><a href="<c:url value="/admin/assignments" />"
 					${('/onlinetest/admin/assignments' == currentPage) ? ' class="activeNavItem"'  : ''}>Assignments</a></li>
 				<li><a href="<c:url value="/admin/resultlist" />"
