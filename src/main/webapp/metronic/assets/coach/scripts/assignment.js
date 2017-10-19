@@ -1,3 +1,4 @@
+
 function generateAccessCode(){
 	
 	if( $('#accessCode').val() ) {
@@ -59,9 +60,9 @@ function assignmentDone(userId){
 	   success: function(data){        
 		   
 		   if(data === "success"){
-			   alert("successsss");
-			  // $('#myModal').modal('show');
-			   window.location.href = "../../../onlinetest/coach/home";			   
+			  // alert("successsss");
+			   $('#myModal').modal('show');
+//			   window.location.href = "../../../onlinetest/coach/home";			   
 		   }
 		   else{
 			   $("#errorMessage").empty();
@@ -75,16 +76,16 @@ function assignmentDone(userId){
 	});
 }
 
-/*function closeModalCoachAssignment(){
+function closeModalCoachAssignment(){
 	window.location.href = "../../../onlinetest/coach/home";	
 	self.close();
-}*/
+}
 
 function assignmentCancel(){
 	window.location.href = "../../../onlinetest/coach/home";
 }
 
-/* by Diana * not needed anymore, since the date is swcheduled and will run automatically
+/* by Diana * not needed anymore, since the date is scheduled and will run automatically
 function sendEmail(userId){
 	var msg;
 	if( !$('#accessCode').val() ) {
