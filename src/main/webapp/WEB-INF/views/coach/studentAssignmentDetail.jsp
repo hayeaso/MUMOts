@@ -121,12 +121,12 @@
 	jQuery('#dateTime').datetimepicker({
 		timepicker: true,
 		closeOnDateSelect: true,
-		//startDate: new Date(),
+		startDate: new Date(),
 		defaultDate: new Date(),
 		scrollMonth : false,
 		todayButton: true,
 		defaultSelect: true,
-		//minDate: new Date(),
+		minDate: new Date(),
 		format: 'm/d/y H:00'
 		//format: 'm/d/Y h:m A' /* M d y will give a different format that will be displayed in the form*/
 	});

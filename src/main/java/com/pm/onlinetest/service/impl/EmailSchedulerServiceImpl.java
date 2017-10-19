@@ -37,6 +37,11 @@ public class EmailSchedulerServiceImpl implements EmailSchedulerService {
 
 	@Autowired
 	private MailSender mailSender;
+	
+	private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yy HH:00");
+	private LocalDateTime dateTime = LocalDateTime.now();
+	private String curDate = dateTime.format(formatter);
+	private LocalDateTime newDateNow = LocalDateTime.parse(curDate, formatter);
 
 	/*
 	 * Tasks scheduler method 1.Seconds; 2.Minutes; 3.Hours; 4.Day-of-Month;
@@ -55,35 +60,9 @@ public class EmailSchedulerServiceImpl implements EmailSchedulerService {
 	@Override
 	public void generateEmailsToBeSend() {
 
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yy HH:00");
-		LocalDateTime dateTime = LocalDateTime.now();
-		String curDate = dateTime.format(formatter);
-		LocalDateTime newDateNow = LocalDateTime.parse(curDate, formatter);
-
-//		// 24 hours ago date
-//		LocalDateTime dateTime24back = newDateNow.minusHours(24);
-//		System.out.println("****************24h ago time************" + dateTime24back.format(formatter)); // 2016/11/16
 		
-		//start reset assignments passed 24 h cron job
-		List<EmailScheduler> past24hMap = new ArrayList<EmailScheduler>();
-		past24hMap = findAllNotStartedWithin24h(newDateNow);
-		
-		if (!past24hMap.isEmpty()){
-	
-			for(EmailScheduler assignment : past24hMap){
-				long hours = calculate24hours(assignment.getSendEmailDateTime(), newDateNow);
-				
-				if (hours > 24){
-					System.out.println(" -------------------------wasnt started within 24 h: assignment id--------------------------" + assignment.getId());
-					System.out.println(" -------------------------wasnt started within 24 h: hours passed--------------------------" + hours);
-					System.out.println(" -------------------------wasnt started within 24 h: email sent date--------------------------" + assignment.getSendEmailDateTime());
-					set24pastAssignmentEmailSchedulerToNull(assignment.getAssignmentId().getId());
-				}				
-			}			
-		}
-		
-		//end resetting assignments that passed 24h period and were not taken, started
-		
+		//resetting assignments that passed 24h period and were not started
+		notStartedIn24Hours();
 		
 		//start sending the email cron job
 		List<EmailScheduler> dateList = new ArrayList<>();
@@ -93,36 +72,38 @@ public class EmailSchedulerServiceImpl implements EmailSchedulerService {
 			System.out.println("****************No dates found************");
 			return;
 		} else {
-			for (EmailScheduler date : dateList) {
-				
+			for (EmailScheduler date : dateList) {				
 				String accessCode = date.getAssignmentId().getAccesscode();
 				if (accessCode != null) {										
 					String email = date.getAssignmentId().getStudentId().getEmail();
 					String studentId = date.getAssignmentId().getStudentId().getStudentId();
 					String accessLink = date.getAccessLink();
-					/*System.out.println("***************sending email: emailSchedulerID***************" + date.getId());
-					System.out.println("***************sending email: accesscode***************" + accessCode);
-					System.out.println("***************sending email: email***************" + email);
-					System.out.println("***************sending email: studentId***************" + studentId);
-					System.out.println("***************sending email: accessLink***************" + accessLink);
-					System.out.println("***************sending email: date***************" + date);*/
-
 					sendEmail(studentId, accessLink, accessCode, email);
-					date.setSend(true);// as email sent, set isSend to true, so it wont be picked up by the DB
+					date.setSend(true);// as email sent, set isSend to true, so it wont be picked up by the DB next time the job runs
 				}
 			}
 		}
 	}
 
-	@Override
-	public List<EmailScheduler> findDateToSend(LocalDateTime newDateNow) {
-		return emailSchedulerRepository.findDateToSend(newDateNow);
-	}
-
-
-	@Override
-	public void saveEmailScheduler(EmailScheduler emailScheduler) {
-		emailSchedulerRepository.save(emailScheduler);
+	/*
+	 * Implements the functionality to allow the coach to regenerate the assignment if the test was not started 
+	 */
+	private void notStartedIn24Hours() {
+		//start reset assignments passed 24 h cron job
+		List<EmailScheduler> past24hMap = new ArrayList<EmailScheduler>();
+		past24hMap = findAllNotStartedWithin24h(newDateNow);
+		
+		if (!past24hMap.isEmpty()){
+	
+			for(EmailScheduler assignment : past24hMap){
+				long hours = calculate24hours(assignment.getSendEmailDateTime(), newDateNow);
+				
+				if (hours >= 24){
+					System.out.println(" -------------------------wasn't started within 24 h: Allow to reassign/regenerate a new test for assignment id --------------------------" + assignment.getId());
+					set24pastAssignmentEmailSchedulerToNull(assignment.getAssignmentId().getId());
+				}				
+			}			
+		}
 	}
 
 	/*
@@ -148,9 +129,7 @@ public class EmailSchedulerServiceImpl implements EmailSchedulerService {
 
 
 	/*
-	 * Method that calculates 24 hours from the date the test was sent this
-	 * method will be used to set the assignment and emailscheduler to null if
-	 * test wasnt taken within 24 hours
+	 * Calculates how many hours passed from the date the test was sent
 	 */
 	public long calculate24hours(LocalDateTime emailschedulerDate, LocalDateTime currentDate) {
 		// using Java 8's time utils to calculate hours between two dates
@@ -167,7 +146,6 @@ public class EmailSchedulerServiceImpl implements EmailSchedulerService {
 	@Override
 	public void set24pastAssignmentEmailSchedulerToNull(Integer id){
 		emailSchedulerRepository.set24pastAssignmentToNull(id);
-		//emailSchedulerRepository.set24pastEmailschedulerToNull(id);
 	}
 	
 	/* 
@@ -182,16 +160,16 @@ public class EmailSchedulerServiceImpl implements EmailSchedulerService {
 	public void updateOnEmailSend(Assignment assignmentId) {
 		emailSchedulerRepository.updateOnEmailSend(assignmentId);
 	}
-	
 
-//	private List<Assignment> findAllAssignentsNotStarted(Assignment assignmentId) {
-//		return emailSchedulerRepository.findAllAssignentsNotStarted(assignmentId);
-//	}
+	@Override
+	public List<EmailScheduler> findDateToSend(LocalDateTime newDateNow) {
+		return emailSchedulerRepository.findDateToSend(newDateNow);
+	}
 
-	
-	/*@Override
-	public List<EmailScheduler> find24hPastDate(LocalDateTime newDateNow) {
-		return emailSchedulerRepository.find24hPastDate(newDateNow);
-	}*/
+
+	@Override
+	public void saveEmailScheduler(EmailScheduler emailScheduler) {
+		emailSchedulerRepository.save(emailScheduler);
+	}
 
 }
