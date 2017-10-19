@@ -34,7 +34,7 @@
 						List </a></li>
 				<li><a href="<c:url value="/dba/importData" />"
 					${('/onlinetest/dba/importData' == currentPage) ? ' class="activeNavItem"' : ''}>Import
-						Data </a></li>
+						Questions </a></li>
 
 				<li><a href="<c:url value="/help" />"
 					${('/onlinetest/help' == currentPage) ? ' class="activeNavItem"' : ''}>Help
