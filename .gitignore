@@ -38,3 +38,5 @@ src/main/webapp/WEB-INT/spring/context/applicationContext.xml
 /*.iml
 /out
 /bin
+/.project
+/.settings
