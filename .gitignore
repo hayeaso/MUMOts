@@ -33,3 +33,4 @@ MUMOts/
 hs_err_pid*
 .idea/
 *.iml
+applicationContext.xml
