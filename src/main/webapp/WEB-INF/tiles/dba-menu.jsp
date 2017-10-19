@@ -19,22 +19,15 @@
 					class="icon-bar"></span>
 			</button>
 		</div>
-		
+
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="navbar-collapse collapse in"
 			id="bs-example-navbar-collapse-1">
 			<ul class="nav navbar-nav">
 
-				<li><a href="<c:url value="/dba/addquestion" />"
-					${('/onlinetest/dba/addquestion' == currentPage) ? ' class="activeNavItem"' : ''}>Add
-						Question </a></li>
-
 				<li><a href="<c:url value="/dba/viewquestions" />"
-					${('/onlinetest/dba/viewquestions' == currentPage) ? ' class="activeNavItem"' : ''}>Question
-						List </a></li>
-				<li><a href="<c:url value="/dba/importData" />"
-					${('/onlinetest/dba/importData' == currentPage) ? ' class="activeNavItem"' : ''}>Import
-						Questions </a></li>
+					${('/onlinetest/dba/viewquestions' == currentPage) ? ' class="activeNavItem"' : ''}>Questions
+				</a></li>
 
 				<li><a href="<c:url value="/help" />"
 					${('/onlinetest/help' == currentPage) ? ' class="activeNavItem"' : ''}>Help
@@ -45,12 +38,14 @@
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown" role="button" aria-haspopup="true"
-					aria-expanded="false"> <span class="bold ">${sessionScope.role}</span><span class="caret"></span></a>
+					aria-expanded="false"> <span class="bold ">${sessionScope.role}</span><span
+						class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="editProfile"><i class="fa fa-edit"></i> Edit
 								Profile </a></li>
 						<li role="separator" class="divider"></li>
-						<li><a href="<c:url value="/logout" />"><i class="glyphicon glyphicon-log-out"></i>Logout</a></li>
+						<li><a href="<c:url value="/logout" />"><i
+								class="glyphicon glyphicon-log-out"></i>Logout</a></li>
 					</ul></li>
 			</ul>
 		</div>

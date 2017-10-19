@@ -39,15 +39,11 @@
 					${('/onlinetest/coach/resultlist' == currentPage) ? ' class="activeNavItem"' : ''}>Result
 						List</a></li>
 
-				<li><a href="<c:url value="/coach/addquestion" />"
-					${('/onlinetest/coach/addquestion' == currentPage) ? ' class="activeNavItem"' : ''}>Add
-						Question</a></li>
+
 				<li><a href="<c:url value="/coach/viewquestions" />"
-					${('/onlinetest/coach/viewquestions' == currentPage) ? ' class="activeNavItem"' : ''}>View
+					${('/onlinetest/coach/viewquestions' == currentPage) ? ' class="activeNavItem"' : ''}>
 						Questions</a></li>
-				<li><a href="<c:url value="/coach/importData" />"
-					${('/onlinetest/coach/importData' == currentPage) ? ' class="activeNavItem"' : ''}>Import
-						Data</a></li>
+
 				<li><a href="<c:url value="/help" />"
 					${('/onlinetest/help' == currentPage) ? ' class="activeNavItem"' : ''}>Help</a></li>
 
