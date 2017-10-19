@@ -10,7 +10,7 @@
 			<jsp:useBean id="now" class="java.util.Date" />
 			Date Time :
 			<fmt:formatDate value="${now}" pattern="dd-MM-yyyy HH:mm:ss a z" />
-			<button id="export" class="btn btn-circlebtn-icon-only  btn-default">Export
+			<button id="exportAssignmentDetail" class="btn btn-circlebtn-icon-only  btn-default">Export
 			</button>
 			<a class="btn btn-circle btn-icon-only btn-default fullscreen"
 				href="#" data-original-title="" title=""></a>
@@ -36,7 +36,7 @@
 
 </div>
 			<br><br>
-			
+			<input id="assignmentId" type="hidden" value="${assignemtId}" />
 			<table class="table table-striped table-hover table-bordered"
 				id="sample_editable_1">
 				<thead>

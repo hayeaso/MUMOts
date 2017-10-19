@@ -11,7 +11,7 @@
 			<jsp:useBean id="now" class="java.util.Date" />
 			Date Time :
 			<fmt:formatDate value="${now}" pattern="dd-MM-yyyy HH:mm:ss a z" />
-			<button id="export" class="btn btn-circlebtn-icon-only  btn-default">Export
+			<button id="exportAssignment" class="btn btn-circlebtn-icon-only  btn-default">Export
 			</button>
 			<a class="btn btn-circle btn-icon-only btn-default fullscreen"
 				href="#" data-original-title="" title=""></a>
@@ -28,12 +28,16 @@
 		<div class="row">
 			<div class="col-md-8"></div>
 		</div>
-		<br> <br> -->
+		<br> <br> -->		
+		
 		<div id="table_wrapper">
-			<table class="table table-striped table-hover table-bordered"
+		
+		<table class="table table-striped table-hover table-bordered"
 				id="sample_editable_1">
 				<thead>
 					<tr>
+						<th><input type="checkbox" class="chkAssignmentCls" id="assignments_SelectAll" data-chks=".assignmentChkGroup"/>
+						</th>
 						<th>No</th>
 						<th>Coach</th>
 						<th>StudentID</th>
@@ -52,6 +56,7 @@
 					<c:forEach items="${assignments}" var="assignment"
 						varStatus="status">
 						<tr>
+							<td class="assignmentChkGroup" data-id="${assignment.id}"><input type="checkbox" /></td>
 							<td>${status.count}</td>
 							<td>${assignment.coachId.firstName}</td>
 							<td>${assignment.studentId.studentId}</td>
@@ -97,7 +102,7 @@
 					</c:forEach>
 				</tbody>
 			</table>
-
+			
 		</div>
 	</div>
 </div>

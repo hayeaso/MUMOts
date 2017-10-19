@@ -28,6 +28,7 @@ public interface AssignmentService {
 	//added by shehza
 	
 	Assignment findByAccesscode(String accessCode);
-	//check if the assignment exist already so don't create new one just override it if user save it again
+	//check if the assignment exist already so don't create new one just override it if user save it again	
 	
+	public List<Assignment> findByIds(List<Integer> ids);
 }
