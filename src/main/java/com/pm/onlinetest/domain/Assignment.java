@@ -3,6 +3,7 @@ package com.pm.onlinetest.domain;
 import java.time.LocalDateTime;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -25,6 +26,10 @@ public class Assignment {
  	private boolean finished;
  	private String accesscode;
  	
+// 	@Column(nullable=false, columnDefinition = "boolean default false")
+// 	private Boolean regenerateTest;//added by Diana Yamaletdinova
+ 	
+ 	@Column(nullable=false, columnDefinition = "boolean default false")
  	private boolean regenerateTest;//added by Diana Yamaletdinova
 	
  	@OneToOne(fetch=FetchType.EAGER)	
@@ -117,7 +122,7 @@ public class Assignment {
 		this.accesscode = accesscode;
 	}
 
-	public boolean isRegenerateTest() {
+	public boolean getRegenerateTest() {
 		return regenerateTest;
 	}
 

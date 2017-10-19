@@ -1,22 +1,26 @@
 package com.pm.onlinetest.controller;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.json.simple.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -24,7 +28,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,25 +35,23 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.pm.onlinetest.domain.User;
-import com.pm.onlinetest.exception.DuplicateCategoryNameException;
-import com.pm.onlinetest.exception.UserNotFoundException;
-import com.pm.onlinetest.domain.Authority;
 import com.pm.onlinetest.domain.Category;
 import com.pm.onlinetest.domain.Choice;
+import com.pm.onlinetest.domain.DataLog;
 import com.pm.onlinetest.domain.Question;
 import com.pm.onlinetest.domain.Student;
 import com.pm.onlinetest.domain.Subcategory;
-import com.pm.onlinetest.domain.Test;
+import com.pm.onlinetest.domain.User;
+import com.pm.onlinetest.exception.DuplicateCategoryNameException;
+import com.pm.onlinetest.exception.UserNotFoundException;
 import com.pm.onlinetest.service.AuthorityService;
 import com.pm.onlinetest.service.CategoryService;
 import com.pm.onlinetest.service.ChoiceService;
+import com.pm.onlinetest.service.DataLogService;
 import com.pm.onlinetest.service.QuestionService;
 import com.pm.onlinetest.service.StudentService;
 import com.pm.onlinetest.service.SubCategoryService;
 import com.pm.onlinetest.service.UserService;
-
-import helpers.CurrentQuestion;
 
 /**
  * Handles requests for the application home page.
@@ -74,6 +75,8 @@ public class AdminController {
 	QuestionService questionService;
 	@Autowired
 	ChoiceService choiceService;
+	@Autowired
+	DataLogService dataLogService;
 
 	@RequestMapping(value = "/admin/home", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
@@ -86,7 +89,7 @@ public class AdminController {
 		model.addAttribute("users", users);
 		return "users";
 	}
-	
+
 	@RequestMapping(value = { "/admin/students", "/coach/students" }, method = RequestMethod.GET)
 	public String getStudents(Model model, HttpServletRequest request) {
 		List<Student> students = studentService.findAll();
@@ -117,9 +120,10 @@ public class AdminController {
 			user.setEnabled(true);
 			userService.save(user);
 
-			redirectAttr.addFlashAttribute("success", "Success");	
-			redirectAttr.addFlashAttribute("titleMessage", "User Added");	
-			redirectAttr.addFlashAttribute("bodyMessage", "User "+user.getUsername()+" SuccessFully Added to the database");	
+			redirectAttr.addFlashAttribute("success", "Success");
+			redirectAttr.addFlashAttribute("titleMessage", "User Added");
+			redirectAttr.addFlashAttribute("bodyMessage",
+					"User " + user.getUsername() + " SuccessFully Added to the database");
 
 			return "redirect:/admin/users";
 		}
@@ -141,22 +145,22 @@ public class AdminController {
 		}
 		if (null != studentService.findByStudentId(student.getStudentId())) {
 			redirectAttr.addFlashAttribute("error", "Error");
-			redirectAttr.addFlashAttribute("model", student);	
-			return "redirect:"+mapping;
-		}else{
+			redirectAttr.addFlashAttribute("model", student);
+			return "redirect:" + mapping;
+		} else {
 			studentService.save(student);
-			redirectAttr.addFlashAttribute("success", "Success");	
-			redirectAttr.addFlashAttribute("titleMessage", "Student Added");	
-			redirectAttr.addFlashAttribute("bodyMessage", "Student "+student.getFirstName()+" "+student.getLastName()+" SuccessFully Added to the database");	
+			redirectAttr.addFlashAttribute("success", "Success");
+			redirectAttr.addFlashAttribute("titleMessage", "Student Added");
+			redirectAttr.addFlashAttribute("bodyMessage", "Student " + student.getFirstName() + " "
+					+ student.getLastName() + " SuccessFully Added to the database");
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		    String role = auth.getAuthorities().toString();
-		    if(role.equals("[ROLE_ADMIN]"))
-		    	return "redirect:/admin/students";
-		    else
-		    	return "redirect:/coach/students";
+			String role = auth.getAuthorities().toString();
+			if (role.equals("[ROLE_ADMIN]"))
+				return "redirect:/admin/students";
+			else
+				return "redirect:/coach/students";
 		}
 	}
-
 
 	@RequestMapping(value = { "/admin/editStudent/{id}", "/coach/editStudent/{id}" }, method = RequestMethod.GET)
 	public String editStudent(@ModelAttribute("student") Student student, HttpServletRequest request, Model model,
@@ -205,13 +209,14 @@ public class AdminController {
 	// }
 
 	@RequestMapping(value = { "/admin/deleteUser", "/coach/deleteUser" }, method = RequestMethod.POST)
-	public String DeleteUser(HttpServletRequest request, @RequestParam("userid") Integer userId) throws UserNotFoundException {		
+	public String DeleteUser(HttpServletRequest request, @RequestParam("userid") Integer userId)
+			throws UserNotFoundException {
 		User user = userService.findByUserId(userId);
 		if (user == null) {
 			logger.debug("user id is invalid");
 			throw new UserNotFoundException("User id is not valid");
 		}
-		userService.updateStatus(userId, !user.isEnabled());		
+		userService.updateStatus(userId, !user.isEnabled());
 		return "admin/users";
 	}
 
@@ -241,7 +246,7 @@ public class AdminController {
 	@RequestMapping(value = "/admin/createCategory", method = RequestMethod.POST)
 	public String createCategoryPost(@ModelAttribute("Category") Category category, BindingResult result,
 			RedirectAttributes redirectAttr) {
-		
+
 		if (result.hasErrors()) {
 			return "createCategory";
 		}
@@ -250,7 +255,7 @@ public class AdminController {
 			categoryService.save(category);
 			redirectAttr.addFlashAttribute("success", "Successfully added new category!");
 			redirectAttr.addFlashAttribute("titleMessage", "CATEGORY ADDED!");
-			redirectAttr.addFlashAttribute("bodyMessage", "Successfully added new category "+ category.getName() );
+			redirectAttr.addFlashAttribute("bodyMessage", "Successfully added new category " + category.getName());
 		} catch (DuplicateCategoryNameException ex) {
 			redirectAttr.addFlashAttribute("alertErrorMsg", "[" + category.getName() + "]: " + ex.getMessage());
 			redirectAttr.addFlashAttribute("category", category);
@@ -290,7 +295,7 @@ public class AdminController {
 		subCategoryService.save(subcategory);
 		redirectAttr.addFlashAttribute("success", "Successfully added new Subcategory!");
 		redirectAttr.addFlashAttribute("titleMessage", "SUB CATEGORY ADDED!");
-		redirectAttr.addFlashAttribute("bodyMessage", "Successfully added new Subcategory "+ subcategory.getName());
+		redirectAttr.addFlashAttribute("bodyMessage", "Successfully added new Subcategory " + subcategory.getName());
 		return "redirect:/admin/subCategories";
 	}
 
@@ -310,94 +315,92 @@ public class AdminController {
 			"/dba/importData" }, method = RequestMethod.POST)
 	public String processExcel2007(Model model, @RequestParam("ExcelFile") MultipartFile excelfile,
 			RedirectAttributes redirectAttr, HttpServletRequest request) {
+
 		String mapping = request.getServletPath();
+		String log = "\t  \t  \t   Welcome to the Log for Insertion Of Questions \n\n";
+		int rows = 0;
+		int insertedRows = 0;
+		String toadd = "";
 		try {
 
-			List<Question> questions = new ArrayList<>();
-			int i = 0;
-			// Creates a workbook object from the uploaded excelfile
-			XSSFWorkbook workbook = new XSSFWorkbook(excelfile.getInputStream());
-			// Creates a worksheet object representing the first sheet
-			XSSFSheet worksheet = workbook.getSheetAt(0);
-			// Reads the data in excel file until last row is encountered
-			while (i <= worksheet.getLastRowNum()) {
-				Question question = new Question();
-				List<Choice> choices = new ArrayList<>();
+			// Using XSSF for xlsx format, for xls use HSSF
+			Workbook workbook = new XSSFWorkbook(excelfile.getInputStream());
 
-				XSSFRow row = worksheet.getRow(i++);
+			int numberOfSheets = workbook.getNumberOfSheets();
 
-				question.setDescription(row.getCell(2).getStringCellValue());
+			// looping over each workbook sheet
+			for (int i = 0; i < numberOfSheets; i++) {
+				Sheet sheet = workbook.getSheetAt(i);
+				Iterator<Row> rowIterator = sheet.iterator();
 
-				String catName = row.getCell(0).getStringCellValue().trim();
-				String subCatName = row.getCell(1).getStringCellValue().trim();
-				boolean error = false;
-				for (int j = 0; j < 8; j++) {
-					if (row.getCell(j).getStringCellValue().trim().length() == 0) {
-						error = true;
-						redirectAttr.addFlashAttribute("error2", "");
-					}
-					if (j == 3) {
-						String answer = row.getCell(j).getStringCellValue().toUpperCase();
-						if (65 > answer.charAt(0) || 70 < answer.charAt(0)) {
-							error = true;
-							redirectAttr.addFlashAttribute("error2", "Please check answer column.");
+				// iterating over each row
+				while (rowIterator.hasNext()) {
+
+					rows++;
+					Question question = new Question();
+					List<Choice> choices = new ArrayList<Choice>();
+					Row row = rowIterator.next();
+
+					// Set the Sub-Category
+					Subcategory subC;
+					// System.out.println(row.getCell(8).toString());
+					if (!subCategoryService.findSubCategoryByName(row.getCell(8).toString()).isEmpty()) {
+
+						// System.out.println(subCategoryService.findSubCategoryByName(row.getCell(8).toString()));
+						List<Subcategory> subCs = subCategoryService.findSubCategoryByName(row.getCell(8).toString());
+						subC = subCs.get(0);
+
+						question.setSubcategory(subC);
+						question.setDescription(row.getCell(0).toString());
+						question.setCategory(row.getCell(8).toString());
+						for (int j = 1; j < 7; j++) {
+							Choice choice = new Choice();
+							choice.setDescription(row.getCell(j).toString());
+							choice.setQuestion(question);
+							choices.add(choice);
+
 						}
-					}
-					if (error) {
-						redirectAttr.addFlashAttribute("error", "Error");
-						redirectAttr.addFlashAttribute("error1", "Error on line: " + i);
-						return "redirect:" + mapping;
-					}
-				}
-
-				List<Subcategory> subcategories = subCategoryService.findSubCategoryByName(subCatName);
-				if (subcategories.size() == 0) {
-					Subcategory subCategory = new Subcategory();
-					subCategory.setName(subCatName);
-					subCategory.setEnabled(true);
-
-					List<Category> categories = categoryService.findCategoryByName(subCatName);
-					if (categories.size() == 0) {
-						Category category = new Category();
-						category.setName(catName);
-						category.setEnabled(true);
-						categoryService.save(category);
-						subCategory.setCategory(category);
+						String rightAnswer = row.getCell(7).toString();
+						int rightAnswerIndex = getRightAnswerIndex(rightAnswer);
+						if (rightAnswerIndex != -1) {
+							choices.get(rightAnswerIndex).setAnswer(true);
+						}
+						questionService.save(question);
+						choiceService.save(choices);
+						insertedRows++;
 					} else {
-						subCategory.setCategory(categories.get(0));
+						toadd += "The Question at row number " + row.getRowNum() + " was not inserted :-->"
+								+ row.getCell(0).toString() + "\n";
+						//System.out.println(toadd);
+						continue;
 					}
-					subCategoryService.save(subCategory);
-					question.setSubcategory(subCategory);
-				} else {
-					question.setSubcategory(subcategories.get(0));
+
 				}
-
-				questionService.save(question);
-				String answer = row.getCell(3).getStringCellValue().toUpperCase();
-				int correctAnswerPos = answer.charAt(0) - 65;
-
-				for (int k = 0; k < 4; k++) {
-					Choice choice = new Choice();
-					choice.setQuestion(question);
-					choice.setDescription(row.getCell(k + 4).getStringCellValue().trim());
-					if (correctAnswerPos == k) {
-						choice.setAnswer(true);
-					} else {
-						choice.setAnswer(false);
-					}
-					choices.add(choice);
-				}
-				choiceService.save(choices);
-
+				//System.out.println("//////////////////////////////////////");
+				//System.out.println(toadd);
+				log+=("\t  \t  \t "+insertedRows +" rows added out of " + rows + "\n\n\n\n");
+				log+=toadd;
+				workbook.close();
 			}
-			workbook.close();
-			redirectAttr.addFlashAttribute("success", "Success");
-		} catch (Exception e) {
-			e.printStackTrace();
-			redirectAttr.addFlashAttribute("error", "Error");
-			redirectAttr.addFlashAttribute("error2", "Error:\n" + e);
-		}
 
+			excelfile.getInputStream().close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		//log+=(insertedRows + " rows added out of " + rows + "\n");
+		//log+=toadd;
+
+		//System.out.println("------------------------------------------------------");
+		System.out.println(log);
+		DataLog dl=new DataLog();
+		dl.setContent(log);
+		Date date = new Date();
+		System.out.println(date);
+		dl.setDate(date);
+		dl.setType("Question");
+		dataLogService.save(dl);
 		return "redirect:" + mapping;
 	}
 
@@ -426,45 +429,12 @@ public class AdminController {
 		return categoryService.findAllEnableCategoryNames();
 	}
 
-	// @ResponseBody
-	// @RequestMapping(value = "/assign", method = RequestMethod.POST)
-	// public String getAssignCoach(Locale locale, Model model,
-	// HttpServletRequest request,
-	// RedirectAttributes redirectAttr) {
-	// String coachId = request.getParameter("coachId").toString();
-	// String studentId = request.getParameter("studentId").toString();
-	// User coach = userService.findByUserId(Integer.parseInt(coachId));
-	// Student student = studentService.findByStudentId(studentId);
-	// Student_Record studentRecord = new Student_Record();
-	// studentRecord.setCoach(coach);
-	// studentRecord.setStudent(student);
-	// studentRecordService.save(studentRecord);
-	//
-	// // redirectAttr.addFlashAttribute("success", "Successfully assigned!");
-	// // return "assigned";
-	// return "ok";
-	// }
-
-	// @RequestMapping(value = "/assignedList", method = RequestMethod.GET)
-	// public String getAssignedList(Locale locale, Model model) {
-	// List<Student_Record> studentRecords = studentRecordService.findAll();
-	// model.addAttribute("studentRecords", studentRecords);
-	// return "assignedList";
-	// }
-	//
-	// @RequestMapping(value = { "/deleteAssign" }, method = RequestMethod.POST)
-	// public void DeleteAssign(HttpServletRequest request) {
-	// String id = request.getParameter("userid").toString();
-	// Student_Record sr = studentRecordService.findById(Integer.parseInt(id));
-	// studentRecordService.delete(sr);
-	// }
-
 	// bind to edit button in users.jsp
 	@RequestMapping(value = "/admin/editUser/{id}", method = RequestMethod.GET)
 	public String editUser(@ModelAttribute("loginUser") User user, Model model, @PathVariable("id") int id) {
-		//System.out.println("GET: enter into Edit User	");
-		//System.out.println("userid=" + id);
-		model.addAttribute("user", userService.findByUserId(id));// assign user										
+		// System.out.println("GET: enter into Edit User ");
+		// System.out.println("userid=" + id);
+		model.addAttribute("user", userService.findByUserId(id));// assign user
 		return "editUser";
 	}
 
@@ -483,11 +453,42 @@ public class AdminController {
 			user.setEnabled(true);
 			userService.save(user);
 			redirectAttr.addFlashAttribute("success", "Success");
-			redirectAttr.addFlashAttribute("titleMessage", "User EDITED");	
-			redirectAttr.addFlashAttribute("bodyMessage", "User "+user.getUsername()+" successfully edited!");	
+			redirectAttr.addFlashAttribute("titleMessage", "User EDITED");
+			redirectAttr.addFlashAttribute("bodyMessage", "User " + user.getUsername() + " successfully edited!");
 
 			return "redirect:/admin/users";
 		}
 		return "redirect:/admin/editUser/" + user.getUserId();
+	}
+
+	private int getRightAnswerIndex(String rightAnswer) {
+		int rightAnswerIndex = -1;
+		switch (rightAnswer) {
+		case "B":
+			rightAnswerIndex = 0;
+			break;
+		case "C":
+			rightAnswerIndex = 1;
+
+			break;
+		case "D":
+			rightAnswerIndex = 2;
+
+			break;
+		case "E":
+			rightAnswerIndex = 3;
+
+			break;
+		case "F":
+			rightAnswerIndex = 4;
+
+			break;
+		case "G":
+			rightAnswerIndex = 5;
+
+			break;
+
+		}
+		return rightAnswerIndex;
 	}
 }

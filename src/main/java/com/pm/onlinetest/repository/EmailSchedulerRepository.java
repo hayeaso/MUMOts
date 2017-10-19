@@ -27,9 +27,6 @@ public interface EmailSchedulerRepository extends CrudRepository<EmailScheduler,
 	@Query ("SELECT d from EmailScheduler d WHERE d.assignmentId =:assignmentId")
 	EmailScheduler findByAssignmentId(@Param("assignmentId") Assignment assignmentId);
 	
-	
-	
-	
 	/*select all assignments that were not started within 24 hours but email was sent
 	* technicaly I can pas the date that is exact 24 h ago considering that i am checking/running tasks every hour, 
 	* but in case something goes wrong, I will leave this way, where I get all the date that is smaller that current date 
@@ -56,13 +53,6 @@ public interface EmailSchedulerRepository extends CrudRepository<EmailScheduler,
 	@Transactional
 	@Query("UPDATE EmailScheduler e SET e.isSend=true WHERE e.assignmentId=:assignmentId")
 	void updateOnEmailSend (@Param("assignmentId") Assignment assignmentId);
-	
-	
-	
-	
-	
-//	@Query("SELECT d from EmailScheduler d WHERE d.sendEmailDateTime <= :dateTime AND accessLink != NULL and d.isSend = true")
-//	List<EmailScheduler> find24hPastDate(@Param("dateTime") LocalDateTime newDateNow);
 
 	
 }
