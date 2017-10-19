@@ -30,3 +30,6 @@ hs_err_pid*
 *.classpath
 *.project
 applicationContext.xml
+.classpath
+.settings/org.eclipse.wst.common.component
+src/main/webapp/WEB-INT/spring/context/applicationContext.xml
