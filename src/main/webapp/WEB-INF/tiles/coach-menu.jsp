@@ -31,13 +31,14 @@
 
 				<li><a href="<c:url value="/coach/home" />"
 					${('/onlinetest/coach/home' == currentPage) ? ' class="activeNavItem"' : ''}>Home</a></li>
+				<li><a href="<c:url value="/coach/students" />"
+					${('/onlinetest/coach/students' == currentPage) ? ' class="activeNavItem"' : ''}>Students</a></li>
 				<li><a href="<c:url value="/coach/assignments" />"
 					${('/onlinetest/coach/assignments' == currentPage) ? ' class="activeNavItem"' : ''}>Assignments</a></li>
 				<li><a href="<c:url value="/coach/resultlist" />"
 					${('/onlinetest/coach/resultlist' == currentPage) ? ' class="activeNavItem"' : ''}>Result
 						List</a></li>
-				<li><a href="<c:url value="/coach/students" />"
-					${('/onlinetest/coach/students' == currentPage) ? ' class="activeNavItem"' : ''}>Students</a></li>
+
 				<li><a href="<c:url value="/coach/addquestion" />"
 					${('/onlinetest/coach/addquestion' == currentPage) ? ' class="activeNavItem"' : ''}>Add
 						Question</a></li>
@@ -56,12 +57,14 @@
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown" role="button" aria-haspopup="true"
-					aria-expanded="false"> <span class="bold">${sessionScope.role}</span></span> <span class="caret"></span></a>
+					aria-expanded="false"> <span class="bold">${sessionScope.role}</span></span>
+						<span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="editProfile"><i class="fa fa-edit"></i> Edit
 								Profile </a></li>
 						<li role="separator" class="divider"></li>
-						<li><a href="<c:url value="/logout" />"><i class="glyphicon glyphicon-log-out"></i>Logout</a></li>
+						<li><a href="<c:url value="/logout" />"><i
+								class="glyphicon glyphicon-log-out"></i>Logout</a></li>
 					</ul></li>
 			</ul>
 		</div>
