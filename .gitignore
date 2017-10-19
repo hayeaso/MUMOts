@@ -35,3 +35,12 @@ applicationContext.xml
 .classpath
 .settings/org.eclipse.wst.common.component
 src/main/webapp/WEB-INT/spring/context/applicationContext.xml
+/*.springBeans
+/*.iml
+/*.classpath
+/*.DS_Store
+/*.project
+/bin
+/out
+/.settings
+
