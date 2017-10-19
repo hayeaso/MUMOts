@@ -80,5 +80,10 @@ div.ui-datepicker-header select {
 	list-style: none;
 }
 
+#loading-indicator {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+}
 
 

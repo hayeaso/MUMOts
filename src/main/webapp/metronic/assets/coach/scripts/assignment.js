@@ -56,12 +56,17 @@ function assignmentDone(userId){
 		   accessLink:$('#accessLink').val(),
 		   dateTime:$("#dateTime").val()
 	   },
+
 	   success: function(data){        
 		   
 		   if(data === "success"){
-			   alert("successsss");
-			  // $('#myModal').modal('show');
-			   window.location.href = "../../../onlinetest/coach/home";			   
+			   //alert("successsss");
+			   $('#myModal').modal('show');
+			   //window.location.href = "../../../onlinetest/coach/home";	
+			// Set a timeout to hide the element again
+//			    setTimeout(function(){
+//			        $("#myModal").hide();
+//			    }, 3000);
 		   }
 		   else{
 			   $("#errorMessage").empty();
@@ -73,12 +78,20 @@ function assignmentDone(userId){
 		   }
 	   }
 	});
+	   $(document).ajaxSend(function(event, request, settings) {
+		    $('#loading-indicator').show();
+		});
+
+		$(document).ajaxComplete(function(event, request, settings) {
+		    $('#loading-indicator').hide();
+		});
 }
 
-/*function closeModalCoachAssignment(){
+
+function closeModalCoachAssignment(){
 	window.location.href = "../../../onlinetest/coach/home";	
 	self.close();
-}*/
+}
 
 function assignmentCancel(){
 	window.location.href = "../../../onlinetest/coach/home";
