@@ -80,6 +80,7 @@ public class CoachController {
 		Student student = coachService.findStudentById(studentId);
 		Assignment assignment = assignmentService.findByStudentIdByFinish(student);
 		EmailScheduler emailScheduler = emailScheduleService.findByAssignmentId(assignment);//added by Diana Yamaletdinova
+ 
 		if(assignment !=null)
 		System.out.println("assignment of finish false is: "+assignment.isFinished());
 		//added by Diana Yamaletdinova//remove later
@@ -89,20 +90,17 @@ public class CoachController {
 		model.addAttribute("student",student);		
 		if(assignment !=null && assignment.getAccesscode()!=null){
 			System.out.println("emailScheduler date " + emailScheduler.getSendEmailDateTime());	
-			//System.out.println("assignment details accessCode: "+ assignment.getAccesscode());			
+			System.out.println("assignment details accessCode: "+ assignment.getAccesscode());			
 			model.addAttribute("assignment",assignment);	
 			model.addAttribute("emailScheduler", emailScheduler);//added by Diana Yamaletdinova
 			System.out.println("assignment and emailScheduler are not null");
-			//return "coach/coach";
 		}
 		else{
 			assignment=null;
 			emailScheduler = null;
 			model.addAttribute("assignment",assignment);
 			model.addAttribute("emailScheduler", emailScheduler);//added by Diana Yamaletdinova
-			//System.out.println("making assignment null");
 		}		
-		//System.out.println("assignment details accessCode:"+ assignment);
 		return "studentAssignmentDetail";	
 	}	
 	@RequestMapping(value = "/coach/studentAssignmentHistory/{userId}", method = RequestMethod.GET)
@@ -126,10 +124,8 @@ public class CoachController {
 		EmailScheduler emailScheduler = null; 
 		String coachName =  SecurityContextHolder.getContext().getAuthentication().getName();
 		User coachModel = userService.findByUsername(coachName);
-		//System.out.println("coachModel.getUsername()t is: "+coachModel.getUsername());
 		
 		Student student = studentService.findByStudentId(Integer.parseInt(userId));
-		//System.out.println("student.getUsername() is: "+student.getFirstName());
 		
 		assignment = assignmentService.findByAccesscode(accessCode);
 		if(assignment !=null ) {
@@ -144,15 +140,12 @@ public class CoachController {
 		 * Format string from user input to LocalDateTime*/
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yy HH:00");
 		LocalDateTime dateTimeUserInput = LocalDateTime.parse(dateTime, formatter);
-		System.out.println("-------------------------------Date from user-------" + dateTimeUserInput);
 		
 		/*saving a new assignment and data into the emailscheduler table that associated with this assignment*/
 		emailScheduler.setAssignmentId(assignment);
 		emailScheduler.setSend(false);
 		emailScheduler.setSendEmailDateTime(dateTimeUserInput);
-		emailScheduler.setAccessLink(accessLink);
-		emailScheduleService.saveEmailScheduler(emailScheduler);
-		
+		emailScheduler.setAccessLink(accessLink);		
 		/* End added by Diana Yamaletdinova*/
 		
 		assignment.setAccesscode(accessCode);
@@ -160,11 +153,11 @@ public class CoachController {
 		assignment.setStudentId(student);
 		assignment.setCount(0);
 		assignment.setFinished(false);	
-		//System.out.println(" Assignment get access codeis: "+assignment.getAccesscode());		
+		emailScheduleService.saveEmailScheduler(emailScheduler);
 		assignmentService.saveAssignment(assignment);
 
 		/* Added by Diana Yamaletdinova*/
-		/*send the emal if user selected the current time*/
+		/*send the email if user selected the current time*/
 		LocalDateTime now = LocalDateTime.now();
 		String curDate = now.format(formatter);
 		LocalDateTime curDateTime = LocalDateTime.parse(curDate, formatter);

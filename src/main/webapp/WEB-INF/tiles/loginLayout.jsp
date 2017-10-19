@@ -25,6 +25,10 @@
 <!-- BEGIN PAGE LEVEL STYLES -->
 <link href="<c:url value="/metronic/assets/admin/pages/css/login.css" />" rel="stylesheet" type="text/css"/>
 <!-- END PAGE LEVEL SCRIPTS -->
+
+<!-- ANIMATE CSS LINK -->
+<link href="<c:url value="/resources/css/animate.css" />" rel="stylesheet" type="text/css"/>
+
 <!-- BEGIN THEME STYLES -->
 <link href="<c:url value="/metronic/assets/global/css/components.css" />" id="style_components" rel="stylesheet" type="text/css"/>
 <link href="<c:url value="/metronic/assets/global/css/plugins.css" />" rel="stylesheet" type="text/css"/>

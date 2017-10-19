@@ -2,7 +2,10 @@ package com.pm.onlinetest.controller;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -34,6 +37,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.pm.onlinetest.domain.Category;
 import com.pm.onlinetest.domain.Choice;
+import com.pm.onlinetest.domain.DataLog;
 import com.pm.onlinetest.domain.Question;
 import com.pm.onlinetest.domain.Student;
 import com.pm.onlinetest.domain.Subcategory;
@@ -43,6 +47,7 @@ import com.pm.onlinetest.exception.UserNotFoundException;
 import com.pm.onlinetest.service.AuthorityService;
 import com.pm.onlinetest.service.CategoryService;
 import com.pm.onlinetest.service.ChoiceService;
+import com.pm.onlinetest.service.DataLogService;
 import com.pm.onlinetest.service.QuestionService;
 import com.pm.onlinetest.service.StudentService;
 import com.pm.onlinetest.service.SubCategoryService;
@@ -70,6 +75,8 @@ public class AdminController {
 	QuestionService questionService;
 	@Autowired
 	ChoiceService choiceService;
+	@Autowired
+	DataLogService dataLogService;
 
 	@RequestMapping(value = "/admin/home", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
@@ -310,7 +317,10 @@ public class AdminController {
 			RedirectAttributes redirectAttr, HttpServletRequest request) {
 
 		String mapping = request.getServletPath();
-
+		String log = "\t  \t  \t   Welcome to the Log for Insertion Of Questions \n\n";
+		int rows = 0;
+		int insertedRows = 0;
+		String toadd = "";
 		try {
 
 			// Using XSSF for xlsx format, for xls use HSSF
@@ -325,19 +335,19 @@ public class AdminController {
 
 				// iterating over each row
 				while (rowIterator.hasNext()) {
+
+					rows++;
 					Question question = new Question();
 					List<Choice> choices = new ArrayList<Choice>();
 					Row row = rowIterator.next();
 
 					// Set the Sub-Category
 					Subcategory subC;
-					System.out.println(row.getCell(8).toString());
+					// System.out.println(row.getCell(8).toString());
 					if (!subCategoryService.findSubCategoryByName(row.getCell(8).toString()).isEmpty()) {
-						System.out.println("We are in ");
 
-						System.out.println(subCategoryService.findSubCategoryByName(row.getCell(8).toString()));
+						// System.out.println(subCategoryService.findSubCategoryByName(row.getCell(8).toString()));
 						List<Subcategory> subCs = subCategoryService.findSubCategoryByName(row.getCell(8).toString());
-						System.out.println(subCs);
 						subC = subCs.get(0);
 
 						question.setSubcategory(subC);
@@ -351,32 +361,46 @@ public class AdminController {
 
 						}
 						String rightAnswer = row.getCell(7).toString();
-
 						int rightAnswerIndex = getRightAnswerIndex(rightAnswer);
 						if (rightAnswerIndex != -1) {
 							choices.get(rightAnswerIndex).setAnswer(true);
 						}
 						questionService.save(question);
 						choiceService.save(choices);
+						insertedRows++;
 					} else {
-						System.out.println("The folowing Question was not inserted :" + row.getRowNum() + "-->"
-								+ row.getCell(0).toString());
-
+						toadd += "The Question at row number " + row.getRowNum() + " was not inserted :-->"
+								+ row.getCell(0).toString() + "\n";
+						//System.out.println(toadd);
 						continue;
 					}
 
 				}
+				//System.out.println("//////////////////////////////////////");
+				//System.out.println(toadd);
+				log+=("\t  \t  \t "+insertedRows +" rows added out of " + rows + "\n\n\n\n");
+				log+=toadd;
 				workbook.close();
 			}
 
 			excelfile.getInputStream().close();
-
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+		//log+=(insertedRows + " rows added out of " + rows + "\n");
+		//log+=toadd;
 
+		//System.out.println("------------------------------------------------------");
+		System.out.println(log);
+		DataLog dl=new DataLog();
+		dl.setContent(log);
+		Date date = new Date();
+		System.out.println(date);
+		dl.setDate(date);
+		dl.setType("Question");
+		dataLogService.save(dl);
 		return "redirect:" + mapping;
 	}
 
@@ -404,8 +428,6 @@ public class AdminController {
 		// may need get all the categories
 		return categoryService.findAllEnableCategoryNames();
 	}
-
-	
 
 	// bind to edit button in users.jsp
 	@RequestMapping(value = "/admin/editUser/{id}", method = RequestMethod.GET)

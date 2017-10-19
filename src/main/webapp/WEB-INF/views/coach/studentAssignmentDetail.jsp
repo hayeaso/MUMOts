@@ -121,7 +121,7 @@
 	jQuery('#dateTime').datetimepicker({
 		timepicker: true,
 		closeOnDateSelect: true,
-		//startDate: new Date(),
+		startDate: new Date(),
 		defaultDate: new Date(),
 		scrollMonth : false,
 		todayButton: true,

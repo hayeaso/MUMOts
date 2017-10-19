@@ -3,10 +3,12 @@ package com.pm.onlinetest.domain;
 
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 
 @Entity
 public class DataLog {
@@ -14,7 +16,7 @@ public class DataLog {
     @GeneratedValue
     private Integer id;
 	
-	private LocalDateTime date;
+	private Date date;
 	
 	public String getType() {
 		return type;
@@ -23,7 +25,8 @@ public class DataLog {
 	public void setType(String type) {
 		this.type = type;
 	}
-
+	
+	@Lob
 	private String Content;
 	
 	private String type;
@@ -36,11 +39,11 @@ public class DataLog {
 		this.id = id;
 	}
 
-	public LocalDateTime getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(LocalDateTime date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 
