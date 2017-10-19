@@ -5,18 +5,18 @@
 
 
 
-<div id="report" class="portlet light ">
+<div id="report" class="portlet box light panel panel-success">
 	<div class="portlet-title">
 		<div class="caption">
-			<span class="caption-subject bold uppercase font-dark">Student
+			<span class="caption-subject bold  font-dark leftShift">Student
 				Test Score </span>
 
 		</div>
 		<div class="actions">
 			<jsp:useBean id="now" class="java.util.Date" />
 			<button id="exportResult"
-				class="btn btn-circlebtn-icon-only  btn-default">Export</button>
-			<a class="btn btn-circle btn-icon-only btn-default fullscreen"
+				class="btn btn-success">Export</button>
+			<a class="btn btn-circle btn-icon-only btn-primary fullscreen glyphicon glyphicon-fullscreen alignright"
 				href="#" data-original-title="" title=""> </a>
 		</div>
 	</div>
@@ -89,4 +89,3 @@
 <script type="text/javascript" src="<c:url value="http://cdn.immex1.com/js/jspdf/plugins/jspdf.plugin.split_text_to_size.js"/>"></script>
 <script type="text/javascript" src="<c:url value="http://cdn.immex1.com/js/jspdf/plugins/jspdf.plugin.from_html.js"/>"></script>
 <script type="text/javascript" src="<c:url value="/metronic/assets/admin/pages/scripts/jquery.table2excel.js"/>"></script>
-

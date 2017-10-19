@@ -110,6 +110,10 @@ public class AssignmentServiceImpl implements AssignmentService {
 	public Assignment findByAccesscode(String accessCode) {
 		// TODO Auto-generated method stub
 		return assignmentRepository.findByAccesscode(accessCode);
-	}	
+	}
 
+	@Override
+	public List<Assignment> findByIds(List<Integer> ids) {
+		return assignmentRepository.findByIdIn(ids);
+	}
 }

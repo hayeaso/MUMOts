@@ -8,7 +8,6 @@ import org.springframework.data.repository.query.Param;
 
 import com.pm.onlinetest.domain.Assignment;
 import com.pm.onlinetest.domain.Student;
-import com.pm.onlinetest.domain.User;
 
 public interface AssignmentRepository extends CrudRepository<Assignment, Integer>{
 	
@@ -29,7 +28,7 @@ public interface AssignmentRepository extends CrudRepository<Assignment, Integer
 	
 	/*modified by Diana Yamaletdinova*/
 	@Query("SELECT a from Assignment a where a.studentId=:student and a.finished=false and a.regenerateTest=false")
-	Assignment findByStudentIdByFinish(@Param("student") Student student);
-
-
+	Assignment findByStudentIdByFinish(@Param("student") Student student);	
+	
+	List<Assignment> findByIdIn(List<Integer> ids);
 }

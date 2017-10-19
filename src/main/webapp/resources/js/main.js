@@ -26,7 +26,7 @@ $(function() {
 		}
 	}
 	
-	var MUMOTS = {
+	var MUMOTS = {			
 			init : function() {
 				this.eventsHandler();
 			},
@@ -44,7 +44,14 @@ $(function() {
 					$node.click(func);
 				}
 			},
-
+			
+			change: function($node, func){
+				if($node.length){
+					$node.unbind("change");
+					$node.change(func);
+				}
+			},
+			
 			eventsHandler : function() {
 				this.clicksHandler();
 				this.changesHandler();
@@ -52,24 +59,69 @@ $(function() {
 
 			clicksHandler : function() {
 				var _this = this;
-				_this.click($("input[id='Checkboxes_SelectAll']"), function(e) {
-					// e.preventDefault();
-					var $this = $(this);
-					_this.debugBtn(this);
-					_this.toggleCheckbox_SelectAll($this, this.checked);
+
+				$("#exportAssignment").click(function (e) {	
+					var values = [];					
+					$("td.assignmentChkGroup").find("span.checked").each( function(index, el) {					
+						values.push($(el).parents("td").data('id'));
+					});
+					console.log(values.toString());
+
+		    		if (values.length > 0) {
+			    		var	url = "/onlinetest//assignments/export";
+			    		$.ajax({
+			    			type:"get",
+			        		url:url,
+			        		data: {"ids":values.toString()},
+			        		success:function(data, textStatus, xhr) {
+			        		//url = CONTEXT_ROOT + "/DownloadFileServlet?fullPathFile=" + data;
+			        		window.location.href = "/onlinetest//assignments/download?ids="+values.toString();
+			        		}
+			        	});
+		    		} else {
+		    			alert("Please select at least 1 record to proceed!");
+		    		}
+		    	});				
+
+				_this.click($("#exportAssignmentDetail"), function(e) {
+					var values = [];	
+					values.push($("input[id='assignmentId']").val());
+					console.log(window.location.href);
+					
+					$.ajax({
+		    			type:"get",
+		        		url:'/onlinetest/assignments/export',
+		        		data: {"ids":values.toString()},
+		        		success:function(data, textStatus, xhr) {		        		
+		        		window.location.href = "/onlinetest/assignments/download?ids="+values.toString();
+		        		}
+		        	});					
+	
 				});
+				
 			},
 
 			changesHandler : function() {
-				var _self = this;
-			},
-			
-			toggleCheckbox_SelectAll: function($checkboxesID, status){
-				$.each($checkboxesID.find("input"), function(index, el){
-					$(el).prop("checked", status);
+				var _this = this;
+				
+				_this.change($("input[id='assignments_SelectAll']"), function(e){					
+					var $this = $(this);
+					_this.debugBtn(this);						
+					_this.toggleCheckbox_SelectAll($this.data('chks'), this.checked);
 				});
 			},
-
+			
+			toggleCheckbox_SelectAll: function($checkboxesID, status){				
+				$.each($($checkboxesID).find("input"), function(index, el){					
+					$(el).prop("checked", status);
+					if (status) { // update bootStrap chk class
+						$(el).parent("span").addClass("checked");
+					} else {
+						$(el).parent("span").removeClass("checked");
+					}
+				});
+			},
+			
 			ajaxErrorMsg: function(xhr, textStatus, errorThrown) {		
 				//return " code: " + xhr.status +" Unexpected error: "+errorThrown+" textStatus: "+textStatus;
 				console.log (" code: " + xhr+" Unexpected error: "+errorThrown+" textStatus: "+textStatus);
