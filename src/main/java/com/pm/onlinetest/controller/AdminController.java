@@ -401,6 +401,11 @@ public class AdminController {
 		dl.setDate(date);
 		dl.setType("Question");
 		dataLogService.save(dl);
+		
+		redirectAttr.addFlashAttribute("success", "Success");
+		redirectAttr.addFlashAttribute("titleMessage", "LOG FILE");
+		redirectAttr.addFlashAttribute("bodyMessage", dl.getContent());
+	
 		return "redirect:" + mapping;
 	}
 

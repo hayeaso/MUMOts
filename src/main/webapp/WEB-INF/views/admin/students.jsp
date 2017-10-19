@@ -14,12 +14,19 @@
    <div class="portlet-body">
 		<div class="table-toolbar">
 			<div class="row">
-				<div class="col-md-6">
-					<div class="btn-group">
+				<div class="col-md-10">
+					<div class="form-group">
+				
 						<a href="registerStudent" class="btn btn-primary"><i class="fa fa-plus"></i> Add New
+						</a>
+						<a href="importStudent" class="btn btn-success"><i class="fa fa-plus"></i> Import Student
 						</a>
 					</div>
 				</div>
+				
+				
+        
+        
 			</div>
 		</div>
 		<table class="table table-striped table-hover table-bordered"
