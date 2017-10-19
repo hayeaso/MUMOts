@@ -1,8 +1,9 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include.jsp"%>
 
-
+ <c:if test="${sessionScope.role == null}">
  <nav class="navbar navbar-default">
   <div class="container-fluid"> 
     <div class="navbar-header">
@@ -18,6 +19,7 @@
       <ul class="nav navbar-nav">
         <!-- <li><a href="">HOME <span class="sr-only">(current)</span></a></li> -->
         <li><a href="<c:url value="/contactus" />">CONTACT US <span class="sr-only">(current)</span></a></li>
+
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
@@ -31,9 +33,15 @@
     </div>
   </div> 
 </nav> 
-<%-- <div class="hor-menu ">
-	<ul class="nav navbar-nav bimal" >
-		<li class="bimal"><a href="<c:url value="/login" />">Login</a></li>
-		<li><a href="<c:url value="/contactus" />">Contact us</a></li>
-	</ul>
-</div> --%>
+</c:if>
+ <c:if test="${sessionScope.role == 'admin'}">
+ <%@ include file="/WEB-INF/tiles/admin-menu.jsp"%>
+ </c:if>
+  <c:if test="${sessionScope.role == 'dba'}">
+   <%@ include file="/WEB-INF/tiles/dba-menu.jsp"%>
+  </c:if>
+   <c:if test="${sessionScope.role == 'coach'}">
+    <%@ include file="/WEB-INF/tiles/coach-menu.jsp"%>
+   </c:if>
+
+

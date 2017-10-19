@@ -69,15 +69,15 @@
 				<form:errors path="authorities[0].authority" cssClass="text-danger" />
 			</div>
 			<div class="form-group">
-				<label class="control-label col-lg-2" for="status">Status</label>
-				<form:select path="status"
-					name="status" class="form-control">						
+				<label class="control-label col-lg-2" for="enabled">Status</label>
+				<form:select path="enabled"
+					name="enabled" class="form-control">						
 					<form:option value="False">Inactive</form:option>
 					<form:option value="True" selected="selected">Active</form:option>												
 				</form:select>
-				<form:errors path="status" cssClass="text-danger" />
+				<form:errors path="enabled" cssClass="text-danger" />
 			</div>
-			<form:hidden path="enabled" value="TRUE" />
+			<%-- <form:hidden path="enabled" value="TRUE" /> --%>
 			<div class="form-actions">
 				<button type="submit" id="register-submit-btn"
 					class="btn btn-success uppercase pull-right">Submit</button>

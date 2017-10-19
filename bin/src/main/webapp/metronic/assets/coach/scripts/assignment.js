@@ -60,6 +60,7 @@ function assignmentDone(userId){
 		   
 		   if(data === "success"){
 			   alert("successsss");
+			  // $('#myModal').modal('show');
 			   window.location.href = "../../../onlinetest/coach/home";			   
 		   }
 		   else{
@@ -74,6 +75,10 @@ function assignmentDone(userId){
 	});
 }
 
+/*function closeModalCoachAssignment(){
+	window.location.href = "../../../onlinetest/coach/home";	
+	self.close();
+}*/
 
 function assignmentCancel(){
 	window.location.href = "../../../onlinetest/coach/home";
