@@ -1,6 +1,12 @@
 # Compiled class file
 /target
-src/main/webapp/WEB-INF/spring/context/*
++src/
++ main/
++ webapp/
++ WEB-INF/
++ spring/
++ context/
++ applicationContext.xml
 
 *.class
 
