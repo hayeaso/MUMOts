@@ -1,19 +1,19 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="/WEB-INF/views/include.jsp"%>
 
-<div id="assignment" class="portlet light ">
+<div id="assignment" class="portlet box light panel panel-success">
 	<div class="portlet-title">
 		<div class="caption">
-			<span class="caption-subject bold uppercase font-dark">Assignment
+			<span class="caption-subject bold  font-dark leftShift">Assignment
 				List </span>
 		</div>
 		<div class="actions">
 			<jsp:useBean id="now" class="java.util.Date" />
 			Date Time :
 			<fmt:formatDate value="${now}" pattern="dd-MM-yyyy HH:mm:ss a z" />
-			<button id="export" class="btn btn-circlebtn-icon-only  btn-default">Export
+			<button id="export" class="btn btn-success">Export
 			</button>
-			<a class="btn btn-circle btn-icon-only btn-default fullscreen"
+			<a class="btn btn-circle btn-icon-only btn-primary fullscreen glyphicon glyphicon-fullscreen text-right alignright"
 				href="#" data-original-title="" title=""></a>
 		</div>
 	</div>
