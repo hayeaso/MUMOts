@@ -140,6 +140,12 @@ public class TestController {
 		attr.addFlashAttribute("errormessage", "Invalid Access Code");
 		return "redirect:/test/acess";
 	}
+	
+	@RequestMapping(value = "/showcategories", method = RequestMethod.GET)
+	public String unauthorizedAccess(Model model) {
+		
+		return "redirect:/test/acess";
+	}
 
 	// Access denied page mapping
 	@RequestMapping(value = "/403", method = RequestMethod.GET)
@@ -291,8 +297,14 @@ public class TestController {
 	}
 
 	@RequestMapping(value = "/completed", method = RequestMethod.GET)
-	public String completede() {
+	public String completed() {
+		 return "redirect:/test/acess";
+	}
+	
+	@RequestMapping(value = "/completed", method = RequestMethod.POST)
+	public String aftercompletion() {
 		return "completed";
 	}
+	
 
 }
