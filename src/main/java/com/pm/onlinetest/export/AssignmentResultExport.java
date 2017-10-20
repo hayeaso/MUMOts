@@ -31,7 +31,7 @@ import com.pm.onlinetest.domain.Test;
 public class AssignmentResultExport {
 	private static final Logger logger = LoggerFactory.getLogger(AssignmentResultExport.class);	
 	public static final String FILE_NAME = "AssignmentList_Exported.xls";
-	private static final String TITLE = "Self Assessment - Student Test Result";
+	private static final String TITLE = "Self Assessment System - Student Test Result";
 	private static final String FONT_NAME = "Calibri";
 	HSSFWorkbook workbook; 
 
@@ -61,8 +61,7 @@ public class AssignmentResultExport {
 	private String[] choiceLabelArr = {"A. ", "B. ", "C. ", "D. ", "E. "};
 	
 	// -- Constructor
-	public AssignmentResultExport(List<Assignment> assignments) {
-		//constructor
+	public AssignmentResultExport(List<Assignment> assignments) {		
 		if (assignments.size() == 0)
 			return;
 		try {
@@ -164,14 +163,16 @@ public class AssignmentResultExport {
 		HSSFRow titleRow = sheet.createRow(this.rowNumber++);
 		HSSFCell titleCell = titleRow.createCell(0);
 		titleCell.setCellValue(new HSSFRichTextString(AssignmentResultExport.TITLE));
-
+		
 		titleStyle.setFillForegroundColor(getIndexcolor("#FFCC00", workbook));
 		titleStyle.setFillPattern(CellStyle.SOLID_FOREGROUND);
 		titleStyle.setWrapText(true);
+		sheet.setColumnWidth(1, 7500);
+		//sheet.autoSizeColumn(1, true);
 		titleCell.setCellStyle(titleStyle);
 		int colCount = AssignmentResultExport.COLUMNHEADERSMAP.size();		
-		sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, colCount - 1));
-		this.rowNumber++; //add a row separate from title (value here should be 2)
+		sheet.addMergedRegion(new CellRangeAddress(0, 1, 0, colCount - 1));
+		this.rowNumber = this.rowNumber + 2; //add a row separate from title (value here should be 3)
 	}
 	
 	/**
@@ -240,7 +241,6 @@ public class AssignmentResultExport {
 	 * @param sheet
 	 */
 	private void buildResultDetailRow(HSSFWorkbook workbook, HSSFSheet sheet, StudentResultInfo stuResult) {
-		// TODO increase based on the size
 		int rowIndex = this.rowNumber;		
 		HSSFCellStyle cellStyle = workbook.createCellStyle();		
 				
@@ -252,18 +252,15 @@ public class AssignmentResultExport {
 			HSSFCell cell = entryRow.createCell(0);			
 			HSSFCellStyle numStyle = workbook.createCellStyle();			
 
-			String questionNum = String.valueOf(qNum++);			
-			numStyle.setFillForegroundColor(bodyNormal);
-			numStyle.setFillPattern(CellStyle.SOLID_FOREGROUND);
+			String questionNum = String.valueOf(qNum++);		
+			numStyle = qNumberMergeCellstyle(numStyle, false);
 			cell.setCellStyle(numStyle);
-			cell.setCellValue(new HSSFRichTextString(questionNum));
-			//createCell(entryRow, cell, 0, String.valueOf(qNum++), numStyle);			 
-			//merge-- firstRow, lastRow, firstCol, lastCol //TODO need to merge based on question choices			
+			cell.setCellValue(new HSSFRichTextString(questionNum));	 
+			//merge-- firstRow, lastRow, firstCol, lastCol //need to merge based on question choices			
 			sheet.addMergedRegion(new CellRangeAddress(rowIndex, rowIndex + answer.getQuestion().getChoices().size(), 0, 0));
 			
 			String questionDesc = (answerEntry.getValue() ? "✅ " : "❌ " ) + answer.getQuestion().getDescription();
 			createCell(entryRow, cell, 1, questionDesc, updateCellStyleColor(textCellStyle, getIndexcolor("#FFFF66", workbook)));					
-			System.out.println(sheet.getRow(rowIndex).getCell(0));
 			
 			rowIndex++;			
 			//✅ correct &#x2705;
@@ -271,16 +268,15 @@ public class AssignmentResultExport {
 			int ind = 0;
 			for (Choice choice : answer.getQuestion().getChoices()) {
 				HSSFRow choiceRow = sheet.createRow(rowIndex++);
-				HSSFCell cellChoice = entryRow.createCell(0);
+				HSSFCell cellChoice = choiceRow.createCell(0);
 				HSSFCellStyle choiceStyle = workbook.createCellStyle();
 				
-				createCell(choiceRow, cell, 0, questionNum, numStyle);				
+				createCell(choiceRow, cell, 0, "", numStyle);				
 				createCell(choiceRow, cellChoice, 1, this.choiceLabelArr[ind++] +choice.getDescription(), 
 						updateAnswerCellStyleColor(choiceStyle, choiceAnswerColorIndex(choice, answer, workbook), workbook));
 				
 				choiceStyle = setStyleBorder(choiceStyle, false);
-			}
-			sheet.getRow(rowIndex - 1).getCell(0).setCellValue(questionNum);					
+			}							
 		}
 		
 		cellStyle = setStyleBorder(cellStyle, true);		
@@ -291,6 +287,16 @@ public class AssignmentResultExport {
 		}
 		this.rowNumber = rowIndex + 1;
 		// sheet.createFreezePane(1, 2);
+	}
+	
+	private HSSFCellStyle qNumberMergeCellstyle(HSSFCellStyle myCellStyle, boolean isWrap) {
+		myCellStyle = setStyleBorder(myCellStyle, isWrap);
+		myCellStyle.setFillForegroundColor(bodyNormal);
+		myCellStyle.setFillPattern(CellStyle.SOLID_FOREGROUND);
+		myCellStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+		myCellStyle.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
+		
+		return myCellStyle;
 	}
 	
 	private HSSFCellStyle setStyleBorder(HSSFCellStyle myCellStyle, boolean isWrap) {
@@ -309,7 +315,7 @@ public class AssignmentResultExport {
 	 * @param workbook
 	 * @return current workbook
 	 */
-	public HSSFWorkbook writeReportToFile(HSSFWorkbook workbook) { //TODO this may no longer need
+	public HSSFWorkbook writeReportToFile(HSSFWorkbook workbook) { //this may no longer need
 		this.setFileID(AssignmentResultExport.FILE_NAME);
 		return workbook;
 	}
@@ -329,13 +335,6 @@ public class AssignmentResultExport {
 		return cell;
 	}
 
-	private HSSFRow createRow(HSSFSheet sheet, int studInfoIndex, int cellnumber, String value, HSSFCellStyle cellStyle) {
-		HSSFRow entryRow = sheet.createRow(studInfoIndex); //studInfoIndex++
-		HSSFCell cell = entryRow.createCell(0);
-		createCell(entryRow, cell, cellnumber, value, cellStyle);	
-		return entryRow;
-	}
-	
 	private HSSFRow createStuInfoRow(HSSFSheet sheet, int studInfoIndex, int cellnumber, String label, Object value, HSSFCellStyle cellStyle) {
 		HSSFRow entryRow = sheet.createRow(studInfoIndex); //studInfoIndex++
 		HSSFCell cell = entryRow.createCell(0);
