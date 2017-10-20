@@ -254,9 +254,9 @@ public class AdminController {
 			redirectAttr.addFlashAttribute("success", "Successfully added new category!");
 			redirectAttr.addFlashAttribute("titleMessage", "CATEGORY ADDED!");
 			redirectAttr.addFlashAttribute("bodyMessage", "Successfully added new category " + category.getName());
-		} catch (DuplicateCategoryNameException ex) {
-			redirectAttr.addFlashAttribute("alertErrorMsg", "[" + category.getName() + "]: " + ex.getMessage());
-			redirectAttr.addFlashAttribute("category", category);
+		} catch (DuplicateCategoryNameException ex) {			
+			redirectAttr.addFlashAttribute("alertErrorMsg", "[" + category.getName() + "]: " + ex.getMessage());			
+			return "redirect:/admin/createCategory";
 		}
 
 		return "redirect:/admin/categories";

@@ -91,15 +91,24 @@
 		</div>
 		<!-- END HEADER MENU -->
 	</div>
-	<!-- END HEADER -->
-
+	<!-- END HEADER -->	
 	<!-- BEGIN PAGE CONTAINER -->
-	<div class="page-container">
-		<!-- BEGIN PAGE CONTENT -->
+	<div class="page-container">		
 		<div class="page-content">
 			<div class="container">
+				<!-- BEGIN PAGE CONTENT -->
 				<div class="row margin-top-10">
-					<div class="col-md-12">
+					<div class="col-md-12">						
+						<!-- This is alert for error on submit form with attribute alertErrorMsg-->
+						<c:if test="${not empty alertErrorMsg}">
+							<div class="alert alert-danger alertContainer"
+								style="height: 36px; padding-top: 8px;">
+								<a class="btn-danger" data-dismiss="alert" style="float: right;"
+									aria-hidden="true">close</a> <span
+									class="center glyphicon glyphicon-exclamation-sign"></span>
+								<c:out value="${alertErrorMsg}" />
+							</div>
+						</c:if>
 						<div class="profile-content">
 							<div class="row">
 								<div class="col-md-12">
