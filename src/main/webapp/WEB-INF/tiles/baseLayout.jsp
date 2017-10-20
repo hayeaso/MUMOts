@@ -15,6 +15,7 @@
 <!-- BEGIN GLOBAL MANDATORY STYLES -->
 
 <!-- Date picker style  -->
+<link href="<c:url value="/metronic/assets/admin/pages/css/datepicker.css" />" rel="stylesheet" type="text/css"/>
 
 <link rel="stylesheet" type="text/css" href="<c:url value="/metronic/assets/global/plugins/font-awesome/css/font-awesome.min.css" />" />
 <link href="<c:url value="/metronic/assets/global/plugins/font-awesome/css/font-awesome.min.css" />" rel="stylesheet" type="text/css"/>
