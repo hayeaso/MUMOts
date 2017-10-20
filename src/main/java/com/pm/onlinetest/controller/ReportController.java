@@ -94,8 +94,7 @@ public class ReportController {
 			}
 			//
 			report.put(subcat, scorePerCategory + " / " + totalQuestionsPerCategory + "  |   "
-					+ scorePerCategory * 100 / totalQuestionsPerCategory + "%  |  Grade : "
-					+ gradeService.getGradeAsStringFromInteger(100 / totalQuestionsPerCategory * scorePerCategory));
+					+ scorePerCategory * 100 / totalQuestionsPerCategory + "%  ");
 			overAllAverage = 0;
 			totalQuestionsPerCategory = 0;
 		}
