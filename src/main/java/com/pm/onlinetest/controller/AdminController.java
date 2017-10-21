@@ -452,10 +452,11 @@ public class AdminController {
 					// Set the Sub-Category
 					Subcategory subC;
 					// System.out.println(row.getCell(8).toString());
-					if (!subCategoryService.findSubCategoryByName(row.getCell(8).toString()).isEmpty()) {
+					if (!subCategoryService.findSubCategoryByName(row.getCell(9).toString()).isEmpty()) {
 
 						// System.out.println(subCategoryService.findSubCategoryByName(row.getCell(8).toString()));
-						List<Subcategory> subCs = subCategoryService.findSubCategoryByName(row.getCell(8).toString());
+						List<Subcategory> subCs = subCategoryService.findSubCategoryByName(row.getCell(9).toString());
+						
 						subC = subCs.get(0);
 
 						question.setSubcategory(subC);
