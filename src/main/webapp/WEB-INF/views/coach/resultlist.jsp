@@ -8,12 +8,13 @@
 <div id="report" class="portlet box light panel panel-success">
 	<div class="portlet-title">
 		<div class="caption">
-			<span class="caption-subject bold  font-dark leftShift"><i class="fa fa-book fa-fw"></i>Student
+			<span class="caption-subject leftShift"><i class="fa fa-book fa-fw"></i>Student
 				Test Score </span>
 
 		</div>
 		<div class="actions">
 			<jsp:useBean id="now" class="java.util.Date" />
+			<fmt:formatDate value="${now}" pattern="dd-MM-yyyy HH:mm:ss a z" />
 			<button id="exportResult"
 				class="btn btn-success">Export</button>
 			<a class="btn btn-circle btn-icon-only btn-primary fullscreen glyphicon glyphicon-fullscreen alignright"
@@ -23,11 +24,7 @@
 	
 	<div class="portlet-body">
 
-
-
-
-
-		<table class="table table-sm" id="sample_editable_1">
+	<table class="table table-sm" id="sample_editable_1">
 			<thead>
 				<tr>
 					<th>No</th>

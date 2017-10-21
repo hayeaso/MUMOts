@@ -4,7 +4,7 @@
 <div id="assignment" class="portlet box light panel panel-success">
 	<div class="portlet-title">
 		<div class="caption">
-			<span class="caption-subject bold  font-dark leftShift">
+			<span class="caption-subject leftShift">
 			<i class="fa fa-book fa-fw"></i>Assignment
 				List </span>
 		</div>
@@ -12,13 +12,16 @@
 			<jsp:useBean id="now" class="java.util.Date" />
 			Date Time :
 			<fmt:formatDate value="${now}" pattern="dd-MM-yyyy HH:mm:ss a z" />
-			<button id="exportAssignment" class="btn btn-circlebtn-icon-only  btn-default">Export
-			</button>
-			<a class="btn btn-circle btn-icon-only btn-primary fullscreen glyphicon glyphicon-fullscreen text-right alignright"
+			
+			
+			<a
+				class="btn btn-icon-only btn-success fullscreen fa fa-th-large text-right alignright"
 				href="#" data-original-title="" title=""></a>
 		</div>
 	</div>
 	<div class="portlet-body">
+	<button id="export" class="btn btn-primary btn-circle alignright"><i class="fa fa-arrow-circle-down"></i>Export
+			</button>
 <!-- 		<div class="table-toolbar">
 			<div class="row">
 				<div class="col-md-6"></div>
