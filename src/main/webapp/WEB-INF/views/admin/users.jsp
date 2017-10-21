@@ -44,7 +44,7 @@
 						<c:if test="${user.authorities[0].authority != null}">
 							<tr id="user${user.userId}">
 								<td>${user.username}</td>
-								<td>${user.firstName}${user.lastName}</td>
+								<td>${user.firstName} ${user.lastName}</td>
 								<td>${user.email}</td>
 								<td class="center">${user.authorities[0].authority}</td>
 
