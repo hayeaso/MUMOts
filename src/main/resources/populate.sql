@@ -15,7 +15,7 @@ INSERT INTO `Authority` (`id`, `authority`, `userId`) VALUES (3, 'ROLE_DBA', 3);
 INSERT INTO `User` (`userId`, `email`, `enabled`, `firstName`, `lastName`, `password`, `username`) VALUES (4, 'juliachenjing@gmail.com', b'1', 'Julia', 'Chen', null, null);
 INSERT INTO `User` (`userId`, `email`, `enabled`, `firstName`, `lastName`, `password`, `username`) VALUES (5, 'bimalparajulise@gmail.edu', b'1', 'Bimal', 'Parajuli', null, null);
 
-INSERT INTO `User` (`userId`, `email`, `enabled`, `firstName`, `lastName`, `password`, `username`) VALUES (6, 'test4@mum.edu', b'1', 'Stu04', 'Stu04', null, null);
+INSERT INTO `User` (`userId`, `email`, `enabled`, `firstName`, `lastName`, `password`, `username`) VALUES (6, 'kloem@mum.edu', b'1', 'Stu04', 'Stu04', null, null);
 INSERT INTO `User` (`userId`, `email`, `enabled`, `firstName`, `lastName`, `password`, `username`) VALUES (7, 'test5@mum.edu', b'1', 'Stu05', 'Stu05', null, null);
 INSERT INTO `User` (`userId`, `email`, `enabled`, `firstName`, `lastName`, `password`, `username`) VALUES (8, 'test6@mum.edu', b'1', 'Stu06', 'Stu06', null, null);
 INSERT INTO `User` (`userId`, `email`, `enabled`, `firstName`, `lastName`, `password`, `username`) VALUES (9, 'test7@mum.edu', b'1', 'Stu07', 'Stu07', null, null);
@@ -56,7 +56,7 @@ INSERT INTO `Subcategory` (`id`, `enabled`, `name`, `category_id`) VALUES (2, b'
 INSERT INTO `Subcategory` (`id`, `enabled`, `name`, `category_id`) VALUES (3, b'1', 'Servlet', 1);
 INSERT INTO `Subcategory` (`id`, `enabled`, `name`, `category_id`) VALUES (4, b'1', 'Spring', 1);
 INSERT INTO `Subcategory` (`id`, `enabled`, `name`, `category_id`) VALUES (5, b'1', 'C#', 2);
-INSERT INTO `Subcategory` (`id`, `enabled`, `name`, `category_id`) VALUES (6, b'1', 'Spring', 1);
+INSERT INTO `Subcategory` (`id`, `enabled`, `name`, `category_id`) VALUES (6, b'1', 'Hibernate', 1);
 INSERT INTO `Subcategory` (`id`, `enabled`, `name`, `category_id`) VALUES (7, b'1', 'JAVA', 1);
 INSERT INTO `Subcategory` (`id`, `enabled`, `name`, `category_id`) VALUES (8, b'1', 'PHP', 3);
 INSERT INTO `Subcategory` (`id`, `enabled`, `name`, `category_id`) VALUES (9, b'1', 'MSSQL', 8);
