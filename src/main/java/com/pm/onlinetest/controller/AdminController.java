@@ -500,15 +500,15 @@ public class AdminController {
 				//log += ("\t  \t  \t " + insertedRows + " rows added out of " + rows + "\n\n\n\n");
 				workbook.close();
 			}
-
+			log += ("\t  \t  \t " + insertedRows + " rows added out of " + rows + "\n\n\n\n");
 			excelfile.getInputStream().close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		//log+=(insertedRows + " rows added out of " + rows + "\n");
-		//log+=toadd;
+		// log+=(insertedRows + " rows added out of " + rows + "\n");
+		// log+=toadd;
 
 		// System.out.println("------------------------------------------------------");
 		System.out.println(log);

@@ -3,13 +3,13 @@
 <%@ include file="/WEB-INF/views/include.jsp"%>
 
 <c:if test="${not empty success}">
-<%@ include file="/WEB-INF/views/popUp.jsp"%>
+<%@ include file="/WEB-INF/views/LogPopUp.jsp"%>
 </c:if>
 <div class="panel panel-success">
 
 	<div class="panel-heading">
 		<h3 class="panel-title">
-			<i class="fa fa-edit"></i>Import Data 
+			<i class="glyphicon glyphicon-upload"></i>Import Data 
 		</h3>
 	</div>
 	<div class="panel-body">
@@ -25,7 +25,7 @@
 					<strong>Success!</strong> Successfully imported Data!
 				</div>
 			</c:if>
-			<form:form method="POST" class="register-form" action="importData"
+			<form:form method="POST" class="register-form" action="importStudentData"
 				enctype="multipart/form-data">
 				<div class="form-body">
 					<div class="form-group last">

@@ -6,7 +6,7 @@
 
 	<div class="panel-heading">
 		<h3 class="panel-title">
-			<i class="fa fa-book fa-fw"></i>Question List
+			<i class="fa fa-question-circle fa-fw"></i>Question List
 		</h3>
 	</div>
 	<div class="panel-body">

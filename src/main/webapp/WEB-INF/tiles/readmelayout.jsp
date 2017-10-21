@@ -54,11 +54,11 @@
 	<!-- BEGIN HEADER -->
 	<div class="page-header">
 		<!-- BEGIN HEADER TOP -->
-		<div class="page-header-top">
+		<div class="page-header-top-test">
 			<div class="container">
 				<div class="page-logo">
 					<a href="#"><img
-						src="<c:url value="/metronic/assets/logo.png" />" height="70px;"
+						src="<c:url value="/metronic/assets/logo2.png" />" height="70px;"
 						alt="logo" class="logo-default"></a>
 				</div>
 				<!-- BEGIN RESPONSIVE MENU TOGGLER -->
@@ -74,7 +74,7 @@
 			</div>
 		</div>
 		<!-- END HEADER TOP -->
-		
+		</div>
 
 	<!-- BEGIN PAGE CONTAINER -->
 	<div class="page-container">

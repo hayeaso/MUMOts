@@ -1,17 +1,24 @@
-INSERT INTO `User` (`userId`, `email`, `enabled`, `firstName`, `lastName`, `password`, `username`) VALUES (1, 'deepakkc669@gmail.com', b'1', 'admin', 'admin', '$2a$10$TSCbbjh3BkwYSc.uc.V/begrFwAI6LJOqHewuvCSTOMp8q2ZMPbpy', 'admin');
+-- Admin DBA and Coach users
+INSERT INTO `User` (`userId`, `email`, `enabled`, `firstName`, `lastName`, `password`, `username`) VALUES (1, 'admin@gmail.com', b'1', 'admin', 'admin', '$2a$10$TSCbbjh3BkwYSc.uc.V/begrFwAI6LJOqHewuvCSTOMp8q2ZMPbpy', 'admin');
 INSERT INTO `Authority` (`id`, `authority`, `userId`) VALUES (1, 'ROLE_ADMIN', 1);
 
-INSERT INTO `User` (`userId`, `email`, `enabled`, `firstName`, `lastName`, `password`, `username`) VALUES (2, 'test@gmail.com', b'1', 'Coach1', 'TestL', '$2a$10$NKtwZv9mcnnycFK1KXfnrutCuLs26PIU5TA33xaM7wWhCWCnz.HCG', 'coach');
+
+INSERT INTO `User` (`userId`, `email`, `enabled`, `firstName`, `lastName`, `password`, `username`) VALUES (2, 'coach@gmail.com', b'1', 'coach', 'coach', '$2a$10$NKtwZv9mcnnycFK1KXfnrutCuLs26PIU5TA33xaM7wWhCWCnz.HCG', 'coach');
 INSERT INTO `Authority` (`id`, `authority`, `userId`) VALUES (2, 'ROLE_COACH', 2);
 
+
+INSERT INTO `User` (`userId`, `email`, `enabled`, `firstName`, `lastName`, `password`, `username`) VALUES (9, 'dba@gmail.com', b'1', 'dba', 'dba', '$2a$10$NKtwZv9mcnnycFK1KXfnrutCuLs26PIU5TA33xaM7wWhCWCnz.HCG', 'dba');
+INSERT INTO `Authority` (`id`, `authority`, `userId`) VALUES (9, 'ROLE_DBA', 9);
+
+
 -- Student users
-INSERT INTO `User` (`userId`, `email`, `enabled`, `firstName`, `lastName`, `password`, `username`) VALUES (3, 'rsapkota@mum.edu', b'1', 'Stu01', 'Clark', null, null);
-INSERT INTO `User` (`userId`, `email`, `enabled`, `firstName`, `lastName`, `password`, `username`) VALUES (4, 'aneupane@mum.edu', b'1', 'Stu02', 'Stark', null, null);
-INSERT INTO `User` (`userId`, `email`, `enabled`, `firstName`, `lastName`, `password`, `username`) VALUES (5, 'test3@mum.edu', b'1', 'Stu03', 'Oven', null, null);
-INSERT INTO `User` (`userId`, `email`, `enabled`, `firstName`, `lastName`, `password`, `username`) VALUES (6, 'test4@mum.edu', b'1', 'Stu04', 'Olive', null, null);
-INSERT INTO `User` (`userId`, `email`, `enabled`, `firstName`, `lastName`, `password`, `username`) VALUES (7, 'test5@mum.edu', b'1', 'Stu05', 'Washinton', null, null);
-INSERT INTO `User` (`userId`, `email`, `enabled`, `firstName`, `lastName`, `password`, `username`) VALUES (8, 'test6@mum.edu', b'1', 'Stu06', 'Trouble', null, null);
-INSERT INTO `User` (`userId`, `email`, `enabled`, `firstName`, `lastName`, `password`, `username`) VALUES (9, 'test7@mum.edu', b'1', 'Stu07', 'Awesome', null, null);
+INSERT INTO `User` (`userId`, `email`, `enabled`, `firstName`, `lastName`, `password`, `username`) VALUES (3, 'juliachenjing@gmail.com', b'1', 'Julia', 'Chen', null, null);
+INSERT INTO `User` (`userId`, `email`, `enabled`, `firstName`, `lastName`, `password`, `username`) VALUES (4, 'bimalparajulise@mum.edu', b'1', 'Bimal', 'Parajuli', null, null);
+INSERT INTO `User` (`userId`, `email`, `enabled`, `firstName`, `lastName`, `password`, `username`) VALUES (5, 'test3@mum.edu', b'1', 'Stu03', 'Stu03', null, null);
+INSERT INTO `User` (`userId`, `email`, `enabled`, `firstName`, `lastName`, `password`, `username`) VALUES (6, 'test4@mum.edu', b'1', 'Stu04', 'Stu04', null, null);
+INSERT INTO `User` (`userId`, `email`, `enabled`, `firstName`, `lastName`, `password`, `username`) VALUES (7, 'test5@mum.edu', b'1', 'Stu05', 'Stu05', null, null);
+INSERT INTO `User` (`userId`, `email`, `enabled`, `firstName`, `lastName`, `password`, `username`) VALUES (8, 'test6@mum.edu', b'1', 'Stu06', 'Stu06', null, null);
+INSERT INTO `User` (`userId`, `email`, `enabled`, `firstName`, `lastName`, `password`, `username`) VALUES (9, 'test7@mum.edu', b'1', 'Stu07', 'Stu07', null, null);
 
 
 INSERT INTO `Grade` (`name`, `rangeFrom`, `rangeTo`) VALUES ('A', 95, 98);

@@ -9,7 +9,7 @@
 <div class="panel panel-success">
 	<div class="panel-heading">
 		<h3 class="panel-title">
-			<i class="fa fa-edit"></i>Student List
+			<i class="fa fa-users fa-fw"></i>Student List
 		</h3>
 	</div>
 	<div class="panel-body">
@@ -20,7 +20,7 @@
 						<div class="form-group">
 
 							<a href="registerStudent" class="btn btn-primary"><i
-								class="fa fa-plus"></i> Add New </a> <a href="importStudent"
+								class="fa fa-plus"></i> Add New </a> <a href="importStudentData"
 								class="btn btn-success"><i class="fa fa-plus"></i> Import
 								Student </a>
 						</div>

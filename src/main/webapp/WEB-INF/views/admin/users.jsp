@@ -11,7 +11,7 @@
 
 	<div class="panel-heading">
 		<h3 class="panel-title">
-			<i class="fa fa-edit"></i>User List
+			<i class="fa fa-users fa-fw"></i>User List
 		</h3>
 	</div>
 	<div class="panel-body">
@@ -44,7 +44,7 @@
 						<c:if test="${user.authorities[0].authority != null}">
 							<tr id="user${user.userId}">
 								<td>${user.username}</td>
-								<td>${user.firstName}${user.lastName}</td>
+								<td>${user.firstName} ${user.lastName}</td>
 								<td>${user.email}</td>
 								<td class="center">${user.authorities[0].authority}</td>
 

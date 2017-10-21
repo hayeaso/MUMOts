@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
@@ -9,10 +10,15 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title"> ${titleMessage} </h4>
+				<h4 class="modal-title">${titleMessage}</h4>
 			</div>
 			<div class="modal-body">
-				<p> ${bodyMessage} </p>
+				<p>${bodyMessage.content}</p>
+				<ul>
+					<c:forEach items="${lines}" var="line">
+						<li>${line.content}"</li>
+					</c:forEach>
+				</ul>
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
@@ -26,8 +32,5 @@
 <script type="text/javascript">
 	$(window).on('load', function() {
 		$('#myModal').modal('show');
-		setTimeout(function(){
-	        $("#myModal").modal('hide');
-	    }, 3000);
 	});
 </script>

@@ -53,7 +53,7 @@
 			<ul class="nav navbar-nav navbar-right">
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown" role="button" aria-haspopup="true"
-					aria-expanded="false"> <span class="bold">${sessionScope.role}</span></span>
+					aria-expanded="false"> <span class="bold"><i class="fa fa-user fa-fw"></i>${sessionScope.role}</span></span>
 						<span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li><a href="editProfile"><i class="fa fa-edit"></i> Edit
