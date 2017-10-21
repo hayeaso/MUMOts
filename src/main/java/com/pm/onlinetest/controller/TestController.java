@@ -141,11 +141,7 @@ public class TestController {
 		return "redirect:/test/acess";
 	}
 	
-	@RequestMapping(value = "/showcategories", method = RequestMethod.GET)
-	public String unauthorizedAccess(Model model) {
-		
-		return "redirect:/test/acess";
-	}
+	
 
 	// Access denied page mapping
 	@RequestMapping(value = "/403", method = RequestMethod.GET)
@@ -161,7 +157,7 @@ public class TestController {
 		return "test/error";
 	}
 
-	@RequestMapping(value = "/showcategories", method = RequestMethod.POST)
+	@RequestMapping(value = "/showcategories", method = RequestMethod.GET)
 	public String selectCategoriesView(Model model, HttpServletRequest request, RedirectAttributes attr) {
 
 //		Assignment obj = (Assignment) request.getAttribute("assignment");
@@ -296,12 +292,9 @@ public class TestController {
 		assignmentService.saveAssignment(assignment);
 	}
 
-	@RequestMapping(value = "/completed", method = RequestMethod.GET)
-	public String completed() {
-		 return "redirect:/test/acess";
-	}
 	
-	@RequestMapping(value = "/completed", method = RequestMethod.POST)
+	
+	@RequestMapping(value = "/completed", method = RequestMethod.GET)
 	public String aftercompletion() {
 		return "completed";
 	}
