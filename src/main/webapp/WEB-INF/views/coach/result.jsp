@@ -3,24 +3,23 @@
 <%@ page session="false"%>
 
  
-                                          
-   <section id="posts-landing">
-        <div id="report" class="portlet light ">
-            <div class="portlet-title">
-                <div class="caption">
-                    <span class="caption-subject bold uppercase font-dark">Student Test Score </span>                                                       
-                    
-                </div>
-               <div class="actions">
+    <div id="posts-landing" class="portlet box light panel panel-success">                                      
+   <div id="report" class="portlet-title">
+		<div class="caption">
+			<span class="caption-subject bold  font-dark leftShift">Student
+				Test Score </span>
+		</div>
+		<div class="actions">
 			<jsp:useBean id="now" class="java.util.Date" />
 			Date Time :
 			<fmt:formatDate value="${now}" pattern="dd-MM-yyyy HH:mm:ss a z" />
-			<button id="export" onclick="javascript:demoFromHTML();" class="btn btn-circlebtn-icon-only  btn-default">Export
-			</button>
-			<a class="btn btn-circle btn-icon-only btn-default fullscreen"
+			<button id="export" onclick="javascript:demoFromHTML();"
+				class="btn btn-success">Export</button>
+			<a
+				class="btn btn-circle btn-icon-only btn-primary fullscreen glyphicon glyphicon-fullscreen text-right alignright"
 				href="#" data-original-title="" title=""></a>
 		</div>
-            </div>
+	</div>
             <div class="portlet-body">
                                                     
 
@@ -114,7 +113,7 @@
   
   </div>  
 </div>
-</section>
+</div>
 <div id="editor"></div>
 <script src="<c:url value="/metronic/assets/global/plugins/jquery.min.js" />" type="text/javascript"></script>
 <script src="<c:url value="/metronic/assets/global/plugins/jquery-migrate.min.js" />" type="text/javascript"></script>

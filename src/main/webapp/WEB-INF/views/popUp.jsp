@@ -26,5 +26,8 @@
 <script type="text/javascript">
 	$(window).on('load', function() {
 		$('#myModal').modal('show');
+		setTimeout(function(){
+	        $("#myModal").modal('hide');
+	    }, 3000);
 	});
 </script>
