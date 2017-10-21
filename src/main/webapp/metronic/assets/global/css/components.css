@@ -3907,6 +3907,12 @@ Portlets
 .portlet.light > .portlet-title > .actions .btn-icon-only {
   height: 27px;
   width: 27px;
+  	padding-left: 5px; 
+    padding-bottom: 2px;  
+    border-top-width: 2px; 
+    border-bottom-width: 2px; 
+    border-left-width: 2px;
+    padding-top: 3px; 
 }
 .portlet.light > .portlet-title > .actions .dropdown-menu li > a {
   color: #555;

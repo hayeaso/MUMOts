@@ -65,14 +65,14 @@
 					class="control-label visible-ie8 visible-ie9">Password</form:label>
 				<form:input path="password" class="form-control placeholder-no-fix"
 					id="register_password" type="password" autocomplete="off"
-					placeholder="Password" name="password" value="${user.password}" />
+					placeholder="Password" name="password"  />
 				<form:errors path="password" cssClass="text-danger" />
 			</div>
 
 			<div class="form-group">
 				<input class=" form-control " placeholder="Confirm Password"
 					name='confirmpassword' id="password_confirmation" type="password"
-					value="${user.password}">
+					required>
 			</div>
 
 			<div id="divCheckPasswordMatch"></div>
@@ -118,7 +118,8 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
-		console.log("INSIDE HERE");
+		
+		document.getElementById("register_password").required = true;
 		$("#register_password, #password_confirmation").keyup(function() {
 			var password = $("#register_password").val();
 			var confirmPassword = $("#password_confirmation").val();
