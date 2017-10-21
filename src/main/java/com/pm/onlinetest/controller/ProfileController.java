@@ -65,7 +65,7 @@ public class ProfileController {
 		return "editProfileFromCoach";
 	}
 	
-	@RequestMapping(value = { "/coach/studentAssignmentDetail/editProfile" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/coach/studentAssignmentDetail/editProfile","coach/editStudent/editProfile","coach/studentAssignmentHistory/editProfile"}, method = RequestMethod.GET)
 	public String  redirectForCoach(@ModelAttribute("loginUser") User user, Model model) {
 		return "redirect:/coach/editProfile";
 	}
