@@ -1,7 +1,9 @@
 package com.pm.onlinetest.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Locale;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,6 +27,9 @@ import com.pm.onlinetest.domain.Student;
 import com.pm.onlinetest.domain.User;
 import com.pm.onlinetest.service.AssignmentService;
 import com.pm.onlinetest.service.UserService;
+import com.pm.onlinetest.service.impl.UserServiceImpl;
+
+import helpers.PasswordDto;
 
 @Controller
 public class LoginController {
@@ -60,69 +65,72 @@ public class LoginController {
 	
 //	ADD by Anita
 	@RequestMapping(value = "/postResetPassword", method = RequestMethod.POST)
-	public String forgetPass(@ModelAttribute("loginUser") User user, Model model, RedirectAttributes redirectAttributes) {
-	
-		String email =user.getEmail();
+	public String forgetPass(@ModelAttribute("loginUser") User user, Model model,
+			RedirectAttributes redirectAttributes) {
 
-		if(userService.emailExists(user.getEmail())){
-			
-			String accessCode = assignmentService.generateAccesscode();
-			userService.setAccessCodeInPasswordField(email,accessCode);
-			
+		String email = user.getEmail();
+
+		User myUser = userService.findByEmail(user.getEmail());
+		if (myUser != null && myUser.getUsername() != null) {
+
+			String token = UUID.randomUUID().toString();
+			userService.createPasswordResetTokenForUser(myUser, token);
+			String accessCode = token + "_" + myUser.getUserId();
+
 			SimpleMailMessage message = new SimpleMailMessage();
-			  message.setTo(email);
+			message.setTo(email);
 
-			   message.setReplyTo("false");
-			   message.setFrom("mumtestlink@gmail.com");
-			    message.setSubject("Test Link");
-			    message.setText("You have requested to reset your password for your account. To get started, please click this link." + "Access Link: "+"http://localhost:8080/onlinetest/resetPassword/"+accessCode);
-			   
-			    mailSender.send(message);
-			    String result ="success";
-			    redirectAttributes.addFlashAttribute("foundEmail", email);
-			    System.out.println("IT HAS TO BE RE_DIRECTED");
-			    return "redirect:/login";
-			
-		}else { 
-			//System.out.println("NOT FOUND");
-			redirectAttributes.addFlashAttribute("notFoundEmail", email);	
+			message.setReplyTo("false");
+			message.setFrom("mumtestlink@gmail.com");
+			message.setSubject("Test Link");
+			message.setText("You have requested to reset your password for your account. To get started, please click this link." + "Access Link: " + "http://localhost:8080/onlinetest/resetPassword/" + accessCode);
+
+			mailSender.send(message);
+			redirectAttributes.addFlashAttribute("foundEmail", email);
+			System.out.println("IT HAS TO BE RE_DIRECTED");
+			return "redirect:/login";
+		} else {
+			redirectAttributes.addFlashAttribute("notFoundEmail", email);
 			return "redirect:/login";
 		}
-	
-
 	}
 	
 	@RequestMapping(value = "/resetPassword/{accessCode}", method = RequestMethod.GET)
-	public String resetPassword(Locale locale,Model model, HttpServletRequest request, HttpServletResponse response , @PathVariable("accessCode") String accessCode) {
-		
-		System.out.println("GET ACCESS IN RESET:"+ accessCode);
-		model.addAttribute("accessCode", accessCode);
-		
+	public String resetPassword(Locale locale, Model model, HttpServletRequest request, HttpServletResponse response , @PathVariable("accessCode") String accessCode) {
+		String[] token = accessCode.split("_"); // token and id		
+		if (token.length > 1) {
+			Integer userId = Integer.parseInt(token[1]);
+			String tokenStatus = userService.validatePasswordResetToken(userId, token[0]);
+			if (tokenStatus.equals(UserServiceImpl.TOKEN_VALID)) {
+				model.addAttribute("token", token[0]);
+				model.addAttribute("id", token[1]);
+			} else {
+				model.addAttribute("exipredToken", token);				
+			}
+		}
 		return "resetPassword";
 	}
 	
+	
 	@RequestMapping(value = "/resetPassword", method = RequestMethod.POST)
-	public String updatePassword(Model model, HttpServletRequest request,RedirectAttributes redirectAttr) {
+	public String updatePassword(@ModelAttribute("passwordDto") PasswordDto passwordDto, Model model, HttpServletRequest request, RedirectAttributes redirectAttr) {	
 		
-		String userAccessCode = request.getParameter("userAccessCode").toString();
-		String newPassword = request.getParameter("newpassword");
-		
-		User user = userService.findUserByAccessCode(userAccessCode);
-		
-		if(user != null) {
-		user.setPassword(newPassword);
-		userService.saveProfile(user);
-		
-		redirectAttr.addFlashAttribute("changeSuccess", "ChangeSuccess");	
-		redirectAttr.addFlashAttribute("titleMessage", "Password Changed");	
-		redirectAttr.addFlashAttribute("bodyMessage", "New Password Updated SuccessFully.");
-		
-		return "redirect:/login";
-		}else {
-			
-			System.out.println("HERE GOES CODE FOR THE ACCES CODE VALIDITY OFF.");
-			
+		String tokenStatus = userService.validatePasswordResetToken(passwordDto.getId(), passwordDto.getToken());
+		User user = userService.getUserFromToken(passwordDto.getToken());
+		if (tokenStatus == UserServiceImpl.TOKEN_VALID && user != null) {
+
+			user.setPassword(passwordDto.getNewPassword());
+			userService.saveProfile(user);
+			// set expiryDate to now
+			userService.setTokenExipredTime(passwordDto.getToken(), LocalDateTime.now());
+			redirectAttr.addFlashAttribute("changeSuccess", "ChangeSuccess");
+			redirectAttr.addFlashAttribute("titleMessage", "Password Changed");
+			redirectAttr.addFlashAttribute("bodyMessage", "New Password Updated SuccessFully.");
+
 			return "redirect:/login";
+		} else {			
+			model.addAttribute("exipredToken", tokenStatus);
+			return "resetPassword";
 		}
 	}
 	

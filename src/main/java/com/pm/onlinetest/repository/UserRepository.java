@@ -46,13 +46,12 @@ public interface UserRepository extends CrudRepository<User, Integer> {
 	@Modifying(clearAutomatically = true)
 	@Transactional
 	@Query("UPDATE User u SET u.password = :accessCode WHERE u.email =:email")
-	void passwordUpdate(@Param("email") String email, @Param("accessCode") String accessCode);
-	
-	@Query("SELECT u FROM User u WHERE u.password =:userAccessCode")
-	User findUserByAccessCode(@Param("userAccessCode") String userAccessCode);
+	void passwordUpdate(@Param("email") String email, @Param("accessCode") String accessCode);	
 	
 	@Modifying(clearAutomatically = true)
 	@Transactional
 	@Query("UPDATE User u SET u.enabled = :enabled WHERE u.userId =:userId")
 	void updateStatus(@Param("userId") Integer userId, @Param("enabled") boolean enabled);
+	
+	User findFirstByEmail(String email);
 }
