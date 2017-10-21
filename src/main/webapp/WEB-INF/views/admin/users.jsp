@@ -11,7 +11,7 @@
 
 	<div class="panel-heading">
 		<h3 class="panel-title">
-			<i class="fa fa-edit"></i>User List
+			<i class="fa fa-users fa-fw"></i>User List
 		</h3>
 	</div>
 	<div class="panel-body">

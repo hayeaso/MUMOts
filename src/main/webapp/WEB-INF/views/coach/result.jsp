@@ -6,7 +6,7 @@
     <div id="posts-landing" class="portlet box light panel panel-success">                                      
    <div id="report" class="portlet-title">
 		<div class="caption">
-			<span class="caption-subject bold  font-dark leftShift">Student
+			<span class="caption-subject bold  font-dark leftShift"><i class="fa fa-book fa-fw"></i>Student
 				Test Score </span>
 		</div>
 		<div class="actions">

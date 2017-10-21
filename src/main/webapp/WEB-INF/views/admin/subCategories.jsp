@@ -8,7 +8,7 @@
 <div class="panel panel-success">
 	<div class="panel-heading">
 		<h3 class="panel-title">
-			<i class="fa fa-edit"></i>Sub Category List
+			<i class="fa fa-list-ol"></i>Sub Category List
 		</h3>
 	</div>
 	<div class="panel-body">

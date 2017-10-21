@@ -4,7 +4,8 @@
 <div id="assignment" class="portlet box light panel panel-success">
 	<div class="portlet-title">
 		<div class="caption">
-			<span class="caption-subject bold  font-dark leftShift">Assignment
+			<span class="caption-subject bold  font-dark leftShift">
+			<i class="fa fa-book fa-fw"></i>Assignment
 				List </span>
 		</div>
 		<div class="actions">

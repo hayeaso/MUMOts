@@ -9,7 +9,7 @@
 <div class="panel panel-success">
 	<div class="panel-heading">
 		<h3 class="panel-title">
-			<i class="fa fa-edit"></i>Student List
+			<i class="fa fa-users fa-fw"></i>Student List
 		</h3>
 	</div>
 	<div class="panel-body">

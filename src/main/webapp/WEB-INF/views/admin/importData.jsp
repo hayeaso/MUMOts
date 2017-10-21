@@ -9,7 +9,7 @@
 
 	<div class="panel-heading">
 		<h3 class="panel-title">
-			<i class="fa fa-edit"></i>Import Data 
+			<i class="glyphicon glyphicon-upload"></i>Import Data 
 		</h3>
 	</div>
 	<div class="panel-body">
