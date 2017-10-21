@@ -1,36 +1,33 @@
 package com.pm.onlinetest.domain;
 
-import java.util.List;
 import java.util.Date;
-import javax.persistence.CascadeType;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Limport javax.persistence.OneToMany;
-taLog {
+import javax.persistence.OneToMany;
+
+@Entity
+public class DataLog {
 	@Id
-    @GeneratedValue
-    private	@GeneratedValue
+	@GeneratedValue
 	private Integer id;
 
-String getType	private String content;
+	private Date date;
+	private String content;
 	private String type;
 
-{
+	public String getType() {
 		return type;
 	}
 
 	public void setType(String type) {
 		this.type = type;
 	}
-	
-	@Lob
-	private String Content;
-	
-	private String type;
 
-	public I	public List<DataLogLines> getLines() {
+	public List<DataLogLines> getLines() {
 		return lines;
 	}
 
@@ -42,7 +39,10 @@ String getType	private String content;
 	private List<DataLogLines> lines;
 
 	public Integer getId() {
-ger id) {
+		return id;
+	}
+
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -55,10 +55,10 @@ ger id) {
 	}
 
 	public String getContent() {
-		return Content;
+		return content;
 	}
 
 	public void setContent(String content) {
-		Content = content;
+		this.content = content;
 	}
 }
