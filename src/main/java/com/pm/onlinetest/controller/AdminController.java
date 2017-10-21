@@ -128,7 +128,6 @@ public class AdminController {
 		}
 
 	}
-
 	
 	@RequestMapping(value = { "/admin/studentIdChecker", "/coach/studentIdChecker" })
 	@ResponseBody public int studentIdChecker(@RequestParam ("studId") String id){		
