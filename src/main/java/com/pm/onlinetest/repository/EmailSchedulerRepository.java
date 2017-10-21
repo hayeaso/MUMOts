@@ -33,7 +33,7 @@ public interface EmailSchedulerRepository extends CrudRepository<EmailScheduler,
 	*and will do the check if its >= than 24 hours in the Service class
 	*/
 	//@Query("SELECT e FROM EmailScheduler e, Assignment a WHERE e.sendEmailDateTime <= :dateTime and e.isSend = true and a.started=false and a.finished=false and a.regenerateTest=false and e.assignmentId=a.id")
-	@Query("SELECT e FROM EmailScheduler e, Assignment a WHERE e.sendEmailDateTime <= :dateTime and e.isSend = true and a.started=false and a.finished=false and a.count<3 and e.assignmentId=a.id")
+	@Query("SELECT e FROM EmailScheduler e, Assignment a WHERE e.sendEmailDateTime <= :dateTime and e.isSend = true and a.started=false and a.count!=99 and e.assignmentId=a.id")
 	List<EmailScheduler> findAllNotStartedWithin24h(@Param("dateTime") LocalDateTime dateTime);
 
 	/*Update the assignment table, by setting finished=true if the test wasnt started in 24 h

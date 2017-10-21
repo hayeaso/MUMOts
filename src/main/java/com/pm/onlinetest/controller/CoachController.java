@@ -116,71 +116,67 @@ public class CoachController {
 	public @ResponseBody String saveAssignment(RedirectAttributes redirectAttr,@RequestParam("userId") String userId,
 			@RequestParam("accessLink") String accessLink,@RequestParam("accessCode") String accessCode,
 			@RequestParam("dateTime") String dateTime) {		
+		
 		try {
-			
-		
-		System.out.println("Student Id in save ASsignment is: "+userId);
-		System.out.println("accesscode in save ASsignment is: "+accessCode);
-		System.out.println("accessLink in save ASsignment is: "+accessLink);
-		
-		Assignment assignment ;
-		EmailScheduler emailScheduler = null; 
-		String coachName =  SecurityContextHolder.getContext().getAuthentication().getName();
-		User coachModel = userService.findByUsername(coachName);
-		
-		Student student = studentService.findByStudentId(Integer.parseInt(userId));
-		
-		assignment = assignmentService.findByAccesscode(accessCode);
-		if(assignment !=null ) {
-			System.out.println("Assignment Already exist");				
-			return "exist"; //added by Diana Yamaletdinova
-		}else {
-			assignment = new Assignment();
-			emailScheduler = new EmailScheduler();
-			System.out.println("Assignment not exist create new one");
-		}
-		/* Added by Diana Yamaletdinova
-		 * Format string from user input to LocalDateTime*/
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yy HH:00");
-		LocalDateTime dateTimeUserInput = LocalDateTime.parse(dateTime, formatter);
-		
-		/*saving a new assignment and data into the emailscheduler table that associated with this assignment*/
-		emailScheduler.setAssignmentId(assignment);
-		emailScheduler.setSend(false);
-		emailScheduler.setSendEmailDateTime(dateTimeUserInput);
-		emailScheduler.setAccessLink(accessLink);		
-		/* End added by Diana Yamaletdinova*/
-		
-		assignment.setAccesscode(accessCode);
-		assignment.setCoachId(coachModel);
-		assignment.setStudentId(student);
-		assignment.setCount(0);
-		assignment.setFinished(false);	
-		emailScheduleService.saveEmailScheduler(emailScheduler);
-		assignmentService.saveAssignment(assignment);
 
-		/* Added by Diana Yamaletdinova*/
-		/*send the email if user selected the current time*/
-		LocalDateTime now = LocalDateTime.now();
-		String curDate = now.format(formatter);
-		LocalDateTime curDateTime = LocalDateTime.parse(curDate, formatter);
-		
-		System.out.println("-------------------------------Date NOW-------" + curDateTime);
-		
-		if (curDateTime.equals(dateTimeUserInput)){
-			System.out.println("-------------------------------dates are the same student.getEmail()" + student.getEmail());
-			emailScheduleService.sendEmail(userId, accessLink, accessCode, student.getEmail());
-			emailScheduleService.updateOnEmailSend(assignment);
-			emailScheduler.setSend(true);
-		}
-		/* End added by Diana Yamaletdinova*/
-	
-		/*	redirectAttr.addFlashAttribute("success", "Test Generated Successfully!");
-	   	return "redirect:/coach/home";
-	 */
-		return "success";
+			Assignment assignment;
+			EmailScheduler emailScheduler = null;
+			String coachName = SecurityContextHolder.getContext().getAuthentication().getName();
+			User coachModel = userService.findByUsername(coachName);
+
+			Student student = studentService.findByStudentId(Integer.parseInt(userId));
+
+			assignment = assignmentService.findByAccesscode(accessCode);
+			if (assignment != null) {
+				System.out.println("Assignment Already exist");
+				return "exist"; // added by Diana Yamaletdinova
+			} else {
+				assignment = new Assignment();
+				emailScheduler = new EmailScheduler();
+				System.out.println("Assignment not exist create new one");
+			}
+			/*
+			 * Added by Diana Yamaletdinova Format string from user input to
+			 * LocalDateTime
+			 */
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yy HH:00");
+			LocalDateTime dateTimeUserInput = LocalDateTime.parse(dateTime, formatter);
+
+			/*
+			 * saving a new assignment and data into the emailscheduler table
+			 * that associated with this assignment
+			 */
+			emailScheduler.setAssignmentId(assignment);
+			emailScheduler.setSend(false);
+			emailScheduler.setSendEmailDateTime(dateTimeUserInput);
+			emailScheduler.setAccessLink(accessLink);
+			/* End added by Diana Yamaletdinova */
+
+			assignment.setAccesscode(accessCode);
+			assignment.setCoachId(coachModel);
+			assignment.setStudentId(student);
+			assignment.setCount(0);
+			assignment.setFinished(false);
+			emailScheduleService.saveEmailScheduler(emailScheduler);
+			assignmentService.saveAssignment(assignment);
+
+			/* Added by Diana Yamaletdinova */
+			/* send the email if user selected the current time */
+			LocalDateTime now = LocalDateTime.now();
+			String curDate = now.format(formatter);
+			LocalDateTime curDateTime = LocalDateTime.parse(curDate, formatter);
+
+			System.out.println("-------------------------------Date NOW-------" + curDateTime);
+
+			if (curDateTime.equals(dateTimeUserInput)) {
+				emailScheduleService.sendEmail(userId, accessLink, accessCode, student.getEmail());
+				emailScheduleService.updateOnEmailSend(assignment);
+				emailScheduler.setSend(true);
+			}
+			/* End added by Diana Yamaletdinova */
+			return "success";
 		} catch (Exception e) {
-			System.out.println("failed"+ e);
+			System.out.println("failed" + e);
 			return "failure";
 			// TODO: handle exception
 		}

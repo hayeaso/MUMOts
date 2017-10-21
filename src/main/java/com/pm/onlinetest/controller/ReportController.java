@@ -1,8 +1,5 @@
 package com.pm.onlinetest.controller;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -10,7 +7,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -171,8 +167,7 @@ public class ReportController {
 		}
 
 		int score = 0;
-		for (Assignment assignment : finisedAssignmentList) {
-			System.out.println(assignment.getStudentId());
+		for (Assignment assignment : finisedAssignmentList) {			
 			for (Test testQuestion : assignment.getTests()) {
 				if (testQuestion.getAnswer() != null) {
 					int choiceID = 0;
@@ -188,8 +183,8 @@ public class ReportController {
 				}
 
 			}
-			long testPercent = 100 * score / assignment.getTests().size();
-			System.out.println("----" + testPercent);
+			int testSize = assignment.getTests().size() == 0 ? 1 : assignment.getTests().size();
+			long testPercent = 100 * score / testSize;			
 			reports.put(assignment, testPercent);
 			model.addAttribute("reports", reports);
 			score = 0;

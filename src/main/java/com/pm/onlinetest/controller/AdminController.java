@@ -94,7 +94,6 @@ public class AdminController {
 		List<Student> students = studentService.findAll();
 		model.addAttribute("students", students);
 		String mapping = request.getServletPath();
-		System.out.println(mapping);
 		return mapping;
 	}
 
@@ -128,7 +127,6 @@ public class AdminController {
 		}
 
 	}
-
 	
 	@RequestMapping(value = { "/admin/studentIdChecker", "/coach/studentIdChecker" })
 	@ResponseBody public int studentIdChecker(@RequestParam ("studId") String id){		
@@ -314,9 +312,7 @@ public class AdminController {
 
 	@RequestMapping(value = { "/admin/importStudentData" }, method = RequestMethod.GET)
 	public String importStudents(HttpServletRequest request) {
-		System.out.println("tttttttttt");
 		String mapping = request.getServletPath();
-		System.out.println(mapping);
 		return mapping;
 	}
 
@@ -377,7 +373,6 @@ public class AdminController {
 								+ " was not inserted :--> ID: " + row.getCell(0).toString() + "\n";
 						DataLogLines dll=new DataLogLines();
 						dll.setContent(text);
-						System.out.println(dll.getContent());
 						ll.add(dll);
 						continue;
 					}
@@ -394,22 +389,16 @@ public class AdminController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		// log+=(insertedRows + " rows added out of " + rows + "\n");
-		// log+=toadd;
 
-		// System.out.println("------------------------------------------------------");
-		System.out.println(log);
 
 		dl.setContent(log);
 		Date date = new Date();
-		System.out.println(ll);
 		dl.setDate(date);
 		dl.setType("Student");
 		dl.setLines(ll);
 		
 		dataLogService.save(dl);
 		
-		//System.out.println(dl.getLines().toString());
 		redirectAttr.addFlashAttribute("success", "Success");
 		redirectAttr.addFlashAttribute("titleMessage", "Welcome to the Log for Students Insertion");
 		redirectAttr.addFlashAttribute("bodyMessage", dl);
@@ -459,10 +448,9 @@ public class AdminController {
 
 					// Set the Sub-Category
 					Subcategory subC;
-					// System.out.println(row.getCell(8).toString());
+			
 					if (!subCategoryService.findSubCategoryByName(row.getCell(9).toString()).isEmpty()) {
 
-						// System.out.println(subCategoryService.findSubCategoryByName(row.getCell(8).toString()));
 						List<Subcategory> subCs = subCategoryService.findSubCategoryByName(row.getCell(9).toString());
 						
 						subC = subCs.get(0);
@@ -495,9 +483,6 @@ public class AdminController {
 					}
 
 				}
-				// System.out.println("//////////////////////////////////////");
-				// System.out.println(toadd);
-				//log += ("\t  \t  \t " + insertedRows + " rows added out of " + rows + "\n\n\n\n");
 				workbook.close();
 			}
 			log += ("\t  \t  \t " + insertedRows + " rows added out of " + rows + "\n\n\n\n");
@@ -507,15 +492,9 @@ public class AdminController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		// log+=(insertedRows + " rows added out of " + rows + "\n");
-		// log+=toadd;
-
-		// System.out.println("------------------------------------------------------");
-		System.out.println(log);
 
 		dl.setContent(log);
 		Date date = new Date();
-		System.out.println(date);
 		dl.setDate(date);
 		dl.setType("Question");
 		dataLogService.save(dl);
@@ -556,8 +535,7 @@ public class AdminController {
 	// bind to edit button in users.jsp
 	@RequestMapping(value = "/admin/editUser/{id}", method = RequestMethod.GET)
 	public String editUser(@ModelAttribute("loginUser") User user, Model model, @PathVariable("id") int id) {
-		// System.out.println("GET: enter into Edit User ");
-		// System.out.println("userid=" + id);
+
 		model.addAttribute("user", userService.findByUserId(id));// assign user
 		return "editUser";
 	}
@@ -566,7 +544,6 @@ public class AdminController {
 	@RequestMapping(value = "/admin/editUser", method = RequestMethod.POST)
 	public String editUser(@Valid @ModelAttribute("loginUser") User user, BindingResult result,
 			RedirectAttributes redirectAttr) {
-		System.out.println("POST: enter into Edit User");
 		if (result.hasErrors()) {
 			return "editUser";
 		}

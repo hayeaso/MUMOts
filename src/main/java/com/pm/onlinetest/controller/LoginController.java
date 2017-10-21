@@ -1,13 +1,11 @@
 package com.pm.onlinetest.controller;
 
 import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
@@ -16,14 +14,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.pm.onlinetest.domain.Student;
 import com.pm.onlinetest.domain.User;
 import com.pm.onlinetest.service.AssignmentService;
 import com.pm.onlinetest.service.UserService;
@@ -82,12 +78,11 @@ public class LoginController {
 
 			message.setReplyTo("false");
 			message.setFrom("mumtestlink@gmail.com");
-			message.setSubject("Test Link");
-			message.setText("You have requested to reset your password for your account. To get started, please click this link." + "Access Link: " + "http://localhost:8080/onlinetest/resetPassword/" + accessCode);
+			message.setSubject("MUM Self Assessment Reset Password Link");
+			message.setText("You have requested to reset your password for your account. To get started, please click this link." + "Access Link: " + "https://ots.cs.mum.edu/onlinetest/resetPassword/" + accessCode);
 
 			mailSender.send(message);
 			redirectAttributes.addFlashAttribute("foundEmail", email);
-			System.out.println("IT HAS TO BE RE_DIRECTED");
 			return "redirect:/login";
 		} else {
 			redirectAttributes.addFlashAttribute("notFoundEmail", email);
@@ -142,12 +137,5 @@ public class LoginController {
 			new SecurityContextLogoutHandler().logout(request, response, auth);
 		}
 		return "redirect:/login";
-	}
-	
-	
-	
-	
-
-
-	
+	}		
 }

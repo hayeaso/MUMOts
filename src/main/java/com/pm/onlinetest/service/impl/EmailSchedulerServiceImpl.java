@@ -1,16 +1,13 @@
 package com.pm.onlinetest.service.impl;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -54,13 +51,12 @@ public class EmailSchedulerServiceImpl implements EmailSchedulerService {
 	 * needed zone="America/Chicago"
 	 * 
 	 * @Scheduled(cron = "* /10 * * * * *", zone="America/Chicago")
-	 * https://www.freeformatter.com/cron-expression-generator-quartz.html 0 1 *
-	 * ? * * At second :00 of minute :01 of every hour 10 0 * ? * * At second
-	 * :10 of minute :00 of every hour 0/10 0 * ? * * => Every 10 seconds
-	 * starting at second 00, at minute :00, of every hour
+	 * https://www.freeformatter.com/cron-expression-generator-quartz.html 
+	 * 0 1 * ? * * At second :00 of minute :01 of every hour 
+	 * 10 0 * ? * * At second :10 of minute :00 of every hour 
+	 * 0/10 0 * ? * * => Every 10 seconds starting at second 00, at minute :00, of every hour
 	 */
 	@Scheduled(fixedDelay = 180000) // 3min
-	// @Scheduled(fixedDelay = 50000)
 	// @Scheduled(cron = "10 0 * ? * *", zone="America/Chicago") // every 1 hour
 	@Override
 	public void generateEmailsToBeSend() {
@@ -111,8 +107,7 @@ public class EmailSchedulerServiceImpl implements EmailSchedulerService {
 									+ assignment.getId());
 					assgnmt.setCount(99);
 					assgnmtService.updateAccessCount(assgnmt);
-					//set24pastAssignmentEmailSchedulerToNull(assignment.getAssignmentId().getId());
-					
+					//set24pastAssignmentEmailSchedulerToNull(assignment.getAssignmentId().getId());					
 				}
 			}
 		}
