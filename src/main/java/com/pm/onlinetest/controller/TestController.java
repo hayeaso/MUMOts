@@ -2,13 +2,12 @@ package com.pm.onlinetest.controller;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.poi.util.SystemOutLogger;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -63,7 +62,7 @@ public class TestController {
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String readme() {
-		return "preacess";
+		return "read";
 	}
 	@RequestMapping(value = "/readme", method = RequestMethod.GET)
 	public String read() {
@@ -141,6 +140,12 @@ public class TestController {
 		attr.addFlashAttribute("errormessage", "Invalid Access Code");
 		return "redirect:/test/acess";
 	}
+	
+	@RequestMapping(value = "/showcategories", method = RequestMethod.GET)
+	public String unauthorizedAccess(Model model) {
+		
+		return "redirect:/test/acess";
+	}
 
 	// Access denied page mapping
 	@RequestMapping(value = "/403", method = RequestMethod.GET)
@@ -156,7 +161,7 @@ public class TestController {
 		return "test/error";
 	}
 
-	@RequestMapping(value = "/showcategories", method = RequestMethod.GET)
+	@RequestMapping(value = "/showcategories", method = RequestMethod.POST)
 	public String selectCategoriesView(Model model, HttpServletRequest request, RedirectAttributes attr) {
 
 //		Assignment obj = (Assignment) request.getAttribute("assignment");
@@ -168,26 +173,18 @@ public class TestController {
 
 		CategorySelectDto dto = new CategorySelectDto();
 		List<Category> categories = new ArrayList<>();
-		
 		for(Category cat : categoryService.findAllEnabled()){
-//			System.out.println("++++"+cat.getName().toString());// Java JS .Net
 			for(Subcategory subCat : cat.getSubcategories()){
-				if(subCat.isEnabled() && questionService.findBySubcategory(subCat).size() >= 0){
-					if (!categories.contains(cat)){
+				if(subCat.isEnabled() && questionService.findBySubcategory(subCat).size() >= 20){
+					if(!categories.contains(cat)) {
 						categories.add(cat);
 					}
+					
 				}
-				System.out.println(subCat.getName());
 			}
-
-
-			System.out.println(cat.getName());
 		}
-
-
 		dto.setCategories(categories);
 		//dto.setCategories(categoryService.findAllEnabled());
-		
 		model.addAttribute("categoryDto", dto);
 		return "categoryselect";
 	}
@@ -196,20 +193,12 @@ public class TestController {
 	public String setCategories(@ModelAttribute("categoryDto") CategorySelectDto dto, BindingResult resultDto,
 			HttpServletRequest request) {
 
-
-		//System.out.println("I am here");
-		System.out.println((request.getSession().getAttribute("assignmentId")));
-		//Integer assignmentId = Integer.parseInt(request.getSession().getAttribute("assignmentId").toString());
-		int assignmentId = 1;
-
-
+		Integer assignmentId = Integer.parseInt(request.getSession().getAttribute("assignmentId").toString());
 		Assignment assignment = assignmentService.findById(assignmentId);
-		//System.out.println("I am here");
+
 		List<Test> existingTest = testService.findByAssignment(assignment);
 		System.out.println("ExistingTest: " + existingTest.size());
-		System.out.println("size is " + existingTest.size());
 		if (existingTest.size() == 0) {
-			System.out.println("I am inside if");
 			List<Integer> subcategories = dto.getSelectedSubCategories();
 
 			Subcategory subcategory = null;
@@ -220,7 +209,7 @@ public class TestController {
 
 				List<Question> subcategoryQuestions = questionService.findBySubcategory(subcategory);
 				//for (int i = 0; i < totalQuestions / subcategories.size(); i++) {
-				for (int i = 0; i < 1; i++) {
+				for (int i = 0; i < 20; i++) {
 
 					int index = 0;
 					if (subcategoryQuestions.size() > 0) {
@@ -228,9 +217,7 @@ public class TestController {
 					}
 
 					Test test = new Test();
-				
-					System.out.println("-----------TESTING -------");
-					test.setQuestion(subcategoryQuestions.remove(i));
+					test.setQuestion(subcategoryQuestions.remove(index));
 					test.setAssignment(assignment);
 					testService.save(test);
 				}
@@ -243,8 +230,7 @@ public class TestController {
 
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
 	public String test(Model model, HttpServletRequest request) {
-		//Integer assignmentId = Integer.parseInt(request.getSession().getAttribute("assignmentId").toString());
-		Integer assignmentId = 1;
+		Integer assignmentId = Integer.parseInt(request.getSession().getAttribute("assignmentId").toString());
 		Assignment assignment = assignmentService.findById(assignmentId);
 		assignment.setStart_date(LocalDateTime.now());
 		assignment.setStarted(true);
@@ -253,14 +239,12 @@ public class TestController {
 
 		tests = testService.findByAssignment(assignment);
 		request.getSession().setAttribute("tests", tests);
-		System.out.println("Test is "+tests);
 		model.addAttribute("test", tests.get(0));
 		model.addAttribute("indexCount", tests.get(0).getId());
 		model.addAttribute("assignment", assignment);
 		model.addAttribute("totalTestCount", tests.size());
 		request.getSession().setAttribute("min", 120);
 		request.getSession().setAttribute("sec", 00);
-		System.out.println("size of test is"+tests.size());
 		return "test";
 	}
 
@@ -277,7 +261,6 @@ public class TestController {
 			test.setAnswer(Integer.parseInt(currentQuestion.getAnswer()));
 		}
 		testService.save(test);
-		System.out.println("index problem is " + tests.get(currentQuestion.getNewQuestionNum()).getId());
 		Test nextTest = testService.findOne(tests.get(currentQuestion.getNewQuestionNum()).getId());
 
 		JSONObject obj = new JSONObject();
@@ -289,7 +272,6 @@ public class TestController {
 			i++;
 		}
 		obj.put("answer", nextTest.getAnswer());
-		System.out.println("Description is"+nextTest.getQuestion().getDescription());
 		return obj;
 	}
 
@@ -316,8 +298,13 @@ public class TestController {
 
 	@RequestMapping(value = "/completed", method = RequestMethod.GET)
 	public String completed() {
-		System.out.println("I am inside completed");
+		 return "redirect:/test/acess";
+	}
+	
+	@RequestMapping(value = "/completed", method = RequestMethod.POST)
+	public String aftercompletion() {
 		return "completed";
 	}
+	
 
 }

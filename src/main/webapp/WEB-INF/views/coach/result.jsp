@@ -64,7 +64,9 @@
                       
                         <tr>
                         <td>Exam Date  </td>
-                        <td>${studentAssignment.start_date}</td>
+                        <fmt:parseDate value="${studentAssignment.start_date}" pattern="yyyy-MM-dd" var="parsedDate" type="date" />						
+						<fmt:formatDate value="${parsedDate}" var="newParsedDate" type="date" pattern="MM/dd/yyyy hh:mm:ss z" />
+						<td>${newParsedDate}</td>
                       </tr>
                       <tr>
                         <td>Invited By  </td>
@@ -107,10 +109,8 @@
 		<span class="label label-info"> Overall Score </span>
 		<br>
 	<div class="col-md-4">
-	<h3>Score : ${total} Out of ${questions}</h3>
-	<h3>Grade ${grade} </h3> </div>
-
-</div>
+	<h3>${total} Out of ${questions}</h3>
+	</div>
   
   </div>  
 </div>
