@@ -11,26 +11,25 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
+import org.hibernate.annotations.Type;
+
 @Entity
 public class Assignment {
 
  	@Id
     @GeneratedValue
     private Integer id;
-
+ 	@Type(type="com.pm.onlinetest.util.LocalDateTimeUserType")
 	private LocalDateTime start_date;
- 
+ 	@Type(type="com.pm.onlinetest.util.LocalDateTimeUserType")
  	private LocalDateTime end_date;
  	private Integer count;
  	private boolean started;
  	private boolean finished;
  	private String accesscode;
- 	
+//	
 // 	@Column(nullable=false, columnDefinition = "boolean default false")
-// 	private Boolean regenerateTest;//added by Diana Yamaletdinova
- 	
- 	@Column(nullable=false, columnDefinition = "boolean default false")
- 	private boolean regenerateTest;//added by Diana Yamaletdinova
+// 	private boolean regenerateTest;//added by Diana Yamaletdinova
 	
  	@OneToOne(fetch=FetchType.EAGER)	
  	private Student studentId;
@@ -121,14 +120,14 @@ public class Assignment {
 	public void setAccesscode(String accesscode) {
 		this.accesscode = accesscode;
 	}
-
-	public boolean getRegenerateTest() {
-		return regenerateTest;
-	}
-
-	public void setRegenerateTest(boolean regenerateTest) {
-		this.regenerateTest = regenerateTest;
-	}
-	
-	
+//
+//	public boolean getRegenerateTest() {
+//		return regenerateTest;
+//	}
+//
+//	public void setRegenerateTest(boolean regenerateTest) {
+//		this.regenerateTest = regenerateTest;
+//	}
+//	
+//	
 }

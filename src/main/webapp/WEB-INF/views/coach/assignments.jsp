@@ -66,7 +66,17 @@
 							<td>${assignment.studentId.email}</td>
 							<td>${assignment.start_date}</td>
 							<td>${assignment.end_date}</td>
-							<td>${assignment.count}</td>
+<%-- 							<td>${assignment.count}</td> --%>
+							<td><c:choose>
+									<c:when test="${assignment.count == 99}">
+										0
+									</c:when>
+									<c:otherwise>
+										${assignment.count}
+									</c:otherwise>
+								</c:choose>
+							</td>							
+							
 							<td><c:choose>
 
 									<c:when

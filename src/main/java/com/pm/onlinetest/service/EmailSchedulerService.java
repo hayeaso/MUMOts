@@ -15,7 +15,7 @@ public interface EmailSchedulerService {
 	public void saveEmailScheduler(EmailScheduler emailScheduler);
 	public List<EmailScheduler> findDateToSend(LocalDateTime newDateNow);
 	public List<EmailScheduler> findAllNotStartedWithin24h(LocalDateTime newDateNow);
-	void set24pastAssignmentEmailSchedulerToNull(Integer id);
+	//void set24pastAssignmentEmailSchedulerToNull(Integer id);
     public EmailScheduler findByAssignmentId(Assignment assignment);
     public String sendEmail(String userId, String accessLink, String accessCode, String email);
     void updateOnEmailSend(Assignment assignment);

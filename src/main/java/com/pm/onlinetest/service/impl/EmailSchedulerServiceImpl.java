@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -19,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.pm.onlinetest.domain.Assignment;
 import com.pm.onlinetest.domain.EmailScheduler;
 import com.pm.onlinetest.repository.EmailSchedulerRepository;
+import com.pm.onlinetest.service.AssignmentService;
 import com.pm.onlinetest.service.EmailSchedulerService;
 
 /**
@@ -34,6 +36,9 @@ public class EmailSchedulerServiceImpl implements EmailSchedulerService {
 
 	@Autowired
 	private EmailSchedulerRepository emailSchedulerRepository;
+	
+	@Autowired
+	private AssignmentService assgnmtService;
 
 	@Autowired
 	private MailSender mailSender;
@@ -99,12 +104,15 @@ public class EmailSchedulerServiceImpl implements EmailSchedulerService {
 
 			for (EmailScheduler assignment : past24hMap) {
 				long hours = calculate24hours(assignment.getSendEmailDateTime(), newDateNow);
-
+				Assignment assgnmt = assignment.getAssignmentId();
 				if (hours >= 24) {
 					System.out.println(
 							" -------------------------wasn't started within 24 h: Allow to reassign/regenerate a new test for assignment id --------------------------"
 									+ assignment.getId());
-					set24pastAssignmentEmailSchedulerToNull(assignment.getAssignmentId().getId());
+					assgnmt.setCount(99);
+					assgnmtService.updateAccessCount(assgnmt);
+					//set24pastAssignmentEmailSchedulerToNull(assignment.getAssignmentId().getId());
+					
 				}
 			}
 		}
@@ -149,10 +157,10 @@ public class EmailSchedulerServiceImpl implements EmailSchedulerService {
 	}
 
 	// @Transactional(isolation=Isolation.READ_COMMITTED)
-	@Override
-	public void set24pastAssignmentEmailSchedulerToNull(Integer id) {
-		emailSchedulerRepository.set24pastAssignmentToNull(id);
-	}
+//	@Override
+//	public void set24pastAssignmentEmailSchedulerToNull(Integer id) {
+//		emailSchedulerRepository.set24pastAssignmentToNull(id);
+//	}
 
 	/*
 	 * Find the EmailScheduler obj by assignment Id
