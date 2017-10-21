@@ -156,27 +156,23 @@
      }
 	 
 	 function checkStudentId(id){
-		 alert(id);
+		 $("#errorMsgStudent").empty();
+		 $("#errorMsgStudent").addClass("hidden");
 		 $.ajax({
 				url:'./studentIdChecker',
 				type:"GET",
 				data: {studId:id},
-				success:function(data){	
-					console.log(data);
-					 $("#errorMsgStudent").empty();
-					if(data==1){
-						//alert("student exists");
+				success:function(data){					 
+					if(data==1){						
 						var msg ="<strong>Warning!</strong>Student Id already exists" 		
-							$("#errorMsgStudent").append(msg);
-							$("#errorMsgStudent").removeClass("hidden");
-							$("#errorMsgStudent").show();
-							
-					}else{
-						alert("student id does not exists");						
+						$("#errorMsgStudent").append(msg);
+						$("#errorMsgStudent").removeClass("hidden");
+						$("#errorMsgStudent").show();	
+						return false;
 					}
 				},
 				error:function(data){
-					alert("error msg");
+					//alert("error msg");
 				}
 			});	
 	 }
