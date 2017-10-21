@@ -36,6 +36,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.pm.onlinetest.domain.Category;
 import com.pm.onlinetest.domain.Choice;
 import com.pm.onlinetest.domain.DataLog;
+import com.pm.onlinetest.domain.DataLogLines;
 import com.pm.onlinetest.domain.Question;
 import com.pm.onlinetest.domain.Student;
 import com.pm.onlinetest.domain.Subcategory;
@@ -303,6 +304,113 @@ public class AdminController {
 		subCategoryService.softDelete(Integer.parseInt(id));
 	}
 
+	@RequestMapping(value = { "/admin/importStudentData" }, method = RequestMethod.GET)
+	public String importStudents(HttpServletRequest request) {
+		System.out.println("tttttttttt");
+		String mapping = request.getServletPath();
+		System.out.println(mapping);
+		return mapping;
+	}
+
+	@RequestMapping(value = { "/admin/importStudentData" }, method = RequestMethod.POST)
+	public String importStudents(Model model, @RequestParam("ExcelFile") MultipartFile excelfile,
+			RedirectAttributes redirectAttr, HttpServletRequest request) {
+
+		String mapping = request.getServletPath();
+		String log = "";
+		int rows = 0;
+		int insertedRows = 0;
+		// String toadd = "";
+		DataLog dl = new DataLog();
+		List<DataLogLines> ll = new ArrayList<>();
+		
+		try {
+			// Using XSSF for xlsx format, for xls use HSSF
+			Workbook workbook = new XSSFWorkbook(excelfile.getInputStream());
+			int numberOfSheets = workbook.getNumberOfSheets();
+			// looping over each workbook sheet
+			for (int i = 0; i < numberOfSheets; i++) {
+				Sheet sheet = workbook.getSheetAt(i);
+				Iterator<Row> rowIterator = sheet.iterator();
+
+				// iterating over each row
+				if (rowIterator.hasNext()) {
+					rowIterator.next();
+				}
+				while (rowIterator.hasNext()) {
+
+					rows++;
+
+					Student student = new Student();
+					Row row = rowIterator.next();
+					Boolean validRow= true;
+					for (int j = 0; j < 6; j++) {
+						if (row.getCell(j).toString().isEmpty()) {
+							validRow=false;
+						}
+					}
+					
+					
+					if (studentService.findByStudentId(row.getCell(0).toString()) == null && validRow==true) {
+						student.setStudentId(row.getCell(0).toString());
+						student.setFirstName(row.getCell(1).toString());
+						student.setLastName(row.getCell(2).toString());
+						student.setEmail(row.getCell(3).toString());
+						student.setEntry(row.getCell(4).toString());
+						if (row.getCell(5).toString().equalsIgnoreCase("Active")) {
+							student.setEnabled(true);
+						} else {
+							student.setEnabled(false);
+						}
+						studentService.save(student);
+						insertedRows++;
+					} else {
+						String text = "The Student Entry at row number " + row.getRowNum()
+								+ " was not inserted :--> ID: " + row.getCell(0).toString() + "\n";
+						DataLogLines dll=new DataLogLines();
+						dll.setContent(text);
+						System.out.println(dll.getContent());
+						ll.add(dll);
+						continue;
+					}
+				}
+				//log += ("\t  \t  \t " + insertedRows + " rows added out of " + rows + "\n\n\n\n");
+				workbook.close();
+			}
+			log += ("\t  \t  \t " + insertedRows + " row(s) added out of  " + rows + " \n\n\n\n");
+			
+
+			excelfile.getInputStream().close();
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		// log+=(insertedRows + " rows added out of " + rows + "\n");
+		// log+=toadd;
+
+		// System.out.println("------------------------------------------------------");
+		System.out.println(log);
+
+		dl.setContent(log);
+		Date date = new Date();
+		System.out.println(ll);
+		dl.setDate(date);
+		dl.setType("Student");
+		dl.setLines(ll);
+		
+		dataLogService.save(dl);
+		
+		//System.out.println(dl.getLines().toString());
+		redirectAttr.addFlashAttribute("success", "Success");
+		redirectAttr.addFlashAttribute("titleMessage", "Welcome to the Log for Students Insertion");
+		redirectAttr.addFlashAttribute("bodyMessage", dl);
+		redirectAttr.addFlashAttribute("lines", ll);
+
+		return "redirect:" + mapping;
+
+	}
+
 	@RequestMapping(value = { "/admin/importData", "/coach/importData", "/dba/importData" }, method = RequestMethod.GET)
 	public String importDataGet(HttpServletRequest request) {
 		String mapping = request.getServletPath();
@@ -315,10 +423,12 @@ public class AdminController {
 			RedirectAttributes redirectAttr, HttpServletRequest request) {
 
 		String mapping = request.getServletPath();
-		String log = "\t  \t  \t   Welcome to the Log for Insertion Of Questions \n\n";
+		String log = "";
 		int rows = 0;
 		int insertedRows = 0;
-		String toadd = "";
+		// String toadd = "";
+		DataLog dl = new DataLog();
+		List<DataLogLines> ll = new ArrayList<>();
 		try {
 
 			// Using XSSF for xlsx format, for xls use HSSF
@@ -367,46 +477,48 @@ public class AdminController {
 						choiceService.save(choices);
 						insertedRows++;
 					} else {
-						toadd += "The Question at row number " + row.getRowNum() + " was not inserted :-->"
+						String text = "The Question at row number " + row.getRowNum() + " was not inserted :-->"
 								+ row.getCell(0).toString() + "\n";
-						//System.out.println(toadd);
+						DataLogLines dll=new DataLogLines();
+						dll.setContent(text);
+						ll.add(dll);
 						continue;
 					}
 
 				}
-				//System.out.println("//////////////////////////////////////");
-				//System.out.println(toadd);
-				log+=("\t  \t  \t "+insertedRows +" rows added out of " + rows + "\n\n\n\n");
-				log+=toadd;
+				// System.out.println("//////////////////////////////////////");
+				// System.out.println(toadd);
+				//log += ("\t  \t  \t " + insertedRows + " rows added out of " + rows + "\n\n\n\n");
 				workbook.close();
 			}
-
+			log += ("\t  \t  \t " + insertedRows + " rows added out of " + rows + "\n\n\n\n");
 			excelfile.getInputStream().close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		//log+=(insertedRows + " rows added out of " + rows + "\n");
-		//log+=toadd;
+		// log+=(insertedRows + " rows added out of " + rows + "\n");
+		// log+=toadd;
 
-		//System.out.println("------------------------------------------------------");
+		// System.out.println("------------------------------------------------------");
 		System.out.println(log);
-		DataLog dl=new DataLog();
+
 		dl.setContent(log);
 		Date date = new Date();
 		System.out.println(date);
 		dl.setDate(date);
 		dl.setType("Question");
 		dataLogService.save(dl);
-		
+		dl.setLines(ll);
 		redirectAttr.addFlashAttribute("success", "Success");
-		redirectAttr.addFlashAttribute("titleMessage", "LOG FILE");
-		redirectAttr.addFlashAttribute("bodyMessage", dl.getContent());
-	
+		redirectAttr.addFlashAttribute("titleMessage", "Welcome to the Log for Questions Insertion");
+		redirectAttr.addFlashAttribute("bodyMessage", dl);
+		redirectAttr.addFlashAttribute("lines", ll);
+
 		return "redirect:" + mapping;
 	}
-
+	
 	@RequestMapping(value = { "/dba/subcategories/{catId}", "/coach/subcategories/{catId}",
 			"/admin/subcategories/{catId}" }, method = RequestMethod.POST)
 	@ResponseBody

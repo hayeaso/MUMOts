@@ -1,23 +1,24 @@
 package com.pm.onlinetest.domain;
 
-
-
-import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Lob;
+import javax.persistence.OneToMany;
 
 @Entity
 public class DataLog {
 	@Id
-    @GeneratedValue
-    private Integer id;
-	
+	@GeneratedValue
+	private Integer id;
+
 	private Date date;
-	
+	private String content;
+	private String type;
+
 	public String getType() {
 		return type;
 	}
@@ -25,13 +26,19 @@ public class DataLog {
 	public void setType(String type) {
 		this.type = type;
 	}
-	
-	@Lob
-	private String Content;
-	
-	private String type;
 
-	public Integer getId() { 
+	public List<DataLogLines> getLines() {
+		return lines;
+	}
+
+	public void setLines(List<DataLogLines> lines) {
+		this.lines = lines;
+	}
+
+	@OneToMany(mappedBy = "log", cascade=CascadeType.ALL)
+	private List<DataLogLines> lines;
+
+	public Integer getId() {
 		return id;
 	}
 
@@ -48,10 +55,10 @@ public class DataLog {
 	}
 
 	public String getContent() {
-		return Content;
+		return content;
 	}
 
 	public void setContent(String content) {
-		Content = content;
+		this.content = content;
 	}
 }

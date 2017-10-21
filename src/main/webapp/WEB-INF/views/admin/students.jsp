@@ -20,7 +20,7 @@
 						<div class="form-group">
 
 							<a href="registerStudent" class="btn btn-primary"><i
-								class="fa fa-plus"></i> Add New </a> <a href="importStudent"
+								class="fa fa-plus"></i> Add New </a> <a href="importStudentData"
 								class="btn btn-success"><i class="fa fa-plus"></i> Import
 								Student </a>
 						</div>
