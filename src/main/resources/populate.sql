@@ -18,7 +18,7 @@ INSERT INTO `User` (`userId`, `email`, `enabled`, `firstName`, `lastName`, `pass
 INSERT INTO `User` (`userId`, `email`, `enabled`, `firstName`, `lastName`, `password`, `username`) VALUES (6, 'test4@mum.edu', b'1', 'Stu04', 'Stu04', null, null);
 INSERT INTO `User` (`userId`, `email`, `enabled`, `firstName`, `lastName`, `password`, `username`) VALUES (7, 'test5@mum.edu', b'1', 'Stu05', 'Stu05', null, null);
 INSERT INTO `User` (`userId`, `email`, `enabled`, `firstName`, `lastName`, `password`, `username`) VALUES (8, 'test6@mum.edu', b'1', 'Stu06', 'Stu06', null, null);
-INSERT INTO `User` (`userId`, `email`, `enabled`, `firstName`, `lastName`, `password`, `username`) VALUES (9, 'test7@mum.edu', b'1', 'Stu07', 'Stu07', null, null);
+INSERT INTO `User` (`userId`, `email`, `enabled`, `firstName`, `lastName`, `password`, `username`) VALUES (10, 'test7@mum.edu', b'1', 'Stu07', 'Stu07', null, null);
 
 
 INSERT INTO `Grade` (`name`, `rangeFrom`, `rangeTo`) VALUES ('A', 95, 98);
