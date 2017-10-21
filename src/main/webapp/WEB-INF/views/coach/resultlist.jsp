@@ -51,7 +51,9 @@
 							${report.key.studentId.lastName}</td>
 						<td>${report.key.studentId.entry}</td>
 						<td>${report.key.studentId.email}</td>
-						<td>${report.key.end_date}</td>
+						<fmt:parseDate value="${report.key.end_date}" pattern="yyyy-MM-dd'T'HH:mm" var="endDate" type="date" />						
+						<fmt:formatDate value="${endDate}" var="myEndDate" type="date" pattern="MM/dd/yyyy HH:mm:ss a z" />
+						<td>${myEndDate}</td>
 						<td><c:choose>
 								<c:when test="${report.value>75}">
 									<p class="text-success">${report.value}</p>
