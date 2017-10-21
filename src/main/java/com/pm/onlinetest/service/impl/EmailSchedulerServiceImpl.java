@@ -73,7 +73,7 @@ public class EmailSchedulerServiceImpl implements EmailSchedulerService {
 		dateList = findDateToSend(newDateNow);
 
 		if (dateList.isEmpty()) {
-			System.out.println("****************No dates found************");
+			System.out.println("****************No emails scheduled to send************");
 			return;
 		} else {
 			for (EmailScheduler date : dateList) {

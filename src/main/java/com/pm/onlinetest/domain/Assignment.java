@@ -19,9 +19,9 @@ public class Assignment {
  	@Id
     @GeneratedValue
     private Integer id;
- 	@Type(type="com.pm.onlinetest.util.LocalDateTimeUserType")
+ 	@Type(type="com.pm.onlinetest.util.LocalDateTimeUserType")//added to display date properly in db
 	private LocalDateTime start_date;
- 	@Type(type="com.pm.onlinetest.util.LocalDateTimeUserType")
+ 	@Type(type="com.pm.onlinetest.util.LocalDateTimeUserType")//added to display date properly in db
  	private LocalDateTime end_date;
  	private Integer count;
  	private boolean started;

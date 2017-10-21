@@ -21,6 +21,14 @@
 			<h3>Register New Student</h3>
 			<p class="hint">Enter student information below:</p>
 			<div class="form-group">
+				<form:label path="studentId"
+					class="control-label visible-ie8 visible-ie9">Student ID</form:label>
+				<form:input path="studentId" onchange="checkStudentId(this.value)" class="form-control placeholder-no-fix"
+					type="text" placeholder="Student ID" name="studentId" value="${model.getStudentId() }"/>
+					<div id="errorMsgStudent" class="alert alert-warning" style="display: none;"></div>
+				<form:errors path="studentId" cssClass="text-danger" />
+			</div>
+			<div class="form-group">
 				<form:label path="firstName"
 					class="control-label visible-ie8 visible-ie9">First Name</form:label>
 				<form:input path="firstName" class="form-control placeholder-no-fix"
@@ -40,13 +48,6 @@
 				<form:input path="email" class="form-control placeholder-no-fix"
 					type="text" placeholder="Email" name="email" value="${model.getEmail() }"/>
 				<form:errors path="email" cssClass="text-danger" />
-			</div>
-			<div class="form-group">
-				<form:label path="studentId"
-					class="control-label visible-ie8 visible-ie9">Student ID</form:label>
-				<form:input path="studentId" class="form-control placeholder-no-fix"
-					type="text" placeholder="Student ID" name="studentId" value="${model.getStudentId() }"/>
-				<form:errors path="studentId" cssClass="text-danger" />
 			</div>
 			
 			<div class="form-group">
@@ -153,4 +154,30 @@
 		window.location.href = "../../../onlinetest/coach/students";	
         self.close();
      }
+	 
+	 function checkStudentId(id){
+		 alert(id);
+		 $.ajax({
+				url:'./studentIdChecker',
+				type:"GET",
+				data: {studId:id},
+				success:function(data){	
+					console.log(data);
+					 $("#errorMsgStudent").empty();
+					if(data==1){
+						//alert("student exists");
+						var msg ="<strong>Warning!</strong>Student Id already exists" 		
+							$("#errorMsgStudent").append(msg);
+							$("#errorMsgStudent").removeClass("hidden");
+							$("#errorMsgStudent").show();
+							
+					}else{
+						alert("student id does not exists");						
+					}
+				},
+				error:function(data){
+					alert("error msg");
+				}
+			});	
+	 }
 </script>
