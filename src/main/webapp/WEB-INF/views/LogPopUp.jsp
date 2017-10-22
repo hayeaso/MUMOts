@@ -1,36 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ include file="/WEB-INF/views/include.jsp"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
-<!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
-	<div class="modal-dialog">
 
-		<!-- Modal content-->
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">${titleMessage}</h4>
-			</div>
-			<div class="modal-body">
-				<p>${bodyMessage.content}</p>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+      <button class="btn btn-warning btn-sm alignright" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></button>
+        <h5 class="modal-title" id="exampleModalLongTitle">${titleMessage}</h5>
+        
+           <!-- <button type="button" class="btn btn-secondary btn-sm alignright" data-dismiss="modal">Close</button>
+         -->
+      </div>
+      <div class="modal-body">
+       <p>${bodyMessage.content}</p>
 				<ul>
 					<c:forEach items="${lines}" var="line">
 						<li>${line.content}"</li>
 					</c:forEach>
 				</ul>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
-			</div>
-		</div>
-	</div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>
 
-<!-- END OF MODAL -->
 
 <script type="text/javascript">
 	$(window).on('load', function() {
-		$('#myModal').modal('show');
+		$('#exampleModalLong').modal('show');
 	});
 </script>
