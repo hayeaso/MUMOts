@@ -205,24 +205,6 @@ public class AdminController {
 		return "redirect:" + mapping + "/" + student.getUserId();
 	}
 
-	// @RequestMapping(value = {"/admin/editStudent", "/coach/editStudent"},
-	// method = RequestMethod.POST)
-	// public String editStudent(@ModelAttribute("student") Student student,
-	// BindingResult result,
-	// RedirectAttributes redirectAttr, HttpServletRequest request) {
-	// String mapping = request.getServletPath();
-	// if (result.hasErrors()) {
-	// return mapping;
-	// }
-	// if(null != studentService.findByStudentId(student.getStudentId())){
-	// redirectAttr.addFlashAttribute("error", "Error");
-	// }else{
-	// studentService.save(student);
-	// redirectAttr.addFlashAttribute("success", "Success");
-	// }
-	// return "redirect:"+mapping;
-	// }
-
 	@RequestMapping(value = { "/admin/deleteUser", "/coach/deleteUser" }, method = RequestMethod.POST)
 	public String DeleteUser(HttpServletRequest request, @RequestParam("userid") Integer userId)
 			throws UserNotFoundException {
@@ -234,17 +216,6 @@ public class AdminController {
 		userService.updateStatus(userId, !user.isEnabled());
 		return "admin/users";
 	}
-
-	// @RequestMapping(value = "/admin/assign", method = RequestMethod.GET)
-	// public String assignCoach(Model model) {
-	// List<Student> students = studentService.findAll();
-	// List<User> coaches = userService.findByAuthority("ROLE_COACH");
-	//
-	// model.addAttribute("students", students);
-	// model.addAttribute("coaches", coaches);
-	//
-	// return "assignCoach";
-	// }
 
 	@RequestMapping(value = "/admin/categories", method = RequestMethod.GET)
 	public String getCategory(Model model) {
@@ -320,13 +291,15 @@ public class AdminController {
 		subCategoryService.softDelete(Integer.parseInt(id));
 	}
 
-	@RequestMapping(value = { "/admin/importStudentData" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/admin/importStudentData", "/coach/importStudentData" }, method = RequestMethod.GET)
 	public String importStudents(HttpServletRequest request) {
+		System.out.println("connected");
 		String mapping = request.getServletPath();
+		System.out.println(mapping);
 		return mapping;
 	}
 
-	@RequestMapping(value = { "/admin/importStudentData" }, method = RequestMethod.POST)
+	@RequestMapping(value = { "/admin/importStudentData", "/coach/importStudentData" }, method = RequestMethod.POST)
 	public String importStudents(Model model, @RequestParam("ExcelFile") MultipartFile excelfile,
 			RedirectAttributes redirectAttr, HttpServletRequest request) {
 
@@ -442,13 +415,20 @@ public class AdminController {
 			Workbook workbook = new XSSFWorkbook(excelfile.getInputStream());
 
 			int numberOfSheets = workbook.getNumberOfSheets();
-
+			List <String> questionsDescription=new ArrayList<String>();
+			Iterator<Question> QuestionIterator = questionService.findAll().iterator();
+			while(QuestionIterator.hasNext()){
+				questionsDescription.add(QuestionIterator.next().getDescription());
+			}
 			// looping over each workbook sheet
 			for (int i = 0; i < numberOfSheets; i++) {
 				Sheet sheet = workbook.getSheetAt(i);
 				Iterator<Row> rowIterator = sheet.iterator();
-
-				// iterating over each row
+				
+				if (rowIterator.hasNext()) {
+					rowIterator.next();
+				}
+				// iterating over each row from second row
 				while (rowIterator.hasNext()) {
 
 					rows++;
@@ -458,24 +438,35 @@ public class AdminController {
 
 					// Set the Sub-Category
 					Subcategory subC;
-			
-					if (!subCategoryService.findSubCategoryByName(row.getCell(9).toString()).isEmpty()) {
+					//System.out.println(row.getCell(0).toString());
+					List<Question> test=questionService.findQuestionByDesc(row.getCell(0).toString());
+					System.out.println(test.size());
+					Boolean exist=false;
+					if (test.size()<1) {
+						exist=true;
+					}
+					//System.out.println(test);
+					//System.out.println(test);
+					if (!subCategoryService.findSubCategoryByName(row.getCell(8).toString()).isEmpty()
+						//	&& !questionsDescription.contains(row.getCell(0).toString())
+							&&		exist
+							) {
 
-						List<Subcategory> subCs = subCategoryService.findSubCategoryByName(row.getCell(9).toString());
+						List<Subcategory> subCs = subCategoryService.findSubCategoryByName(row.getCell(8).toString());
 						
 						subC = subCs.get(0);
 
 						question.setSubcategory(subC);
 						question.setDescription(row.getCell(0).toString());
-						question.setCategory(row.getCell(8).toString());
-						for (int j = 1; j < 7; j++) {
+						question.setCategory(row.getCell(7).toString());
+						for (int j = 1; j < 6; j++) {
 							Choice choice = new Choice();
 							choice.setDescription(row.getCell(j).toString());
 							choice.setQuestion(question);
 							choices.add(choice);
 
 						}
-						String rightAnswer = row.getCell(7).toString();
+						String rightAnswer = row.getCell(6).toString();
 						int rightAnswerIndex = getRightAnswerIndex(rightAnswer);
 						if (rightAnswerIndex != -1) {
 							choices.get(rightAnswerIndex).setAnswer(true);

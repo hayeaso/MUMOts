@@ -59,15 +59,21 @@ public class QuestionsController {
 			model.addAttribute("categories", listCategory);
 			return mapping;
 		}
-
-		for (Choice choice : question.getChoices()) {
-			choice.setQuestion(question);
+		if (questionService.findQuestionByDesc(question.getDescription()).size()<1) {
+			for (Choice choice : question.getChoices()) {
+				choice.setQuestion(question);
+			}
+			questionService.save(question);
+			redirectAttr.addFlashAttribute("success", "The question Successfully added !");
+			redirectAttr.addFlashAttribute("question", question);
+			
+			return "redirect:"+mapping;
+		} else {
+			model.addAttribute("error", "This Question Exist in The Database!!");
+			model.addAttribute("question", question);
+			return mapping;
 		}
-		questionService.save(question);
-		redirectAttr.addFlashAttribute("success", "The question Successfully added !");
-		redirectAttr.addFlashAttribute("question", question);
 		
-		return "redirect:"+mapping;
 	}
 
 	// @RequestMapping(value = "/dba/editquestion/{question_id}", method =

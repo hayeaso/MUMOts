@@ -13,4 +13,5 @@ public interface QuestionService {
 	public Question findQuestionById(Integer id);
 	public void delete(Question question);
 	public List<Question> findBySubcategory(Subcategory subcategory);
+	public List<Question> findQuestionByDesc(String desc);
 }

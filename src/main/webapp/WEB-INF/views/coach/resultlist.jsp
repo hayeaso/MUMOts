@@ -14,10 +14,12 @@
 		</div>
 		<div class="actions">
 			<jsp:useBean id="now" class="java.util.Date" />
+
 			<fmt:formatDate value="${now}" pattern="dd-MM-yyyy HH:mm:ss a z" />
-			
-			<a class="btn  btn-icon-only btn-success fullscreen fa fa-th-large alignright"
-				href="#" data-original-title="" title=""> </a>
+
+
+			<a class="btn btn-circle btn-icon-only btn-primary fullscreen glyphicon glyphicon-fullscreen alignright"
+			href="#" data-original-title="" title=""> </a>
 		</div>
 	</div>
 	
@@ -52,7 +54,9 @@
 							${report.key.studentId.lastName}</td>
 						<td>${report.key.studentId.entry}</td>
 						<td>${report.key.studentId.email}</td>
-						<td>${report.key.end_date}</td>
+						<fmt:parseDate value="${report.key.end_date}" pattern="yyyy-MM-dd'T'HH:mm" var="endDate" type="date" />						
+						<fmt:formatDate value="${endDate}" var="myEndDate" type="date" pattern="MM/dd/yyyy hh:mm:ss a z" />
+						<td>${myEndDate}</td>
 						<td><c:choose>
 								<c:when test="${report.value>75}">
 									<p class="text-success">${report.value}</p>
