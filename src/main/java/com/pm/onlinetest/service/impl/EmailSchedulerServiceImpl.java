@@ -6,7 +6,6 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
@@ -33,7 +32,7 @@ public class EmailSchedulerServiceImpl implements EmailSchedulerService {
 
 	@Autowired
 	private EmailSchedulerRepository emailSchedulerRepository;
-	
+
 	@Autowired
 	private AssignmentService assgnmtService;
 
@@ -51,10 +50,10 @@ public class EmailSchedulerServiceImpl implements EmailSchedulerService {
 	 * needed zone="America/Chicago"
 	 * 
 	 * @Scheduled(cron = "* /10 * * * * *", zone="America/Chicago")
-	 * https://www.freeformatter.com/cron-expression-generator-quartz.html 
-	 * 0 1 * ? * * At second :00 of minute :01 of every hour 
-	 * 10 0 * ? * * At second :10 of minute :00 of every hour 
-	 * 0/10 0 * ? * * => Every 10 seconds starting at second 00, at minute :00, of every hour
+	 * https://www.freeformatter.com/cron-expression-generator-quartz.html 0 1 *
+	 * ? * * At second :00 of minute :01 of every hour 10 0 * ? * * At second
+	 * :10 of minute :00 of every hour 0/10 0 * ? * * => Every 10 seconds
+	 * starting at second 00, at minute :00, of every hour
 	 */
 	@Scheduled(fixedDelay = 180000) // 3min
 	// @Scheduled(cron = "10 0 * ? * *", zone="America/Chicago") // every 1 hour
@@ -107,7 +106,7 @@ public class EmailSchedulerServiceImpl implements EmailSchedulerService {
 									+ assignment.getId());
 					assgnmt.setCount(99);
 					assgnmtService.updateAccessCount(assgnmt);
-					//set24pastAssignmentEmailSchedulerToNull(assignment.getAssignmentId().getId());					
+					// set24pastAssignmentEmailSchedulerToNull(assignment.getAssignmentId().getId());
 				}
 			}
 		}
@@ -124,11 +123,10 @@ public class EmailSchedulerServiceImpl implements EmailSchedulerService {
 			message.setReplyTo("false");
 			message.setFrom("mumtestlink@gmail.com");
 			message.setSubject("MUM Online Test System : Assignment Link");
-			message.setText(
-					" Access the test you need to enter the access code provided below. "
-							+ " Please find the link and the access code below: \n" + "Access Link: "
-							+ "https://ots.cs.mum.edu/onlinetest/test" + "\n" + "Access Code: " + accessCode
-							+ "\nGetting to know what is strong and what is weak on your knowledge tree  will be helpful for your job search!");
+			message.setText("Access the test you need to enter the access code provided below."
+					+ " Please find the link and the access code below: \n\n" + "Access Link: "
+					+ "https://ots.cs.mum.edu/onlinetest/test" + "\n" + "Access Code: " + accessCode
+					+ "\n\nGetting to know what is strong and what is weak on your knowledge tree  will be helpful for your job search!");
 
 			mailSender.send(message);
 			return "success";
@@ -152,10 +150,10 @@ public class EmailSchedulerServiceImpl implements EmailSchedulerService {
 	}
 
 	// @Transactional(isolation=Isolation.READ_COMMITTED)
-//	@Override
-//	public void set24pastAssignmentEmailSchedulerToNull(Integer id) {
-//		emailSchedulerRepository.set24pastAssignmentToNull(id);
-//	}
+	// @Override
+	// public void set24pastAssignmentEmailSchedulerToNull(Integer id) {
+	// emailSchedulerRepository.set24pastAssignmentToNull(id);
+	// }
 
 	/*
 	 * Find the EmailScheduler obj by assignment Id
