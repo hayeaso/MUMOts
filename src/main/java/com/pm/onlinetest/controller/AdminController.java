@@ -580,29 +580,26 @@ public class AdminController {
 
 	private int getRightAnswerIndex(String rightAnswer) {
 		int rightAnswerIndex = -1;
+		// Choice A in excel start form column B
+		// the index here start from 0 based on choices array 
 		switch (rightAnswer) {
-		case "B":
+		case "A":
 			rightAnswerIndex = 0;
 			break;
-		case "C":
+		case "B":
 			rightAnswerIndex = 1;
 
 			break;
-		case "D":
+		case "C":
 			rightAnswerIndex = 2;
 
 			break;
-		case "E":
+		case "D":
 			rightAnswerIndex = 3;
 
 			break;
-		case "F":
+		case "E":
 			rightAnswerIndex = 4;
-
-			break;
-		case "G":
-			rightAnswerIndex = 5;
-
 			break;
 
 		}
