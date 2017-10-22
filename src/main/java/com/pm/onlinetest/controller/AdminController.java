@@ -414,8 +414,11 @@ public class AdminController {
 			for (int i = 0; i < numberOfSheets; i++) {
 				Sheet sheet = workbook.getSheetAt(i);
 				Iterator<Row> rowIterator = sheet.iterator();
-
-				// iterating over each row
+				
+				if (rowIterator.hasNext()) {
+					rowIterator.next();
+				}
+				// iterating over each row from second row
 				while (rowIterator.hasNext()) {
 
 					rows++;
@@ -434,18 +437,18 @@ public class AdminController {
 					}
 					//System.out.println(test);
 					//System.out.println(test);
-					if (!subCategoryService.findSubCategoryByName(row.getCell(9).toString()).isEmpty()
+					if (!subCategoryService.findSubCategoryByName(row.getCell(8).toString()).isEmpty()
 						//	&& !questionsDescription.contains(row.getCell(0).toString())
 							&&		exist
 							) {
 
-						List<Subcategory> subCs = subCategoryService.findSubCategoryByName(row.getCell(9).toString());
+						List<Subcategory> subCs = subCategoryService.findSubCategoryByName(row.getCell(8).toString());
 						
 						subC = subCs.get(0);
 
 						question.setSubcategory(subC);
 						question.setDescription(row.getCell(0).toString());
-						question.setCategory(row.getCell(8).toString());
+						question.setCategory(row.getCell(7).toString());
 						for (int j = 1; j < 6; j++) {
 							Choice choice = new Choice();
 							choice.setDescription(row.getCell(j).toString());
@@ -453,7 +456,7 @@ public class AdminController {
 							choices.add(choice);
 
 						}
-						String rightAnswer = row.getCell(7).toString();
+						String rightAnswer = row.getCell(6).toString();
 						int rightAnswerIndex = getRightAnswerIndex(rightAnswer);
 						if (rightAnswerIndex != -1) {
 							choices.get(rightAnswerIndex).setAnswer(true);
