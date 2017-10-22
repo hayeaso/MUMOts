@@ -15,14 +15,15 @@
 		<div class="actions">
 			<jsp:useBean id="now" class="java.util.Date" />
 			<fmt:formatDate value="${now}" pattern="dd-MM-yyyy HH:mm:ss a z" />
-			<button id="exportResult"
-				class="btn btn-success">Export</button>
-			<a class="btn btn-circle btn-icon-only btn-primary fullscreen glyphicon glyphicon-fullscreen alignright"
+			
+			<a class="btn  btn-icon-only btn-success fullscreen fa fa-th-large alignright"
 				href="#" data-original-title="" title=""> </a>
 		</div>
 	</div>
 	
 	<div class="portlet-body">
+	<button id="exportResult"
+				class="btn btn-circle btn-primary alignright"><i class="fa fa-arrow-circle-down"></i> Export</button>
 
 	<table class="table table-sm" id="sample_editable_1">
 			<thead>

@@ -190,6 +190,16 @@ public class AdminController {
 			studentService.save(student);
 
 			redirectAttr.addFlashAttribute("success", "Success");
+			redirectAttr.addFlashAttribute("titleMessage", "Student Edited");
+			redirectAttr.addFlashAttribute("bodyMessage", "Student " + student.getFirstName() + " "
+					+ student.getLastName() + " successFully edited to the database");
+			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+			String role = auth.getAuthorities().toString();
+			if (role.equals("[ROLE_ADMIN]"))
+				return "redirect:/admin/students";
+			else
+				return "redirect:/coach/students";
+			
 		}
 
 		return "redirect:" + mapping + "/" + student.getUserId();
