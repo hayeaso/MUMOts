@@ -45,20 +45,11 @@ INSERT INTO `Grade` (`name`, `rangeFrom`, `rangeTo`) VALUES ('NC', 0, 59);
 INSERT INTO `Category` (`id`, `enabled`, `name`) VALUES (1, b'1', 'Java');
 INSERT INTO `Category` (`id`, `enabled`, `name`) VALUES (2, b'1', 'DOT Net');
 INSERT INTO `Category` (`id`, `enabled`, `name`) VALUES (3, b'1', 'PHP');
-INSERT INTO `Category` (`id`, `enabled`, `name`) VALUES (4, b'1', 'Ruby');
-INSERT INTO `Category` (`id`, `enabled`, `name`) VALUES (5, b'1', 'C');
-INSERT INTO `Category` (`id`, `enabled`, `name`) VALUES (6, b'1', 'C++');
-INSERT INTO `Category` (`id`, `enabled`, `name`) VALUES (7, b'1', 'PYTHON');
-INSERT INTO `Category` (`id`, `enabled`, `name`) VALUES (8, b'1', 'DATABASE');
+INSERT INTO `Category` (`id`, `enabled`, `name`) VALUES (4, b'1', 'DATABASE');
 
 -- Subcategory Data Sample
-INSERT INTO `Subcategory` (`id`, `enabled`, `name`, `category_id`) VALUES (1, b'1', 'Core', 1);
-INSERT INTO `Subcategory` (`id`, `enabled`, `name`, `category_id`) VALUES (2, b'1', 'JSP', 1);
-INSERT INTO `Subcategory` (`id`, `enabled`, `name`, `category_id`) VALUES (3, b'1', 'Servlet', 1);
-INSERT INTO `Subcategory` (`id`, `enabled`, `name`, `category_id`) VALUES (4, b'1', 'Spring', 1);
-INSERT INTO `Subcategory` (`id`, `enabled`, `name`, `category_id`) VALUES (5, b'1', 'C#', 2);
-INSERT INTO `Subcategory` (`id`, `enabled`, `name`, `category_id`) VALUES (6, b'1', 'Hibernate', 1);
-INSERT INTO `Subcategory` (`id`, `enabled`, `name`, `category_id`) VALUES (7, b'1', 'JAVA', 1);
-INSERT INTO `Subcategory` (`id`, `enabled`, `name`, `category_id`) VALUES (8, b'1', 'PHP', 3);
-INSERT INTO `Subcategory` (`id`, `enabled`, `name`, `category_id`) VALUES (9, b'1', 'MSSQL', 8);
+INSERT INTO `Subcategory` (`id`, `enabled`, `name`, `category_id`) VALUES (1, b'1', 'C#', 2);
+INSERT INTO `Subcategory` (`id`, `enabled`, `name`, `category_id`) VALUES (2, b'1', 'JAVA', 1);
+INSERT INTO `Subcategory` (`id`, `enabled`, `name`, `category_id`) VALUES (3, b'1', 'PHP', 3);
+INSERT INTO `Subcategory` (`id`, `enabled`, `name`, `category_id`) VALUES (4, b'1', 'MSSQL', 4);
 
