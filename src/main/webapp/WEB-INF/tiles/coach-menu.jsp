@@ -32,7 +32,7 @@
 				<li><a href="<c:url value="/coach/home" />"
 					${('/onlinetest/coach/home' == currentPage) ? ' class="activeNavItem"' : ''}>Home</a></li>
 				<li><a href="<c:url value="/coach/students" />"
-					${('/onlinetest/coach/students' == currentPage) ? ' class="activeNavItem"' : ''}>Students</a></li>
+					${('/onlinetest/coach/students' == currentPage||'/onlinetest/coach/registerStudent' == currentPage||'/onlinetest/coach/importStudentData' == currentPage) ? ' class="activeNavItem"' : ''}>Students</a></li>
 				<li><a href="<c:url value="/coach/assignments" />"
 					${('/onlinetest/coach/assignments' == currentPage) ? ' class="activeNavItem"' : ''}>Assignments</a></li>
 				<li><a href="<c:url value="/coach/resultlist" />"
@@ -41,7 +41,7 @@
 
 
 				<li><a href="<c:url value="/coach/viewquestions" />"
-					${('/onlinetest/coach/viewquestions' == currentPage) ? ' class="activeNavItem"' : ''}>
+					${('/onlinetest/coach/viewquestions' == currentPage ||'/onlinetest/coach/addquestion' == currentPage||'/onlinetest/coach/importData' == currentPage) ? ' class="activeNavItem"' : ''}>
 						Questions</a></li>
 
 				<li><a href="<c:url value="/help" />"

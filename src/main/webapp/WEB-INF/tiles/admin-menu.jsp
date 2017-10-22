@@ -33,7 +33,7 @@
 						List</a></li>
 
 				<li><a href="<c:url value="/admin/students" />"
-					${('/onlinetest/admin/students' == currentPage || '/onlinetest/admin/registerStudent' == currentPage) ? ' class="activeNavItem"' : ''}>Student
+					${('/onlinetest/admin/students' == currentPage || '/onlinetest/admin/registerStudent' == currentPage|| '/onlinetest/admin/importStudentData' == currentPage) ? ' class="activeNavItem"' : ''}>Student
 						List</a></li>
 				<li><a href="<c:url value="/admin/categories" />"
 					${('/onlinetest/admin/categories' == currentPage || '/onlinetest/admin/createCategory' == currentPage) ? ' class="activeNavItem"'  : ''}>Category</a></li>
@@ -42,7 +42,7 @@
 						Category</a></li>
 
 				<li><a href="<c:url value="/admin/viewquestions" />"
-					${('/onlinetest/admin/viewquestions' == currentPage) ? ' class="activeNavItem"'  : ''}>Questions
+					${('/onlinetest/admin/viewquestions' == currentPage|| '/onlinetest/admin/addquestion' == currentPage || '/onlinetest/admin/importData' == currentPage) ? ' class="activeNavItem"'  : ''}>Questions
 				</a></li>
 
 				<li><a href="<c:url value="/admin/assignments" />"

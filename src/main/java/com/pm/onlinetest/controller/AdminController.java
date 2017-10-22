@@ -121,7 +121,7 @@ public class AdminController {
 			redirectAttr.addFlashAttribute("success", "Success");
 			redirectAttr.addFlashAttribute("titleMessage", "User Added");
 			redirectAttr.addFlashAttribute("bodyMessage",
-					"User " + user.getUsername() + " SuccessFully Added to the database");
+					"User " + user.getUsername() + " added Successfully");
 
 			return "redirect:/admin/users";
 		}
@@ -157,7 +157,7 @@ public class AdminController {
 			redirectAttr.addFlashAttribute("success", "Success");
 			redirectAttr.addFlashAttribute("titleMessage", "Student Added");
 			redirectAttr.addFlashAttribute("bodyMessage", "Student " + student.getFirstName() + " "
-					+ student.getLastName() + " SuccessFully Added to the database");
+					+ student.getLastName() + " added successfully");
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 			String role = auth.getAuthorities().toString();
 			if (role.equals("[ROLE_ADMIN]"))
@@ -192,7 +192,7 @@ public class AdminController {
 			redirectAttr.addFlashAttribute("success", "Success");
 			redirectAttr.addFlashAttribute("titleMessage", "Student Edited");
 			redirectAttr.addFlashAttribute("bodyMessage", "Student " + student.getFirstName() + " "
-					+ student.getLastName() + " successFully edited to the database");
+					+ student.getLastName() + " edited successfully");
 			Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 			String role = auth.getAuthorities().toString();
 			if (role.equals("[ROLE_ADMIN]"))
@@ -239,9 +239,9 @@ public class AdminController {
 
 		try {
 			categoryService.save(category);
-			redirectAttr.addFlashAttribute("success", "Successfully added new category!");
-			redirectAttr.addFlashAttribute("titleMessage", "CATEGORY ADDED!");
-			redirectAttr.addFlashAttribute("bodyMessage", "Successfully added new category " + category.getName());
+			redirectAttr.addFlashAttribute("success", "New category added successfully!");
+			redirectAttr.addFlashAttribute("titleMessage", "Category added!");
+			redirectAttr.addFlashAttribute("bodyMessage", "New category added successfully " + category.getName());
 		} catch (DuplicateCategoryNameException ex) {			
 			redirectAttr.addFlashAttribute("alertErrorMsg", "[" + category.getName() + "]: " + ex.getMessage());			
 			return "redirect:/admin/createCategory";
@@ -279,9 +279,9 @@ public class AdminController {
 
 		subcategory.setCategory(categoryService.findOne(subcategory.getCategoryId()));
 		subCategoryService.save(subcategory);
-		redirectAttr.addFlashAttribute("success", "Successfully added new Subcategory!");
-		redirectAttr.addFlashAttribute("titleMessage", "SUB CATEGORY ADDED!");
-		redirectAttr.addFlashAttribute("bodyMessage", "Successfully added new Subcategory " + subcategory.getName());
+		redirectAttr.addFlashAttribute("success", "New bubcategory added successfully!");
+		redirectAttr.addFlashAttribute("titleMessage", "Sub category added!");
+		redirectAttr.addFlashAttribute("bodyMessage", "New bubcategory added successfully " + subcategory.getName());
 		return "redirect:/admin/subCategories";
 	}
 
@@ -344,6 +344,7 @@ public class AdminController {
 						student.setLastName(row.getCell(2).toString());
 						student.setEmail(row.getCell(3).toString());
 						student.setEntry(row.getCell(4).toString());
+						student.setEnabled(true);
 						if (row.getCell(5).toString().equalsIgnoreCase("Active")) {
 							student.setJobSearchStatus(true);
 						} else {
@@ -353,7 +354,7 @@ public class AdminController {
 						insertedRows++;
 					} else {
 						String text = "The Student Entry at row number " + row.getRowNum()
-								+ " was not inserted :--> ID: " + row.getCell(0).toString() + "\n";
+								+ " was not inserted :--> " + row.getCell(0).toString() + "\n";
 						DataLogLines dll=new DataLogLines();
 						dll.setContent(text);
 						ll.add(dll);
@@ -569,7 +570,7 @@ public class AdminController {
 			user.setEnabled(true);
 			userService.save(user);
 			redirectAttr.addFlashAttribute("success", "Success");
-			redirectAttr.addFlashAttribute("titleMessage", "User EDITED");
+			redirectAttr.addFlashAttribute("titleMessage", "User edited");
 			redirectAttr.addFlashAttribute("bodyMessage", "User " + user.getUsername() + " successfully edited!");
 
 			return "redirect:/admin/users";
@@ -579,29 +580,26 @@ public class AdminController {
 
 	private int getRightAnswerIndex(String rightAnswer) {
 		int rightAnswerIndex = -1;
+		// Choice A in excel start form column B
+		// the index here start from 0 based on choices array 
 		switch (rightAnswer) {
-		case "B":
+		case "A":
 			rightAnswerIndex = 0;
 			break;
-		case "C":
+		case "B":
 			rightAnswerIndex = 1;
 
 			break;
-		case "D":
+		case "C":
 			rightAnswerIndex = 2;
 
 			break;
-		case "E":
+		case "D":
 			rightAnswerIndex = 3;
 
 			break;
-		case "F":
+		case "E":
 			rightAnswerIndex = 4;
-
-			break;
-		case "G":
-			rightAnswerIndex = 5;
-
 			break;
 
 		}
