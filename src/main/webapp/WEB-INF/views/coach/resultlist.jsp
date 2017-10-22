@@ -14,7 +14,7 @@
 		</div>
 		<div class="actions">
 			<jsp:useBean id="now" class="java.util.Date" />
-			<fmt:formatDate value="${now}" pattern="dd-MM-yyyy HH:mm:ss a z" />
+			<fmt:formatDate value="${now}" pattern="MM/dd/yyyy hh:mm:ss a z" />
 			<button id="exportResult"
 				class="btn btn-success">Export</button>
 			<a class="btn btn-circle btn-icon-only btn-primary fullscreen glyphicon glyphicon-fullscreen alignright"
@@ -52,7 +52,7 @@
 						<td>${report.key.studentId.entry}</td>
 						<td>${report.key.studentId.email}</td>
 						<fmt:parseDate value="${report.key.end_date}" pattern="yyyy-MM-dd'T'HH:mm" var="endDate" type="date" />						
-						<fmt:formatDate value="${endDate}" var="myEndDate" type="date" pattern="MM/dd/yyyy HH:mm:ss a z" />
+						<fmt:formatDate value="${endDate}" var="myEndDate" type="date" pattern="MM/dd/yyyy hh:mm:ss a z" />
 						<td>${myEndDate}</td>
 						<td><c:choose>
 								<c:when test="${report.value>75}">

@@ -12,7 +12,7 @@
 		<div class="actions">
 			<jsp:useBean id="now" class="java.util.Date" />			
 			Date Time :
-			<fmt:formatDate value="${now}" pattern="MM/dd/yyyy HH:mm:ss a z" />
+			<fmt:formatDate value="${now}" pattern="MM/dd/yyyy hh:mm:ss a z" />
 			<button id="export" onclick="javascript:demoFromHTML();"
 				class="btn btn-success">Export</button>
 			<a
@@ -65,7 +65,7 @@
                         <tr>
                         <td>Exam Date  </td>
                         <fmt:parseDate value="${studentAssignment.start_date}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDate" type="date" />						
-						<fmt:formatDate value="${parsedDate}" var="newParsedDate" type="date" pattern="MM/dd/yyyy HH:mm:ss a z" />
+						<fmt:formatDate value="${parsedDate}" var="newParsedDate" type="date" pattern="MM/dd/yyyy hh:mm:ss a z" />
 						<td>${newParsedDate}</td>
                       </tr>
                       <tr>
