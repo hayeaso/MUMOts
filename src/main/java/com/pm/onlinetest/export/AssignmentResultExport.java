@@ -58,7 +58,7 @@ public class AssignmentResultExport {
 	}
 	//public enum ChoiceLable {A, B, C, D, E };
 	private String[] stuInfoArr = {"Student ID", "Student Name", "Entry", "Score", "Percent", "Taken Date"};
-	private String[] choiceLabelArr = {"A. ", "B. ", "C. ", "D. ", "E. "};
+	private String[] choiceLabelArr = {"A. ", "B. ", "C. ", "D. ", "E. ", "F. "}; // current logic a question contains 5 choice
 	
 	// -- Constructor
 	public AssignmentResultExport(List<Assignment> assignments) {		
@@ -272,7 +272,7 @@ public class AssignmentResultExport {
 				HSSFCellStyle choiceStyle = workbook.createCellStyle();
 				
 				createCell(choiceRow, cell, 0, "", numStyle);				
-				createCell(choiceRow, cellChoice, 1, this.choiceLabelArr[ind++] +choice.getDescription(), 
+				createCell(choiceRow, cellChoice, 1, this.choiceLabelArr[ind++] + choice.getDescription(), 
 						updateAnswerCellStyleColor(choiceStyle, choiceAnswerColorIndex(choice, answer, workbook), workbook));
 				
 				choiceStyle = setStyleBorder(choiceStyle, false);
