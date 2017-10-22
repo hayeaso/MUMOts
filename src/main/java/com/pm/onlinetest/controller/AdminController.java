@@ -345,9 +345,9 @@ public class AdminController {
 						student.setEmail(row.getCell(3).toString());
 						student.setEntry(row.getCell(4).toString());
 						if (row.getCell(5).toString().equalsIgnoreCase("Active")) {
-							student.setEnabled(true);
+							student.setJobSearchStatus(true);
 						} else {
-							student.setEnabled(false);
+							student.setJobSearchStatus(false);
 						}
 						studentService.save(student);
 						insertedRows++;
