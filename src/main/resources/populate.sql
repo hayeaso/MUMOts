@@ -20,7 +20,7 @@ INSERT INTO `User` (`userId`, `email`, `enabled`, `firstName`, `lastName`, `pass
 INSERT INTO `User` (`userId`, `email`, `enabled`, `firstName`, `lastName`, `password`, `username`) VALUES (9, 'test7@mum.edu', b'1', 'Stu07', 'Stu07', null, null);
 
 -- Student Data Sample
-INSERT INTO `Student` (`userId`, `entry`, `jobSearchStatus`, `studentId`) VALUES (4, 'August 2016', 0, 985002);
+INSERT INTO `Student` (`userId`, `entry`, `jobSearchStatus`, `studentId`) VALUES (4, 'August 2016', 1, 985002);
 INSERT INTO `Student` (`userId`, `entry`, `jobSearchStatus`, `studentId`) VALUES (5, 'August 2016', 1, 985003);
 INSERT INTO `Student` (`userId`, `entry`, `jobSearchStatus`, `studentId`) VALUES (6, 'August 2016', 1, 985004);
 INSERT INTO `Student` (`userId`, `entry`, `jobSearchStatus`, `studentId`) VALUES (7, 'October 2016', 1, 985015);

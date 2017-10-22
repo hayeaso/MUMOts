@@ -8,8 +8,10 @@
 		</h3>
 	</div>
 	<div class="panel-body">
-	<div class=" portlet-title caption ">
+	<div class="caption">
+			<b>
 			Student ID: ${student.studentId} 
+			</b>
 		</div>
 		
 		<div class="caption">
