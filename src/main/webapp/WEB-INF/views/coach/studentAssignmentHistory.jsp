@@ -8,19 +8,17 @@
 		</h3>
 	</div>
 	<div class="panel-body">
-	<div class="caption">
-			<b>
-			Student ID: ${student.studentId} 
-			</b>
-		</div>
-		
 		<div class="caption">
-			Student Name: ${student.firstName} ${student.lastName}
+			<b> Student ID: ${student.studentId} </b>
+		</div>
+
+		<div class="caption">
+			<b> Student Name: ${student.firstName} ${student.lastName} </b>
 		</div>
 		<div class="caption">
-			Entry: ${student.entry}
+			<b> Entry: ${student.entry} </b>
 		</div>
-	
+
 		<table class="table table-striped table-hover table-bordered"
 			id="sample_editable_1">
 			<thead>
@@ -31,14 +29,15 @@
 					<th>Start Time</th>
 					<th>End Time</th>
 					<th>Finished</th>
-					
+
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach items="${assignments}" var="assignment">
 					<tr id="user${assignment.id}">
 						<td>${assignment.id}</td>
-						<td>${assignment.coachId.firstName} ${assignment.coachId.lastName}</td>
+						<td>${assignment.coachId.firstName}
+							${assignment.coachId.lastName}</td>
 						<td>${assignment.accesscode}</td>
 						<td>${assignment.start_date}</td>
 						<td>${assignment.end_date}</td>
