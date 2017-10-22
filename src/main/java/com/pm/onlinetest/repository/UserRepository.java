@@ -53,5 +53,9 @@ public interface UserRepository extends CrudRepository<User, Integer> {
 	@Query("UPDATE User u SET u.enabled = :enabled WHERE u.userId =:userId")
 	void updateStatus(@Param("userId") Integer userId, @Param("enabled") boolean enabled);
 	
-	User findFirstByEmail(String email);
+	// First keyword introduce in spring jpa 1.7 which is not support in current
+	// version of this project. If the version is update pls remove the Query
+	// annotation on top of it
+	@Query("SELECT u FROM User u WHERE u.email=:email and u.username is not null)")
+	User findFirstByEmail(@Param("email") String email);
 }

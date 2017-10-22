@@ -7,6 +7,7 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.core.Authentication;
@@ -32,12 +33,14 @@ public class LoginController {
 
 	@Autowired
 	UserService userService;
-	
-	 @Autowired
-	    private MailSender mailSender;
-	 
-	 @Autowired
-		AssignmentService assignmentService;
+
+	@Autowired
+	private MailSender mailSender;
+
+	@Autowired
+	AssignmentService assignmentService;	
+	@Value("${application.context.url}")
+	private String appContextUrl;
 
 	
 	@RequestMapping(value = "/exam", method = RequestMethod.GET)
@@ -78,8 +81,11 @@ public class LoginController {
 
 			message.setReplyTo("false");
 			message.setFrom("mumtestlink@gmail.com");
-			message.setSubject("MUM Self Assessment Reset Password Link");
-			message.setText("You have requested to reset your password for your account. To get started, please click this link." + "Access Link: " + "https://ots.cs.mum.edu/onlinetest/resetPassword/" + accessCode);
+			message.setSubject("Password Reset - MUM Self Assessment");
+			message.setText(
+					"You have requested to reset your password for your account.\r\nTo reset your password, visit the following address.\r\n"
+							+ appContextUrl + "/resetPassword/" + accessCode
+							+ "\r\nThe above link will expire in 60 minutes.");
 
 			mailSender.send(message);
 			redirectAttributes.addFlashAttribute("foundEmail", email);

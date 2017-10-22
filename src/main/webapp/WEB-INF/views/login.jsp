@@ -25,7 +25,7 @@
 			<div class="panel-body">
 				<c:if test="${not empty foundEmail}">
 					<div class="alert alert-warning">
-						<h4>Link Sent to your email id - ${ FoundEmail }.</h4>
+						<h4>Link Sent to your email id - ${ foundEmail }.</h4>
 					</div>
 				</c:if>
 				<c:if test="${not empty changeSuccess}">
