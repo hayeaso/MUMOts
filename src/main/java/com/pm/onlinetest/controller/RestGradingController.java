@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.pm.onlinetest.domain.Grade;
 import com.pm.onlinetest.service.GradeService;
 import com.pm.onlinetest.util.GradesWrapper;
 

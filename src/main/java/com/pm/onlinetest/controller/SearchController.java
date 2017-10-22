@@ -43,9 +43,8 @@ public class SearchController {
 
 		for(Test test : assignment.getTests()){
 			subcats.add(test.getQuestion().getSubcategory());
-		}
+		}	
 		
-		System.out.println(subcats.toString());
 		return "questions";
 	}
 	

@@ -8,12 +8,13 @@
 <div id="report" class="portlet box light panel panel-success">
 	<div class="portlet-title">
 		<div class="caption">
-			<span class="caption-subject bold  font-dark leftShift"><i class="fa fa-book fa-fw"></i>Student
+			<span class="caption-subject leftShift"><i class="fa fa-book fa-fw"></i>Student
 				Test Score </span>
 
 		</div>
 		<div class="actions">
 			<jsp:useBean id="now" class="java.util.Date" />
+			<fmt:formatDate value="${now}" pattern="MM/dd/yyyy hh:mm:ss a z" />
 			<button id="exportResult"
 				class="btn btn-success">Export</button>
 			<a class="btn btn-circle btn-icon-only btn-primary fullscreen glyphicon glyphicon-fullscreen alignright"
@@ -23,11 +24,7 @@
 	
 	<div class="portlet-body">
 
-
-
-
-
-		<table class="table table-sm" id="sample_editable_1">
+	<table class="table table-sm" id="sample_editable_1">
 			<thead>
 				<tr>
 					<th>No</th>
@@ -54,7 +51,9 @@
 							${report.key.studentId.lastName}</td>
 						<td>${report.key.studentId.entry}</td>
 						<td>${report.key.studentId.email}</td>
-						<td>${report.key.end_date}</td>
+						<fmt:parseDate value="${report.key.end_date}" pattern="yyyy-MM-dd'T'HH:mm" var="endDate" type="date" />						
+						<fmt:formatDate value="${endDate}" var="myEndDate" type="date" pattern="MM/dd/yyyy hh:mm:ss a z" />
+						<td>${myEndDate}</td>
 						<td><c:choose>
 								<c:when test="${report.value>75}">
 									<p class="text-success">${report.value}</p>

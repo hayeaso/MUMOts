@@ -6,22 +6,23 @@
     <div id="posts-landing" class="portlet box light panel panel-success">                                      
    <div id="report" class="portlet-title">
 		<div class="caption">
-			<span class="caption-subject bold  font-dark leftShift"><i class="fa fa-book fa-fw"></i>Student
+			<span class="caption-subject leftShift"><i class="fa fa-book fa-fw"></i>Student
 				Test Score </span>
 		</div>
 		<div class="actions">
-			<jsp:useBean id="now" class="java.util.Date" />
+			<jsp:useBean id="now" class="java.util.Date" />			
 			Date Time :
-			<fmt:formatDate value="${now}" pattern="dd-MM-yyyy HH:mm:ss a z" />
+			<fmt:formatDate value="${now}" pattern="MM/dd/yyyy hh:mm:ss a z" />
 			<button id="export" onclick="javascript:demoFromHTML();"
 				class="btn btn-success">Export</button>
 			<a
-				class="btn btn-circle btn-icon-only btn-primary fullscreen glyphicon glyphicon-fullscreen text-right alignright"
-				href="#" data-original-title="" title=""></a>
+				class="btn btn-icon-only btn-success fullscreen text-right alignright"
+				href="#" data-original-title="" title=""> <i class="fa fa-th-large"></i></a>
 		</div>
 	</div>
             <div class="portlet-body">
-                                                    
+                               <button id="export" onclick="javascript:demoFromHTML();"
+				class="btn btn-circle btn-primary alignright"><i class="fa fa-arrow-circle-down"></i> Export</button>      
 
     <h3><span>Student Profile </span> </h3>                                                   
 	<div class="row">
@@ -63,8 +64,8 @@
                       
                         <tr>
                         <td>Exam Date  </td>
-                        <fmt:parseDate value="${studentAssignment.start_date}" pattern="yyyy-MM-dd" var="parsedDate" type="date" />						
-						<fmt:formatDate value="${parsedDate}" var="newParsedDate" type="date" pattern="MM/dd/yyyy hh:mm:ss z" />
+                        <fmt:parseDate value="${studentAssignment.start_date}" pattern="yyyy-MM-dd'T'HH:mm" var="parsedDate" type="date" />						
+						<fmt:formatDate value="${parsedDate}" var="newParsedDate" type="date" pattern="MM/dd/yyyy hh:mm:ss a z" />
 						<td>${newParsedDate}</td>
                       </tr>
                       <tr>

@@ -4,14 +4,14 @@
 <div id="assignment" class="portlet box light panel panel-success">
 	<div class="portlet-title">
 		<div class="caption">
-			<span class="caption-subject bold  font-dark leftShift">
+			<span class="caption-subject leftShift">
 			<i class="fa fa-book fa-fw"></i>Assignment
 				List </span>
 		</div>
 		<div class="actions">
 			<jsp:useBean id="now" class="java.util.Date" />
 			Date Time :
-			<fmt:formatDate value="${now}" pattern="dd-MM-yyyy HH:mm:ss a z" />
+			<fmt:formatDate value="${now}" pattern="MM/dd/yyyy hh:mm:ss a z" />
 			<button id="exportAssignment" class="btn btn-circlebtn-icon-only  btn-default">Export
 			</button>
 			<a class="btn btn-circle btn-icon-only btn-primary fullscreen glyphicon glyphicon-fullscreen text-right alignright"
@@ -19,6 +19,8 @@
 		</div>
 	</div>
 	<div class="portlet-body">
+	<button id="export" class="btn btn-primary btn-circle alignright"><i class="fa fa-arrow-circle-down"></i>Export
+			</button>
 <!-- 		<div class="table-toolbar">
 			<div class="row">
 				<div class="col-md-6"></div>
@@ -65,8 +67,12 @@
 								${assignment.studentId.lastName}</td>
 							<td>${assignment.studentId.entry}</td>
 							<td>${assignment.studentId.email}</td>
-							<td>${assignment.start_date}</td>
-							<td>${assignment.end_date}</td>
+							<fmt:parseDate value="${assignment.start_date}" pattern="yyyy-MM-dd'T'HH:mm" var="startDate" type="date" />						
+							<fmt:formatDate value="${startDate}" var="myStartDate" type="date" pattern="MM/dd/yyyy hh:mm:ss a z" />
+							<td>${myStartDate}</td>
+							<fmt:parseDate value="${assignment.end_date}" pattern="yyyy-MM-dd'T'HH:mm" var="endDate" type="date" />						
+							<fmt:formatDate value="${endDate}" var="myEndDate" type="date" pattern="MM/dd/yyyy hh:mm:ss a z" />
+							<td>${myEndDate}</td>
 <%-- 							<td>${assignment.count}</td> --%>
 							<td><c:choose>
 									<c:when test="${assignment.count == 99}">

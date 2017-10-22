@@ -3880,7 +3880,7 @@ Portlets
   min-height: 48px;
 }
 .portlet.light > .portlet-title > .caption {
-  color: #666;
+  color: inherit;
   padding: 10px 0;
 }
 .portlet.light > .portlet-title > .caption > .caption-subject {
