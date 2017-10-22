@@ -168,6 +168,11 @@
 		<put-attribute name="content"
 			value="/WEB-INF/views/admin/importStudentData.jsp" />
 	</definition>
+	<definition name="/coach/importStudentData" extends="base-definition">
+		<put-attribute name="menu" value="/WEB-INF/tiles/coach-menu.jsp"></put-attribute>
+		<put-attribute name="content"
+			value="/WEB-INF/views/admin/importStudentData.jsp" />
+	</definition>
 	
 	<definition name="/admin/importData" extends="base-definition">
 		<put-attribute name="menu" value="/WEB-INF/tiles/admin-menu.jsp"></put-attribute>

@@ -281,13 +281,15 @@ public class AdminController {
 		subCategoryService.softDelete(Integer.parseInt(id));
 	}
 
-	@RequestMapping(value = { "/admin/importStudentData" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/admin/importStudentData", "/coach/importStudentData" }, method = RequestMethod.GET)
 	public String importStudents(HttpServletRequest request) {
+		System.out.println("connected");
 		String mapping = request.getServletPath();
+		System.out.println(mapping);
 		return mapping;
 	}
 
-	@RequestMapping(value = { "/admin/importStudentData" }, method = RequestMethod.POST)
+	@RequestMapping(value = { "/admin/importStudentData", "/coach/importStudentData" }, method = RequestMethod.POST)
 	public String importStudents(Model model, @RequestParam("ExcelFile") MultipartFile excelfile,
 			RedirectAttributes redirectAttr, HttpServletRequest request) {
 
