@@ -1,7 +1,9 @@
-
-
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ page session="false"%>
+
+<c:if test="${not empty success}">
+	<%@ include file="/WEB-INF/views/LogPopUp.jsp"%>
+</c:if>
 <div class="panel panel-success">
 
 	<div class="panel-heading">

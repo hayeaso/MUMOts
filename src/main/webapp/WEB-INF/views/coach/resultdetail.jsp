@@ -11,9 +11,9 @@
 			<jsp:useBean id="now" class="java.util.Date" />
 			Date Time :
 			<fmt:formatDate value="${now}" pattern="dd-MM-yyyy HH:mm:ss a z" />
-			
+			&nbsp; &nbsp;
 			<a
-				class="btn  btn-icon-only btn-success fullscreen fa fa-th-large text-right alignright"
+				class="btn  btn-icon-only btn-primary btn-circle fullscreen fa fa-th-large text-right alignright"
 				href="#" data-original-title="" title=""></a>
 		</div>
 	</div>

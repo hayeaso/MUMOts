@@ -2,9 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include.jsp"%>
 
-<c:if test="${not empty success}">
-	<%@ include file="/WEB-INF/views/LogPopUp.jsp"%>
-</c:if>
+
 <div class="panel panel-success">
 
 	<div class="panel-heading">

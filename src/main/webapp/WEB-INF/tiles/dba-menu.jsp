@@ -26,7 +26,7 @@
 			<ul class="nav navbar-nav">
 
 				<li><a href="<c:url value="/dba/viewquestions" />"
-					${('/onlinetest/dba/viewquestions' == currentPage) ? ' class="activeNavItem"' : ''}>Questions
+					${('/onlinetest/dba/viewquestions' == currentPage||'/onlinetest/dba/addquestion' == currentPage||'/onlinetest/dba/importData' == currentPage) ? ' class="activeNavItem"' : ''}>Questions
 				</a></li>
 
 				<li><a href="<c:url value="/help" />"

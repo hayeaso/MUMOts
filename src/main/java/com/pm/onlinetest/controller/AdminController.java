@@ -344,16 +344,17 @@ public class AdminController {
 						student.setLastName(row.getCell(2).toString());
 						student.setEmail(row.getCell(3).toString());
 						student.setEntry(row.getCell(4).toString());
+						student.setEnabled(true);
 						if (row.getCell(5).toString().equalsIgnoreCase("Active")) {
-							student.setEnabled(true);
+							student.setJobSearchStatus(true);
 						} else {
-							student.setEnabled(false);
+							student.setJobSearchStatus(false);
 						}
 						studentService.save(student);
 						insertedRows++;
 					} else {
 						String text = "The Student Entry at row number " + row.getRowNum()
-								+ " was not inserted :--> ID: " + row.getCell(0).toString() + "\n";
+								+ " was not inserted :--> " + row.getCell(0).toString() + "\n";
 						DataLogLines dll=new DataLogLines();
 						dll.setContent(text);
 						ll.add(dll);
@@ -382,12 +383,19 @@ public class AdminController {
 		
 		dataLogService.save(dl);
 		
-		redirectAttr.addFlashAttribute("success", "Success");
+		redirectAttr.addFlashAttribute("successLog", "SuccessLog");
 		redirectAttr.addFlashAttribute("titleMessage", "Welcome to the Log for Students Insertion");
 		redirectAttr.addFlashAttribute("bodyMessage", dl);
 		redirectAttr.addFlashAttribute("lines", ll);
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String role = auth.getAuthorities().toString();
+		if (role.equals("[ROLE_ADMIN]"))
+			return "redirect:/admin/students";
+		else
+			return "redirect:/coach/students";
 
-		return "redirect:" + mapping;
+		
 
 	}
 
@@ -504,8 +512,15 @@ public class AdminController {
 		redirectAttr.addFlashAttribute("titleMessage", "Welcome to the Log for Questions Insertion");
 		redirectAttr.addFlashAttribute("bodyMessage", dl);
 		redirectAttr.addFlashAttribute("lines", ll);
-
-		return "redirect:" + mapping;
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String role = auth.getAuthorities().toString();
+		if (role.equals("[ROLE_ADMIN]"))
+			return "redirect:/admin/viewquestions";
+		else if(role.equals("[ROLE_COACH]"))
+			return "redirect:/coach/viewquestions";
+		else
+			return "redirect:/dba/viewquestions";
 	}
 	
 	@RequestMapping(value = { "/dba/subcategories/{catId}", "/coach/subcategories/{catId}",
@@ -565,29 +580,26 @@ public class AdminController {
 
 	private int getRightAnswerIndex(String rightAnswer) {
 		int rightAnswerIndex = -1;
+		// Choice A in excel start form column B
+		// the index here start from 0 based on choices array 
 		switch (rightAnswer) {
-		case "B":
+		case "A":
 			rightAnswerIndex = 0;
 			break;
-		case "C":
+		case "B":
 			rightAnswerIndex = 1;
 
 			break;
-		case "D":
+		case "C":
 			rightAnswerIndex = 2;
 
 			break;
-		case "E":
+		case "D":
 			rightAnswerIndex = 3;
 
 			break;
-		case "F":
+		case "E":
 			rightAnswerIndex = 4;
-
-			break;
-		case "G":
-			rightAnswerIndex = 5;
-
 			break;
 
 		}

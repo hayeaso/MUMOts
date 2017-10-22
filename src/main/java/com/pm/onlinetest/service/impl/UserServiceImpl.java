@@ -68,42 +68,35 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User findByUsername(String username) {
-		// TODO Auto-generated method stub
 		return userRepository.findByUsername(username);
 	}
 	
 	@Override
 	public User findByUserId(Integer userId) {
-		// TODO Auto-generated method stub
 		return userRepository.findByUserId(userId);
 	}
 	@Override
 	public void delete(User user) {
-		// TODO Auto-generated method stub
 		userRepository.delete( user);
 	}
 
 	@Override
 	public List<User> findByAuthority(String authority) {
-		// TODO Auto-generated method stub
 		return userRepository.findByAuthority(authority);
 	}
 
 	@Override
 	public void softDelete(Integer userId) {
-		// TODO Auto-generated method stub
 		userRepository.softDelete(userId);
 	}
 
 	@Override
 	public User findByUsernameExceptThis(String username, Integer userId) {
-		// TODO Auto-generated method stub
 		return userRepository.findByUsernameExceptThis(username, userId);
 	}
 
 	@Override
 	public boolean emailExists(String email) {
-		// TODO Auto-generated method stub
 		if(userRepository.isEmailExists(email)!=null) {
 			return true;
 		}
@@ -112,17 +105,13 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int findByUseremail(String email) {
-		// TODO Auto-generated method stub
-		return userRepository.findByUseremailid(email);
-		
-		}
+		return userRepository.findByUseremailid(email);		
+	}
 		
 	@Override
 	public void setAccessCodeInPasswordField(String email, String accessCode) {
-		// TODO Auto-generated method stub
-		userRepository.passwordUpdate(email, accessCode);
-		
-		}
+		userRepository.passwordUpdate(email, accessCode);		
+	}
 	
 	@Override
 	public List<User> findAll() {

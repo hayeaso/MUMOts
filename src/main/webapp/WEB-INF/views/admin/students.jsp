@@ -5,6 +5,9 @@
 <c:if test="${not empty success}">
 	<%@ include file="/WEB-INF/views/popUp.jsp"%>
 </c:if>
+<c:if test="${not empty successLog}">
+	<%@ include file="/WEB-INF/views/LogPopUp.jsp"%>
+</c:if>
 
 <div class="panel panel-success">
 	<div class="panel-heading">

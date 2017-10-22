@@ -14,11 +14,11 @@
 		</div>
 		<div class="actions">
 			<jsp:useBean id="now" class="java.util.Date" />
-
+			Date Time : 
 			<fmt:formatDate value="${now}" pattern="dd-MM-yyyy HH:mm:ss a z" />
 
-
-			<a class="btn btn-circle btn-icon-only btn-primary fullscreen glyphicon glyphicon-fullscreen alignright"
+			&nbsp;&nbsp;
+			<a class="btn btn-circle btn-icon-only btn-primary fullscreen fa fa-th-large alignright"
 			href="#" data-original-title="" title=""> </a>
 		</div>
 	</div>

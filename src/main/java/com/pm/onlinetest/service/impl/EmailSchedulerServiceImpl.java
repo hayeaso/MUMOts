@@ -123,12 +123,12 @@ public class EmailSchedulerServiceImpl implements EmailSchedulerService {
 			message.setTo(email);
 			message.setReplyTo("false");
 			message.setFrom("mumtestlink@gmail.com");
-			message.setSubject("Test Link");
+			message.setSubject("MUM Online Test System : Assignment Link");
 			message.setText(
-					"The test you can take at this particular link. To access the test you need to enter the access code provided below. "
+					" Access the test you need to enter the access code provided below. "
 							+ " Please find the link and the access code below: \n" + "Access Link: "
 							+ "https://ots.cs.mum.edu/onlinetest/test" + "\n" + "Access Code: " + accessCode
-							+ "\nAll the best!");
+							+ "\nGetting to know what is strong and what is weak on your knowledge tree  will be helpful for your job search!");
 
 			mailSender.send(message);
 			return "success";
