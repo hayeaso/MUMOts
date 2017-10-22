@@ -90,7 +90,7 @@ public class TestController {
 			// Check if Student has previously finished test
 			if (assgnmentObj.isFinished()) {
 				attr.addFlashAttribute("errormessage", "This test has been completed.");
-				return "redirect:/test";
+				return "redirect:/test/acess";
 			} else { // If Student has not previously finished,
 
 				// Check if maximum number of attempts has not been exceeded

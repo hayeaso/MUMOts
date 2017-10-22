@@ -28,6 +28,11 @@
 					<strong>Success!</strong> Successfully imported Data!
 				</div>
 			</c:if>
+			<c:if test="${error}">
+				<div class="alert alert-success">
+					<strong>Oops!</strong> Something went wrong, please check the file!
+				</div>
+			</c:if>
 			<form:form method="POST" class="register-form"
 				action="importStudentData" enctype="multipart/form-data">
 				<div class="form-body">
