@@ -12,10 +12,10 @@
 			<jsp:useBean id="now" class="java.util.Date" />
 			Date Time :
 			<fmt:formatDate value="${now}" pattern="MM/dd/yyyy hh:mm:ss a z" />
-			<button id="exportAssignment"
-				class="btn btn-circlebtn-icon-only  btn-default">Export</button>
+			&nbsp; &nbsp;
+		
 			<a
-				class="btn btn-circle btn-icon-only btn-primary fullscreen glyphicon glyphicon-fullscreen text-right alignright"
+				class="btn  btn-circle btn-icon-only btn-primary fullscreen fa fa-th-large text-right alignright"
 				href="#" data-original-title="" title=""></a>
 		</div>
 	</div>

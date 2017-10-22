@@ -13,10 +13,9 @@
 			<jsp:useBean id="now" class="java.util.Date" />			
 			Date Time :
 			<fmt:formatDate value="${now}" pattern="MM/dd/yyyy hh:mm:ss a z" />
-			<button id="export" onclick="javascript:demoFromHTML();"
-				class="btn btn-success">Export</button>
+			&nbsp; &nbsp;
 			<a
-				class="btn btn-icon-only btn-success fullscreen text-right alignright"
+				class="btn btn-icon-only btn-primary btn-circle fullscreen text-right alignright"
 				href="#" data-original-title="" title=""> <i class="fa fa-th-large"></i></a>
 		</div>
 	</div>

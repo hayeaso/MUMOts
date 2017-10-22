@@ -382,12 +382,19 @@ public class AdminController {
 		
 		dataLogService.save(dl);
 		
-		redirectAttr.addFlashAttribute("success", "Success");
+		redirectAttr.addFlashAttribute("successLog", "SuccessLog");
 		redirectAttr.addFlashAttribute("titleMessage", "Welcome to the Log for Students Insertion");
 		redirectAttr.addFlashAttribute("bodyMessage", dl);
 		redirectAttr.addFlashAttribute("lines", ll);
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String role = auth.getAuthorities().toString();
+		if (role.equals("[ROLE_ADMIN]"))
+			return "redirect:/admin/students";
+		else
+			return "redirect:/coach/students";
 
-		return "redirect:" + mapping;
+		
 
 	}
 
@@ -504,8 +511,15 @@ public class AdminController {
 		redirectAttr.addFlashAttribute("titleMessage", "Welcome to the Log for Questions Insertion");
 		redirectAttr.addFlashAttribute("bodyMessage", dl);
 		redirectAttr.addFlashAttribute("lines", ll);
-
-		return "redirect:" + mapping;
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		String role = auth.getAuthorities().toString();
+		if (role.equals("[ROLE_ADMIN]"))
+			return "redirect:/admin/viewquestions";
+		else if(role.equals("[ROLE_COACH]"))
+			return "redirect:/coach/viewquestions";
+		else
+			return "redirect:/dba/viewquestions";
 	}
 	
 	@RequestMapping(value = { "/dba/subcategories/{catId}", "/coach/subcategories/{catId}",
