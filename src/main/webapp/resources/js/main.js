@@ -68,7 +68,7 @@ $(function() {
 					console.log(values.toString());
 
 		    		if (values.length > 0) {
-			    		var	url = "/onlinetest//assignments/export";
+			    		var	url = "/onlinetest/assignments/export";
 			    		$.ajax({
 			    			type:"get",
 			        		url:url,
