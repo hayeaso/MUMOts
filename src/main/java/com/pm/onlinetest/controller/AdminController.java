@@ -354,7 +354,7 @@ public class AdminController {
 						insertedRows++;
 					} else {
 						String text = "The Student Entry at row number " + row.getRowNum()
-								+ " was not inserted :--> ID: " + row.getCell(0).toString() + "\n";
+								+ " was not inserted :--> " + row.getCell(0).toString() + "\n";
 						DataLogLines dll=new DataLogLines();
 						dll.setContent(text);
 						ll.add(dll);
