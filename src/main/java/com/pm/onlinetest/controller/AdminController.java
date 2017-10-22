@@ -344,6 +344,7 @@ public class AdminController {
 						student.setLastName(row.getCell(2).toString());
 						student.setEmail(row.getCell(3).toString());
 						student.setEntry(row.getCell(4).toString());
+						student.setEnabled(true);
 						if (row.getCell(5).toString().equalsIgnoreCase("Active")) {
 							student.setJobSearchStatus(true);
 						} else {
