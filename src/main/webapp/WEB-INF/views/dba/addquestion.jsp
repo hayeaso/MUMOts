@@ -16,6 +16,15 @@
 
 			</div>
 		</c:if>
+		<c:if test="${not empty error}">
+			<div class="alert alert-warning">
+				<h4>Sorry!! The question could not be added !</h4>
+				<p>
+					<c:out value="${error}" />
+					</br> <b>${question.description}</b>
+				</p>
+			</div>
+		</c:if>
 		<c:if test="${empty success}">
 			<form:form modelAttribute="question">
 				<h3>Add Question</h3>
@@ -39,11 +48,11 @@
 					<form:label path="subcategory.id"
 						class="control-label visible-ie8 visible-ie9">Sub category</form:label>
 					<div id="subCat">
-					<form:select  path="subcategory.id"
-						class="form-control placeholder-no-fix" multiple="true"
-						itemValue="id" itemLabel="name">
-						<form:option value="" label="Sub Categories" />
-					</form:select>
+						<form:select path="subcategory.id"
+							class="form-control placeholder-no-fix" multiple="true"
+							itemValue="id" itemLabel="name">
+							<form:option value="" label="Sub Categories" />
+						</form:select>
 					</div>
 
 				</div>
@@ -108,21 +117,22 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script>
 	$(document).ready(function() {
-			$('#idCategory').change(function(event) {
-				var id = $('#idCategory').val();
+		$('#idCategory').change(function(event) {
+			var id = $('#idCategory').val();
 
-				$.ajax({
-					type: 'POST',
-					url: '/onlinetest/${sessionScope.role}/subcategories/'+id,
-					contentType : 'application/json; charset=utf-8',
-				    dataType : 'json',
-	                success: function (data) {
-	                	$('#subCat').empty();
-						$('#subCat').append(data.subcat);						
-	                },error: function(jqXHR, status, err){
+			$.ajax({
+				type : 'POST',
+				url : '/onlinetest/${sessionScope.role}/subcategories/' + id,
+				contentType : 'application/json; charset=utf-8',
+				dataType : 'json',
+				success : function(data) {
+					$('#subCat').empty();
+					$('#subCat').append(data.subcat);
+				},
+				error : function(jqXHR, status, err) {
 
-	                }
-				});
+				}
+			});
 
 		});
 	});

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -25,6 +26,7 @@ public class Question {
 	private Integer id;
 	
 	@NotEmpty(message="Question can not empty")
+	@Column(unique=true)
 	private String description;
 
 

@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.pm.onlinetest.domain.Question;
 import com.pm.onlinetest.domain.Subcategory;
@@ -48,6 +47,13 @@ public class QuestionServiceImp implements QuestionService {
 	public void update(Question question) {
 		questionRepository.save(question);
 		
+	}
+
+	@Override
+	public List <Question> findQuestionByDesc(String desc) {
+		System.out.println(desc);
+		List<Question> questions=questionRepository.findByDesc(desc);
+		return questions;
 	}
 
 }
