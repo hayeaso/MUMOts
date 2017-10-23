@@ -160,12 +160,12 @@ public class TestController {
 	@RequestMapping(value = "/showcategories", method = RequestMethod.GET)
 	public String selectCategoriesView(Model model, HttpServletRequest request, RedirectAttributes attr) {
 
-		// Assignment obj = (Assignment) request.getAttribute("assignment");
+		 Assignment obj = (Assignment) request.getAttribute("assignment");
 		//
-		// if (obj == null) {
+		 if (obj == null) {
 		// attr.addFlashAttribute("errormessage", "Invalid Operation");
-		// return "redirect:/test/error";
-		// }
+		 return "redirect:/test/access";
+		 }
 
 		CategorySelectDto dto = new CategorySelectDto();
 		// List<Subcategory> subcategories = new ArrayList<>();
@@ -302,8 +302,11 @@ public class TestController {
 	}
 
 	@RequestMapping(value = "/completed", method = RequestMethod.GET)
-	public String aftercompletion() {
-		return "completed";
+	public String aftercompletion(HttpServletRequest request) {
+		List<Test> tests = (List<Test>) request.getSession().getAttribute("tests");
+		if(tests!=null)
+			return "completed";
+		return "redirect:/test/access";
 	}
 
 }
