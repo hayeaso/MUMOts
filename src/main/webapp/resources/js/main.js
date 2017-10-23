@@ -136,7 +136,7 @@ $(function() {
 			var $btnClick = $("button.deleteButton[data-value='"+uid+"']");	
 
 			$(this).find('.modal-title').text($btnClick.text()+ " Confirmation"); // change title
-			if ($btnClick.text() == "Undelete") { // if undelete button
+			if ($btnClick.text().trim() == "Undelete") { // if undelete button
 				$(this).find('.modal-body p').text("Are you sure, you want to undelete?");								
 			}					
 		});
