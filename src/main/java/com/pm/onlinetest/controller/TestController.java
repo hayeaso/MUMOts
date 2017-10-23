@@ -3,6 +3,7 @@ package com.pm.onlinetest.controller;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
@@ -64,10 +65,12 @@ public class TestController {
 	public String readme() {
 		return "read";
 	}
+
 	@RequestMapping(value = "/readme", method = RequestMethod.GET)
 	public String read() {
 		return "read";
 	}
+
 	@RequestMapping(value = "/acess", method = RequestMethod.GET)
 	public String showAccessPage() {
 		return "access";
@@ -103,11 +106,10 @@ public class TestController {
 					if (assgnmentObj.isStarted()) {// Check if Student has
 													// started Test previously
 
-
 						LocalDateTime currentDate = LocalDateTime.now();
 						// Check if time is still remaining
 						long minutes = ChronoUnit.MINUTES.between(assgnmentObj.getStart_date(), currentDate);
-						System.out.println("minutes:"+minutes);
+						System.out.println("minutes:" + minutes);
 						if (minutes < 160) {
 
 							// Authenticate Student and redirect to test page
@@ -140,8 +142,6 @@ public class TestController {
 		attr.addFlashAttribute("errormessage", "Invalid Access Code");
 		return "redirect:/test/acess";
 	}
-	
-	
 
 	// Access denied page mapping
 	@RequestMapping(value = "/403", method = RequestMethod.GET)
@@ -160,28 +160,36 @@ public class TestController {
 	@RequestMapping(value = "/showcategories", method = RequestMethod.GET)
 	public String selectCategoriesView(Model model, HttpServletRequest request, RedirectAttributes attr) {
 
-//		Assignment obj = (Assignment) request.getAttribute("assignment");
-//
-//		if (obj == null) {
-//			attr.addFlashAttribute("errormessage", "Invalid Operation");
-//			return "redirect:/test/error";
-//		}
+		 Assignment obj = (Assignment) request.getAttribute("assignment");
+		//
+		 if (obj == null) {
+		// attr.addFlashAttribute("errormessage", "Invalid Operation");
+		 return "redirect:/test/access";
+		 }
 
 		CategorySelectDto dto = new CategorySelectDto();
-		List<Category> categories = new ArrayList<>();
-		for(Category cat : categoryService.findAllEnabled()){
-			for(Subcategory subCat : cat.getSubcategories()){
-				if(subCat.isEnabled() && questionService.findBySubcategory(subCat).size() >= 20){
-					if(!categories.contains(cat)) {
-						categories.add(cat);
+		// List<Subcategory> subcategories = new ArrayList<>();
+		List<Category> categories = categoryService.findAllEnabled();
+
+		for (Category cat : categories) {
+			for (Subcategory subCat : cat.getSubcategories()) {
+				// System.out.println("in");
+				if (subCat.isEnabled() && questionService.findBySubcategory(subCat).size() < 20) {
+					if (cat.getSubcategories().contains(subCat)) {
+						//System.out.println("I am removing " + subCat);
+						subCat.setEnabled(false);
+
+						//System.out.println(subCat.getName());
 					}
-					
 				}
 			}
 		}
 		dto.setCategories(categories);
-		//dto.setCategories(categoryService.findAllEnabled());
+		
+		// dto.setCategories(categoryService.findAllEnabled());
+
 		model.addAttribute("categoryDto", dto);
+		// model.addAttribute("subs", subcategories);
 		return "categoryselect";
 	}
 
@@ -198,13 +206,14 @@ public class TestController {
 			List<Integer> subcategories = dto.getSelectedSubCategories();
 
 			Subcategory subcategory = null;
-			//Integer totalQuestions = 80;
+			// Integer totalQuestions = 80;
 			Random rand = new Random();
 			for (Integer subcat_id : subcategories) {
 				subcategory = subCategoryService.findOne(subcat_id);
 
 				List<Question> subcategoryQuestions = questionService.findBySubcategory(subcategory);
-				//for (int i = 0; i < totalQuestions / subcategories.size(); i++) {
+				// for (int i = 0; i < totalQuestions / subcategories.size();
+				// i++) {
 				for (int i = 0; i < 20; i++) {
 
 					int index = 0;
@@ -292,12 +301,12 @@ public class TestController {
 		assignmentService.saveAssignment(assignment);
 	}
 
-	
-	
 	@RequestMapping(value = "/completed", method = RequestMethod.GET)
-	public String aftercompletion() {
-		return "completed";
+	public String aftercompletion(HttpServletRequest request) {
+		List<Test> tests = (List<Test>) request.getSession().getAttribute("tests");
+		if(tests!=null)
+			return "completed";
+		return "redirect:/test/access";
 	}
-	
 
 }

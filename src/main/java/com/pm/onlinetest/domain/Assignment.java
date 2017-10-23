@@ -19,18 +19,13 @@ public class Assignment {
  	@Id
     @GeneratedValue
     private Integer id;
- 	@Type(type="com.pm.onlinetest.util.LocalDateTimeUserType")//added to display date properly in db
 	private LocalDateTime start_date;
- 	@Type(type="com.pm.onlinetest.util.LocalDateTimeUserType")//added to display date properly in db
  	private LocalDateTime end_date;
  	private Integer count;
  	private boolean started;
  	private boolean finished;
  	private String accesscode;
-//	
-// 	@Column(nullable=false, columnDefinition = "boolean default false")
-// 	private boolean regenerateTest;//added by Diana Yamaletdinova
-	
+
  	@OneToOne(fetch=FetchType.EAGER)	
  	private Student studentId;
  	
@@ -120,14 +115,5 @@ public class Assignment {
 	public void setAccesscode(String accesscode) {
 		this.accesscode = accesscode;
 	}
-//
-//	public boolean getRegenerateTest() {
-//		return regenerateTest;
-//	}
-//
-//	public void setRegenerateTest(boolean regenerateTest) {
-//		this.regenerateTest = regenerateTest;
-//	}
-//	
-//	
+
 }

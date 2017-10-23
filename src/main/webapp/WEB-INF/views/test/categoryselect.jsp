@@ -5,16 +5,22 @@
 
 <div class="content">
 	<div class="portlet light">
-	<h2 class="margin-bottom-20"> Please select 3 to 4 sub categories </h2>
+		<h2 class="margin-bottom-20">Please select 3 to 4 sub categories
+		</h2>
 		<form:form modelAttribute="categoryDto" method="POST"
 			action="setcategories/">
 			<c:forEach items="${categoryDto.categories}" var="cats">
 		        ${cats.name}<br />
 				<c:forEach items="${cats.subcategories}" var="subcats">
-					<form:checkbox name="selectedSubCategories"
-						path="selectedSubCategories" value="${subcats.id}" />${subcats.name}<br />
+					<c:if test="${subcats.enabled}">
+						<form:checkbox name="selectedSubCategories"
+							path="selectedSubCategories" value="${subcats.id}" />
+						${subcats.name}<br />
+					</c:if>
 				</c:forEach>
+
 				<hr />
+
 			</c:forEach>
 			<button class="btn btn-success btnSubmitCat" style="display: none;"
 				type="submit">Submit</button>

@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="/WEB-INF/views/include.jsp"%>
 
-<div id="assignment" class="portlet box light panel panel-success">
+<div id="assignmentE" class="portlet box light panel panel-success">
 	<div class="portlet-title">
 		<div class="caption">
 			<span class="caption-subject leftShift"> <i
@@ -20,7 +20,7 @@
 		</div>
 	</div>
 	<div class="portlet-body">
-		<button id="export" class="btn btn-primary btn-circle alignright">
+		<button id="exportAssignment" class="btn btn-primary btn-circle alignright">
 			<i class="fa fa-arrow-circle-down"></i>Export
 		</button>
 		<!-- 		<div class="table-toolbar">

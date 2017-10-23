@@ -83,7 +83,7 @@ public class CoachController {
  
 		if(assignment !=null)
 		System.out.println("assignment of finish false is: "+assignment.isFinished());
-		//added by Diana Yamaletdinova//remove later
+		//added by Diana Yamaletdinova
 		if (emailScheduler != null){
 			System.out.println("emailScheduler already exists for this assignment");			
 		}			
@@ -166,8 +166,6 @@ public class CoachController {
 			String curDate = now.format(formatter);
 			LocalDateTime curDateTime = LocalDateTime.parse(curDate, formatter);
 
-			System.out.println("-------------------------------Date NOW-------" + curDateTime);
-
 			if (curDateTime.equals(dateTimeUserInput)) {
 				emailScheduleService.sendEmail(userId, accessLink, accessCode, student.getEmail());
 				emailScheduleService.updateOnEmailSend(assignment);
@@ -178,7 +176,6 @@ public class CoachController {
 		} catch (Exception e) {
 			System.out.println("failed" + e);
 			return "failure";
-			// TODO: handle exception
 		}
 	}
 

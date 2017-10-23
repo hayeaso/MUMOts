@@ -49,7 +49,7 @@ input:checked + label { color: green; }
 					</div>
 				</c:if>
 
-				<form action="<spring:url value="/postLogin"></spring:url>"
+				<form action="<spring:url value="/postLogin?targetUrl=${targetUrl}"></spring:url>"
 					method="post" class="form-horizontal" role="form">
 					<div style="margin-bottom: 25px" class="input-group">
 						<span class="input-group-addon"><i
@@ -69,11 +69,13 @@ input:checked + label { color: green; }
 
 					<!-- <div class="input-group"> -->
 						<!-- <div class="checkbox">  -->
-							
+					<!-- if this is login for update, ignore remember me check -->
+						<c:if test="${empty loginUpdate}">		
 							<input id="login-remember"
-								type="checkbox" name="keepMe" />
+								type="checkbox" name="remember-me" />
 								<label for="lg_remember">  Remember me
 							</label>
+						</c:if>
 						<!-- </div> -->
 					<!-- </div>  -->
 

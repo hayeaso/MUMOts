@@ -45,15 +45,15 @@ public class EmailSchedulerServiceImpl implements EmailSchedulerService {
 	private LocalDateTime newDateNow = LocalDateTime.parse(curDate, formatter);
 
 	/*
-	 * Tasks scheduler method 1.Seconds; 2.Minutes; 3.Hours; 4.Day-of-Month;
-	 * 5.Month; 6.Day-of-Week; 7.Year (optional field) set the timezone if
-	 * needed zone="America/Chicago"
+	 * Tasks scheduler method 
+	 * 1.Seconds; 2.Minutes; 3.Hours; 4.Day-of-Month; 5.Month; 6.Day-of-Week; 7.Year (optional field) 
+	 * set the timezone if needed zone="America/Chicago"
 	 * 
 	 * @Scheduled(cron = "* /10 * * * * *", zone="America/Chicago")
-	 * https://www.freeformatter.com/cron-expression-generator-quartz.html 0 1 *
-	 * ? * * At second :00 of minute :01 of every hour 10 0 * ? * * At second
-	 * :10 of minute :00 of every hour 0/10 0 * ? * * => Every 10 seconds
-	 * starting at second 00, at minute :00, of every hour
+	 * https://www.freeformatter.com/cron-expression-generator-quartz.html 
+	 * 0 1 * ? * * At second :00 of minute :01 of every hour 
+	 * 10 0 * ? * * At second x:10 of minute :00 of every hour 
+	 * 0/10 0 * ? * * => Every 10 seconds starting at second 00, at minute :00, of every hour
 	 */
 	@Scheduled(fixedDelay = 180000) // 3min
 	// @Scheduled(cron = "10 0 * ? * *", zone="America/Chicago") // every 1 hour
@@ -106,7 +106,6 @@ public class EmailSchedulerServiceImpl implements EmailSchedulerService {
 									+ assignment.getId());
 					assgnmt.setCount(99);
 					assgnmtService.updateAccessCount(assgnmt);
-					// set24pastAssignmentEmailSchedulerToNull(assignment.getAssignmentId().getId());
 				}
 			}
 		}
@@ -149,15 +148,6 @@ public class EmailSchedulerServiceImpl implements EmailSchedulerService {
 		return emailSchedulerRepository.findAllNotStartedWithin24h(newDateNow);
 	}
 
-	// @Transactional(isolation=Isolation.READ_COMMITTED)
-	// @Override
-	// public void set24pastAssignmentEmailSchedulerToNull(Integer id) {
-	// emailSchedulerRepository.set24pastAssignmentToNull(id);
-	// }
-
-	/*
-	 * Find the EmailScheduler obj by assignment Id
-	 */
 	@Override
 	public EmailScheduler findByAssignmentId(Assignment assignmentId) {
 		return emailSchedulerRepository.findByAssignmentId(assignmentId);
