@@ -399,13 +399,13 @@ public class AdminController {
 
 	}
 
-	@RequestMapping(value = { "/admin/importData", "/coach/importData", "/dba/importData" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/admin/importData", "/dba/importData" }, method = RequestMethod.GET)
 	public String importDataGet(HttpServletRequest request) {
 		String mapping = request.getServletPath();
 		return mapping;
 	}
 
-	@RequestMapping(value = { "/admin/importData", "/coach/importData",
+	@RequestMapping(value = { "/admin/importData",
 			"/dba/importData" }, method = RequestMethod.POST)
 	public String processExcel2007(Model model, @RequestParam("ExcelFile") MultipartFile excelfile,
 			RedirectAttributes redirectAttr, HttpServletRequest request) {
