@@ -71,7 +71,7 @@
 			occurs -->
 		<!-- enable remember me -->
 		<security:remember-me data-source-ref="dataSource"
-			token-validity-seconds="86400" remember-me-parameter="keepMe" />
+			token-validity-seconds="18000" remember-me-parameter="remember-me" />
 	</security:http>
 	<security:authentication-manager>
 		<security:authentication-provider>
