@@ -1,5 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page session="false"%>
+<%@ page session="true"%>
+
 
 <c:if test="${not empty success}">
 	<%@ include file="/WEB-INF/views/LogPopUp.jsp"%>
@@ -17,14 +18,19 @@
 			<div class="table-toolbar">
 				<div class="row">
 					<div class="col-md-10">
+				
+					 <c:if test="${sessionScope.role == 'admin' || sessionScope.role == 'dba'}">
 						<div class="form-group">
 
 							<a href="addquestion" class="btn btn-primary"><i
 								class="fa fa-plus"></i> Add New </a> 
+								
+								
 								<a href="importData"
 								class="btn btn-success"><i class="fa fa-plus"></i> Import
 								Questions </a>
 						</div>
+						</c:if>
 					</div>
 				</div>
 			</div>
