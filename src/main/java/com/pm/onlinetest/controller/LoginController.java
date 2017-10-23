@@ -7,13 +7,11 @@ import java.util.UUID;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
-import org.springframework.security.authentication.RememberMeAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
@@ -23,9 +21,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.RequestMethod;	
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.pm.onlinetest.domain.User;
@@ -154,7 +150,7 @@ public class LoginController {
 		return "redirect:/login";
 	}
 	
-	// TODO Start Remember me blocks	
+	//Start Remember me blocks	
 	void cancelCookie(HttpServletRequest request, HttpServletResponse response, String cookieName) {		
 		Cookie cookie = new Cookie(cookieName, null);
 		cookie.setMaxAge(0);
@@ -162,42 +158,17 @@ public class LoginController {
 		response.addCookie(cookie);
 	}
 	
-	/**
-	 * get targetURL from session
-	 */
-	private String getRememberMeTargetUrlFromSession(HttpServletRequest request) {
-		String targetUrl = "";
-		HttpSession session = request.getSession(false);
-		if (session != null) {
-			targetUrl = session.getAttribute("targetUrl") == null ? "" : session.getAttribute("targetUrl").toString();
-		}
-		return targetUrl;
-	}
-
-	/**
-	 * If the login in from remember me cookie, refer
-	 * org.springframework.security.authentication.AuthenticationTrustResolverImpl
-	 */
-	private boolean isRememberMeAuthenticated() {
-
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		if (authentication == null) {
-			return false;
-		}
-
-		return RememberMeAuthenticationToken.class.isAssignableFrom(authentication.getClass());
-	}
-
-	/**
-	 * save targetURL in session
-	 */
+	/*
+	 * //** This probably need to implements when you want to put restriction on
+	 * some request that need fullyAuthenticate save targetURL in session
+	 *//*
 	private void setRememberMeTargetUrlToSession(HttpServletRequest request) {
 		HttpSession session = request.getSession(false);
 		if (session != null) {
-			session.setAttribute("targetUrl", "/admin/update");
+			session.setAttribute("targetUrl", "/admin/editStudent");
 		}
 	}
 
 	// End of Remember me blocks
-
+*/
 }

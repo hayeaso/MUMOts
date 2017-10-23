@@ -61,7 +61,7 @@
 		<div class="page-header-top">
 			<div class="container">
 				<div class="page-logo">
-					<a href="<c:url value="/" />"><img
+					<a href="<c:url value="/home" />"><img
 						src="<c:url value="/metronic/assets/logo2.png" />" height="70px;"
 						alt="logo" class="logo-default"></a>
 				</div>

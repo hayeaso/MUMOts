@@ -71,17 +71,22 @@
 			occurs -->
 		<!-- enable remember me -->
 		<security:remember-me data-source-ref="dataSource"
-			token-validity-seconds="18000" remember-me-parameter="remember-me" />
+			token-validity-seconds="18000" remember-me-parameter="remember-me" key="secretRem"/>
 	</security:http>
+	<bean id="rememberMeAuthenticationProvider" class="org.springframework.security.authentication.RememberMeAuthenticationProvider">
+	  <constructor-arg name="key" value="secretRem"/>
+	</bean> 
+
 	<security:authentication-manager>
-		<security:authentication-provider>
+		<security:authentication-provider ref="rememberMeAuthenticationProvider" />
+		<security:authentication-provider>	
 			<security:password-encoder hash="bcrypt" />	
 			<security:jdbc-user-service
 				data-source-ref="dataSource"
 				users-by-username-query="select username, password, enabled from user where username=?"
 				authorities-by-username-query="select u1.username, u2.authority from user u1, authority u2 where u1.userId = u2.userId and u1.username =?" />
 		</security:authentication-provider>
-	</security:authentication-manager>
+	</security:authentication-manager>	
 
 </beans>
 	    
