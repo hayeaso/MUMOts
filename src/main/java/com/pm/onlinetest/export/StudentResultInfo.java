@@ -99,7 +99,7 @@ public class StudentResultInfo {
 		this.setReportDetail(reportDetail);
 		this.setStudent(assignment.getStudentId());
 		this.setScoreResult(score + "/" + tests.size());
-		double testPercent = 100 / tests.size() * score;
+		double testPercent = tests.size() == 0 ? 0 : (100 / tests.size() * score);
 		this.setPercent(testPercent);
 		this.setTakenDate(assignment.getStart_date());
 	}

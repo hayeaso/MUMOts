@@ -90,8 +90,10 @@ public class AssignmentResultExport {
 			for (Assignment assignment : assignments) {
 				StudentResultInfo stuResult = new StudentResultInfo(assignment);
 				buildStudentInfoRows(workbook, sheet, stuResult);
-				buildHeaderRow(workbook, sheet);
-				buildResultDetailRow(workbook, sheet, stuResult);				
+				if (assignment.getEnd_date() != null) {
+					buildHeaderRow(workbook, sheet);
+					buildResultDetailRow(workbook, sheet, stuResult);
+				}
 			}						
 
 			writeReportToFile(workbook);			
@@ -195,11 +197,14 @@ public class AssignmentResultExport {
 		this.createStuInfoRow(sheet, studInfoIndex++, 0, this.stuInfoArr[3], stuResult.getScoreResult(), updateCellStyleColor(cellStyle, bodyNormal));
 		//Percent
 		this.createStuInfoRow(sheet, studInfoIndex++, 0, this.stuInfoArr[4], stuResult.getPercent() + "%", updateCellStyleColor(cellStyle, bodyNormal));					
-		//Taken Date need to covert to Date for format		
-		ZonedDateTime zdt = stuResult.getTakenDate().atZone(ZoneId.systemDefault());
-		Date takenDate = Date.from(zdt.toInstant());
-		this.createStuInfoRow(sheet, studInfoIndex++, 0, this.stuInfoArr[5], takenDate,  updateCellStyleColor(dateCellStyle, bodyNormal));
-
+		//Taken Date need to covert to Date for format
+		if (stuResult.getTakenDate() != null) {
+			ZonedDateTime zdt = stuResult.getTakenDate().atZone(ZoneId.systemDefault());
+			Date takenDate = Date.from(zdt.toInstant());
+			this.createStuInfoRow(sheet, studInfoIndex++, 0, this.stuInfoArr[5], takenDate,  updateCellStyleColor(dateCellStyle, bodyNormal));
+		} else {
+			this.createStuInfoRow(sheet, studInfoIndex++, 0, this.stuInfoArr[5], "N/A", updateCellStyleColor(cellStyle, bodyNormal));
+		}
 		// -- Autofit column --
 		for (int i = 0; i < this.stuInfoArr.length; i++) {
 			sheet.autoSizeColumn((short) i, true);

@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include.jsp"%>
-
+<style>
+input:checked + label { color: green; }
+</style>
 <div class="container">
 	<div id="loginbox" style="margin-top: 50px;"
 		class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
@@ -25,7 +27,7 @@
 			<div class="panel-body">
 				<c:if test="${not empty foundEmail}">
 					<div class="alert alert-warning">
-						<h4>Link Sent to your email id - ${ foundEmail }.</h4>
+						<h4>Link Sent to your email id - ${foundEmail }</h4>
 					</div>
 				</c:if>
 				<c:if test="${not empty changeSuccess}">
@@ -65,13 +67,15 @@
 
 
 
-					<div class="input-group">
-						<div class="checkbox">
-							<label for="lg_remember"> <input id="login-remember"
-								type="checkbox" name="keepMe"> Remember me
+					<!-- <div class="input-group"> -->
+						<!-- <div class="checkbox">  -->
+							
+							<input id="login-remember"
+								type="checkbox" name="keepMe" />
+								<label for="lg_remember">  Remember me
 							</label>
-						</div>
-					</div>
+						<!-- </div> -->
+					<!-- </div>  -->
 
 
 					<div style="margin-top: 10px" class="form-group">
