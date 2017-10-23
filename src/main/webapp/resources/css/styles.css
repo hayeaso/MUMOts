@@ -96,4 +96,10 @@
     border-left-width: 2px; ! important;
     padding-top: 3px; ! important;
 } */
+.errorPage{
+	    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    width: fit-content;
+}
 
