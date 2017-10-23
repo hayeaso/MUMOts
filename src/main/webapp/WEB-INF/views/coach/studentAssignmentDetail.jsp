@@ -68,9 +68,6 @@
 						</div>
 					</div>
 					
-<img src="<c:url value="/resources/images/ajax-loader.gif" />" alt="Loading..." id="loading-indicator" style="display:none" />
-
-
 					<div class="form-actions">
 						<div class="row">
 							<div class="col-md-offset-3 col-md-9">
@@ -118,32 +115,18 @@
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.4/jquery.datetimepicker.css"/ >
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.4/build/jquery.datetimepicker.full.min.js"></script>
 
-<style>
-	#loading-indicator {
-	  position: absolute;
-	  left: 10px;
-	  top: 10px;
-	}
-</style>
 <script type="text/javascript">
 
 	jQuery('#dateTime').datetimepicker({
 		timepicker: true,
 		closeOnDateSelect: true,
-		//startDate: new Date(),
+		startDate: new Date(),
 		defaultDate: new Date(),
 		scrollMonth : false,
 		todayButton: true,
 		defaultSelect: true,
-		//minDate: new Date(),
+		minDate: new Date(),
 		format: 'm/d/y H:00'
-		//format: 'm/d/Y h:m A' /* M d y will give a different format that will be displayed in the form*/
 	});
-   
-/* this will display am/pm format
- * format: 'm/d/y H:i A'
- format: 'Y/m/d A g:i',
- formatTime: 'A g:i',
- */
 
 </script>
