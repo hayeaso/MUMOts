@@ -1,4 +1,5 @@
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page session="false"%>
 <div class="panel panel-success">
 
@@ -39,8 +40,18 @@
 						<td>${assignment.coachId.firstName}
 							${assignment.coachId.lastName}</td>
 						<td>${assignment.accesscode}</td>
-						<td>${assignment.start_date}</td>
-						<td>${assignment.end_date}</td>
+						<td><c:out value="${assignment.id}" /></td>
+						<fmt:parseDate value="${assignment.start_date}"
+							pattern="yyyy-MM-dd'T'HH:mm" var="startDate" type="date" />
+						<fmt:formatDate value="${startDate}" var="myStartDate" type="date"
+							pattern="MM/dd/yyyy hh:mm:ss a z" />
+						<td>${myStartDate}</td>
+						<fmt:parseDate value="${assignment.end_date}"
+							pattern="yyyy-MM-dd'T'HH:mm" var="endDate" type="date" />
+						<fmt:formatDate value="${endDate}" var="myEndDate" type="date"
+							pattern="MM/dd/yyyy hh:mm:ss a z" />
+						<td><c:out value="${assignment.finished}" /></td>
+						<td><c:out value="details" /></td>
 						<td>${assignment.finished}</td>
 					</tr>
 				</c:forEach>
