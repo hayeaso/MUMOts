@@ -77,7 +77,7 @@
 			<form:hidden path="enabled" value="TRUE" />
 			<div class="form-actions">
 				<button type="submit" id="register-submit-btn"
-					class="btn btn-success uppercase pull-right">Update</button>
+					class="btn btn-primary uppercase pull-right">Update</button>
 			</div>
 			<div class="form-actions">
 				<c:if test="${user_role == 'admin'}">

@@ -61,6 +61,9 @@
 							<button type="submit" class="btn btn-circle btn-primary">
 								<span class="glyphicon glyphicon-upload"></span> Import
 							</button>
+							<a href="<c:url value='/admin/students'/>"> <input
+								type="button" id="register-cancel-btn"
+								class="btn btn-success btn btn-circle" value="Cancel" /></a>
 						</div>
 					</div>
 				</div>
