@@ -566,8 +566,7 @@ public class AdminController {
 
 		if (null != userService.findByUsernameExceptThis(user.getUsername(), user.getUserId())) {
 			redirectAttr.addFlashAttribute("error", "Error");
-		} else {
-			user.setEnabled(true);
+		} else {			
 			userService.save(user);
 			redirectAttr.addFlashAttribute("success", "Success");
 			redirectAttr.addFlashAttribute("titleMessage", "User edited");

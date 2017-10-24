@@ -77,7 +77,7 @@
 
 			<div id="divCheckPasswordMatch"></div>
 
-			<form:hidden path="enabled" value="TRUE" />
+			<form:hidden path="enabled" value="${user.enabled}"  />
 			<div class="form-actions">
 				<button type="submit" id="register-submit-btn"
 					class="btn btn-success uppercase pull-right">Submit</button>
