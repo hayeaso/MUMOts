@@ -130,7 +130,9 @@
 			$('#BtnForSubmit').removeAttr('disabled');
 		}
 	};
+	
 	$(document).ready(function() {
+		$('#BtnForSubmit').attr('disabled', 'disabled');
 		$('#idCategory').change(function(event) {
 			var id = $('#idCategory').val();
 
