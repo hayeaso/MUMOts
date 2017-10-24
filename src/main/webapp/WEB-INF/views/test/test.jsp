@@ -52,7 +52,7 @@
 						<div class="modal-footer">
 							<button class="btn default" data-dismiss="modal"
 								aria-hidden="true">Close</button>
-							<button data-dismiss="modal" class="btn blue btnTestFinish">Confirm</button>
+							<button data-dismiss="modal" class="btn btn-primary btnTestFinish">Confirm</button>
 						</div>
 					</div>
 				</div>

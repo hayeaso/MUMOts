@@ -3,6 +3,10 @@
 <%@ include file="/WEB-INF/views/include.jsp"%>
 <c:set var="currentPage"
 	value="${requestScope['javax.servlet.forward.request_uri']}" />
+
+<c:set var="pageParts" value="${fn:split(currentPage, '/')}" />
+<c:set var="pageWithoutParam"
+	value="/${pageParts[0]}/${pageParts[1]}/${pageParts[2] }" />
 <%-- 
 <c:set var="rooot" value="${pageContext.request.contextPath}" /> --%>
 
@@ -21,15 +25,13 @@
 		</div>
 
 
-
-
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="navbar-collapse collapse in"
 			id="bs-example-navbar-collapse-1">
 
 			<ul class="nav navbar-nav">
 				<li><a href="<c:url value="/admin/users" />"
-					${('/onlinetest/admin/users' == currentPage || '/onlinetest/admin/register' == currentPage) ? ' class="activeNavItem"' : ''}>User
+					${('/onlinetest/admin/users' == currentPage || '/onlinetest/admin/register' == currentPage || '/onlinetest/admin/editUser' == pageWithoutParam) ? ' class="activeNavItem"' : ''}>User
 						List</a></li>
 
 				<li><a href="<c:url value="/admin/students" />"
@@ -46,7 +48,7 @@
 				</a></li>
 
 				<li><a href="<c:url value="/admin/assignments" />"
-					${('/onlinetest/admin/assignments' == currentPage) ? ' class="activeNavItem"'  : ''}>Assignments</a></li>
+					${('/onlinetest/admin/assignments' == currentPage || '/onlinetest/admin/result' == pageWithoutParam || '/onlinetest/admin/resultDetail' == pageWithoutParam) ? ' class="activeNavItem"'  : ''}>Assignments</a></li>
 				<li><a href="<c:url value="/admin/resultlist" />"
 					${('/onlinetest/admin/resultlist' == currentPage) ? ' class="activeNavItem"'  : ''}>Test
 						Results</a></li>
