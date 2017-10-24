@@ -50,6 +50,7 @@
 							pattern="yyyy-MM-dd'T'HH:mm" var="endDate" type="date" />
 						<fmt:formatDate value="${endDate}" var="myEndDate" type="date"
 							pattern="MM/dd/yyyy hh:mm:ss a z" />
+							<td>${myEndDate}</td>
 						<td><c:out value="${assignment.finished}" /></td>
 						<td><c:out value="details" /></td>
 						<td>${assignment.finished}</td>
