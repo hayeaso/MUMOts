@@ -81,8 +81,6 @@ function assignmentDone(userId){
 
 window.sendingEmail=function(){
 		 waitingDialog.show('Processing......');
-		 var animation=waitingDialog.animate();
-		// return true;
 }	
 function closeModalCoachAssignment(){
 	window.location.href = "../../../onlinetest/coach/home";	

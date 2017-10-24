@@ -92,7 +92,6 @@ $(document).ready(
 	 var inputFile = document.getElementById("ExcelFile").value; // added .value
 	 if (inputFile !== "") {
 		 waitingDialog.show('Processing......');
-		 var animation=waitingDialog.animate();
 		 return true;
 	 }
  }	    
