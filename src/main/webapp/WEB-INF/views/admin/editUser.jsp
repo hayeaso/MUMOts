@@ -85,25 +85,9 @@
 					</c:if>
 				</form:select>
 				<form:errors path="authorities[0].authority" cssClass="text-danger" />
-			</div>			
-			<div class="form-group">
-				<label class="control-label col-lg-2" for="enabled">Status</label>
-				<form:select path="enabled"
-						class="form-control">
-					<c:choose>
-						<c:when test="${user.enabled}">						
-							<form:option value="False">Inactive</form:option>
-							<form:option value="True" selected="selected">Active</form:option>
-						</c:when>
-						<c:otherwise>							
-							<form:option value="False" selected="selected">Inactive</form:option>
-							<form:option value="True">Active</form:option>
-						</c:otherwise>
-					</c:choose>
-				</form:select>
-				<form:errors path="enabled" cssClass="text-danger" />
 			</div>
-			<%-- <form:hidden path="enabled" value="TRUE" /> --%>
+			
+			<form:hidden path="enabled" value="${user.enabled}"/>
 			<div class="form-actions">
 				<button type="submit" id="register-submit-btn"
 					class="btn btn-success uppercase pull-right">Submit</button>

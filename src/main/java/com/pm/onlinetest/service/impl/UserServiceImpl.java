@@ -39,8 +39,7 @@ public class UserServiceImpl implements UserService {
 		String encodedPassword = passwordEncoder.encode(user.getPassword());
 		String role = user.getAuthorities().get(0).getAuthority();
 		user.setAuthorities(null);
-		user.setPassword(encodedPassword);
-		user.setEnabled(true);
+		user.setPassword(encodedPassword);		
 		userRepository.save(user);
 		Authority authority = new Authority();
 		authority.setUserId(user.getUserId());
@@ -56,8 +55,7 @@ public class UserServiceImpl implements UserService {
 
 		PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 		String encodedPassword = passwordEncoder.encode(user.getPassword());
-		user.setPassword(encodedPassword);
-		user.setEnabled(true);
+		user.setPassword(encodedPassword);		
 		userRepository.save(user);
 	}
 	

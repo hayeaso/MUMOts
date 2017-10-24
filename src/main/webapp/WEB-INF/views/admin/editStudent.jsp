@@ -73,8 +73,9 @@
 					</c:if>					
 				</form:select>
 				<form:errors path="jobSearchStatus" cssClass="text-danger" />
-			</div>			
-			<form:hidden path="enabled" value="TRUE" />
+			</div>
+
+			<form:hidden path="enabled" value="${student.enabled}"/>
 			<div class="form-actions">
 				<button type="submit" id="register-submit-btn"
 					class="btn btn-success uppercase pull-right">Update</button>
