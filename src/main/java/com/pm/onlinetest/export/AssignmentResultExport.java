@@ -28,6 +28,10 @@ import com.pm.onlinetest.domain.Assignment;
 import com.pm.onlinetest.domain.Choice;
 import com.pm.onlinetest.domain.Test;
 
+/** This class is use for generate Excel for Assignment result detail
+ * 
+ * @author kloem
+ */
 public class AssignmentResultExport {
 	private static final Logger logger = LoggerFactory.getLogger(AssignmentResultExport.class);	
 	public static final String FILE_NAME = "AssignmentList_Exported.xls";
@@ -40,6 +44,7 @@ public class AssignmentResultExport {
 	private HSSFCellStyle columnHeaderStyle;
 	private HSSFCellStyle dateCellStyle;
 	private HSSFCellStyle textCellStyle;
+	private HSSFCellStyle encodingCellStyle;
 	private final short bodyNormal = HSSFColor.WHITE.index;
 	private final short borderThin = HSSFCellStyle.BORDER_THIN;
 	private int rowNumber = 0;
@@ -57,7 +62,7 @@ public class AssignmentResultExport {
 		COLUMNHEADERSMAP.put(COLUMNFIELDS.Qustion, "Question");		
 	}
 	//public enum ChoiceLable {A, B, C, D, E };
-	private String[] stuInfoArr = {"Student ID", "Student Name", "Entry", "Score", "Percent", "Taken Date"};
+	private String[] stuInfoArr = {"Student ID:", "Student Name:", "Entry:", "Score:", "Percent:", "Taken Date:"};
 	private String[] choiceLabelArr = {"A. ", "B. ", "C. ", "D. ", "E. ", "F. "}; // current logic a question contains 5 choice
 	
 	// -- Constructor
@@ -94,6 +99,7 @@ public class AssignmentResultExport {
 					buildHeaderRow(workbook, sheet);
 					buildResultDetailRow(workbook, sheet, stuResult);
 				}
+				this.buildBarRow(workbook, sheet);
 			}						
 
 			writeReportToFile(workbook);			
@@ -102,6 +108,23 @@ public class AssignmentResultExport {
 			logger.error("buildExcelReport() failed " + ex.getMessage());
 		}
 		return workbook;
+	}
+	
+	/**
+	 * This function create a row bar for separating student result
+	 * @param workbook2
+	 * @param sheet
+	 */
+	private void buildBarRow(HSSFWorkbook workbook2, HSSFSheet sheet) {
+		HSSFRow barRow = sheet.createRow(this.rowNumber++);
+		HSSFCell barCell = barRow.createCell(0);		
+		HSSFCellStyle cellStyle = workbook2.createCellStyle();
+		
+		cellStyle.setFillForegroundColor(getIndexcolor("#C0C0C0", workbook2));
+		cellStyle.setFillPattern(CellStyle.SOLID_FOREGROUND);		
+		barCell.setCellStyle(cellStyle);
+		int colCount = AssignmentResultExport.COLUMNHEADERSMAP.size();
+		sheet.addMergedRegion(new CellRangeAddress(this.rowNumber -1 , this.rowNumber - 1, 0, colCount-1));				
 	}
 
 	/**
@@ -125,7 +148,7 @@ public class AssignmentResultExport {
 		// -- Row header font style --
 		HSSFFont rowHeaderFont = workbook.createFont();
 		rowHeaderFont.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
-		rowHeaderFont.setFontHeightInPoints((short) 12);
+		rowHeaderFont.setFontHeightInPoints((short) 14);
 		rowHeaderFont.setColor(HSSFColor.DARK_RED.index);
 		rowHeaderFont.setFontName(AssignmentResultExport.FONT_NAME);
 		// -- Row header cell style --
@@ -135,7 +158,7 @@ public class AssignmentResultExport {
 		// -- Column header font style --
 		HSSFFont columnHeaderFont = workbook.createFont();
 		columnHeaderFont.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
-		columnHeaderFont.setFontHeightInPoints((short) 12);
+		columnHeaderFont.setFontHeightInPoints((short) 14);
 		columnHeaderFont.setFontName(AssignmentResultExport.FONT_NAME);
 		// -- Row header cell style --
 		columnHeaderStyle = workbook.createCellStyle();
@@ -152,7 +175,15 @@ public class AssignmentResultExport {
 		textCellStyle.setFont(detailsFont);
 		// -- Date style --
 		dateCellStyle = workbook.createCellStyle();
-		dateCellStyle.setDataFormat(HSSFDataFormat.getBuiltinFormat("MM/dd/yyyy HH:mm:ss"));			
+		dateCellStyle.setDataFormat(HSSFDataFormat.getBuiltinFormat("MM/dd/yyyy HH:mm:ss"));
+		// --Symbol Style
+		HSSFFont symbolFont;
+		symbolFont = workbook.createFont();
+		symbolFont.setCharSet(HSSFFont.SYMBOL_CHARSET);		
+		symbolFont.setFontName(AssignmentResultExport.FONT_NAME);
+		encodingCellStyle = workbook.createCellStyle();
+		encodingCellStyle.setFont(symbolFont);
+		encodingCellStyle = setStyleBorder(encodingCellStyle, false);
 	}
 
 	/**
@@ -203,7 +234,7 @@ public class AssignmentResultExport {
 			Date takenDate = Date.from(zdt.toInstant());
 			this.createStuInfoRow(sheet, studInfoIndex++, 0, this.stuInfoArr[5], takenDate,  updateCellStyleColor(dateCellStyle, bodyNormal));
 		} else {
-			this.createStuInfoRow(sheet, studInfoIndex++, 0, this.stuInfoArr[5], "N/A", updateCellStyleColor(cellStyle, bodyNormal));
+			this.createStuInfoRow(sheet, studInfoIndex++, 0, "Status:", "Not Complete", updateCellStyleColor(cellStyle, bodyNormal));
 		}
 		// -- Autofit column --
 		for (int i = 0; i < this.stuInfoArr.length; i++) {
@@ -224,6 +255,7 @@ public class AssignmentResultExport {
 		int rowIndex = this.rowNumber;
 		HSSFRow headerRow = sheet.createRow(rowIndex++); // 1
 		HSSFFont titleFont = workbook.createFont();
+		titleFont.setFontName(AssignmentResultExport.FONT_NAME);
 		for (AssignmentResultExport.COLUMNFIELDS columns : COLUMNFIELDS.values()) {
 			String labelName = COLUMNHEADERSMAP.get(columns);
 			HSSFCell headerCell = headerRow.createCell(headerColIndex);
@@ -264,8 +296,8 @@ public class AssignmentResultExport {
 			//merge-- firstRow, lastRow, firstCol, lastCol //need to merge based on question choices			
 			sheet.addMergedRegion(new CellRangeAddress(rowIndex, rowIndex + answer.getQuestion().getChoices().size(), 0, 0));
 			
-			String questionDesc = (answerEntry.getValue() ? "✅ " : "❌ " ) + answer.getQuestion().getDescription();
-			createCell(entryRow, cell, 1, questionDesc, updateCellStyleColor(textCellStyle, getIndexcolor("#FFFF66", workbook)));					
+			String questionDesc = (answerEntry.getValue() ? "✅ " : "❌ ") + answer.getQuestion().getDescription();
+			createCell(entryRow, cell, 1, new HSSFRichTextString(questionDesc), updateCellStyleColor(this.encodingCellStyle, getIndexcolor("#FFFF66", workbook)));					
 			
 			rowIndex++;			
 			//✅ correct &#x2705;
@@ -339,7 +371,14 @@ public class AssignmentResultExport {
 		cell.setCellValue(value);
 		return cell;
 	}
-
+	
+	private HSSFCell createCell(HSSFRow entryRow, HSSFCell cell, int cellnumber, HSSFRichTextString value, HSSFCellStyle cellStyle) {
+		cell = entryRow.createCell(cellnumber);
+		cell.setCellStyle(cellStyle);
+		cell.setCellValue(value);
+		return cell;
+	}
+	
 	private HSSFRow createStuInfoRow(HSSFSheet sheet, int studInfoIndex, int cellnumber, String label, Object value, HSSFCellStyle cellStyle) {
 		HSSFRow entryRow = sheet.createRow(studInfoIndex); //studInfoIndex++
 		HSSFCell cell = entryRow.createCell(0);
