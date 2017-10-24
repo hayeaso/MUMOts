@@ -40,7 +40,7 @@
 						<td>${assignment.coachId.firstName}
 							${assignment.coachId.lastName}</td>
 						<td>${assignment.accesscode}</td>
-						<td><c:out value="${assignment.id}" /></td>
+
 						<fmt:parseDate value="${assignment.start_date}"
 							pattern="yyyy-MM-dd'T'HH:mm" var="startDate" type="date" />
 						<fmt:formatDate value="${startDate}" var="myStartDate" type="date"

@@ -61,9 +61,16 @@
 							<button type="submit" class="btn btn-circle btn-primary" onclick="return loadingStudents()">
 								<span class="glyphicon glyphicon-upload" ></span> Import
 							</button>
+							<c:if test="${sessionScope.role == 'admin' }">
 							<a href="<c:url value='/admin/students'/>"> <input
 								type="button" id="register-cancel-btn"
 								class="btn btn-success btn btn-circle" value="Cancel" /></a>
+								</c:if>
+								<c:if test="${sessionScope.role == 'coach' }">
+							<a href="<c:url value='/coach/students'/>"> <input
+								type="button" id="register-cancel-btn"
+								class="btn btn-success btn btn-circle" value="Cancel" /></a>
+								</c:if>
 						</div>
 					</div>
 				</div>

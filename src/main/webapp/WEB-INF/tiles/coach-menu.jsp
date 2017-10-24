@@ -5,6 +5,10 @@
 <c:set var="currentPage"
 	value="${requestScope['javax.servlet.forward.request_uri']}" />
 
+<c:set var="pageParts" value="${fn:split(currentPage, '/')}" />
+<c:set var="pageWithoutParam"
+	value="/${pageParts[0]}/${pageParts[1]}/${pageParts[2] }" />
+	
 <nav class="navbar navbar-default">
 	<div class="container-fluid">
 
@@ -30,11 +34,11 @@
 			<ul class="nav navbar-nav">
 
 				<li><a href="<c:url value="/coach/home" />"
-					${('/onlinetest/coach/home' == currentPage) ? ' class="activeNavItem"' : ''}>Home</a></li>
+					${('/onlinetest/coach/home' == currentPage || '/onlinetest/coach/studentAssignmentDetail' == pageWithoutParam ) ? ' class="activeNavItem"' : ''}>Home</a></li>
 				<li><a href="<c:url value="/coach/students" />"
-					${('/onlinetest/coach/students' == currentPage||'/onlinetest/coach/registerStudent' == currentPage||'/onlinetest/coach/importStudentData' == currentPage) ? ' class="activeNavItem"' : ''}>Students</a></li>
+					${('/onlinetest/coach/students' == currentPage || '/onlinetest/coach/registerStudent' == currentPage || '/onlinetest/coach/importStudentData' == currentPage || '/onlinetest/coach/editStudent' == pageWithoutParam) ? ' class="activeNavItem"' : ''}>Students</a></li>
 				<li><a href="<c:url value="/coach/assignments" />"
-					${('/onlinetest/coach/assignments' == currentPage) ? ' class="activeNavItem"' : ''}>Assignments</a></li>
+					${('/onlinetest/coach/assignments' == currentPage || '/onlinetest/coach/result' == pageWithoutParam || '/onlinetest/coach/resultDetail' == pageWithoutParam) ? ' class="activeNavItem"' : ''}>Assignments</a></li>
 				<li><a href="<c:url value="/coach/resultlist" />"
 					${('/onlinetest/coach/resultlist' == currentPage) ? ' class="activeNavItem"' : ''}>Result
 						List</a></li>

@@ -2,7 +2,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/include.jsp"%>
-
+<c:set var="currentPage"
+	value="${requestScope['javax.servlet.forward.request_uri']}" />
+	
  <c:if test="${sessionScope.role == null}">
  <nav class="navbar navbar-default">
   <div class="container-fluid"> 
@@ -18,9 +20,11 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
       <ul class="nav navbar-nav">
         <!-- <li><a href="">HOME <span class="sr-only">(current)</span></a></li> -->
-        <li><a href="<c:url value="/contactus" />">CONTACT US <span class="sr-only">(current)</span></a></li>
+					<li><a href="<c:url value="/contactus" />"
+						${('/onlinetest/contactus' == currentPage) ? ' class="activeNavItem"' : ''}>Contact
+							Us </a></li>
 
-      </ul>
+				</ul>
       
       <ul class="nav navbar-nav navbar-right">
       <c:if test="${pageContext.request.userPrincipal.name == null}">
