@@ -281,7 +281,7 @@ public class AdminController {
 		subCategoryService.save(subcategory);
 		redirectAttr.addFlashAttribute("success", "New bubcategory added successfully!");
 		redirectAttr.addFlashAttribute("titleMessage", "Sub category added!");
-		redirectAttr.addFlashAttribute("bodyMessage", "New bubcategory added successfully " + subcategory.getName());
+		redirectAttr.addFlashAttribute("bodyMessage", "New subcategory "+ subcategory.getName()+" added successfully.");
 		return "redirect:/admin/subCategories";
 	}
 

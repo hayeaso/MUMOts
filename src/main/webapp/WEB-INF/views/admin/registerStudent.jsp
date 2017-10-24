@@ -72,7 +72,7 @@
 
 			<div class="form-actions">
 				<button type="submit" id="register-submit-btn"
-					class="btn btn-success uppercase pull-right">Submit</button>
+					class="btn btn-primary uppercase pull-right">Submit</button>
 			</div>
 						
 			<div class="form-actions">

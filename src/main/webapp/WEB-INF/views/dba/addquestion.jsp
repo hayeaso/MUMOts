@@ -103,12 +103,15 @@
 
 					</c:forEach>
 				</ol>
-	</div>
-	<div class="form-actions">
-		<button type="submit" class="btn btn-lg btn-success btn-mini"
-			class="btn btn-success uppercase pull-right">Submit</button>
-	</div>
 
+				<div class="form-actions alignright">
+					<button type="submit" class="btn btn-primary btn-mini"
+						class="btn btn-success uppercase pull-right">Submit</button>
+					<a href="<c:url value='/admin/viewquestions'/>"> <input
+						style="margin-right: 20px;" type="button" id="register-cancel-btn"
+						class="btn btn-success  alignleft" value="Cancel" /></a>
+				</div>
+	</div>
 	<div id="result"></div>
 	</form:form>
 	</c:if>
