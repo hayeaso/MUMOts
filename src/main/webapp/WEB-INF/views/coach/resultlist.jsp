@@ -3,8 +3,6 @@
 <%@ include file="/WEB-INF/views/include.jsp"%>
 <%@ page session="false"%>
 
-
-
 <div id="report" class="portlet box light panel panel-success">
 	<div class="portlet-title">
 		<div class="caption">
@@ -62,7 +60,7 @@
 									<p class="text-success">${report.value}</p>
 								</c:when>
 								<c:when test="${report.value < 75}">
-									<p class="text-danger">${report.value}</p>
+									<p class="text-danger">${report.value}%</p>
 								</c:when>
 
 								<c:otherwise>
