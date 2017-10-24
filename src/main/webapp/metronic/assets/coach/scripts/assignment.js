@@ -58,17 +58,13 @@ function assignmentDone(userId){
 		   dateTime:$("#dateTime").val()
 	   },
 	   ajaxSend: function() {
-		    /* show loader */
-			//$('#loading-indicator').show();
-		   //waitingDialog.show('Custom message');
 			
 		},
+		
 	   success: function(data){        
-		  // $('#loading-indicator').show();
 		   if(data === "success"){
-
+			   waitingDialog.hide();
 			   $('#myModal').modal('show');
-//			   window.location.href = "../../../onlinetest/coach/home";			   
 		   }
 		   else{
 			   $("#errorMessage").empty();
@@ -82,6 +78,12 @@ function assignmentDone(userId){
 	})
 }
 
+
+window.sendingEmail=function(){
+		 waitingDialog.show('Processing......');
+		 var animation=waitingDialog.animate();
+		// return true;
+}	
 function closeModalCoachAssignment(){
 	window.location.href = "../../../onlinetest/coach/home";	
 	self.close();

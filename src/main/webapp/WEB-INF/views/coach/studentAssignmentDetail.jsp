@@ -75,7 +75,7 @@
 									onclick="generateAccessCode()" name="generate-test-btn"
 									class="btn btn-circle btn-primary">Generate Test</button>
 								<button type="button" id="send-test-btn"
-									onclick="assignmentDone(${student.userId})" name="send-test-btn"
+									onclick="assignmentDone(${student.userId}); sendingEmail()" name="send-test-btn"
 									class="btn btn-circle btn-success" >Send Email & Save</button>
 								<button type="button" id="student-assignment-cancelbtn"
 									onclick="assignmentCancel()" class="btn btn-circle btn-default">Cancel</button>
@@ -114,6 +114,7 @@
 <!-- JS for Date-Picker -->
 <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.4/jquery.datetimepicker.css"/ >
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-datetimepicker/2.5.4/build/jquery.datetimepicker.full.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-waitingfor/1.2.4/bootstrap-waitingfor.js"></script>
 
 <script type="text/javascript">
 
@@ -128,5 +129,6 @@
 		minDate: new Date(),
 		format: 'm/d/y H:00'
 	});
+ 
 
 </script>

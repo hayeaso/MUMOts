@@ -58,8 +58,8 @@
 				<div class="form-actions">
 					<div class="row">
 						<div class="col-md-offset-3 col-md-9">
-							<button type="submit" class="btn btn-circle btn-primary">
-								<span class="glyphicon glyphicon-upload"></span> Import
+							<button type="submit" class="btn btn-circle btn-primary" onclick="return loadingStudents()">
+								<span class="glyphicon glyphicon-upload" ></span> Import
 							</button>
 							<a href="<c:url value='/admin/students'/>"> <input
 								type="button" id="register-cancel-btn"
@@ -71,6 +71,7 @@
 		</div>
 	</div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-waitingfor/1.2.4/bootstrap-waitingfor.js"></script>
 <script>
 
 $(document).ready(
@@ -88,4 +89,14 @@ $(document).ready(
 	            }
 	            );
 	    });
+	    
+//loading pop up while waiting to complete the import	
+window.loadingStudents=function(){
+	 var inputFile = document.getElementById("ExcelFile").value; // added .value
+	 if (inputFile !== "") {
+		 waitingDialog.show('Processing......');
+		 var animation=waitingDialog.animate();
+		 return true;
+	 }
+}	
 </script>
