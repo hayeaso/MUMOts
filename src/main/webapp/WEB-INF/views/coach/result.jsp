@@ -3,7 +3,7 @@
 <%@ page session="false"%>
 
  
-    <div id="posts-landing" class="portlet box light panel panel-success">                                      
+<div id="posts-landing" class="portlet box light panel panel-success">                                      
    <div id="report" class="portlet-title">
 		<div class="caption">
 			<span class="caption-subject leftShift"><i class="fa fa-book fa-fw"></i>Student
@@ -83,7 +83,7 @@
            
      
 	
-	<span class="label label-info"> Score Detail </span>
+	<span class="label label-success"> Score Detail </span>
 	<br>
 	<div class="col-md-4"><table class="table table-sm">
 			<thead>
@@ -105,7 +105,7 @@
 				</c:forEach>
 			</tbody>
 		</table></div>
-		<span class="label label-info"> Overall Score </span>
+		<span class="label label-success"> Overall Score </span>
 		<br>
 	<div class="col-md-4">
 	<h3>${total} Out of ${questions}</h3>
@@ -113,6 +113,8 @@
   
   </div>  
 </div>
+
+	
 </div>
 <div id="editor"></div>
 <script src="<c:url value="/metronic/assets/global/plugins/jquery.min.js" />" type="text/javascript"></script>
