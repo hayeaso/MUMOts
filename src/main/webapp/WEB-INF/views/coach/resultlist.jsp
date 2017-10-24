@@ -46,7 +46,7 @@
 					<tr>
 
 						<td>${status.count}</td>
-						<td>${report.key.coachId.firstName}</td>
+						<td>${report.key.coachId.firstName} ${report.key.coachId.lastName}</td>
 						<td>${report.key.studentId.studentId}</td>
 						<td>${report.key.studentId.firstName}
 							${report.key.studentId.lastName}</td>

@@ -21,7 +21,7 @@
 				<h4>Sorry!! The question could not be added !</h4>
 				<p>
 					<c:out value="${error}" />
-					</br> <b>${question.description}</b>
+					<b>${question.description}</b>
 				</p>
 			</div>
 		</c:if>
@@ -68,10 +68,9 @@
 				</div>
 
 
-
-
 				<ol type="A">
-					<p class="text-right">Correct Answer(select Only one)</p>
+					<p class="text-right" id="input">Correct Answer(select Only
+						one)</p>
 					<c:forEach items="${question.choices}" var="choice" varStatus="i">
 
 						<div class="form-group">
@@ -92,9 +91,10 @@
 										cssClass="text-danger" />
 
 								</div>
-								<div class="col-md-1 ">
+								<div class="col-md-1 " id="checkbox">
 									<span class="col-md-2 col-md-offset-1"> <form:checkbox
-											class="icheck" path="choices[${i.index}].answer" />
+											class="icheck" path="choices[${i.index}].answer"
+											onchange="disableSubmit()" />
 									</span>
 								</div>
 
@@ -106,20 +106,33 @@
 
 				<div class="form-actions alignright">
 					<button type="submit" class="btn btn-primary btn-mini"
-						class="btn btn-success uppercase pull-right">Submit</button>
+						id="BtnForSubmit" class="btn btn-success uppercase pull-right">Submit</button>
 					<a href="<c:url value='/admin/viewquestions'/>"> <input
 						style="margin-right: 20px;" type="button" id="register-cancel-btn"
 						class="btn btn-success  alignleft" value="Cancel" /></a>
 				</div>
+			</form:form>
+		</c:if>
 	</div>
 	<div id="result"></div>
-	</form:form>
-	</c:if>
+
 </div>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script>
+	var disableSubmit = function myFunction() {
+
+		var numClicked = $("input:checkbox:checked").length;
+		if (numClicked != 1) {
+			$('#BtnForSubmit').attr('disabled', 'disabled');
+		} else {
+
+			$('#BtnForSubmit').removeAttr('disabled');
+		}
+	};
+	
 	$(document).ready(function() {
+		$('#BtnForSubmit').attr('disabled', 'disabled');
 		$('#idCategory').change(function(event) {
 			var id = $('#idCategory').val();
 
