@@ -26,7 +26,7 @@
 				</div>
 			</c:if>
 			<c:if test="${error}">
-				<div class="alert alert-success">
+				<div class="alert alert-warning">
 					<strong>Oops!</strong> Something went wrong, please check the file!
 				</div>
 			</c:if>
@@ -55,7 +55,7 @@
 				<div class="form-actions">
 					<div class="row">
 						<div class="col-md-offset-3 col-md-9">
-							<button type="submit" class="btn btn-circle btn-primary">
+							<button type="submit" class="btn btn-circle btn-primary" onclick="return loadingQuestions()">
 								<span class="glyphicon glyphicon-upload"></span> Import
 							</button>
 							<a href="<c:url value='/admin/viewquestions'/>"> <input
@@ -68,6 +68,8 @@
 		</div>
 	</div>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-waitingfor/1.2.4/bootstrap-waitingfor.js"></script>
+
 <script>
 
 $(document).ready(
@@ -85,4 +87,12 @@ $(document).ready(
 	            }
 	            );
 	    });
+//loading pop up while waiting to complete the import	
+ window.loadingQuestions=function(){
+	 var inputFile = document.getElementById("ExcelFile").value; // added .value
+	 if (inputFile !== "") {
+		 waitingDialog.show('Processing......');
+		 return true;
+	 }
+ }	    
 </script>
