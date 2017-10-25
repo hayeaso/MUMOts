@@ -34,7 +34,7 @@
 			<ul class="nav navbar-nav">
 
 				<li><a href="<c:url value="/coach/home" />"
-					${('/onlinetest/coach/home' == currentPage || '/onlinetest/coach/studentAssignmentDetail' == pageWithoutParam ) ? ' class="activeNavItem"' : ''}>Home</a></li>
+					${('/onlinetest/coach/home' == currentPage || '/onlinetest/coach/studentAssignmentDetail' == pageWithoutParam || '/onlinetest/coach/studentAssignmentHistory' == pageWithoutParam ) ? ' class="activeNavItem"' : ''}>Home</a></li>
 				<li><a href="<c:url value="/coach/students" />"
 					${('/onlinetest/coach/students' == currentPage || '/onlinetest/coach/registerStudent' == currentPage || '/onlinetest/coach/importStudentData' == currentPage || '/onlinetest/coach/editStudent' == pageWithoutParam) ? ' class="activeNavItem"' : ''}>Students</a></li>
 				<li><a href="<c:url value="/coach/assignments" />"
