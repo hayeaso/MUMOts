@@ -6,6 +6,8 @@ import org.springframework.stereotype.Service;
 
 import com.pm.onlinetest.domain.Category;
 import com.pm.onlinetest.domain.Subcategory;
+import com.pm.onlinetest.exception.DuplicateCategoryNameException;
+import com.pm.onlinetest.exception.DuplicateSubCategoryNameException;
 import com.pm.onlinetest.repository.SubCategoryRepository;
 import com.pm.onlinetest.service.SubCategoryService;
 
@@ -28,8 +30,16 @@ public class SubCategoryServiceImp implements SubCategoryService {
 	}
 
 	@Override
-	public void save(Subcategory subcategory) {
+	public void save(Subcategory subcategory) throws DuplicateSubCategoryNameException {
 		// TODO Auto-generated method stub
+		
+		Subcategory temp = subCategoryRepository.findFirstByName(subcategory.getName());
+		if (temp != null && !(temp.getId().equals(subcategory.getId()))) {
+			throw new DuplicateSubCategoryNameException("Sub-Category is already exist!");
+		}		
+		//categoryRepository.save(category);
+		
+		
 		subCategoryRepository.save(subcategory);
 	}
 
