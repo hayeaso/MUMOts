@@ -78,7 +78,7 @@
 			<form:hidden path="enabled" value="${student.enabled}"/>
 			<div class="form-actions">
 				<button type="submit" id="register-submit-btn"
-					class="btn btn-primary uppercase pull-right">Update</button>
+					class="btn btn-success uppercase pull-right">Update</button>
 			</div>
 			<div class="form-actions">
 				<c:if test="${user_role == 'admin'}">
@@ -87,7 +87,7 @@
  				<c:if test="${user_role == 'coach'}">
 					<a href="<c:url value='/coach/students'/>">
  				</c:if>
- 				<input style="margin-right:30px;" type="button" id="register-cancel-btn" class="btn btn-success uppercase pull-right" value="Cancel"/>
+ 				<input style="margin-right:30px;" type="button" id="register-cancel-btn" class="btn btn-primary uppercase pull-right" value="Cancel"/>
  			</div>	
 			<br/><br/>
 		</form:form>

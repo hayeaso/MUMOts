@@ -71,12 +71,12 @@
 			<form:hidden path="enabled" value="TRUE" />
 			<div class="form-actions">
 				<button type="submit" id="register-submit-btn"
-					class="btn btn-primary uppercase pull-right">Submit</button>
+					class="btn btn-success uppercase pull-right">Submit</button>
 			</div>
 			<div class="form-actions">
 				<a href="<c:url value='/admin/users'/>"> <input
 					style="margin-right: 30px;" type="button" id="register-cancel-btn"
-					class="btn btn-success uppercase pull-right" value="Cancel" /></a>
+					class="btn btn-primary uppercase pull-right" value="Cancel" /></a>
 			</div>
 			<br />
 			<br />

@@ -109,7 +109,7 @@
 						id="BtnForSubmit" class="btn btn-success uppercase pull-right">Submit</button>
 					<a href="<c:url value='/admin/viewquestions'/>"> <input
 						style="margin-right: 20px;" type="button" id="register-cancel-btn"
-						class="btn btn-success  alignleft" value="Cancel" /></a>
+						class="btn btn-primary  alignleft" value="Cancel" /></a>
 				</div>
 			</form:form>
 		</c:if>

@@ -60,7 +60,7 @@
 							</button>
 							<a href="<c:url value='/admin/viewquestions'/>"> <input
 								type="button" id="register-cancel-btn"
-								class="btn btn-success btn btn-circle" value="Cancel" /></a>
+								class="btn btn-default btn btn-circle" value="Cancel" /></a>
 						</div>
 					</div>
 				</div>
