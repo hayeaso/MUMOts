@@ -168,9 +168,9 @@ public class TestController {
 //		 return "redirect:/test/access";
 //		 }
 		
-		int assignment =  (int) request.getSession().getAttribute("assignmentId");
-		if(assignment<1) {
-			return "redirect:/test/access";
+		Integer assignment =  (Integer) request.getSession().getAttribute("assignmentId");
+		if(assignment==null) {
+			return "redirect:/test";
 		}
 		CategorySelectDto dto = new CategorySelectDto();
 		
@@ -305,10 +305,10 @@ public class TestController {
 
 	@RequestMapping(value = "/completed", method = RequestMethod.GET)
 	public String aftercompletion(HttpServletRequest request) {
-		//List<Test> tests = (List<Test>) request.getSession().getAttribute("tests");
-		//if(tests!=null)
+		List<Test> tests = (List<Test>) request.getSession().getAttribute("tests");
+		if(tests!=null)
 			return "completed";
-		//return "redirect:/test/access";
+		return "redirect:/test";
 	}
 
 }
