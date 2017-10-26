@@ -29,4 +29,7 @@ public interface SubCategoryRepository extends CrudRepository<Subcategory, Integ
 	
 	@Query("SELECT sc FROM Subcategory sc WHERE sc.category=:category")
 	public List<Subcategory> findByCategoryId(@Param("category") Category category);
+	
+	@Query("SELECT sc FROM Subcategory sc WHERE sc.name=:name AND sc.enabled = true")
+	public Subcategory findFirstByName(@Param("name") String name);
 }
