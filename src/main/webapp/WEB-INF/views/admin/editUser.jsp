@@ -94,7 +94,7 @@
 			</div>
 			<div class="form-actions">
 				<a href="<c:url value='/admin/users'/>">
- 				<input style="margin-right:30px;" type="button" id="register-cancel-btn" class="btn btn-success uppercase pull-right" value="Cancel"/>
+ 				<input style="margin-right:30px;" type="button" id="register-cancel-btn" class="btn btn-primary uppercase pull-right" value="Cancel"/>
  			</div>
 			<br/><br/>
 		</form:form>

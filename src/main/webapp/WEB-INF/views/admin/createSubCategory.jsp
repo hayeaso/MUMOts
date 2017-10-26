@@ -29,19 +29,19 @@
 				<form:label path="name"
 					class="control-label visible-ie8 visible-ie9">Subcategory Name</form:label>
 				<form:input path="name" class="form-control placeholder-no-fix"
-					type="text" placeholder="Category Name" name="name" />
+					type="text" placeholder="Sub Category Name" name="name" />
 				<form:errors path="name" cssClass="text-danger" />
 			</div>
 			<form:hidden path="enabled" value="TRUE" />
 			<c:if test="${categories != null}">
 			<div class="form-actions">
 				<button type="submit" id="register-submit-btn"
-					class="btn btn-primary uppercase pull-right">Submit</button>
+					class="btn btn-success uppercase pull-right">Submit</button>
 			</div>
 			<div class="form-actions">
 				<a href="<c:url value='/admin/subCategories'/>"> <input
 				 style="margin-right: 20px;" type="button" id="register-cancel-btn"
-					class="btn btn-success uppercase alignright" value="Cancel" /></a>
+					class="btn btn-primary uppercase alignright" value="Cancel" /></a>
 			</div>
 			</c:if>
 			<br />

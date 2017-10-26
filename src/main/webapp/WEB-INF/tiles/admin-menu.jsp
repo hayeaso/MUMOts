@@ -35,7 +35,7 @@
 						List</a></li>
 
 				<li><a href="<c:url value="/admin/students" />"
-					${('/onlinetest/admin/students' == currentPage || '/onlinetest/admin/registerStudent' == currentPage|| '/onlinetest/admin/importStudentData' == currentPage) ? ' class="activeNavItem"' : ''}>Student
+					${('/onlinetest/admin/students' == currentPage || '/onlinetest/admin/registerStudent' == currentPage|| '/onlinetest/admin/importStudentData' == currentPage || '/onlinetest/admin/editStudent' == pageWithoutParam) ? ' class="activeNavItem"' : ''}>Student
 						List</a></li>
 				<li><a href="<c:url value="/admin/categories" />"
 					${('/onlinetest/admin/categories' == currentPage || '/onlinetest/admin/createCategory' == currentPage) ? ' class="activeNavItem"'  : ''}>Category</a></li>

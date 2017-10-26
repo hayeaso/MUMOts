@@ -103,3 +103,10 @@
     width: fit-content;
 }
 
+.hideme{
+	overflow:hidden;
+}
+
+.margDown{
+	margin-bottom :10px;
+}

@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.MailSender;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.security.authentication.RememberMeAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -37,6 +39,8 @@ public class HomeController {
 	UserService userService;
 	@Autowired
 	AuthorityService authorityService;
+	@Autowired
+	private MailSender mailSender;
 
 	/**
 	 * Simply selects the home view to render by returning its name.
@@ -56,9 +60,15 @@ public class HomeController {
 	}
 	
 	@RequestMapping(value = { "/contactus" }, method = RequestMethod.POST)
-	public String coantacted(@ModelAttribute("contactus")Contactus contactus) {
-		contactService.save(contactus);
-		return "home";
+	public String coantacted(@ModelAttribute("contactus")Contactus contactus, Model model) {
+		if (sendEmail(contactus.getEmail(), "MUM Self Assessment - Contact Us", contactus.getComment() + "\r\n \r\nRegards, \r\n \r\n" + contactus.getName(), mailSender)) {
+			contactService.save(contactus);			
+			model.addAttribute("success", "Success");
+			model.addAttribute("contactus", new Contactus());
+		} else {
+			model.addAttribute("error", "Error");			
+		}		
+		return "contactus";
 	}
 
 	@RequestMapping(value = "/rolecheck", method = RequestMethod.GET)
@@ -99,4 +109,30 @@ public class HomeController {
 		return RememberMeAuthenticationToken.class.isAssignableFrom(authentication.getClass());
 	}
 
+	/**
+	 * This is not really recommend as the email content can be seen It should
+	 * be revisit and config on javamailproperties using more secure way eg,
+	 * using port 465
+	 * 
+	 * @param toEmail
+	 * @param subject
+	 * @param body
+	 * @param emailSender
+	 * @return
+	 */
+	public boolean sendEmail(String toEmail, String subject, String body, MailSender emailSender) {
+		try {
+			SimpleMailMessage message = new SimpleMailMessage();
+			message.setTo(toEmail);
+			message.setReplyTo("false");
+			message.setFrom("mumtestlink@gmail.com");
+			message.setSubject(subject);
+			message.setText(body);
+			emailSender.send(message);
+		} catch (Exception ex) {
+			logger.error("Can't send email " + ex.getMessage());
+			return false;
+		}
+		return true;
+	}
 }

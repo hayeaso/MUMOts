@@ -26,13 +26,13 @@
 		<div class="form-group">
 			<div class="form-actions">
 				<button type="submit" id="register-submit-btn"
-					class="btn btn-primary uppercase pull-right">Submit</button>
+					class="btn btn-success uppercase pull-right">Submit</button>
 			</div>
 			
 			<div class="form-actions">
 				<a href="<c:url value='/admin/categories'/>"> <input
 				 style="margin-right: 20px;" type="button" id="register-cancel-btn"
-					class="btn btn-success uppercase alignright" value="Cancel" /></a>
+					class="btn btn-primary uppercase alignright" value="Cancel" /></a>
 			</div>
 
 			</div>

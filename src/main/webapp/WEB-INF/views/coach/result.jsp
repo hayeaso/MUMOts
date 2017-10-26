@@ -1,9 +1,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="/WEB-INF/views/include.jsp"%>
-<%@ page session="false"%>
+<%-- <%@ page session="false"%> --%>
 
  
-<div id="posts-landing" class="portlet box light panel panel-success">                                      
+<div id="posts-landing" class="portlet box light panel panel-success hideme">                                      
    <div id="report" class="portlet-title">
 		<div class="caption">
 			<span class="caption-subject leftShift"><i class="fa fa-book fa-fw"></i>Student
@@ -112,6 +112,13 @@
 	</div>
   
   </div>  
+  <div class="pull-left margDown">
+					<a href="<c:url value='/${sessionScope.role}/assignments'/>">
+						<button id="back"
+				class="btn btn-primary btn-circle alignright"><i class="fa fa-hand-o-left"></i> Back</button>
+					</a>
+ 				
+ 			</div>
 </div>
 
 	
