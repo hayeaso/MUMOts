@@ -29,7 +29,7 @@
 				<form:label path="name"
 					class="control-label visible-ie8 visible-ie9">Subcategory Name</form:label>
 				<form:input path="name" class="form-control placeholder-no-fix"
-					type="text" placeholder="Category Name" name="name" />
+					type="text" placeholder="Sub Category Name" name="name" />
 				<form:errors path="name" cssClass="text-danger" />
 			</div>
 			<form:hidden path="enabled" value="TRUE" />
