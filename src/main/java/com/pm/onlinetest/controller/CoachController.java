@@ -2,6 +2,7 @@ package com.pm.onlinetest.controller;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -59,7 +60,9 @@ public class CoachController {
 	@RequestMapping(value = "/coach/home", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
 		List<Student> students = coachService.findStudentByAcitveJobStatus();
-		model.addAttribute("students", students);
+		List<Assignment> assignmentScheduled=emailScheduleService.findAllAssignmentsSendAndNotStarted();
+		model.addAttribute("assignmentScheduled", assignmentScheduled);
+		model.addAttribute("students", students);		
 		return "coach";
 
 	}
@@ -202,14 +205,14 @@ public class CoachController {
 	@RequestMapping(value = "/coach/changeStudentJobSearchStatus", method = RequestMethod.POST)
 	public @ResponseBody String changeStudentJobStatus(@RequestParam("userId") String studentId,
 			@RequestParam("jobSearchStatus") String jobSearchStatus) {
-		System.out.println("Inside job chnange status in coach controller studentId" + studentId);
-		System.out.println("job search status is: " + jobSearchStatus);
+		//System.out.println("Inside job chnange status in coach controller studentId" + studentId);
+		//System.out.println("job search status is: " + jobSearchStatus);
 		boolean jobStatus = false;
 		if (jobSearchStatus.equals("active")) {
 			jobStatus = true;
 		}
-		System.out.println("Inside job chnange status in coach controller studentId" + studentId);
-		System.out.println("job search status is: " + jobSearchStatus);
+		//System.out.println("Inside job chnange status in coach controller studentId" + studentId);
+		//System.out.println("job search status is: " + jobSearchStatus);
 		Student student = studentService.findByStudentId(Integer.parseInt(studentId));
 		student.setJobSearchStatus(jobStatus);
 		studentService.save(student);

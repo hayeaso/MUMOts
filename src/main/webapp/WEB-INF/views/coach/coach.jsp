@@ -19,7 +19,8 @@
 					<th>Full Name</th>
 					<th>Email</th>
 					<th>Job Search Status</th>
-					<th>Generate Test</th>				
+					<th>Generate Test</th>	
+					<th>Generated</th>			
 					<th>Test History</th>
 					
 				</tr>
@@ -70,7 +71,17 @@
 						  </div>
 						</td>
 						
-						<td><a href="<c:url value="studentAssignmentDetail/${student.userId}" />">Generate Test</a>			
+						<td><a href="<c:url value="studentAssignmentDetail/${student.userId}" />">Generate Test</a>
+						
+						<td>
+ 							<c:forEach items="${assignmentScheduled}" var="assignmentScheduled">
+	 							<c:choose>	 							
+									<c:when test="${assignmentScheduled.studentId.userId == student.userId}">
+										<img src="<c:url value="/resources/images/check.jpg" />" alt="assigned" style=" height: 12%">
+									</c:when>
+								</c:choose> 
+							</c:forEach>									
+						</td>
 						<td><a href="<c:url value="studentAssignmentHistory/${student.userId}" />">Test History</a></td>
 					</tr>
 				</c:forEach>

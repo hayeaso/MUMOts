@@ -15,6 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.pm.onlinetest.domain.Assignment;
 import com.pm.onlinetest.domain.EmailScheduler;
+import com.pm.onlinetest.domain.Student;
 import com.pm.onlinetest.repository.EmailSchedulerRepository;
 import com.pm.onlinetest.service.AssignmentService;
 import com.pm.onlinetest.service.EmailSchedulerService;
@@ -166,6 +167,12 @@ public class EmailSchedulerServiceImpl implements EmailSchedulerService {
 	@Override
 	public void saveEmailScheduler(EmailScheduler emailScheduler) {
 		emailSchedulerRepository.save(emailScheduler);
+	}
+
+	@Override
+	public List<Assignment> findAllAssignmentsSendAndNotStarted(/*Student studentId*/) {
+		//return emailSchedulerRepository.findAllAssignmentsSendAndNotStarted(studentId);
+		return emailSchedulerRepository.findAllAssignmentsSendAndNotStarted();
 	}
 
 }

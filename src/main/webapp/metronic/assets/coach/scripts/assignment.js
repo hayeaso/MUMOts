@@ -23,6 +23,10 @@ function generateAccessCode(){
 
 function assignmentDone(userId){
 
+
+//	window.sendingEmail=function(){
+//			 waitingDialog.show('Processing......');	
+//	}
 	if( !$('#accessCode').val() ) {
 		$("#errorMessage").empty();
 		var msg ="<strong>Warning!</strong> Access Code is empty, you can not save. Please Generate the code first."		
@@ -47,7 +51,7 @@ function assignmentDone(userId){
 		$("#errorMessage").show();
 		return false;
 	}
-	
+	window.sendingEmailProcessing();
 	$.ajax({ 
 	   type: "POST",
 	   url: '../../../onlinetest/coach/saveAssignment',
@@ -57,12 +61,8 @@ function assignmentDone(userId){
 		   accessLink:$('#accessLink').val(),
 		   dateTime:$("#dateTime").val()
 	   },
-	   ajaxSend: function() {
-			
-		},
-		
-	   success: function(data){        
-		   if(data === "success"){
+	   success: function(data){   
+		   if(data === "success"){	
 			   waitingDialog.hide();
 			   $('#myModal').modal('show');
 		   }
@@ -77,11 +77,10 @@ function assignmentDone(userId){
 	   }
 	})
 }
-
-
-window.sendingEmail=function(){
-		 waitingDialog.show('Processing......');
-}	
+/*progress bar when sending an email*/	
+function sendingEmailProcessing(){
+	waitingDialog.show('Processing......');
+}
 function closeModalCoachAssignment(){
 	window.location.href = "../../../onlinetest/coach/home";	
 	self.close();
