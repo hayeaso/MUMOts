@@ -80,7 +80,7 @@ public class TestController {
 	public String verifyAccess(@RequestParam("access_code") String accesscode, RedirectAttributes attr,
 			HttpServletRequest request) {
 
-		System.out.println(accesscode);
+		
 
 		Assignment assgnmentObj;
 
@@ -90,6 +90,7 @@ public class TestController {
 			// Add Assignment Object to Request attributes
 			attr.addFlashAttribute("assignment", assgnmentObj);
 			request.getSession().setAttribute("assignmentId", assgnmentObj.getId());
+			System.out.println("Assignment id is " + assgnmentObj.getId());
 			// Check if Student has previously finished test
 			if (assgnmentObj.isFinished()) {
 				attr.addFlashAttribute("errormessage", "This test has been completed.");
@@ -166,22 +167,23 @@ public class TestController {
 //		// attr.addFlashAttribute("errormessage", "Invalid Operation");
 //		 return "redirect:/test/access";
 //		 }
-
+		
+		int assignment =  (int) request.getSession().getAttribute("assignmentId");
+		if(assignment<1) {
+			return "redirect:/test/access";
+		}
 		CategorySelectDto dto = new CategorySelectDto();
-		// List<Subcategory> subcategories = new ArrayList<>();
+		
 		List<Category> categories = categoryService.findAllEnabled();
 
-		for (Category cat : categories) {
+		for (Category cat : categories) {	
 			for (Subcategory subCat : cat.getSubcategories()) {
-				// System.out.println("in");
-				if (subCat.isEnabled() && questionService.findBySubcategory(subCat).size() < 20) {
-					if (cat.getSubcategories().contains(subCat)) {
-						//System.out.println("I am removing " + subCat);
-						subCat.setEnabled(false);
-
-						//System.out.println(subCat.getName());
+					if (subCat.isEnabled() && questionService.findBySubcategory(subCat).size() < 20) {
+						if (cat.getSubcategories().contains(subCat)) {
+							subCat.setEnabled(false);	
+							
+						}
 					}
-				}
 			}
 		}
 		dto.setCategories(categories);
