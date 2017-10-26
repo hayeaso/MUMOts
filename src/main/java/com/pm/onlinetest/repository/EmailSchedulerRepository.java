@@ -35,10 +35,6 @@ public interface EmailSchedulerRepository extends CrudRepository<EmailScheduler,
 	@Query("SELECT e FROM EmailScheduler e, Assignment a WHERE e.sendEmailDateTime <= :dateTime and e.isSend = true and a.started=false and a.count!=99 and e.assignmentId=a.id")
 	List<EmailScheduler> findAllNotStartedWithin24h(@Param("dateTime") LocalDateTime dateTime);
 
-	//@Query("SELECT DISTINCT a FROM EmailScheduler e, Assignment a WHERE e.isSend = true and a.finished=false and a.count<3 and a.studentId=:studentId")
-	//List<Assignment> findAllAssignmentsSendAndNotStarted(@Param("studentId") Student studentId);
-	
-	//@Query("SELECT DISTINCT a FROM EmailScheduler e, Assignment a WHERE e.isSend = true and a.finished=false and a.count<3")
 	@Query("SELECT DISTINCT a FROM Student s, EmailScheduler e, Assignment a WHERE e.isSend = true and a.finished=false and a.count<3 and a.studentId=s.userId and e.assignmentId=a.id")
 	List<Assignment> findAllAssignmentsSendAndNotStarted();
 	

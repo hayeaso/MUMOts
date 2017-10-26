@@ -71,7 +71,7 @@
 			<form:hidden path="enabled" value="TRUE" />
 
 			<div class="form-actions">
-				<button type="submit" id="register-submit-btn"
+				<button type="submit" id="register-submit-btn" disabled="${error}"
 					class="btn btn-success uppercase pull-right">Submit</button>
 			</div>
 						
