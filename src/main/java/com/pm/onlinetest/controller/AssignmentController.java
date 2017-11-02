@@ -44,11 +44,7 @@ public class AssignmentController {
 		model.addAttribute("accessCode",accessCode);
 		model.addAttribute("accessLink","www.test.com");	
 		
-		Map<String,String> map = new HashMap<String, String>();
-	/*	ArrayList<String> list= new ArrayList<String>();
-		list.add(accessCode);
-		list.add(accessLink);
-	*/	
+		Map<String,String> map = new HashMap<String, String>();	
 		map.put("accessCode",accessCode);
 		map.put("accessLink",accessLink);
 		
