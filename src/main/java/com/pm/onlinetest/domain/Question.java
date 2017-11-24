@@ -35,17 +35,18 @@ public class Question {
 	
 
 	@ManyToOne
+	//many question has one subcategory_id
 	@JoinColumn(name = "subcategory_id")
 	private Subcategory subcategory;
 
-
+        //one question has several choices
 	@OneToMany(fetch = FetchType.EAGER, mappedBy = "question", cascade = CascadeType.ALL)
 	private List<Choice> choices;
 		
 
    
 
-
+    //one question could belong to several tests
     @OneToMany(fetch=FetchType.EAGER, mappedBy = "question", cascade = CascadeType.ALL)
 	private Set<Test> tests;
   
