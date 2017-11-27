@@ -5,10 +5,12 @@
 *	Use STS and Pivital Server
 *	Import as a Maven Project
 *	Need to connect to MySQL.
+*	In the build path, change JRE to JDK
 *	Right Click-->Maven--> Update Project
 *   Right Click-->Run As--> Maven Clean
 *   Right Click-->Run As--> Maven Install
-*	The user name and password are 1,1 and 2 2 if you get the previous database.
+
+*	The user name and password area admin, admin and dba,dba, coach, coach.
 
 ## 2 Function
 --------
@@ -76,10 +78,5 @@ d) DBA user
 
 ---
 
-
-## 3 Features of the E-Bazaar MainProject Distribution
----
-
-1.	Controller classes contain the listeners. This strategy implements the philosophy that “controllers should be in control”. Rather than placing listeners in the Gui class that triggers them – which would, in effect, place control in the Gui – we place them in the appropriate Controller class. In this way, the responsibility of handling of important events, which involves controlling the flow of the application, is given to the appropriate Controller class.
 
 
